@@ -1,6 +1,0 @@
-E:\code\prosystem\platform\ICSharpCode.SharpZLib\bin\Debug\ICSharpCode.SharpZipLib.xml
-E:\code\prosystem\platform\ICSharpCode.SharpZLib\bin\Debug\ICSharpCode.SharpZipLib.dll
-E:\code\prosystem\platform\ICSharpCode.SharpZLib\bin\Debug\ICSharpCode.SharpZipLib.pdb
-E:\code\prosystem\platform\ICSharpCode.SharpZLib\obj\Debug\ICSharpCode.SharpZLib.csprojResolveAssemblyReference.cache
-E:\code\prosystem\platform\ICSharpCode.SharpZLib\obj\Debug\ICSharpCode.SharpZipLib.dll
-E:\code\prosystem\platform\ICSharpCode.SharpZLib\obj\Debug\ICSharpCode.SharpZipLib.pdb

@@ -157,3 +157,4 @@ storage.ide-shm
 storage.ide-wal
 *.dll
 /bin
+*.txt
