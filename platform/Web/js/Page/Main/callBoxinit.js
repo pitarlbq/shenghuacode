@@ -481,14 +481,14 @@ function callListPush() {
     })
     if (canPush) {
         callList.push({
-            CallTime = CallTime,
-            PickUpTime = PickUpTime,
-            HangUpTime = HangUpTime,
-            ComingPhoneNumber = ComingPhoneNumber,
-            RelatedPhoneRecordID = RelatedPhoneRecordID,
-            ServiceID = ServiceID,
-            RecordName = RecordName,
-            PhoneType = PhoneType
+            CallTime: CallTime,
+            PickUpTime: PickUpTime,
+            HangUpTime: HangUpTime,
+            ComingPhoneNumber: ComingPhoneNumber,
+            RelatedPhoneRecordID: RelatedPhoneRecordID,
+            ServiceID: ServiceID,
+            RecordName: RecordName,
+            PhoneType: PhoneType
         })
     }
     reSetData();
