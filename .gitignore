@@ -14,12 +14,6 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
-.vs/
-Debug/
-**/Debug:
-**/Bin:
-*.dll
-*.pdb
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
@@ -161,3 +155,9 @@ db.lock
 storage.ide
 storage.ide-shm
 storage.ide-wal
+.vs/
+Debug/
+**/Debug:
+**/Bin:
+*.dll
+*.pdb
