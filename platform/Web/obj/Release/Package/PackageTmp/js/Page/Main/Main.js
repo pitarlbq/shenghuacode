@@ -1,6 +1,6 @@
 ﻿var returnvalue = "";
 var ytnamevalue = [];
-var BeforeBanJieTimeOutHour = 1200;
+var BeforeBanJieTimeOutHour = 12;
 $(function () {
     if (DefaultURL) {
         addnewTab('400客服', DefaultURL, '');

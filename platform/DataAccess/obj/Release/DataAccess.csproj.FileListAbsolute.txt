@@ -35,3 +35,16 @@ F:\code\CustomerPro\platform\DataAccess\obj\Release\DataAccess.pdb
 F:\code\CustomerPro\platform\DataAccess\obj\Release\DataAccess.csprojAssemblyReference.cache
 F:\code\CustomerPro\platform\DataAccess\obj\Release\DataAccess.csproj.CoreCompileInputs.cache
 F:\code\CustomerPro\platform\DataAccess\obj\Release\DataAccess.csproj.CopyComplete
+F:\code\gitcode\shenghuacode\platform\DataAccess\bin\Release\DataAccess.dll
+F:\code\gitcode\shenghuacode\platform\DataAccess\bin\Release\DataAccess.pdb
+F:\code\gitcode\shenghuacode\platform\DataAccess\bin\Release\Utility.dll
+F:\code\gitcode\shenghuacode\platform\DataAccess\bin\Release\log4net.dll
+F:\code\gitcode\shenghuacode\platform\DataAccess\bin\Release\Newtonsoft.Json.dll
+F:\code\gitcode\shenghuacode\platform\DataAccess\bin\Release\ThoughtWorks.QRCode.dll
+F:\code\gitcode\shenghuacode\platform\DataAccess\bin\Release\Utility.pdb
+F:\code\gitcode\shenghuacode\platform\DataAccess\bin\Release\Newtonsoft.Json.xml
+F:\code\gitcode\shenghuacode\platform\DataAccess\obj\Release\DataAccess.csprojAssemblyReference.cache
+F:\code\gitcode\shenghuacode\platform\DataAccess\obj\Release\DataAccess.csproj.CoreCompileInputs.cache
+F:\code\gitcode\shenghuacode\platform\DataAccess\obj\Release\DataAccess.csproj.CopyComplete
+F:\code\gitcode\shenghuacode\platform\DataAccess\obj\Release\DataAccess.dll
+F:\code\gitcode\shenghuacode\platform\DataAccess\obj\Release\DataAccess.pdb

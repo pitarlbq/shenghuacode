@@ -1072,7 +1072,7 @@ namespace Web.APPCode
                 dataItem["ColumnName"] = "是否超时";
                 results.Add(dataItem);
                 dataItem = new Dictionary<string, object>();
-                dataItem["FieldName"] = "BanJieChaoShiTakeHour";
+                dataItem["FieldName"] = "FinalBanJieChaoShiTakeHour";
                 dataItem["ColumnName"] = "办结超时时间";
                 results.Add(dataItem);
                 dataItem = new Dictionary<string, object>();

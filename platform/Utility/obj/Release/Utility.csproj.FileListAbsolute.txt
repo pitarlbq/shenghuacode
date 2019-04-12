@@ -31,3 +31,16 @@ F:\code\CustomerPro\platform\Utility\bin\Release\Microsoft.Web.Administration.dl
 F:\code\CustomerPro\platform\Utility\obj\Release\Utility.csprojAssemblyReference.cache
 F:\code\CustomerPro\platform\Utility\obj\Release\Utility.csproj.CoreCompileInputs.cache
 F:\code\CustomerPro\platform\Utility\obj\Release\Utility.csproj.CopyComplete
+F:\code\gitcode\shenghuacode\platform\Utility\bin\Release\Utility.dll
+F:\code\gitcode\shenghuacode\platform\Utility\bin\Release\Utility.pdb
+F:\code\gitcode\shenghuacode\platform\Utility\bin\Release\ICSharpCode.SharpZipLib.dll
+F:\code\gitcode\shenghuacode\platform\Utility\bin\Release\log4net.dll
+F:\code\gitcode\shenghuacode\platform\Utility\bin\Release\Microsoft.Web.Administration.dll
+F:\code\gitcode\shenghuacode\platform\Utility\bin\Release\Newtonsoft.Json.dll
+F:\code\gitcode\shenghuacode\platform\Utility\bin\Release\ThoughtWorks.QRCode.dll
+F:\code\gitcode\shenghuacode\platform\Utility\bin\Release\Newtonsoft.Json.xml
+F:\code\gitcode\shenghuacode\platform\Utility\obj\Release\Utility.csprojAssemblyReference.cache
+F:\code\gitcode\shenghuacode\platform\Utility\obj\Release\Utility.csproj.CoreCompileInputs.cache
+F:\code\gitcode\shenghuacode\platform\Utility\obj\Release\Utility.csproj.CopyComplete
+F:\code\gitcode\shenghuacode\platform\Utility\obj\Release\Utility.dll
+F:\code\gitcode\shenghuacode\platform\Utility\obj\Release\Utility.pdb

@@ -116,7 +116,7 @@ function getTimeName() {
     var mm = (Number(newDate.getMinutes()) < 10 ? "0" + newDate.getMinutes().toString() : newDate.getMinutes().toString());
     var ss = (Number(newDate.getSeconds()) < 10 ? "0" + newDate.getSeconds().toString() : newDate.getSeconds().toString());
     var hs = newDate.getMilliseconds();
-    return yyyy + MM + dd + +HH + mm + hs;
+    return yyyy + MM + dd + HH + mm + ss + hs;
 }
 function getTimeStr(newDate) {
     //var newDate = new Date();
