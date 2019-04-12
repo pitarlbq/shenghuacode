@@ -1,0 +1,61 @@
+2019-03-01 00:09:04,550 [6800] DEBUG root - [ProjectHandler]visit为空
+2019-03-01 09:57:59,529 [18176] ERROR root - [ServiceHandler]命令:loadservicelist
+Newtonsoft.Json.JsonSerializationException: Error getting value from 'IsLianJieService' on 'Foresight.DataAccess.ViewCustomerService'. ---> System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Foresight.DataAccess.ViewCustomerService.get_IsLianJieService() 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 345
+   在 GetIsLianJieService(Object )
+   在 Newtonsoft.Json.Serialization.DynamicValueProvider.GetValue(Object target)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Newtonsoft.Json.Serialization.DynamicValueProvider.GetValue(Object target)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.CalculatePropertyValues(JsonWriter writer, Object value, JsonContainerContract contract, JsonProperty member, JsonProperty property, JsonContract& memberContract, Object& memberValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeList(JsonWriter writer, IEnumerable values, JsonArrayContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.Serialize(JsonWriter jsonWriter, Object value, Type objectType)
+   在 Newtonsoft.Json.JsonSerializer.SerializeInternal(JsonWriter jsonWriter, Object value, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.SerializeObjectInternal(Object value, Type type, JsonSerializer jsonSerializer)
+   在 Newtonsoft.Json.JsonConvert.SerializeObject(Object value)
+   在 Utility.JsonConvert.SerializeObject(Object value) 位置 f:\code\CustomerPro\platform\Utility\Newtonsoft.cs:行号 12
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1528
+2019-03-01 09:58:05,407 [12644] ERROR root - [ServiceHandler]命令:loadservicelist
+Newtonsoft.Json.JsonSerializationException: Error getting value from 'IsLianJieService' on 'Foresight.DataAccess.ViewCustomerService'. ---> System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Foresight.DataAccess.ViewCustomerService.get_IsLianJieService() 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 345
+   在 GetIsLianJieService(Object )
+   在 Newtonsoft.Json.Serialization.DynamicValueProvider.GetValue(Object target)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Newtonsoft.Json.Serialization.DynamicValueProvider.GetValue(Object target)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.CalculatePropertyValues(JsonWriter writer, Object value, JsonContainerContract contract, JsonProperty member, JsonProperty property, JsonContract& memberContract, Object& memberValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeList(JsonWriter writer, IEnumerable values, JsonArrayContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeObject(JsonWriter writer, Object value, JsonObjectContract contract, JsonProperty member, JsonContainerContract collectionContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.SerializeValue(JsonWriter writer, Object value, JsonContract valueContract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerProperty)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalWriter.Serialize(JsonWriter jsonWriter, Object value, Type objectType)
+   在 Newtonsoft.Json.JsonSerializer.SerializeInternal(JsonWriter jsonWriter, Object value, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.SerializeObjectInternal(Object value, Type type, JsonSerializer jsonSerializer)
+   在 Newtonsoft.Json.JsonConvert.SerializeObject(Object value)
+   在 Utility.JsonConvert.SerializeObject(Object value) 位置 f:\code\CustomerPro\platform\Utility\Newtonsoft.cs:行号 12
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1528
+2019-03-01 10:38:13,244 [10044] INFO  root - [SocketClient.EVENT_CONNECT]连接成功: 2019-03-01 10:38:13
+2019-03-01 14:50:09,502 [520] ERROR root - [ProjectHandler]visit: getprojectinfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 106
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1..ctor(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 398
+   在 Foresight.DataAccess.Framework.EntityList`1..ctor(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityList.cs:行号 206
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.InitializeList[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1311
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1110
+   在 Foresight.DataAccess.Project.GetMyProjectListByUserID(Int32 UserID, List`1& EqualIDList, List`1& InIDList, List`1 ProjectIDList) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\Project.cs:行号 62
+   在 Foresight.DataAccess.ProjectTree.GetProjectTreeListByID(Int32 ID, String Keywords, Int32 UserID, Int32 IconID, Boolean OnlyXiaoqu, Boolean ExceptRoom) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\Project.cs:行号 391
+   在 Web.APPCode.CacheHelper.GetMyProjectDetailsTree(Int32 UserID) 位置 f:\code\CustomerPro\platform\Web\APPCode\CacheHelper.cs:行号 191
+   在 Web.WebUtil.GetMyProjectDetailsTree(Int32 UserID) 位置 f:\code\CustomerPro\platform\Web\APPCode\WebUtil.cs:行号 267
+   在 Web.Handler.ProjectHandler.GetProjectInfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 1208
+   在 Web.Handler.ProjectHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 38

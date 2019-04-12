@@ -1,0 +1,41 @@
+.aui-list .aui-list-header {
+    font-size: 0.7rem;
+}
+
+.aui-media-list .aui-list-item-media img {
+    width: 3rem;
+}
+
+.aui-list .aui-list-item {
+    padding-left: 0.5rem;
+}
+
+.aui-media-list .aui-list-item-inner {
+    padding-right: 0.25rem;
+}
+
+.aui-list-item-title {
+    margin-bottom: 0.3rem;
+    width: 80%;
+}
+
+.aui-list .aui-list-item-media {
+    padding: 0.75rem 0 0 0;
+    width: 4rem;
+}
+
+.aui-list-item-text.aui-ellipsis-2 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.aui-list-item-text .aui-list-item-right {
+    position: relative;
+    width: 4rem;
+    text-align: right;
+}

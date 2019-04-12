@@ -1,0 +1,113 @@
+2019-02-26 08:38:50,420 [13008] ERROR root - [CKHandler]visit: loadckdepartmentgrid
+System.ArgumentNullException: 值不能为 null。
+参数名: String
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt64(String value, NumberStyles options, NumberFormatInfo numfmt)
+   在 System.Int64.Parse(String s)
+   在 Web.Handler.CKHandler.loadckdepartmentgrid(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\CKHandler.ashx.cs:行号 85
+   在 Web.Handler.CKHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\CKHandler.ashx.cs:行号 39
+2019-02-26 10:38:44,193 [10576] ERROR root - [ServiceHandler]命令:getroominfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1256
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1078
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1093
+   在 Foresight.DataAccess.ViewRoomBasic.GetViewRoomBasicByRoomID(Int32 RoomID) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 61
+   在 Web.Handler.ServiceHandler.getroominfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1278
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 46
+2019-02-26 11:58:25,626 [9072] ERROR root - [ServiceHandler]命令:getroominfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1256
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1078
+   在 Foresight.DataAccess.Project.GetProject(Int32 iD, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\Generated.Project.cs:行号 1312
+   在 Foresight.DataAccess.Sys_OrderNumber.GetSys_OrderNumber(String OrderTypeName, Int32 RoomID, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Sys_OrderNumber.cs:行号 54
+   在 Foresight.DataAccess.Sys_OrderNumber.GetSys_OrderNumberByRoomID(String OrderTypeName, Int32 RoomID) 位置 f:\code\CustomerPro\platform\DataAccess\Sys_OrderNumber.cs:行号 29
+   在 Foresight.DataAccess.CustomerService.GetLastestCustomerServiceNumber(String OrderTypeName, Int32 RoomID, Int32& OrderNumberID) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\CustomerService.cs:行号 80
+   在 Web.Handler.ServiceHandler.getroominfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1248
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 46
+2019-02-26 11:58:27,732 [6116] ERROR root - [ServiceHandler]命令:getroominfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1256
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1078
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1093
+   在 Foresight.DataAccess.ViewRoomBasic.GetViewRoomBasicByRoomID(Int32 RoomID) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 61
+   在 Web.Handler.ServiceHandler.getroominfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1278
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 46
+2019-02-26 13:22:03,345 [17144] ERROR root - [ServiceHandler]命令:getroominfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1256
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1078
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1093
+   在 Foresight.DataAccess.ViewRoomBasic.GetViewRoomBasicByRoomID(Int32 RoomID) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 61
+   在 Web.Handler.ServiceHandler.getroominfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1278
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 46
+2019-02-26 13:22:28,316 [12260] ERROR root - [ServiceHandler]命令:getroominfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1256
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1078
+   在 Foresight.DataAccess.Project.GetProject(Int32 iD, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\Generated.Project.cs:行号 1312
+   在 Foresight.DataAccess.Sys_OrderNumber.GetSys_OrderNumber(String OrderTypeName, Int32 RoomID, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Sys_OrderNumber.cs:行号 54
+   在 Foresight.DataAccess.Sys_OrderNumber.GetSys_OrderNumberByRoomID(String OrderTypeName, Int32 RoomID) 位置 f:\code\CustomerPro\platform\DataAccess\Sys_OrderNumber.cs:行号 29
+   在 Foresight.DataAccess.CustomerService.GetLastestCustomerServiceNumber(String OrderTypeName, Int32 RoomID, Int32& OrderNumberID) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\CustomerService.cs:行号 80
+   在 Web.Handler.ServiceHandler.getroominfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1248
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 46
+2019-02-26 13:22:35,477 [12260] ERROR root - [ServiceHandler]命令:getroominfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 106
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1..ctor(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 398
+   在 Foresight.DataAccess.Framework.EntityList`1..ctor(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityList.cs:行号 206
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.InitializeList[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1311
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1110
+   在 Foresight.DataAccess.RoomPhoneRelation.GetRoomPhoneRelationsByRoomID(Int32 RoomID) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\RoomPhoneRelation.cs:行号 28
+   在 Web.Handler.ServiceHandler.getroominfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1300
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 46
+2019-02-26 14:31:37,971 [14288] ERROR root - [ServiceHandler]命令:getroominfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1256
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1078
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1093
+   在 Foresight.DataAccess.ViewRoomBasic.GetViewRoomBasicByRoomID(Int32 RoomID) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 61
+   在 Web.Handler.ServiceHandler.getroominfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1278
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 46
+2019-02-26 16:44:02,524 [8848] INFO  root - [SocketClient.EVENT_CONNECT]连接成功: 2019-02-26 16:44:02

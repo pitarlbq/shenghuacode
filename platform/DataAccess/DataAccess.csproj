@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5186E1B0-F2A8-4E86-A50E-498D1821EA80}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAccess</RootNamespace>
+    <AssemblyName>DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analysis\AnalysisAccessModel.cs" />
+    <Compile Include="Analysis\AnalysisHelper.cs" />
+    <Compile Include="CangKu\CKDepartment.cs" />
+    <Compile Include="CangKu\CKProudctInDetail.cs" />
+    <Compile Include="CangKu\Generated.CKDepartment.cs" />
+    <Compile Include="CangKu\Generated.CKProudctInDetail.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="CustomerService\CustomerService.cs" />
+    <Compile Include="CustomerService\CustomerServiceAttach.cs" />
+    <Compile Include="CustomerService\CustomerServiceChuli.cs" />
+    <Compile Include="CustomerService\CustomerServiceChuli_Attach.cs" />
+    <Compile Include="CustomerService\CustomerServiceHuifang.cs" />
+    <Compile Include="CustomerService\CustomerService_Accpet.cs" />
+    <Compile Include="CustomerService\CustomerService_Material.cs" />
+    <Compile Include="CustomerService\CustomerService_Return.cs" />
+    <Compile Include="CustomerService\CustomerService_Task.cs" />
+    <Compile Include="CustomerService\Generated.CustomerService_Return.cs" />
+    <Compile Include="CustomerService\Generated.PhoneRecord.cs" />
+    <Compile Include="CustomerService\Generated.ServiceType.cs" />
+    <Compile Include="CustomerService\Generated.UserServiceType.cs" />
+    <Compile Include="CustomerService\PhoneRecord.cs" />
+    <Compile Include="CustomerService\UserServiceType.cs" />
+    <Compile Include="Generated.HolidayLog.cs" />
+    <Compile Include="Generated.Seat.cs" />
+    <Compile Include="Generated.SiteVersion.cs" />
+    <Compile Include="Generated.SysConfig.cs" />
+    <Compile Include="Generated.TableColumn.cs" />
+    <Compile Include="CustomerService\Generated.ViewCustomerService.cs" />
+    <Compile Include="CustomerService\Generated.ViewCustomerServiceInDetail.cs" />
+    <Compile Include="CustomerService\ServiceType.cs" />
+    <Compile Include="CustomerService\ViewCustomerService.cs" />
+    <Compile Include="CustomerService\ViewCustomerServiceInDetail.cs" />
+    <Compile Include="Generated.Company.cs" />
+    <Compile Include="HolidayLog.cs" />
+    <Compile Include="Analysis\AnalysisAccess.cs" />
+    <Compile Include="Mall\Generated.Mall_UserProject.cs" />
+    <Compile Include="Generated.ViewRoomFeeHistory.cs" />
+    <Compile Include="Mall\Generated.Mall_Coupon.cs" />
+    <Compile Include="Mall\Mall_Coupon.cs" />
+    <Compile Include="RoomSource\Generated.RoomProperty.cs" />
+    <Compile Include="RoomSource\Generated.RoomState.cs" />
+    <Compile Include="Generated.Sys_OrderNumber.cs" />
+    <Compile Include="JPushLog.cs" />
+    <Compile Include="Mall\Generated.Mall_CouponUser.cs" />
+    <Compile Include="Mall\Mall_CouponUser.cs" />
+    <Compile Include="Mall\Mall_UserProject.cs" />
+    <Compile Include="RoomSource\Generated.TreeExpandLevel.cs" />
+    <Compile Include="RoomSource\RoomProperty.cs" />
+    <Compile Include="RoomSource\DefineField.cs" />
+    <Compile Include="Framework\ColumnInfo.cs" />
+    <Compile Include="Framework\DatabaseColumnAttribute.cs" />
+    <Compile Include="Framework\EntityBase.cs" />
+    <Compile Include="Framework\EntityBaseReadOnly.cs" />
+    <Compile Include="Framework\EntityCancelEventArgs.cs" />
+    <Compile Include="Framework\EntityComparer.cs" />
+    <Compile Include="Framework\EntityEventArgs.cs" />
+    <Compile Include="Framework\EntityException.cs" />
+    <Compile Include="Framework\EntityFinder.cs" />
+    <Compile Include="Framework\EntityList.cs" />
+    <Compile Include="Framework\EntityListBase.cs" />
+    <Compile Include="Framework\EntityListReadOnly.cs" />
+    <Compile Include="Framework\EntityValidationCancelEventArgs.cs" />
+    <Compile Include="Framework\EntityValidationEventArgs.cs" />
+    <Compile Include="Framework\Generated.EntityBase.cs" />
+    <Compile Include="Framework\Generated.EntityBaseReadOnly.cs" />
+    <Compile Include="Framework\Generated.EntityList.cs" />
+    <Compile Include="Framework\Generated.EntityListBase.cs" />
+    <Compile Include="Framework\Generated.EntityListReadOnly.cs" />
+    <Compile Include="Framework\Generated.SqlHelper.cs" />
+    <Compile Include="Framework\Generated.ValidationGroup.cs" />
+    <Compile Include="Framework\ISavable.cs" />
+    <Compile Include="Framework\ISearchable.cs" />
+    <Compile Include="Framework\MinToEmptyTypeConverter.cs" />
+    <Compile Include="Framework\SqlHelper.cs" />
+    <Compile Include="Framework\SqlHelperBase.cs" />
+    <Compile Include="Framework\ValidationError.cs" />
+    <Compile Include="Framework\ValidationGroup.cs" />
+    <Compile Include="CustomerService\Generated.CustomerService.cs">
+      <DependentUpon>CustomerService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\Generated.CustomerServiceAttach.cs">
+      <DependentUpon>CustomerServiceAttach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\Generated.CustomerServiceChuli.cs">
+      <DependentUpon>CustomerServiceChuli.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\Generated.CustomerServiceChuli_Attach.cs">
+      <DependentUpon>CustomerServiceChuli_Attach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\Generated.CustomerServiceHuifang.cs">
+      <DependentUpon>CustomerServiceHuifang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\Generated.CustomerService_Accpet.cs">
+      <DependentUpon>CustomerService_Accpet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\Generated.CustomerService_Material.cs">
+      <DependentUpon>CustomerService_Material.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\Generated.CustomerService_Task.cs">
+      <DependentUpon>CustomerService_Task.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSource\Generated.DefineField.cs" />
+    <Compile Include="Generated.JPushLog.cs" />
+    <Compile Include="Generated.OperationLog.cs" />
+    <Compile Include="RoomSource\Generated.Project_Public.cs" />
+    <Compile Include="Generated.Role.cs" />
+    <Compile Include="Generated.RoleModule.cs" />
+    <Compile Include="Generated.RoleProject.cs" />
+    <Compile Include="RoomSource\Generated.RoomBasic.cs" />
+    <Compile Include="RoomSource\Generated.RoomBasicField.cs" />
+    <Compile Include="Generated.SysMenu.cs" />
+    <Compile Include="Generated.TableColumnsUser.cs" />
+    <Compile Include="Generated.TempID.cs" />
+    <Compile Include="Generated.User.cs" />
+    <Compile Include="Generated.UserCompany.cs" />
+    <Compile Include="Generated.UserDepartment.cs" />
+    <Compile Include="Generated.UserRole.cs" />
+    <Compile Include="RoomSource\Generated.RoomPhoneRelation.cs" />
+    <Compile Include="RoomSource\Generated.RoomRelation.cs" />
+    <Compile Include="RoomSource\Generated.RoomType.cs" />
+    <Compile Include="RoomSource\Generated.ViewProjectTree.cs" />
+    <Compile Include="RoomSource\Generated.ViewRoomBasic.cs" />
+    <Compile Include="OperationLog.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="RoleModule.cs" />
+    <Compile Include="RoleProject.cs" />
+    <Compile Include="RoomSource\RoomBasic.cs" />
+    <Compile Include="RoomSource\RoomBasicField.cs" />
+    <Compile Include="RoomSource\Generated.Project.cs">
+      <DependentUpon>Project.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSource\Generated.ProjectComany.cs">
+      <DependentUpon>ProjectComany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSource\Generated.ProjectName.cs">
+      <DependentUpon>ProjectName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSource\Generated.ProjectNameRelation.cs">
+      <DependentUpon>ProjectNameRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSource\Generated.ProjectOrderNumber.cs">
+      <DependentUpon>ProjectOrderNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSource\Generated.ProjectProperty.cs">
+      <DependentUpon>ProjectProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSource\Generated.ProjectYT.cs">
+      <DependentUpon>ProjectYT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSource\Generated.ProjectYTOrder.cs">
+      <DependentUpon>ProjectYTOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSource\Generated.Project_Property.cs">
+      <DependentUpon>Project_Property.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSource\Project_Public.cs" />
+    <Compile Include="RoomSource\Project.cs" />
+    <Compile Include="RoomSource\ProjectComany.cs" />
+    <Compile Include="RoomSource\ProjectName.cs" />
+    <Compile Include="RoomSource\ProjectNameRelation.cs" />
+    <Compile Include="RoomSource\ProjectOrderNumber.cs" />
+    <Compile Include="RoomSource\ProjectProperty.cs" />
+    <Compile Include="RoomSource\ProjectYT.cs" />
+    <Compile Include="RoomSource\ProjectYTOrder.cs" />
+    <Compile Include="RoomSource\Project_Property.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomSource\RoomPhoneRelation.cs" />
+    <Compile Include="RoomSource\RoomRelation.cs" />
+    <Compile Include="RoomSource\RoomType.cs" />
+    <Compile Include="RoomSource\RoomState.cs" />
+    <Compile Include="RoomSource\TreeExpandLevel.cs" />
+    <Compile Include="Seat.cs" />
+    <Compile Include="SiteVersion.cs" />
+    <Compile Include="SysConfig.cs" />
+    <Compile Include="SysMenu.cs" />
+    <Compile Include="Sys_OrderNumber.cs" />
+    <Compile Include="TableColumn.cs" />
+    <Compile Include="TableColumnsUser.cs" />
+    <Compile Include="TempID.cs" />
+    <Compile Include="UI\DataGrid.cs" />
+    <Compile Include="RoomSource\ViewRoomBasic.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserCompany.cs" />
+    <Compile Include="UserDepartment.cs" />
+    <Compile Include="UserRole.cs" />
+    <Compile Include="RoomSource\ViewProjectTree.cs" />
+    <Compile Include="ViewRoomFeeHistory.cs" />
+    <Compile Include="Wechat\Generated.Wechat_Service.cs" />
+    <Compile Include="Wechat\Generated.Wechat_ServiceImg.cs" />
+    <Compile Include="Wechat\Generated.Wechat_ServiceUser.cs" />
+    <Compile Include="Wechat\Generated.Wechat_User.cs" />
+    <Compile Include="Wechat\Wechat_Service.cs" />
+    <Compile Include="Wechat\Wechat_ServiceImg.cs" />
+    <Compile Include="Wechat\Wechat_ServiceUser.cs" />
+    <Compile Include="Wechat\Wechat_User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Foresight.DataAccess.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{a8c330c1-5525-4ecf-ae86-974fbc3ab142}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

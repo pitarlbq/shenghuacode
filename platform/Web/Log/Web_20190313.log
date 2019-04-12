@@ -1,0 +1,177 @@
+2019-03-13 10:50:49,485 [21156] ERROR root - [ProjectHandler]visit: getprojectparams
+System.ArgumentOutOfRangeException: 索引必须位于该列表的界限内。
+参数名: index
+   在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   在 System.Collections.Generic.List`1.Insert(Int32 index, T item)
+   在 Web.Handler.ProjectHandler.getprojectparams(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 130
+   在 Web.Handler.ProjectHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 101
+2019-03-13 13:32:03,927 [11596] ERROR root - [ServiceHandler]命令:loadservicelist
+System.Data.SqlClient.SqlException (0x80131904): 无法绑定由多个部分组成的标识符 "ViewCustomerService.ServiceType1ID"。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, Boolean canViewAll, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32[] CompanyIDList, Int32 ServiceType, Boolean canexport, Boolean canViewWechatAPPService, Boolean canViewWechatAPPSuggestoin, Boolean isServiceAnalysis, Int32 CloseType, Int32 TimeOutType, Boolean IsTouSuChaoShi, Boolean IsRepairChaoShi, Int32 CallBackStatus, Int32 CallServiceType, Int32 ServiceType1ID) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1680
+ClientConnectionId:66eb1557-684b-448b-8fed-1094e4fada1e
+Error Number:4104,State:1,Class:16
+2019-03-13 13:32:06,884 [20036] ERROR root - [ServiceHandler]命令:loadservicelist
+System.Data.SqlClient.SqlException (0x80131904): 无法绑定由多个部分组成的标识符 "ViewCustomerService.ServiceType1ID"。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, Boolean canViewAll, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32[] CompanyIDList, Int32 ServiceType, Boolean canexport, Boolean canViewWechatAPPService, Boolean canViewWechatAPPSuggestoin, Boolean isServiceAnalysis, Int32 CloseType, Int32 TimeOutType, Boolean IsTouSuChaoShi, Boolean IsRepairChaoShi, Int32 CallBackStatus, Int32 CallServiceType, Int32 ServiceType1ID) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1680
+ClientConnectionId:89810f24-97fd-448c-bd05-da32bc300ef8
+Error Number:4104,State:1,Class:16
+2019-03-13 13:32:08,844 [20036] ERROR root - [ServiceHandler]命令:loadservicelist
+System.Data.SqlClient.SqlException (0x80131904): 无法绑定由多个部分组成的标识符 "ViewCustomerService.ServiceType1ID"。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, Boolean canViewAll, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32[] CompanyIDList, Int32 ServiceType, Boolean canexport, Boolean canViewWechatAPPService, Boolean canViewWechatAPPSuggestoin, Boolean isServiceAnalysis, Int32 CloseType, Int32 TimeOutType, Boolean IsTouSuChaoShi, Boolean IsRepairChaoShi, Int32 CallBackStatus, Int32 CallServiceType, Int32 ServiceType1ID) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1680
+ClientConnectionId:66eb1557-684b-448b-8fed-1094e4fada1e
+Error Number:4104,State:1,Class:16
+2019-03-13 13:32:10,430 [20036] ERROR root - [ServiceHandler]命令:loadservicelist
+System.Data.SqlClient.SqlException (0x80131904): 无法绑定由多个部分组成的标识符 "ViewCustomerService.ServiceType1ID"。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, Boolean canViewAll, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32[] CompanyIDList, Int32 ServiceType, Boolean canexport, Boolean canViewWechatAPPService, Boolean canViewWechatAPPSuggestoin, Boolean isServiceAnalysis, Int32 CloseType, Int32 TimeOutType, Boolean IsTouSuChaoShi, Boolean IsRepairChaoShi, Int32 CallBackStatus, Int32 CallServiceType, Int32 ServiceType1ID) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1680
+ClientConnectionId:89810f24-97fd-448c-bd05-da32bc300ef8
+Error Number:4104,State:1,Class:16
+2019-03-13 13:32:12,038 [20036] ERROR root - [ServiceHandler]命令:loadservicelist
+System.Data.SqlClient.SqlException (0x80131904): 无法绑定由多个部分组成的标识符 "ViewCustomerService.ServiceType1ID"。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, Boolean canViewAll, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32[] CompanyIDList, Int32 ServiceType, Boolean canexport, Boolean canViewWechatAPPService, Boolean canViewWechatAPPSuggestoin, Boolean isServiceAnalysis, Int32 CloseType, Int32 TimeOutType, Boolean IsTouSuChaoShi, Boolean IsRepairChaoShi, Int32 CallBackStatus, Int32 CallServiceType, Int32 ServiceType1ID) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1680
+ClientConnectionId:66eb1557-684b-448b-8fed-1094e4fada1e
+Error Number:4104,State:1,Class:16
+2019-03-13 13:32:13,250 [20036] ERROR root - [ServiceHandler]命令:loadservicelist
+System.Data.SqlClient.SqlException (0x80131904): 无法绑定由多个部分组成的标识符 "ViewCustomerService.ServiceType1ID"。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, Boolean canViewAll, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32[] CompanyIDList, Int32 ServiceType, Boolean canexport, Boolean canViewWechatAPPService, Boolean canViewWechatAPPSuggestoin, Boolean isServiceAnalysis, Int32 CloseType, Int32 TimeOutType, Boolean IsTouSuChaoShi, Boolean IsRepairChaoShi, Int32 CallBackStatus, Int32 CallServiceType, Int32 ServiceType1ID) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1680
+ClientConnectionId:89810f24-97fd-448c-bd05-da32bc300ef8
+Error Number:4104,State:1,Class:16
+2019-03-13 13:33:25,881 [11596] ERROR root - [ServiceHandler]命令:loadservicelist
+System.Data.SqlClient.SqlException (0x80131904): 无法绑定由多个部分组成的标识符 "ViewCustomerService.ServiceType1ID"。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, Boolean canViewAll, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32[] CompanyIDList, Int32 ServiceType, Boolean canexport, Boolean canViewWechatAPPService, Boolean canViewWechatAPPSuggestoin, Boolean isServiceAnalysis, Int32 CloseType, Int32 TimeOutType, Boolean IsTouSuChaoShi, Boolean IsRepairChaoShi, Int32 CallBackStatus, Int32 CallServiceType, Int32 ServiceType1ID) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1680
+ClientConnectionId:89810f24-97fd-448c-bd05-da32bc300ef8
+Error Number:4104,State:1,Class:16
+2019-03-13 15:56:37,743 [8008] ERROR root - [ServiceHandler]命令:loadservicelist
+System.Data.SqlClient.SqlException (0x80131904): 变量名 '@UserID' 已声明。变量名在查询批次或存储过程内部必须唯一。
+必须声明标量变量 "@ServiceFrom1"。
+')' 附近有语法错误。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, Boolean canViewAll, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32[] CompanyIDList, Int32 ServiceType, Boolean canexport, Boolean canViewWechatAPPService, Boolean canViewWechatAPPSuggestoin, Boolean isServiceAnalysis, Int32 CloseType, Int32 TimeOutType, Boolean IsTouSuChaoShi, Boolean IsRepairChaoShi, Int32 CallBackStatus, Int32 CallServiceType, Int32 ServiceType1ID) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 277
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1680
+ClientConnectionId:c2876afc-e735-4f21-952c-eb147622b209
+Error Number:134,State:1,Class:15

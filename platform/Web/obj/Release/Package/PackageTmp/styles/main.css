@@ -1,0 +1,95 @@
+﻿table.projecttable {
+    width: 95%;
+    margin: 0 auto;
+    border: none;
+    border-collapse: separate;
+    border-spacing: 0px;
+}
+
+    table.projecttable td {
+        text-align: left;
+        vertical-align: top;
+        border: solid 1px #ccc;
+        padding: 5px 0 5px 5px;
+    }
+
+.inputbox {
+    width: 200px;
+}
+
+.ytmain {
+    float: left;
+    margin: 10px 20px 0 0;
+    width: 260px;
+}
+
+
+.ytbox {
+    width: 205px;
+    float: left;
+    min-height: 180px;
+    border: solid 1px #ccc;
+}
+
+    .ytbox .yttitle {
+        text-align: center;
+        background: #ccc;
+        line-height: 25px;
+        position: relative;
+    }
+
+        .ytbox .yttitle .ytnumber {
+            position: absolute;
+            left: 0;
+            width: 80px;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .ytbox .yttitle .ytclose {
+            position: absolute;
+            right: 0;
+            width: 50px;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .ytbox .yttitle .ytnumber input {
+            width: 15px;
+        }
+
+.ytview {
+    float: right;
+    width: 50px;
+    text-align: right;
+}
+
+table.yttable, table.ytdetailtable {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 5px;
+}
+
+    table.yttable td {
+        border: none;
+        min-width: 60px;
+    }
+
+    table.ytdetailtable td {
+        border: solid 1px #ccc;
+        max-width: 60px;
+        padding: 0;
+        text-align: center;
+    }
+
+table.projecttable td.viewdetails, table.projecttable td.yttd {
+    border: none;
+    padding: 0;
+    border-spacing: 0;
+}
+
+.hidefield {
+    display: none;
+}

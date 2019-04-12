@@ -1,0 +1,82 @@
+﻿html, body, form {
+    height: 100%;
+    margin: 0 auto;
+}
+
+body {
+    background: #2f80d1;
+    font-family: 'Microsoft YaHei';
+    font-size: 12px;
+}
+
+.sitewapper {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0;
+    position: relative;
+    height: 100%;
+}
+
+.header {
+    height: 40px;
+}
+
+    .header .headertitle {
+        width: 200px;
+        margin: 0 0 0 10px;
+        float: left;
+    }
+
+    .header a {
+        float: right;
+        line-height: 40px;
+        font-size: 25px;
+        color: #fff;
+        margin: 0 0 0 10px;
+    }
+
+    .header .headertitle .logo {
+        background: url("images/yongyoulogo.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        width: 40px;
+        height: 40px;
+    }
+
+    .header .headerbox {
+        float: right;
+        width: 100px;
+        line-height: 30px;
+        color: #fff;
+        font-size: 15px;
+        margin: 5px 10px 0 10px;
+        text-align: center;
+        border: 1px solid #59b9fa;
+        border-radius: 3px;
+        FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#5eb7fe,endColorStr=#539bd7); /*IE 6 7 8*/
+        background: -ms-linear-gradient(top, #5eb7fe, #539bd7); /* IE 10 */
+        background: -moz-linear-gradient(top,#5eb7fe,#539bd7); /*火狐*/
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#5eb7fe), to(#539bd7)); /*谷歌*/
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#5eb7fe), to(#539bd7)); /* Safari 4-5, Chrome 1-9*/
+        background: -webkit-linear-gradient(top, #5eb7fe, #539bd7); /*Safari5.1 Chrome 10+*/
+    }
+
+.body {
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    top: 0px;
+    bottom: 0px;
+    height: 100%;
+}
+
+.footer {
+    clear: both;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

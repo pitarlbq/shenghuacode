@@ -1,0 +1,143 @@
+2019-02-27 09:13:58,198 [14448] ERROR root - [ProjectHandler]visit: getprojectinfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1256
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters, SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1078
+   在 Foresight.DataAccess.User.GetUserByLoginName(String loginname, SqlHelper helper, String Type) 位置 f:\code\CustomerPro\platform\DataAccess\User.cs:行号 266
+   在 Foresight.DataAccess.User.GetUserByLoginName(String loginname, String Type) 位置 f:\code\CustomerPro\platform\DataAccess\User.cs:行号 238
+   在 Web.APPCode.CacheHelper.GetUser(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\APPCode\CacheHelper.cs:行号 47
+   在 Web.APPCode.CacheHelper.GetCompanyID(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\APPCode\CacheHelper.cs:行号 71
+   在 Web.WebUtil.GetCompanyID(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\APPCode\WebUtil.cs:行号 78
+   在 Web.Handler.ProjectHandler.GetProjectInfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 1198
+   在 Web.Handler.ProjectHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 38
+2019-02-27 11:10:54,078 [13396] INFO  root - [SocketClient.EVENT_CONNECT]连接成功: 2019-02-27 11:10:54
+2019-02-27 12:01:32,801 [11240] ERROR root - [SysSettingHandler]命令:savemyseat
+System.Data.SqlClient.SqlException (0x80131904): 不能将值 NULL 插入列 'SeatStatus'，表 'customerpro.dbo.Seat'；列不允许有 Null 值。INSERT 失败。
+语句已终止。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBase.Insert(SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBase.cs:行号 1152
+   在 Foresight.DataAccess.Framework.EntityBase.Save(SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBase.cs:行号 713
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Save() 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 276
+   在 Web.Handler.SysSettingHandler.savemyseat(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\SysSettingHandler.ashx.cs:行号 115
+   在 Web.Handler.SysSettingHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\SysSettingHandler.ashx.cs:行号 89
+ClientConnectionId:0f04441c-e183-4ecd-b798-2aa2ac1fe76f
+Error Number:515,State:2,Class:16
+2019-02-27 13:59:39,060 [15516] ERROR root - [ServiceHandler]命令: savecustomerservice
+System.Data.SqlClient.SqlException (0x80131904): 不能将值 NULL 插入列 'CallTime'，表 'customerpro.dbo.PhoneRecord'；列不允许有 Null 值。INSERT 失败。
+语句已终止。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBase.Insert(SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBase.cs:行号 1152
+   在 Foresight.DataAccess.Framework.EntityBase.Save(SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBase.cs:行号 713
+   在 Web.Handler.ServiceHandler.savecustomerservice(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1611
+ClientConnectionId:d1ae76d2-3703-4f94-bad8-7d7c6738347f
+Error Number:515,State:2,Class:16
+2019-02-27 14:11:23,557 [1124] ERROR root - [ServiceHandler]命令:loadservicelist
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Foresight.DataAccess.ViewCustomerService.GetServiceTypeNames(ServiceType[] list, ServiceType data, String& CategoryPartA, String& CategoryPartB, String& CategoryPartC) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Foresight.DataAccess.ViewCustomerService.GetFinalViewCustomerDataGrid(ViewCustomerService[] list) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 234
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, Int32 PayStatus, Int32 ServiceAccpetManID, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32 ServiceType, Int32 ServiceRange, List`1 PublicProjectIDList, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 199
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1354
+2019-02-27 14:11:26,421 [15472] ERROR root - [ServiceHandler]命令:loadservicelist
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Foresight.DataAccess.ViewCustomerService.GetServiceTypeNames(ServiceType[] list, ServiceType data, String& CategoryPartA, String& CategoryPartB, String& CategoryPartC) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Foresight.DataAccess.ViewCustomerService.GetFinalViewCustomerDataGrid(ViewCustomerService[] list) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 234
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, Int32 PayStatus, Int32 ServiceAccpetManID, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32 ServiceType, Int32 ServiceRange, List`1 PublicProjectIDList, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 199
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1354
+2019-02-27 14:11:31,777 [10540] ERROR root - [ServiceHandler]命令:loadservicelist
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Foresight.DataAccess.ViewCustomerService.GetServiceTypeNames(ServiceType[] list, ServiceType data, String& CategoryPartA, String& CategoryPartB, String& CategoryPartC) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Foresight.DataAccess.ViewCustomerService.GetFinalViewCustomerDataGrid(ViewCustomerService[] list) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 234
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, Int32 PayStatus, Int32 ServiceAccpetManID, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32 ServiceType, Int32 ServiceRange, List`1 PublicProjectIDList, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 199
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1354
+2019-02-27 14:12:48,694 [16508] ERROR root - [ServiceHandler]命令:loadservicelist
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Foresight.DataAccess.ViewCustomerService.GetServiceTypeNames(ServiceType[] list, ServiceType data, String& CategoryPartA, String& CategoryPartB, String& CategoryPartC) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 271
+   在 Foresight.DataAccess.ViewCustomerService.GetFinalViewCustomerDataGrid(ViewCustomerService[] list) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 234
+   在 Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(String Keywords, List`1 RoomIDList, DateTime StartTime, DateTime EndTime, Int32 ServiceStatus, Int32 PayStatus, Int32 ServiceAccpetManID, String orderBy, Int64 startRowIndex, Int32 pageSize, Int32 UserID, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32 ServiceType, Int32 ServiceRange, List`1 PublicProjectIDList, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 199
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1354
+2019-02-27 15:52:02,941 [11192] ERROR root - [ProjectHandler]visit: getprojectinfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 106
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1..ctor(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 398
+   在 Foresight.DataAccess.Framework.EntityList`1..ctor(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityList.cs:行号 206
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.InitializeList[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1311
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1110
+   在 Foresight.DataAccess.ProjectTree.GetProjectTreeListByID(Int32 ID, String Keywords, Int32 UserID, Int32 IconID, Boolean OnlyXiaoqu, Boolean ExceptRoom) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\Project.cs:行号 446
+   在 Web.APPCode.CacheHelper.GetMyProjectDetailsTree(Int32 UserID) 位置 f:\code\CustomerPro\platform\Web\APPCode\CacheHelper.cs:行号 191
+   在 Web.WebUtil.GetMyProjectDetailsTree(Int32 UserID) 位置 f:\code\CustomerPro\platform\Web\APPCode\WebUtil.cs:行号 267
+   在 Web.Handler.ProjectHandler.GetProjectInfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 1208
+   在 Web.Handler.ProjectHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 38
+2019-02-27 16:45:57,851 [16608] INFO  root - [SocketClient.EVENT_CONNECT]连接成功: 2019-02-27 16:45:57
+2019-02-27 17:35:35,984 [15016] DEBUG root - [ProjectHandler]visit为空
+2019-02-27 21:04:23,501 [18380] INFO  root - [SocketClient.EVENT_CONNECT]连接成功: 2019-02-27 21:04:23
+2019-02-27 22:37:50,120 [15352] ERROR root - [ServiceHandler]命令:uploadvoicerecord
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Web.Handler.ServiceHandler.uploadvoicerecord(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 201
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 139
+2019-02-27 22:44:34,426 [5816] ERROR root - [ServiceHandler]命令:uploadvoicerecord
+Foresight.DataAccess.Framework.EntityException: Validation failed.
+   在 Foresight.DataAccess.Framework.EntityBase.Save(SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBase.cs:行号 698
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Save() 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 276
+   在 Web.Handler.ServiceHandler.uploadvoicerecord(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 212
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 139
+2019-02-27 22:46:34,520 [5816] ERROR root - [ServiceHandler]命令:uploadvoicerecord
+Foresight.DataAccess.Framework.EntityException: Validation failed.
+   在 Foresight.DataAccess.Framework.EntityBase.Save(SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBase.cs:行号 698
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Save() 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 276
+   在 Web.Handler.ServiceHandler.uploadvoicerecord(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 212
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 139
+2019-02-27 22:49:18,287 [11652] ERROR root - [ServiceHandler]命令:uploadvoicerecord
+Foresight.DataAccess.Framework.EntityException: Validation failed.
+   在 Foresight.DataAccess.Framework.EntityBase.Save(SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBase.cs:行号 698
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Save() 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 276
+   在 Web.Handler.ServiceHandler.uploadvoicerecord(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 212
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 139
+2019-02-27 22:49:18,454 [11828] ERROR root - [ServiceHandler]命令:uploadvoicerecord
+Foresight.DataAccess.Framework.EntityException: Validation failed.
+   在 Foresight.DataAccess.Framework.EntityBase.Save(SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBase.cs:行号 698
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Save() 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 276
+   在 Web.Handler.ServiceHandler.uploadvoicerecord(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 212
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 139
+2019-02-27 22:49:18,609 [11652] ERROR root - [ServiceHandler]命令:uploadvoicerecord
+Foresight.DataAccess.Framework.EntityException: Validation failed.
+   在 Foresight.DataAccess.Framework.EntityBase.Save(SqlHelper helper) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBase.cs:行号 698
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Save() 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 276
+   在 Web.Handler.ServiceHandler.uploadvoicerecord(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 212
+   在 Web.Handler.ServiceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 139

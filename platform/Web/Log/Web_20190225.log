@@ -1,0 +1,256 @@
+2019-02-25 10:17:04,942 [9308] ERROR root - [ProjectHandler]visit: getprojectinfo
+System.Data.SqlClient.SqlException (0x80131904): 列名 'IsLocked' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1108
+   在 Foresight.DataAccess.ProjectTree.GetProjectTreeListByID(Int32 ID, String Keywords, Int32 UserID, Int32 IconID, Boolean OnlyXiaoqu, Boolean ExceptRoom) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\Project.cs:行号 451
+   在 Web.APPCode.CacheHelper.GetMyProjectDetailsTree(Int32 UserID) 位置 f:\code\CustomerPro\platform\Web\APPCode\CacheHelper.cs:行号 191
+   在 Web.WebUtil.GetMyProjectDetailsTree(Int32 UserID) 位置 f:\code\CustomerPro\platform\Web\APPCode\WebUtil.cs:行号 267
+   在 Web.Handler.ProjectHandler.GetProjectInfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 1208
+   在 Web.Handler.ProjectHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 38
+ClientConnectionId:957174d2-d375-4ca2-9c1a-2a3336f1a512
+Error Number:207,State:1,Class:16
+2019-02-25 10:17:05,378 [11248] ERROR root - [ProjectHandler]visit: getprojectinfo
+System.Data.SqlClient.SqlException (0x80131904): 列名 'IsLocked' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1108
+   在 Foresight.DataAccess.ProjectTree.GetProjectTreeListByID(Int32 ID, String Keywords, Int32 UserID, Int32 IconID, Boolean OnlyXiaoqu, Boolean ExceptRoom) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\Project.cs:行号 451
+   在 Web.APPCode.CacheHelper.GetMyProjectDetailsTree(Int32 UserID) 位置 f:\code\CustomerPro\platform\Web\APPCode\CacheHelper.cs:行号 191
+   在 Web.WebUtil.GetMyProjectDetailsTree(Int32 UserID) 位置 f:\code\CustomerPro\platform\Web\APPCode\WebUtil.cs:行号 267
+   在 Web.Handler.ProjectHandler.GetProjectInfo(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 1208
+   在 Web.Handler.ProjectHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 38
+ClientConnectionId:957174d2-d375-4ca2-9c1a-2a3336f1a512
+Error Number:207,State:1,Class:16
+2019-02-25 10:18:49,912 [10164] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Data.SqlClient.SqlException (0x80131904): 列名 'BuildingArea' 无效。
+由于绑定错误，无法使用视图或函数 'ViewRoomBasic'。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, String OpenID, Int32 ConnectStatus, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 161
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 87
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 727
+ClientConnectionId:0ec59c52-065e-4221-ab4a-b46cd9c2220b
+Error Number:207,State:1,Class:16
+2019-02-25 10:18:52,735 [10164] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Data.SqlClient.SqlException (0x80131904): 列名 'BuildingArea' 无效。
+由于绑定错误，无法使用视图或函数 'ViewRoomBasic'。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, String OpenID, Int32 ConnectStatus, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 161
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 87
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 727
+ClientConnectionId:0ec59c52-065e-4221-ab4a-b46cd9c2220b
+Error Number:207,State:1,Class:16
+2019-02-25 10:21:52,201 [14480] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Data.SqlClient.SqlException (0x80131904): 列名 'isParent' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, String OpenID, Int32 ConnectStatus, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 161
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 87
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 727
+ClientConnectionId:c01073d1-a1f6-4ed7-bf17-1c0a3650d467
+Error Number:207,State:1,Class:16
+2019-02-25 10:22:30,354 [11248] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Data.SqlClient.SqlException (0x80131904): 列名 'isParent' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, String OpenID, Int32 ConnectStatus, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 161
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 87
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 727
+ClientConnectionId:c01073d1-a1f6-4ed7-bf17-1c0a3650d467
+Error Number:207,State:1,Class:16
+2019-02-25 10:22:31,540 [5668] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Data.SqlClient.SqlException (0x80131904): 列名 'isParent' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, String OpenID, Int32 ConnectStatus, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 161
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 87
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 727
+ClientConnectionId:c01073d1-a1f6-4ed7-bf17-1c0a3650d467
+Error Number:207,State:1,Class:16
+2019-02-25 10:23:02,922 [11248] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Data.SqlClient.SqlException (0x80131904): 列名 'isParent' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, String OpenID, Int32 ConnectStatus, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 161
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 87
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 727
+ClientConnectionId:c01073d1-a1f6-4ed7-bf17-1c0a3650d467
+Error Number:207,State:1,Class:16
+2019-02-25 10:23:04,828 [11248] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Data.SqlClient.SqlException (0x80131904): 列名 'isParent' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, String OpenID, Int32 ConnectStatus, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 161
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 87
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 727
+ClientConnectionId:c01073d1-a1f6-4ed7-bf17-1c0a3650d467
+Error Number:207,State:1,Class:16
+2019-02-25 10:23:19,909 [11060] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Data.SqlClient.SqlException (0x80131904): 列名 'isParent' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String selectedFieldList, String fromStatementAndCriteria, List`1 parameters, String orderBy, Int64 startRowIndex, Int32 pageSize, Int64& totalRows) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1196
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, String OpenID, Int32 ConnectStatus, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 161
+   在 Foresight.DataAccess.ViewRoomBasic.GetRoomBasicListByKeywords(List`1 RoomIDList, List`1 ProjectIDList, String RoomOwner, String OwnerPhone, String Keywords, List`1 SearchAreas, String orderBy, Int64 startRowIndex, Int32 pageSize, Boolean canexport) 位置 f:\code\CustomerPro\platform\DataAccess\RoomSource\ViewRoomBasic.cs:行号 87
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 727
+ClientConnectionId:c01073d1-a1f6-4ed7-bf17-1c0a3650d467
+Error Number:207,State:1,Class:16
+2019-02-25 11:30:00,123 [13136] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中。
+   在 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   在 Web.APPCode.ExportHelper.DownLoadRoomSourceData(DataGrid dg, String& downloadurl, String& error) 位置 f:\code\CustomerPro\platform\Web\APPCode\ExportHelper.cs:行号 331
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 666
+2019-02-25 11:30:12,740 [12060] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中。
+   在 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   在 Web.APPCode.ExportHelper.DownLoadRoomSourceData(DataGrid dg, String& downloadurl, String& error) 位置 f:\code\CustomerPro\platform\Web\APPCode\ExportHelper.cs:行号 331
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 666
+2019-02-25 11:36:17,925 [2196] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中。
+   在 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   在 Web.APPCode.ExportHelper.DownLoadRoomSourceData(DataGrid dg, String& downloadurl, String& error) 位置 f:\code\CustomerPro\platform\Web\APPCode\ExportHelper.cs:行号 335
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 666
+2019-02-25 11:37:22,912 [14840] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中。
+   在 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   在 Web.APPCode.ExportHelper.DownLoadRoomSourceData(DataGrid dg, String& downloadurl, String& error) 位置 f:\code\CustomerPro\platform\Web\APPCode\ExportHelper.cs:行号 335
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 666
+2019-02-25 11:38:25,564 [13012] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中。
+   在 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   在 Web.APPCode.ExportHelper.DownLoadRoomSourceData(DataGrid dg, String& downloadurl, String& error) 位置 f:\code\CustomerPro\platform\Web\APPCode\ExportHelper.cs:行号 340
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 666
+2019-02-25 11:38:49,806 [14408] ERROR root - [RoomResourceHandler]命令:LoadRoomResourceList
+System.Collections.Generic.KeyNotFoundException: 给定关键字不在字典中。
+   在 System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   在 Web.APPCode.ExportHelper.DownLoadRoomSourceData(DataGrid dg, String& downloadurl, String& error) 位置 f:\code\CustomerPro\platform\Web\APPCode\ExportHelper.cs:行号 340
+   在 Web.Handler.RoomResourceHandler.LoadRoomResourceList(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 666

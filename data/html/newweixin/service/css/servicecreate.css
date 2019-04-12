@@ -1,0 +1,99 @@
+ [v-cloak] {
+     display: none;
+ }
+
+ .aui-list {
+     background: #fff;
+     margin: 0.5rem;
+     border-radius: 5px;
+ }
+
+ .aui-content {
+     padding-bottom: 2.6rem;
+ }
+
+ .aui-list-header span {
+     margin-left: 1rem;
+     color: #ffc107;
+ }
+
+ .aui-list .aui-list-item {
+     background-size: 0px;
+ }
+
+ .aui-list .aui-list-item-label-icon {
+     padding-right: 0;
+ }
+
+ .aui-bar-nav.header {
+     line-height: 1.5rem;
+     min-height: 1.5rem;
+ }
+
+ .aui-bar-nav .aui-pull-right {
+     font-size: 0.6rem;
+ }
+
+ .aui-list .aui-list-item-input label {
+     margin-right: 10px;
+ }
+
+ input[type="datetime-local"]:before {
+     content: attr(placeholder);
+     color: #ccc;
+ }
+
+ ::-webkit-input-placeholder {
+     color: #ccc;
+ }
+
+ .bottombtn {
+     width: 100%;
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     border-bottom-right-radius: 0;
+     border-bottom-left-radius: 0;
+     height: 2.6rem;
+     line-height: 2.6rem;
+     border-radius: 0;
+     font-size: 0.8rem;
+     background-color: #b18951;
+ }
+
+ .bottombtnleft {
+     width: 50%;
+     left: 0;
+ }
+
+ .bottombtnright {
+     width: 50%;
+     left: 50%;
+     right: 0;
+     border-left: solid 1px #fff;
+ }
+
+ input.datetime_text {
+     position: absolute;
+     top: 0;
+     left: 0;
+     z-index: 1;
+     background-color: #fff;
+ }
+
+ .aui-list .aui-list-item .aui-list-item-input.datetime_box {
+     position: relative;
+ }
+
+ .topBanner {
+     margin: 0;
+     text-align: center;
+ }
+
+ .topBanner img {
+     max-width: 100%;
+     margin: 0 auto;
+ }
+ .iconfont{
+     color: #b18951;
+ }

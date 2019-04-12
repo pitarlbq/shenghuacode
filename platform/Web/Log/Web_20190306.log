@@ -1,0 +1,8 @@
+2019-03-06 17:45:13,469 [2624] ERROR root - [Jpush.JpushAPI]PushMessage
+cn.jpush.api.common.APIRequestException: 远程服务器返回错误: (400) 错误的请求。
+   在 cn.jpush.api.common.BaseHttpClient.sendRequest(String method, String url, String auth, String reqParams)
+   在 cn.jpush.api.common.BaseHttpClient.sendPost(String url, String auth, String reqParams)
+   在 cn.jpush.api.push.PushClient.sendPush(String payloadString)
+   在 cn.jpush.api.push.PushClient.sendPush(PushPayload payload)
+   在 cn.jpush.api.JPushClient.SendPush(PushPayload payload)
+   在 JPush.JpushAPI.doPushMessage(String title, Dictionary`2 extras, String[] cids, String sendtype, String msg_content, Int32 PushAPP, Boolean IsToAll) 位置 f:\code\CustomerPro\platform\JPush\JpusAPI.cs:行号 134

@@ -1,0 +1,13 @@
+[v-cloak] {
+    display: none;
+}
+html,body{
+	height: 100%;
+	background:#f0f0f0;
+}
+.aui-list{
+	font-size: 0.7rem;
+}
+.aui-list input[type="text"],.aui-list textarea,.aui-list input[type="number"]{
+	font-size: 0.7rem;
+}

@@ -1,0 +1,7 @@
+E:\code\prosystem\platform\ICSharpCode.SharpZLib\bin\Release\ICSharpCode.SharpZipLib.xml
+E:\code\prosystem\platform\ICSharpCode.SharpZLib\bin\Release\ICSharpCode.SharpZipLib.dll
+E:\code\prosystem\platform\ICSharpCode.SharpZLib\obj\Release\ICSharpCode.SharpZipLib.dll
+E:\code\prosystem\platform\ICSharpCode.SharpZLib\obj\Release\ICSharpCode.SharpZLib.csprojResolveAssemblyReference.cache
+F:\code\prosystem\platform\ICSharpCode.SharpZLib\bin\Release\ICSharpCode.SharpZipLib.xml
+F:\code\prosystem\platform\ICSharpCode.SharpZLib\bin\Release\ICSharpCode.SharpZipLib.dll
+F:\code\prosystem\platform\ICSharpCode.SharpZLib\obj\Release\ICSharpCode.SharpZipLib.dll

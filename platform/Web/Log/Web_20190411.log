@@ -1,0 +1,117 @@
+2019-04-11 16:52:22,952 [1764] ERROR root - [ProjectHandler]visit: getprojectinfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1.Initialize(IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 106
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1..ctor(IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 398
+   在 Foresight.DataAccess.Framework.EntityList`1..ctor(IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityList.cs:行号 206
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.InitializeList[T](IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1311
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1110
+   在 Foresight.DataAccess.ProjectTree.GetProjectTreeListByID(Int32 ID, String Keywords, Int32 UserID, Int32 IconID, Boolean OnlyXiaoqu, Boolean ExceptRoom, Int32 CompanyID) 位置 F:\code\CustomerPro\platform\DataAccess\RoomSource\Project.cs:行号 503
+   在 Web.APPCode.CacheHelper.GetMyProjectDetailsTree(Int32 UserID) 位置 F:\code\CustomerPro\platform\Web\APPCode\CacheHelper.cs:行号 186
+   在 Web.WebUtil.GetMyProjectDetailsTree(Int32 UserID) 位置 F:\code\CustomerPro\platform\Web\APPCode\WebUtil.cs:行号 267
+   在 Web.Handler.ProjectHandler.GetProjectInfo(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 1234
+   在 Web.Handler.ProjectHandler.ProcessRequest(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 38
+2019-04-11 20:21:36,276 [16324] ERROR root - [ProjectHandler]visit: getprojectinfo
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1.Initialize(IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 106
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1..ctor(IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 398
+   在 Foresight.DataAccess.Framework.EntityList`1..ctor(IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityList.cs:行号 206
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.InitializeList[T](IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1311
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1110
+   在 Foresight.DataAccess.Project.GetMyProjectListByUserID(Int32 UserID, List`1& EqualIDList, List`1& InIDList, List`1 ProjectIDList) 位置 F:\code\CustomerPro\platform\DataAccess\RoomSource\Project.cs:行号 62
+   在 Foresight.DataAccess.ProjectTree.GetProjectTreeListByID(Int32 ID, String Keywords, Int32 UserID, Int32 IconID, Boolean OnlyXiaoqu, Boolean ExceptRoom, Int32 CompanyID) 位置 F:\code\CustomerPro\platform\DataAccess\RoomSource\Project.cs:行号 448
+   在 Web.APPCode.CacheHelper.GetMyProjectDetailsTree(Int32 UserID) 位置 F:\code\CustomerPro\platform\Web\APPCode\CacheHelper.cs:行号 186
+   在 Web.WebUtil.GetMyProjectDetailsTree(Int32 UserID) 位置 F:\code\CustomerPro\platform\Web\APPCode\WebUtil.cs:行号 267
+   在 Web.Handler.ProjectHandler.GetProjectInfo(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 1234
+   在 Web.Handler.ProjectHandler.ProcessRequest(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\Handler\ProjectHandler.ashx.cs:行号 38
+2019-04-11 20:59:41,922 [13816] ERROR root - [AnalysisHandler]visit: loadcalltotalanalysis
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize[T](IDataReader reader) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1256
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetOne[T](String commandText, List`1 parameters, SqlHelper helper) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1078
+   在 Foresight.DataAccess.User.GetUserByLoginName(String loginname, SqlHelper helper, String Type) 位置 F:\code\CustomerPro\platform\DataAccess\User.cs:行号 275
+   在 Foresight.DataAccess.User.GetUserByLoginName(String loginname, String Type) 位置 F:\code\CustomerPro\platform\DataAccess\User.cs:行号 245
+   在 Web.APPCode.CacheHelper.GetUser(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\APPCode\CacheHelper.cs:行号 47
+   在 Web.WebUtil.GetUser(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\APPCode\WebUtil.cs:行号 74
+   在 Web.Handler.AnalysisHandler.loadcalltotalanalysis(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 71
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 57
+2019-04-11 21:27:45,914 [15972] ERROR root - [ServiceHandler]命令: domarknotcallback
+System.Data.SqlClient.SqlException (0x80131904): “=”附近有语法错误。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Foresight.DataAccess.Framework.SqlHelperBase.Execute(String command, CommandType commandType, List`1 parameterList, Int32 timeout) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 103
+   在 Foresight.DataAccess.Framework.SqlHelperBase.Execute(String command, CommandType commandType, List`1 parameterList) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 83
+   在 Web.Handler.ServiceHandler.domarknotcallback(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 203
+ClientConnectionId:9430f1f4-d29e-4f78-8257-479be5f32d67
+Error Number:102,State:1,Class:15
+2019-04-11 21:28:46,991 [9496] ERROR root - [ServiceHandler]命令: domarknotcallback
+System.Data.SqlClient.SqlException (0x80131904): “=”附近有语法错误。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Foresight.DataAccess.Framework.SqlHelperBase.Execute(String command, CommandType commandType, List`1 parameterList, Int32 timeout) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 103
+   在 Foresight.DataAccess.Framework.SqlHelperBase.Execute(String command, CommandType commandType, List`1 parameterList) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 83
+   在 Web.Handler.ServiceHandler.domarknotcallback(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 203
+ClientConnectionId:9430f1f4-d29e-4f78-8257-479be5f32d67
+Error Number:102,State:1,Class:15
+2019-04-11 21:28:54,995 [7556] ERROR root - [ServiceHandler]命令: domarknotcallback
+System.Data.SqlClient.SqlException (0x80131904): “=”附近有语法错误。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Foresight.DataAccess.Framework.SqlHelperBase.Execute(String command, CommandType commandType, List`1 parameterList, Int32 timeout) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 103
+   在 Foresight.DataAccess.Framework.SqlHelperBase.Execute(String command, CommandType commandType, List`1 parameterList) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 83
+   在 Web.Handler.ServiceHandler.domarknotcallback(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 203
+ClientConnectionId:9430f1f4-d29e-4f78-8257-479be5f32d67
+Error Number:102,State:1,Class:15
+2019-04-11 21:29:54,262 [7556] ERROR root - [ServiceHandler]命令: domarknotcallback
+System.Data.SqlClient.SqlException (0x80131904): “=”附近有语法错误。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Foresight.DataAccess.Framework.SqlHelperBase.Execute(String command, CommandType commandType, List`1 parameterList, Int32 timeout) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 103
+   在 Foresight.DataAccess.Framework.SqlHelperBase.Execute(String command, CommandType commandType, List`1 parameterList) 位置 F:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 83
+   在 Web.Handler.ServiceHandler.domarknotcallback(HttpContext context) 位置 F:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 203
+ClientConnectionId:e3fd7636-d832-42ec-95d5-f5cc5094904b
+Error Number:102,State:1,Class:15

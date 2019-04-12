@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>EngineIoClientDotNet</id>
+    <version>1.0.7</version>
+    <title>EngineIoClientDotNet</title>
+    <authors>Matthias Ludwig</authors>
+    <owners>Matthias Ludwig</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/Quobject/EngineIoClientDotNet/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>This is the Engine.IO Client Library for C#.</description>
+    <summary>This library supports all of the features the JS client does, including events, options and upgrading transport. EngineIoClientDotNet has a similar api to those of the JavaScript client.</summary>
+    <tags>engine.io.client</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework3.5">
+        <dependency id="WebSocket4Net" version="0.15.2" />
+        <dependency id="SuperSocket.ClientEngine.Core" version="0.10.0" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="System.Threading.Tasks.Unofficial" version="3.1.0" />
+      </group>
+      <group targetFramework=".NETFramework4.0">
+        <dependency id="WebSocket4Net" version="0.15.2" />
+        <dependency id="SuperSocket.ClientEngine.Core" version="0.10.0" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+      </group>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="WebSocket4Net" version="0.15.2" />
+        <dependency id="SuperSocket.ClientEngine.Core" version="0.10.0" />
+        <dependency id="System.Collections.Immutable" version="1.4.0" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

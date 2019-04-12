@@ -1,0 +1,93 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-toast.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/page/comm.css" />
+    <style type="text/css">
+    html, body{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+    .text-white {
+        color: #ffffff !important;
+    }
+
+    .iconfont {
+        font-size: 1.2rem;
+    }
+    .aui-list.aui-list-in{
+        margin-top: 10px;
+        background-size: 0px;
+    }
+    .aui-list.aui-list-in .aui-list-item{
+        background-size: 0px;
+    }
+    .aui-list .aui-list-item-input {
+        font-size: 0.7rem;
+    }
+    .aui-list .aui-list-item-media{
+        width: 6rem;
+        height: 6rem;
+    }
+    .aui-media-list .aui-list-item-inner{
+        height: 6rem;
+        line-height: 6rem;
+        padding: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!-- 顶部 -->
+        <section class="aui-content">
+            <div class="aui-list aui-media-list aui-list-noborder aui-bg-info">
+                <div class="aui-list-item aui-list-item-middle" style="background-color:#03a9f4 !important;">
+                    <div class="aui-media-list-item-inner ">
+                        <div class="aui-list-item-media">
+                            <img v-bind:src="userinfo.headimg" class="aui-img-round"></img>
+                        </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text text-white aui-font-size-18">{{userinfo.headname}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="aui-list aui-list-in">
+                <li class="aui-list-item" v-on:click="do_view_challenge()">
+                    <div class="aui-list-item-label-icon">
+                        <i class="icon iconfont icon-jiangbei" style="font-size: 24px;color: #29ab91"></i>
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        <div class="aui-list-item-input">挑战管理</div>
+                    </div>
+                </li>
+                <li class="aui-list-item" v-on:click="do_view_baby()">
+                    <div class="aui-list-item-label-icon">
+                        <i class="icon iconfont icon-renyuan" style="font-size: 24px;color: #29ab91"></i>
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        <div class="aui-list-item-input">宝宝信息</div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+</body>
+<script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript">
+init_js('js/index.js');
+</script>
+
+</html>

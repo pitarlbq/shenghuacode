@@ -1,0 +1,1841 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AFAF2D06-1115-4D69-A12D-5090C13B1C02}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Web</RootNamespace>
+    <AssemblyName>Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Analysis\ServiceCallTotalAnalysis.aspx" />
+    <Content Include="Analysis\ServiceChuLiList.aspx" />
+    <Content Include="Analysis\ServiceTabAveChaoShiAnalysis.aspx" />
+    <Content Include="Analysis\ServiceWuYeTouSuTimeOutAnalysis.aspx" />
+    <Content Include="Analysis\ServiceYingXiaoTouSuTimeOutAnalysis.aspx" />
+    <Content Include="Analysis\ServiceRepairTimeOutAnalysis.aspx" />
+    <Content Include="Analysis\ServiceTouSuFromCountAnalysis.aspx" />
+    <Content Include="Analysis\ServiceListAnalysis.aspx" />
+    <Content Include="Analysis\ServiceTabTouSuFeeSummaryAnalysis.aspx" />
+    <Content Include="Analysis\ServiceWuYeTouSuFeeAnalysis.aspx" />
+    <Content Include="Analysis\ServiceYingXiaoTouSuFeeAnalysis.aspx" />
+    <Content Include="Analysis\ServiceRepairFeeAnalysis.aspx" />
+    <Content Include="Analysis\ServiceRepairShiXiaoAnalysis.aspx" />
+    <Content Include="Analysis\ServiceRepairManyiAnalysis.aspx" />
+    <Content Include="Analysis\ServiceTabChaoShiSummaryAnalysis.aspx" />
+    <Content Include="Analysis\ServiceTabTouSuShiXiaoSummaryAnalysis.aspx" />
+    <Content Include="Analysis\ServiceRepairChaoShiAnalysis.aspx" />
+    <Content Include="Analysis\ServiceTouSuChaoShiAnalysis.aspx" />
+    <Content Include="Analysis\ServiceWuYeTouSuShiXiaoAnalysis.aspx" />
+    <Content Include="Analysis\ServiceYingXiaoTouSuCountAnalysis.aspx" />
+    <Content Include="Analysis\ServiceYingXiaoTouSuShiXiaoAnalysis.aspx" />
+    <Content Include="Analysis\ServiceYingXiaoManyiAnalysis.aspx" />
+    <Content Include="Analysis\ServiceTabChuliSummaryAnalysis.aspx" />
+    <Content Include="Analysis\ServiceRepairCountAnalysis.aspx" />
+    <Content Include="Analysis\ServiceRepairFromCountAnalysis.aspx" />
+    <Content Include="Analysis\ServiceWuYeTouSuCountAnalysis.aspx" />
+    <Content Include="Analysis\ServiceFeeDetailAnalysis.aspx" />
+    <Content Include="Analysis\ServiceTabTouSuCountAnalysis.aspx" />
+    <Content Include="Analysis\ServiceTimeOutDetailAnalysis.aspx" />
+    <Content Include="Analysis\ServiceDetailAnalysis.aspx" />
+    <Content Include="Analysis\ServiceCallSummaryAnalysis.aspx" />
+    <Content Include="callring.mp3" />
+    <Content Include="CangKu\DepartmentMgr.aspx" />
+    <Content Include="CangKu\EditDepartment.aspx" />
+    <Content Include="CustomerService\CustomerServiceTypeEdit.aspx" />
+    <Content Include="CustomerService\ServiceCallRateEdit.aspx" />
+    <Content Include="CustomerService\ServiceProcessFileView.aspx" />
+    <Content Include="CustomerService\ServiceSuggestionList.aspx" />
+    <Content Include="CustomerService\ServicePhoneListen.aspx" />
+    <Content Include="CustomerService\ServiceRecordMgr.aspx" />
+    <Content Include="CustomerService\ServiceCallMgr.aspx" />
+    <Content Include="CustomerService\ServiceProcessMgr.aspx" />
+    <Content Include="CustomerService\ServiceSend.aspx" />
+    <Content Include="CustomerService\ServiceSuggestionEdit.aspx" />
+    <Content Include="CustomerService\ServiceSuggestionMgr.aspx" />
+    <Content Include="ErrorPage.html" />
+    <Content Include="InitialSetup\AddProjectProperty.aspx" />
+    <Content Include="InitialSetup\PublicProjectEdit.aspx" />
+    <Content Include="InitialSetup\PublicProjectMgr.aspx" />
+    <Content Include="js\call\deviceapi.js" />
+    <Content Include="js\call\jquery-1.8.3.min.js" />
+    <Content Include="js\call\json2.js" />
+    <Content Include="js\call\qnvfunc.js" />
+    <Content Include="js\call\qnviccub.js" />
+    <Content Include="js\Page\Analysis\ExportTemplate.js" />
+    <Content Include="js\Page\Analysis\ServiceCallTotalAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceRepairFromCountAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceListAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceChuLiList.js" />
+    <Content Include="js\Page\Analysis\ServiceYingXiaoTouSuTimeOutAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceWuYeTouSuTimeOutAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceRepairTimeOutAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceWuYeTouSuFeeAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceYingXiaoTouSuFeeAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceRepairFeeAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceRepairManyiAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceRepairChaoShiAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceTouSuChaoShiAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceYingXiaoTouSuCountAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceWuYeTouSuShiXiaoAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceRepairShiXiaoAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceYingXiaoTouSuShiXiaoAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceYingXiaoManyiAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceRepairCountAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceTouSuFromCountAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceWuYeTouSuCountAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceFeeDetailAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceTimeOutDetailAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceDetailAnalysis.js" />
+    <Content Include="js\Page\Analysis\ServiceCallSummaryAnalysis.js" />
+    <Content Include="js\Page\CangKu\CKDepartmentMgr.js" />
+    <Content Include="js\Page\CustomerService\ServiceRecordMgr.js" />
+    <Content Include="js\Page\CustomerService\ServiceCallMgr.js" />
+    <Content Include="js\Page\CustomerService\ServiceProcessMgr.js" />
+    <Content Include="js\Page\Comm\EditRow.js" />
+    <Content Include="js\Page\InitialSetup\AddProjectProperty.js" />
+    <Content Include="js\Page\InitialSetup\PublicProjectMgr.js" />
+    <Content Include="js\Page\Main\callBoxinit.js" />
+    <Content Include="js\Page\Main\zTreeLoad.js" />
+    <Content Include="js\Page\SysSetting\AssignProjectNumber.js" />
+    <Content Include="js\Page\SysSetting\EditCustomerServiceTaskCombobox.js" />
+    <Content Include="js\Page\SysSetting\OperationMgr.js" />
+    <Content Include="js\Page\SysSetting\OrderNumberMgr.js" />
+    <Content Include="js\Page\SysSetting\UserStaffMgr.js" />
+    <Content Include="js\Page\UserInfo\UserDepartmentMgr.js" />
+    <Content Include="js\Page\UserInfo\UserAuthMgr.js" />
+    <Content Include="js\Page\UserInfo\UserServiceTypeMgr.js" />
+    <Content Include="Main\Default.aspx" />
+    <Content Include="newmessage.mp3" />
+    <Content Include="privacy.html" />
+    <Content Include="styles\icons\回访管理.png" />
+    <Content Include="styles\icons\客户信息.png" />
+    <Content Include="styles\icons\客服中心.png" />
+    <Content Include="styles\icons\工单信息.png" />
+    <Content Include="styles\icons\数据统计.png" />
+    <Content Include="styles\icons\系统设置.png" />
+    <Content Include="styles\images\app\app_user.png" />
+    <Content Include="styles\images\bg_1.png" />
+    <Content Include="styles\images\bg_2.png" />
+    <Content Include="styles\images\buttons\head-time.png" />
+    <Content Include="styles\images\buttons\jiaoban.png" />
+    <Content Include="styles\images\buttons\leftarrow.png" />
+    <Content Include="styles\images\buttons\manual.png" />
+    <Content Include="styles\images\buttons\manual_new.png" />
+    <Content Include="styles\images\buttons\print.png" />
+    <Content Include="styles\images\buttons\rightarrow.png" />
+    <Content Include="styles\images\buttons\search.png" />
+    <Content Include="styles\images\buttons\statusbanjie.png" />
+    <Content Include="styles\images\buttons\statuschaoshi.png" />
+    <Content Include="styles\images\buttons\statuschuli.png" />
+    <Content Include="styles\images\buttons\statushuifang.png" />
+    <Content Include="styles\images\buttons\statusjiedan.png" />
+    <Content Include="styles\images\buttons\statuskaisuo.png" />
+    <Content Include="styles\images\buttons\statusmorechashi.png" />
+    <Content Include="styles\images\buttons\statusnormal.png" />
+    <Content Include="styles\images\buttons\statussuoding.png" />
+    <Content Include="styles\images\buttons\sysnotify.png" />
+    <Content Include="styles\images\buttons\sysnotify_new.png" />
+    <Content Include="styles\images\buttons\tempfee.png" />
+    <Content Include="styles\images\buttons\warning_icon.png" />
+    <Content Include="styles\images\buttons\warning_icon_2.png" />
+    <Content Include="styles\images\buttons\warning_icon_new.png" />
+    <Content Include="styles\images\buttons\wechat_service.png" />
+    <Content Include="styles\images\buttons\wechat_service_new.png" />
+    <Content Include="styles\images\cloudsystem_bg.jpg" />
+    <Content Include="styles\images\Icons\sanbiao.png" />
+    <Content Include="styles\images\Icons\shezhi.png" />
+    <Content Include="styles\images\Icons\zyda.png" />
+    <Content Include="styles\images\logo_1.png" />
+    <Content Include="styles\images\logo_center.png" />
+    <Content Include="styles\images\pwd_active_icon.png" />
+    <Content Include="styles\images\pwd_icon.png" />
+    <Content Include="styles\images\rengou_count_icon.jpg" />
+    <Content Include="styles\images\username_active_icon.png" />
+    <Content Include="styles\images\username_icon.png" />
+    <Content Include="styles\images\wyicon.jpg" />
+    <Content Include="styles\aui.css" />
+    <Content Include="styles\icons\double_down_arrow.png" />
+    <Content Include="styles\icons\double_up_arrow.png" />
+    <Content Include="styles\icons\关联.png" />
+    <Content Include="styles\icons\关闭_2.png" />
+    <Content Include="styles\icons\发货.png" />
+    <Content Include="styles\icons\完成.png" />
+    <Content Include="styles\icons\更多.png" />
+    <Content Include="styles\icons\重置.png" />
+    <Content Include="styles\images\app\appcustomer.png" />
+    <Content Include="styles\images\cloudsystem_bg.png" />
+    <Content Include="styles\images\error-img.png" />
+    <Content Include="styles\images\Icons\发票管理.png" />
+    <Content Include="styles\images\Icons\联营分成.png" />
+    <Content Include="styles\images\Icons\返租结算.png" />
+    <Content Include="CustomerService\EditServiceMaterial.aspx" />
+    <Content Include="CustomerService\CustomerServiceTypeMgr.aspx" />
+    <Content Include="CustomerService\ServiceEdit.aspx" />
+    <Content Include="CustomerService\ServiceComplete.aspx" />
+    <Content Include="CustomerService\ServiceCall.aspx" />
+    <Content Include="CustomerService\ServiceProcess.aspx" />
+    <Content Include="CustomerService\ServiceDetailSummary.aspx" />
+    <Content Include="CustomerService\ServiceMgr.aspx" />
+    <Content Include="CustomerService\ServiceMaterialList.aspx" />
+    <Content Include="CustomerService\ServiceList.aspx" />
+    <Content Include="CustomerService\ServiceStatic.aspx" />
+    <Content Include="html\images\login_1.png" />
+    <Content Include="html\images\NewLogo.png" />
+    <Content Include="html\images\Logo_home.png" />
+    <Content Include="InitialSetup\AddProperty.aspx" />
+    <Content Include="InitialSetup\EditColumns.aspx" />
+    <Content Include="InitialSetup\PropertySetup.aspx" />
+    <Content Include="InitialSetup\ShowYT.aspx" />
+    <Content Include="js\Page\Main\Content.js" />
+    <Content Include="js\easyui\bootstrap\easyui.css" />
+    <Content Include="js\easyui\bootstrap\images\accordion_arrows.png" />
+    <Content Include="js\easyui\bootstrap\images\blank.gif" />
+    <Content Include="js\easyui\bootstrap\images\calendar_arrows.png" />
+    <Content Include="js\easyui\bootstrap\images\combo_arrow.png" />
+    <Content Include="js\easyui\bootstrap\images\datagrid_icons.png" />
+    <Content Include="js\easyui\bootstrap\images\datebox_arrow.png" />
+    <Content Include="js\easyui\bootstrap\images\layout_arrows.png" />
+    <Content Include="js\easyui\bootstrap\images\linkbutton_bg.png" />
+    <Content Include="js\easyui\bootstrap\images\loading.gif" />
+    <Content Include="js\easyui\bootstrap\images\menu_arrows.png" />
+    <Content Include="js\easyui\bootstrap\images\messager_icons.png" />
+    <Content Include="js\easyui\bootstrap\images\pagination_icons.png" />
+    <Content Include="js\easyui\bootstrap\images\panel_tools.png" />
+    <Content Include="js\easyui\bootstrap\images\searchbox_button.png" />
+    <Content Include="js\easyui\bootstrap\images\slider_handle.png" />
+    <Content Include="js\easyui\bootstrap\images\spinner_arrows.png" />
+    <Content Include="js\easyui\bootstrap\images\tabs_icons.png" />
+    <Content Include="js\easyui\bootstrap\images\tree_icons.png" />
+    <Content Include="js\easyui\bootstrap\images\validatebox_warning.png" />
+    <Content Include="js\easyui\datagrid-detailview.js" />
+    <Content Include="js\Page\Comm\jquery.bigcolorpicker.js" />
+    <Content Include="js\Page\Main\Main.js" />
+    <Content Include="js\Page\Comm\MaskUtil.js" />
+    <Content Include="js\Page\InitialSetup\AddSubProject.js" />
+    <Content Include="js\Page\Comm\ChargeFeeComm.js" />
+    <Content Include="js\Page\RoomResource\EditRoomResource_Rent.js" />
+    <Content Include="js\Page\RoomResource\EditRoomResource_Owner.js" />
+    <Content Include="js\Page\RoomResource\EditRoomResource_Relation.js" />
+    <Content Include="js\Page\RoomResource\EditRoomResource_Fee.js" />
+    <Content Include="js\Page\CustomerService\ServiceMgr.js" />
+    <Content Include="js\Page\CustomerService\ServiceMaterialList.js" />
+    <Content Include="js\Page\CustomerService\ServiceProcess.js" />
+    <Content Include="js\Page\CustomerService\ServiceEdit.js" />
+    <Content Include="js\Page\UserInfo\UserCKCategoryMgr.js" />
+    <Content Include="js\Page\UserInfo\ChooseWehcatUser.js" />
+    <Content Include="js\Page\CustomerService\CustomerServiceTypeMgr.js" />
+    <Content Include="js\Page\CustomerService\ServiceStatic.js" />
+    <Content Include="js\Page\UserInfo\UserAnalysisMgr.js" />
+    <Content Include="js\Page\UserInfo\UserProjectMgr.js" />
+    <Content Include="js\socket\loginclient.js" />
+    <Content Include="js\socket\server.js" />
+    <Content Include="js\Page\Comm\treeextension.js" />
+    <Content Include="js\ueditor\dialogs\anchor\anchor.html" />
+    <Content Include="js\ueditor\dialogs\attachment\attachment.css" />
+    <Content Include="js\ueditor\dialogs\attachment\attachment.html" />
+    <Content Include="js\ueditor\dialogs\attachment\attachment.js" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_chm.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_default.png" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_doc.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_exe.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_jpg.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_mp3.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_mv.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_pdf.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_ppt.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_psd.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_rar.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_txt.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\fileTypeImages\icon_xls.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\images\alignicon.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\images\alignicon.png" />
+    <Content Include="js\ueditor\dialogs\attachment\images\bg.png" />
+    <Content Include="js\ueditor\dialogs\attachment\images\file-icons.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\images\file-icons.png" />
+    <Content Include="js\ueditor\dialogs\attachment\images\icons.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\images\icons.png" />
+    <Content Include="js\ueditor\dialogs\attachment\images\image.png" />
+    <Content Include="js\ueditor\dialogs\attachment\images\progress.png" />
+    <Content Include="js\ueditor\dialogs\attachment\images\success.gif" />
+    <Content Include="js\ueditor\dialogs\attachment\images\success.png" />
+    <Content Include="js\ueditor\dialogs\background\background.css" />
+    <Content Include="js\ueditor\dialogs\background\background.html" />
+    <Content Include="js\ueditor\dialogs\background\background.js" />
+    <Content Include="js\ueditor\dialogs\background\images\bg.png" />
+    <Content Include="js\ueditor\dialogs\background\images\success.png" />
+    <Content Include="js\ueditor\dialogs\charts\chart.config.js" />
+    <Content Include="js\ueditor\dialogs\charts\charts.css" />
+    <Content Include="js\ueditor\dialogs\charts\charts.html" />
+    <Content Include="js\ueditor\dialogs\charts\charts.js" />
+    <Content Include="js\ueditor\dialogs\charts\images\charts0.png" />
+    <Content Include="js\ueditor\dialogs\charts\images\charts1.png" />
+    <Content Include="js\ueditor\dialogs\charts\images\charts2.png" />
+    <Content Include="js\ueditor\dialogs\charts\images\charts3.png" />
+    <Content Include="js\ueditor\dialogs\charts\images\charts4.png" />
+    <Content Include="js\ueditor\dialogs\charts\images\charts5.png" />
+    <Content Include="js\ueditor\dialogs\emotion\emotion.css" />
+    <Content Include="js\ueditor\dialogs\emotion\emotion.html" />
+    <Content Include="js\ueditor\dialogs\emotion\emotion.js" />
+    <Content Include="js\ueditor\dialogs\emotion\images\0.gif" />
+    <Content Include="js\ueditor\dialogs\emotion\images\bface.gif" />
+    <Content Include="js\ueditor\dialogs\emotion\images\cface.gif" />
+    <Content Include="js\ueditor\dialogs\emotion\images\fface.gif" />
+    <Content Include="js\ueditor\dialogs\emotion\images\jxface2.gif" />
+    <Content Include="js\ueditor\dialogs\emotion\images\neweditor-tab-bg.png" />
+    <Content Include="js\ueditor\dialogs\emotion\images\tface.gif" />
+    <Content Include="js\ueditor\dialogs\emotion\images\wface.gif" />
+    <Content Include="js\ueditor\dialogs\emotion\images\yface.gif" />
+    <Content Include="js\ueditor\dialogs\gmap\gmap.html" />
+    <Content Include="js\ueditor\dialogs\help\help.css" />
+    <Content Include="js\ueditor\dialogs\help\help.html" />
+    <Content Include="js\ueditor\dialogs\help\help.js" />
+    <Content Include="js\ueditor\dialogs\image\image.css" />
+    <Content Include="js\ueditor\dialogs\image\image.html" />
+    <Content Include="js\ueditor\dialogs\image\image.js" />
+    <Content Include="js\ueditor\dialogs\image\images\alignicon.jpg" />
+    <Content Include="js\ueditor\dialogs\image\images\bg.png" />
+    <Content Include="js\ueditor\dialogs\image\images\icons.gif" />
+    <Content Include="js\ueditor\dialogs\image\images\icons.png" />
+    <Content Include="js\ueditor\dialogs\image\images\image.png" />
+    <Content Include="js\ueditor\dialogs\image\images\progress.png" />
+    <Content Include="js\ueditor\dialogs\image\images\success.gif" />
+    <Content Include="js\ueditor\dialogs\image\images\success.png" />
+    <Content Include="js\ueditor\dialogs\insertframe\insertframe.html" />
+    <Content Include="js\ueditor\dialogs\internal.js" />
+    <Content Include="js\ueditor\dialogs\link\link.html" />
+    <Content Include="js\ueditor\dialogs\map\map.html" />
+    <Content Include="js\ueditor\dialogs\map\show.html" />
+    <Content Include="js\ueditor\dialogs\music\music.css" />
+    <Content Include="js\ueditor\dialogs\music\music.html" />
+    <Content Include="js\ueditor\dialogs\music\music.js" />
+    <Content Include="js\ueditor\dialogs\preview\preview.html" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\addimg.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\brush.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\delimg.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\delimgH.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\empty.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\emptyH.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\eraser.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\redo.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\redoH.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\scale.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\scaleH.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\size.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\undo.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\images\undoH.png" />
+    <Content Include="js\ueditor\dialogs\scrawl\scrawl.css" />
+    <Content Include="js\ueditor\dialogs\scrawl\scrawl.html" />
+    <Content Include="js\ueditor\dialogs\scrawl\scrawl.js" />
+    <Content Include="js\ueditor\dialogs\searchreplace\searchreplace.html" />
+    <Content Include="js\ueditor\dialogs\searchreplace\searchreplace.js" />
+    <Content Include="js\ueditor\dialogs\snapscreen\snapscreen.html" />
+    <Content Include="js\ueditor\dialogs\spechars\spechars.html" />
+    <Content Include="js\ueditor\dialogs\spechars\spechars.js" />
+    <Content Include="js\ueditor\dialogs\table\dragicon.png" />
+    <Content Include="js\ueditor\dialogs\table\edittable.css" />
+    <Content Include="js\ueditor\dialogs\table\edittable.html" />
+    <Content Include="js\ueditor\dialogs\table\edittable.js" />
+    <Content Include="js\ueditor\dialogs\table\edittd.html" />
+    <Content Include="js\ueditor\dialogs\table\edittip.html" />
+    <Content Include="js\ueditor\dialogs\template\config.js" />
+    <Content Include="js\ueditor\dialogs\template\images\bg.gif" />
+    <Content Include="js\ueditor\dialogs\template\images\pre0.png" />
+    <Content Include="js\ueditor\dialogs\template\images\pre1.png" />
+    <Content Include="js\ueditor\dialogs\template\images\pre2.png" />
+    <Content Include="js\ueditor\dialogs\template\images\pre3.png" />
+    <Content Include="js\ueditor\dialogs\template\images\pre4.png" />
+    <Content Include="js\ueditor\dialogs\template\template.css" />
+    <Content Include="js\ueditor\dialogs\template\template.html" />
+    <Content Include="js\ueditor\dialogs\template\template.js" />
+    <Content Include="js\ueditor\dialogs\video\images\bg.png" />
+    <Content Include="js\ueditor\dialogs\video\images\center_focus.jpg" />
+    <Content Include="js\ueditor\dialogs\video\images\file-icons.gif" />
+    <Content Include="js\ueditor\dialogs\video\images\file-icons.png" />
+    <Content Include="js\ueditor\dialogs\video\images\icons.gif" />
+    <Content Include="js\ueditor\dialogs\video\images\icons.png" />
+    <Content Include="js\ueditor\dialogs\video\images\image.png" />
+    <Content Include="js\ueditor\dialogs\video\images\left_focus.jpg" />
+    <Content Include="js\ueditor\dialogs\video\images\none_focus.jpg" />
+    <Content Include="js\ueditor\dialogs\video\images\progress.png" />
+    <Content Include="js\ueditor\dialogs\video\images\right_focus.jpg" />
+    <Content Include="js\ueditor\dialogs\video\images\success.gif" />
+    <Content Include="js\ueditor\dialogs\video\images\success.png" />
+    <Content Include="js\ueditor\dialogs\video\video.css" />
+    <Content Include="js\ueditor\dialogs\video\video.html" />
+    <Content Include="js\ueditor\dialogs\video\video.js" />
+    <Content Include="js\ueditor\dialogs\webapp\webapp.html" />
+    <Content Include="js\ueditor\dialogs\wordimage\fClipboard_ueditor.swf" />
+    <Content Include="js\ueditor\dialogs\wordimage\imageUploader.swf" />
+    <Content Include="js\ueditor\dialogs\wordimage\tangram.js" />
+    <Content Include="js\ueditor\dialogs\wordimage\wordimage.html" />
+    <Content Include="js\ueditor\dialogs\wordimage\wordimage.js" />
+    <Content Include="js\ueditor\lang\en\en.js" />
+    <Content Include="js\ueditor\lang\en\images\addimage.png" />
+    <Content Include="js\ueditor\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="js\ueditor\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="js\ueditor\lang\en\images\background.png" />
+    <Content Include="js\ueditor\lang\en\images\button.png" />
+    <Content Include="js\ueditor\lang\en\images\copy.png" />
+    <Content Include="js\ueditor\lang\en\images\deletedisable.png" />
+    <Content Include="js\ueditor\lang\en\images\deleteenable.png" />
+    <Content Include="js\ueditor\lang\en\images\listbackground.png" />
+    <Content Include="js\ueditor\lang\en\images\localimage.png" />
+    <Content Include="js\ueditor\lang\en\images\music.png" />
+    <Content Include="js\ueditor\lang\en\images\rotateleftdisable.png" />
+    <Content Include="js\ueditor\lang\en\images\rotateleftenable.png" />
+    <Content Include="js\ueditor\lang\en\images\rotaterightdisable.png" />
+    <Content Include="js\ueditor\lang\en\images\rotaterightenable.png" />
+    <Content Include="js\ueditor\lang\en\images\upload.png" />
+    <Content Include="js\ueditor\lang\zh-cn\images\copy.png" />
+    <Content Include="js\ueditor\lang\zh-cn\images\localimage.png" />
+    <Content Include="js\ueditor\lang\zh-cn\images\music.png" />
+    <Content Include="js\ueditor\lang\zh-cn\images\upload.png" />
+    <Content Include="js\ueditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="js\ueditor\themes\default\css\ueditor.css" />
+    <Content Include="js\ueditor\themes\default\css\ueditor.min.css" />
+    <Content Include="js\ueditor\themes\default\dialogbase.css" />
+    <Content Include="js\ueditor\themes\default\images\anchor.gif" />
+    <Content Include="js\ueditor\themes\default\images\arrow.png" />
+    <Content Include="js\ueditor\themes\default\images\arrow_down.png" />
+    <Content Include="js\ueditor\themes\default\images\arrow_up.png" />
+    <Content Include="js\ueditor\themes\default\images\button-bg.gif" />
+    <Content Include="js\ueditor\themes\default\images\cancelbutton.gif" />
+    <Content Include="js\ueditor\themes\default\images\charts.png" />
+    <Content Include="js\ueditor\themes\default\images\cursor_h.gif" />
+    <Content Include="js\ueditor\themes\default\images\cursor_h.png" />
+    <Content Include="js\ueditor\themes\default\images\cursor_v.gif" />
+    <Content Include="js\ueditor\themes\default\images\cursor_v.png" />
+    <Content Include="js\ueditor\themes\default\images\dialog-title-bg.png" />
+    <Content Include="js\ueditor\themes\default\images\filescan.png" />
+    <Content Include="js\ueditor\themes\default\images\highlighted.gif" />
+    <Content Include="js\ueditor\themes\default\images\icons-all.gif" />
+    <Content Include="js\ueditor\themes\default\images\icons.gif" />
+    <Content Include="js\ueditor\themes\default\images\icons.png" />
+    <Content Include="js\ueditor\themes\default\images\loaderror.png" />
+    <Content Include="js\ueditor\themes\default\images\loading.gif" />
+    <Content Include="js\ueditor\themes\default\images\lock.gif" />
+    <Content Include="js\ueditor\themes\default\images\neweditor-tab-bg.png" />
+    <Content Include="js\ueditor\themes\default\images\pagebreak.gif" />
+    <Content Include="js\ueditor\themes\default\images\scale.png" />
+    <Content Include="js\ueditor\themes\default\images\sortable.png" />
+    <Content Include="js\ueditor\themes\default\images\spacer.gif" />
+    <Content Include="js\ueditor\themes\default\images\sparator_v.png" />
+    <Content Include="js\ueditor\themes\default\images\table-cell-align.png" />
+    <Content Include="js\ueditor\themes\default\images\tangram-colorpicker.png" />
+    <Content Include="js\ueditor\themes\default\images\toolbar_bg.png" />
+    <Content Include="js\ueditor\themes\default\images\unhighlighted.gif" />
+    <Content Include="js\ueditor\themes\default\images\upload.png" />
+    <Content Include="js\ueditor\themes\default\images\videologo.gif" />
+    <Content Include="js\ueditor\themes\default\images\word.gif" />
+    <Content Include="js\ueditor\themes\default\images\wordpaste.png" />
+    <Content Include="js\ueditor\themes\iframe.css" />
+    <Content Include="js\ueditor\third-party\codemirror\codemirror.css" />
+    <Content Include="js\ueditor\third-party\codemirror\codemirror.js" />
+    <Content Include="js\ueditor\third-party\highcharts\adapters\mootools-adapter.js" />
+    <Content Include="js\ueditor\third-party\highcharts\adapters\mootools-adapter.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\adapters\prototype-adapter.js" />
+    <Content Include="js\ueditor\third-party\highcharts\adapters\prototype-adapter.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\adapters\standalone-framework.js" />
+    <Content Include="js\ueditor\third-party\highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\highcharts-more.js" />
+    <Content Include="js\ueditor\third-party\highcharts\highcharts-more.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\highcharts.js" />
+    <Content Include="js\ueditor\third-party\highcharts\highcharts.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\annotations.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\annotations.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\canvas-tools.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\canvas-tools.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\data.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\data.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\drilldown.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\drilldown.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\exporting.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\exporting.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\funnel.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\funnel.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\heatmap.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\heatmap.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\map.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\map.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\no-data-to-display.js" />
+    <Content Include="js\ueditor\third-party\highcharts\modules\no-data-to-display.src.js" />
+    <Content Include="js\ueditor\third-party\highcharts\themes\dark-blue.js" />
+    <Content Include="js\ueditor\third-party\highcharts\themes\dark-green.js" />
+    <Content Include="js\ueditor\third-party\highcharts\themes\gray.js" />
+    <Content Include="js\ueditor\third-party\highcharts\themes\grid.js" />
+    <Content Include="js\ueditor\third-party\highcharts\themes\skies.js" />
+    <Content Include="js\ueditor\third-party\jquery-1.10.2.js" />
+    <Content Include="js\ueditor\third-party\jquery-1.10.2.min.js" />
+    <Content Include="js\ueditor\third-party\snapscreen\UEditorSnapscreen.exe" />
+    <Content Include="js\ueditor\third-party\SyntaxHighlighter\shCore.js" />
+    <Content Include="js\ueditor\third-party\SyntaxHighlighter\shCoreDefault.css" />
+    <Content Include="js\ueditor\third-party\video-js\font\vjs.svg" />
+    <Content Include="js\ueditor\third-party\video-js\video-js.css" />
+    <Content Include="js\ueditor\third-party\video-js\video-js.min.css" />
+    <Content Include="js\ueditor\third-party\video-js\video-js.swf" />
+    <Content Include="js\ueditor\third-party\video-js\video.dev.js" />
+    <Content Include="js\ueditor\third-party\video-js\video.js" />
+    <Content Include="js\ueditor\third-party\webuploader\Uploader.swf" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.css" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.custom.js" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.custom.min.js" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.flashonly.js" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.html5only.js" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.html5only.min.js" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.js" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.min.js" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.withoutimage.js" />
+    <Content Include="js\ueditor\third-party\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="js\ueditor\third-party\xss.min.js" />
+    <Content Include="js\ueditor\third-party\zeroclipboard\ZeroClipboard.js" />
+    <Content Include="js\ueditor\third-party\zeroclipboard\ZeroClipboard.min.js" />
+    <Content Include="js\ueditor\third-party\zeroclipboard\ZeroClipboard.swf" />
+    <Content Include="js\ueditor\ueditor.all.js" />
+    <Content Include="js\ueditor\ueditor.all.min.js" />
+    <Content Include="js\ueditor\ueditor.config.js" />
+    <Content Include="js\ueditor\ueditor.parse.js" />
+    <Content Include="js\ueditor\ueditor.parse.min.js" />
+    <Content Include="js\vue.js" />
+    <Content Include="RoomResource\EditRoomName.aspx" />
+    <Content Include="RoomResource\EditAPPAccount.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="InitialSetup\AddSubProject.aspx" />
+    <Content Include="InitialSetup\AddProject.aspx" />
+    <Content Include="InitialSetup\AddTopyt.aspx" />
+    <Content Include="InitialSetup\Addyt.aspx" />
+    <Content Include="InitialSetup\Default.aspx" />
+    <Content Include="InitialSetup\Setup.aspx" />
+    <Content Include="js\Page\Main\Comm.js" />
+    <Content Include="js\easyui\default\easyui.css" />
+    <Content Include="js\easyui\default\images\accordion_arrows.png" />
+    <Content Include="js\easyui\default\images\blank.gif" />
+    <Content Include="js\easyui\default\images\calendar_arrows.png" />
+    <Content Include="js\easyui\default\images\combo_arrow.png" />
+    <Content Include="js\easyui\default\images\datagrid_icons.png" />
+    <Content Include="js\easyui\default\images\datebox_arrow.png" />
+    <Content Include="js\easyui\default\images\layout_arrows.png" />
+    <Content Include="js\easyui\default\images\linkbutton_bg.png" />
+    <Content Include="js\easyui\default\images\loading.gif" />
+    <Content Include="js\easyui\default\images\menu_arrows.png" />
+    <Content Include="js\easyui\default\images\messager_icons.png" />
+    <Content Include="js\easyui\default\images\pagination_icons.png" />
+    <Content Include="js\easyui\default\images\panel_tools.png" />
+    <Content Include="js\easyui\default\images\searchbox_button.png" />
+    <Content Include="js\easyui\default\images\slider_handle.png" />
+    <Content Include="js\easyui\default\images\spinner_arrows.png" />
+    <Content Include="js\easyui\default\images\tabs_icons.png" />
+    <Content Include="js\easyui\default\images\tree_icons.png" />
+    <Content Include="js\easyui\default\images\validatebox_warning.png" />
+    <Content Include="js\easyui\easyui-lang-zh_CN.js" />
+    <Content Include="js\easyui\gray\easyui.css" />
+    <Content Include="js\easyui\gray\images\accordion_arrows.png" />
+    <Content Include="js\easyui\gray\images\blank.gif" />
+    <Content Include="js\easyui\gray\images\calendar_arrows.png" />
+    <Content Include="js\easyui\gray\images\combo_arrow.png" />
+    <Content Include="js\easyui\gray\images\datagrid_icons.png" />
+    <Content Include="js\easyui\gray\images\datebox_arrow.png" />
+    <Content Include="js\easyui\gray\images\layout_arrows.png" />
+    <Content Include="js\easyui\gray\images\linkbutton_bg.png" />
+    <Content Include="js\easyui\gray\images\loading.gif" />
+    <Content Include="js\easyui\gray\images\menu_arrows.png" />
+    <Content Include="js\easyui\gray\images\messager_icons.png" />
+    <Content Include="js\easyui\gray\images\pagination_icons.png" />
+    <Content Include="js\easyui\gray\images\panel_tools.png" />
+    <Content Include="js\easyui\gray\images\searchbox_button.png" />
+    <Content Include="js\easyui\gray\images\slider_handle.png" />
+    <Content Include="js\easyui\gray\images\spinner_arrows.png" />
+    <Content Include="js\easyui\gray\images\tabs_icons.png" />
+    <Content Include="js\easyui\gray\images\tree_icons.png" />
+    <Content Include="js\easyui\gray\images\validatebox_warning.png" />
+    <Content Include="js\easyui\icon.css" />
+    <Content Include="js\easyui\icons\back.png" />
+    <Content Include="js\easyui\icons\blank.gif" />
+    <Content Include="js\easyui\icons\cancel.png" />
+    <Content Include="js\easyui\icons\clear.png" />
+    <Content Include="js\easyui\icons\cut.png" />
+    <Content Include="js\easyui\icons\edit_add.png" />
+    <Content Include="js\easyui\icons\edit_remove.png" />
+    <Content Include="js\easyui\icons\excel.png" />
+    <Content Include="js\easyui\icons\filesave.png" />
+    <Content Include="js\easyui\icons\filter.png" />
+    <Content Include="js\easyui\icons\help.png" />
+    <Content Include="js\easyui\icons\large_chart.png" />
+    <Content Include="js\easyui\icons\large_clipart.png" />
+    <Content Include="js\easyui\icons\large_picture.png" />
+    <Content Include="js\easyui\icons\large_shapes.png" />
+    <Content Include="js\easyui\icons\large_smartart.png" />
+    <Content Include="js\easyui\icons\lock.png" />
+    <Content Include="js\easyui\icons\man.png" />
+    <Content Include="js\easyui\icons\mini_add.png" />
+    <Content Include="js\easyui\icons\mini_edit.png" />
+    <Content Include="js\easyui\icons\mini_refresh.png" />
+    <Content Include="js\easyui\icons\more.png" />
+    <Content Include="js\easyui\icons\no.png" />
+    <Content Include="js\easyui\icons\ok.png" />
+    <Content Include="js\easyui\icons\pencil.png" />
+    <Content Include="js\easyui\icons\print.png" />
+    <Content Include="js\easyui\icons\redo.png" />
+    <Content Include="js\easyui\icons\reload.png" />
+    <Content Include="js\easyui\icons\search.png" />
+    <Content Include="js\easyui\icons\sum.png" />
+    <Content Include="js\easyui\icons\tip.png" />
+    <Content Include="js\easyui\icons\undo.png" />
+    <Content Include="js\easyui\jquery.easyui.min.js" />
+    <Content Include="js\Lodop\LodopFuncs.js" />
+    <Content Include="js\Page\InitialSetup\AddProject.js" />
+    <Content Include="js\Page\Comm\GetTypeList.js" />
+    <Content Include="js\Page\Comm\PinYin.js" />
+    <Content Include="js\Page\UserInfo\RoleMgr.js" />
+    <Content Include="js\Page\InitialSetup\InitialSetup.js" />
+    <Content Include="js\Page\RoomResource\RoomResourceSetup.js" />
+    <Content Include="js\Page\UserInfo\UserMgr.js" />
+    <Content Include="js\Page\UserInfo\UserModuleMgr.js" />
+    <Content Include="js\Page\UserInfo\UserRoleMgr.js" />
+    <Content Include="js\Page\Comm\unit.js" />
+    <Content Include="js\Page\Comm\util.js" />
+    <Content Include="js\ztree\jquery.ztree.core.js" />
+    <Content Include="js\ztree\jquery.ztree.excheck.js" />
+    <Content Include="js\ztree\jquery.ztree.exedit.js" />
+    <Content Include="js\ztree\zTreeStyle\img\diy\1_close.png" />
+    <Content Include="js\ztree\zTreeStyle\img\diy\1_open.png" />
+    <Content Include="js\ztree\zTreeStyle\img\diy\2.png" />
+    <Content Include="js\ztree\zTreeStyle\img\diy\3.png" />
+    <Content Include="js\ztree\zTreeStyle\img\diy\4.png" />
+    <Content Include="js\ztree\zTreeStyle\img\diy\5.png" />
+    <Content Include="js\ztree\zTreeStyle\img\diy\6.png" />
+    <Content Include="js\ztree\zTreeStyle\img\diy\7.png" />
+    <Content Include="js\ztree\zTreeStyle\img\diy\8.png" />
+    <Content Include="js\ztree\zTreeStyle\img\diy\9.png" />
+    <Content Include="js\ztree\zTreeStyle\img\line_conn.gif" />
+    <Content Include="js\ztree\zTreeStyle\img\loading.gif" />
+    <Content Include="js\ztree\zTreeStyle\img\zTreeStandard.gif" />
+    <Content Include="js\ztree\zTreeStyle\img\zTreeStandard.png" />
+    <Content Include="js\ztree\zTreeStyle\zTreeStyle.css" />
+    <Content Include="Main\subpage.aspx" />
+    <Content Include="Register.aspx" />
+    <Content Include="Master\Content.Master" />
+    <Content Include="Master\NavContent.Master" />
+    <Content Include="Handler\ProjectHandler.ashx" />
+    <Content Include="Handler\RoomResourceHandler.ashx" />
+    <Content Include="Master\NavContent4.Master" />
+    <Content Include="Handler\AuthMgrHandler.ashx" />
+    <Content Include="Handler\UserHandler.ashx" />
+    <Content Include="Handler\UserRoleHandler.ashx" />
+    <Content Include="Handler\ImportSourceHandler.ashx" />
+    <Content Include="Handler\ServiceHandler.ashx" />
+    <Content Include="Handler\CheckStatusHandler.ashx" />
+    <Content Include="Master\NavContent6.Master" />
+    <Content Include="Handler\LoginHandler.ashx" />
+    <Content Include="RoomResource\EditRoomResource_Fee.aspx" />
+    <Content Include="RoomResource\EditRoomResource_Relation.aspx" />
+    <Content Include="RoomResource\EditRoomResource_Rent.aspx" />
+    <Content Include="RoomResource\EditRoomResource_Owner.aspx" />
+    <Content Include="RoomResource\EditRoomResource_Basic.aspx" />
+    <Content Include="styles\images\point.png" />
+    <Content Include="styles\maintab.css" />
+    <Content Include="styles\iconfont\iconfont.css" />
+    <Content Include="styles\iconfont\iconfont.svg" />
+    <Content Include="styles\icons\三表.png" />
+    <Content Include="styles\icons\交班.png" />
+    <Content Include="styles\icons\作废.png" />
+    <Content Include="styles\icons\保存.png" />
+    <Content Include="styles\icons\保证金.png" />
+    <Content Include="styles\icons\修改.png" />
+    <Content Include="styles\icons\停用.png" />
+    <Content Include="styles\icons\关闭.png" />
+    <Content Include="styles\icons\出库.png" />
+    <Content Include="styles\icons\删除.png" />
+    <Content Include="styles\icons\办结.png" />
+    <Content Include="styles\icons\历史.png" />
+    <Content Include="styles\icons\变更.png" />
+    <Content Include="styles\icons\合同.png" />
+    <Content Include="styles\icons\同步.png" />
+    <Content Include="styles\icons\启用.png" />
+    <Content Include="styles\icons\回访.png" />
+    <Content Include="styles\icons\增加.png" />
+    <Content Include="styles\icons\处理.png" />
+    <Content Include="styles\icons\备忘录.png" />
+    <Content Include="styles\icons\审核.png" />
+    <Content Include="styles\icons\导入.png" />
+    <Content Include="styles\icons\导出.png" />
+    <Content Include="styles\icons\打印.png" />
+    <Content Include="styles\icons\抄表-01.png" />
+    <Content Include="styles\icons\挂账.png" />
+    <Content Include="styles\icons\排序.png" />
+    <Content Include="styles\icons\搜索.png" />
+    <Content Include="styles\icons\摊销费.png" />
+    <Content Include="styles\icons\撤销订单.png" />
+    <Content Include="styles\icons\收费.png" />
+    <Content Include="styles\icons\明细.png" />
+    <Content Include="styles\icons\派单.png" />
+    <Content Include="styles\icons\生成.png" />
+    <Content Include="styles\icons\绑定.png" />
+    <Content Include="styles\icons\结算.png" />
+    <Content Include="styles\icons\详情.png" />
+    <Content Include="styles\icons\退款.png" />
+    <Content Include="styles\icons\选择.png" />
+    <Content Include="styles\icons\通知.png" />
+    <Content Include="styles\icons\配置.png" />
+    <Content Include="styles\icons\项目办结.png" />
+    <Content Include="styles\icons\预收款.png" />
+    <Content Include="styles\images\addimage.jpg" />
+    <Content Include="styles\images\arrow_right.png" />
+    <Content Include="styles\images\big_bgcolor.jpg" />
+    <Content Include="styles\images\edit.jpg" />
+    <Content Include="styles\images\equipMentType-bg.png" />
+    <Content Include="styles\images\equparameter-bg.png" />
+    <Content Include="styles\images\equprojects-bg.png" />
+    <Content Include="styles\images\Icons\weixin.jpg" />
+    <Content Include="styles\images\nocolor.png" />
+    <Content Include="styles\images\nocolor_over.png" />
+    <Content Include="styles\images\noimg.png" />
+    <Content Include="styles\images\xiaoguotu.JPG" />
+    <Content Include="styles\images\zukongimg.jpg" />
+    <Content Include="styles\jquery.bigcolorpicker.css" />
+    <Content Include="styles\page\default.css" />
+    <Content Include="SysSeting\AssignProjectNumber.aspx" />
+    <Content Include="SysSeting\EditCustomerServiceTaskCombobox.aspx" />
+    <Content Include="SysSeting\OperationMgr.aspx" />
+    <Content Include="SysSeting\OrderNumberMgr.aspx" />
+    <Content Include="SysSeting\ImportantTouSuRuleEdit.aspx" />
+    <Content Include="SysSeting\TableSetUp.aspx" />
+    <Content Include="SysSeting\SeatEdit.aspx" />
+    <Content Include="SysSeting\UserStaffEdit.aspx" />
+    <Content Include="SysSeting\UserStaffMgr.aspx" />
+    <Content Include="UserInfo\PersionalInfo.aspx" />
+    <Content Include="UserInfo\UserCKCategoryMgr.aspx" />
+    <Content Include="UserInfo\ChooseWehcatUser.aspx" />
+    <Content Include="UserInfo\UserDepartmentMgr.aspx" />
+    <Content Include="Handler\ProjectPropertyHandler.ashx" />
+    <Content Include="packages.config" />
+    <Content Include="js\ueditor\third-party\jquery-1.10.2.min.map" />
+    <Content Include="js\ueditor\third-party\video-js\font\vjs.eot" />
+    <Content Include="js\ueditor\third-party\video-js\font\vjs.ttf" />
+    <Content Include="js\ueditor\third-party\video-js\font\vjs.woff" />
+    <Content Include="Handler\Base\BaseHandler.ashx" />
+    <Content Include="Master\NavContent7.Master" />
+    <Content Include="Handler\SysSettingHandler.ashx" />
+    <Content Include="Handler\CKHandler.ashx" />
+    <Content Include="Master\NavContent8.Master" />
+    <Content Include="download\driver.zip" />
+    <Content Include="Mobile\API.ashx" />
+    <Content Include="Mobile\Wechat.ashx" />
+    <Content Include="Wechat\SuggesitonRedirect.aspx" />
+    <Content Include="Wechat\ServiceRedirect.aspx" />
+    <Content Include="Handler\AnalysisHandler.ashx" />
+    <None Include="Properties\PublishProfiles\customerpro.pubxml" />
+    <None Include="Properties\PublishProfiles\pro.pubxml" />
+    <Content Include="RoomResource\AddRelateResource.aspx" />
+    <Content Include="RoomResource\EditRelateFamily.aspx" />
+    <Content Include="RoomResource\EditRoomResource.aspx" />
+    <Content Include="RoomResource\ImportSource.aspx" />
+    <Content Include="RoomResource\Setup.aspx" />
+    <Content Include="styles\buttons.css" />
+    <Content Include="styles\images\Icons\dkgl.jpg" />
+    <Content Include="styles\images\Icons\allicons.png" />
+    <Content Include="styles\images\Icons\业主台账.png" />
+    <Content Include="styles\images\Icons\交班报表.png" />
+    <Content Include="styles\images\Icons\催收中心.png" />
+    <Content Include="styles\images\Icons\公摊处理.png" />
+    <Content Include="styles\images\Icons\单号设置.png" />
+    <Content Include="styles\images\Icons\合同档案.png" />
+    <Content Include="styles\images\Icons\导入账单.png" />
+    <Content Include="styles\images\Icons\应收台账.png" />
+    <Content Include="styles\images\Icons\房源台账.png" />
+    <Content Include="styles\images\Icons\房源档案.png" />
+    <Content Include="styles\images\Icons\抄表处理.png" />
+    <Content Include="styles\images\Icons\押金台账.png" />
+    <Content Include="styles\images\Icons\收入台账.png" />
+    <Content Include="styles\images\Icons\收款管理.png" />
+    <Content Include="styles\images\Icons\收费中心.png" />
+    <Content Include="styles\images\Icons\收费设置.png" />
+    <Content Include="styles\images\Icons\权限管理.png" />
+    <Content Include="styles\images\Icons\欠费台账.png" />
+    <Content Include="styles\images\Icons\用户管理.png" />
+    <Content Include="styles\images\Icons\系统设置.png" />
+    <Content Include="styles\images\Icons\角色分配.png" />
+    <Content Include="styles\images\Icons\财务审计.png" />
+    <Content Include="styles\images\Icons\预收台账.png" />
+    <Content Include="styles\images\login_1.png" />
+    <Content Include="styles\images\logo.png" />
+    <Content Include="styles\images\Logo_home.png" />
+    <Content Include="styles\images\yongyoulogo.png" />
+    <Content Include="styles\page\initialdefault.css" />
+    <Content Include="styles\page\printfeeorder.css" />
+    <Content Include="styles\table.css" />
+    <Content Include="styles\iconfont\iconfont.eot" />
+    <Content Include="styles\iconfont\iconfont.ttf" />
+    <Content Include="styles\iconfont\iconfont.woff" />
+    <None Include="Properties\PublishProfiles\prosys.pubxml" />
+    <Content Include="Ueditor\config.json" />
+    <Content Include="Ueditor\controller.ashx" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="js\jquery-1.8.3.min.js" />
+    <Content Include="Login.aspx" />
+    <Content Include="styles\basic.css" />
+    <Content Include="styles\icons\1_icon.jpg" />
+    <Content Include="styles\icons\2_icon.jpg" />
+    <Content Include="styles\icons\3_icon.jpg" />
+    <Content Include="styles\icons\4_icon.jpg" />
+    <Content Include="styles\icons\5_icon.jpg" />
+    <Content Include="styles\images\skgl.jpg" />
+    <Content Include="styles\images\srdz.jpg" />
+    <Content Include="styles\images\tjbb.jpg" />
+    <Content Include="styles\images\xtgl.jpg" />
+    <Content Include="styles\main.css" />
+    <Content Include="styles\master.css" />
+    <Content Include="styles\page\login.css" />
+    <Content Include="styles\treecss.css" />
+    <Content Include="UserInfo\EditRole.aspx" />
+    <Content Include="UserInfo\EditUser.aspx" />
+    <Content Include="UserInfo\EditUserPwd.aspx" />
+    <Content Include="UserInfo\RoleMgr.aspx" />
+    <Content Include="UserInfo\UserMgr.aspx" />
+    <Content Include="UserInfo\UserAnalysisMgr.aspx" />
+    <Content Include="UserInfo\UserAuthMgr.aspx" />
+    <Content Include="UserInfo\UserServiceTypeMgr.aspx" />
+    <Content Include="UserInfo\UserProjectMgr.aspx" />
+    <Content Include="UserInfo\UserModuleMgr.aspx" />
+    <Content Include="UserInfo\UserRoleMgr.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analysis\ServiceCallTotalAnalysis.aspx.cs">
+      <DependentUpon>ServiceCallTotalAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceCallTotalAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceCallTotalAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceChuLiList.aspx.cs">
+      <DependentUpon>ServiceChuLiList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceChuLiList.aspx.designer.cs">
+      <DependentUpon>ServiceChuLiList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabAveChaoShiAnalysis.aspx.cs">
+      <DependentUpon>ServiceTabAveChaoShiAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabAveChaoShiAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceTabAveChaoShiAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceWuYeTouSuTimeOutAnalysis.aspx.cs">
+      <DependentUpon>ServiceWuYeTouSuTimeOutAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceWuYeTouSuTimeOutAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceWuYeTouSuTimeOutAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceYingXiaoTouSuTimeOutAnalysis.aspx.cs">
+      <DependentUpon>ServiceYingXiaoTouSuTimeOutAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceYingXiaoTouSuTimeOutAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceYingXiaoTouSuTimeOutAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairTimeOutAnalysis.aspx.cs">
+      <DependentUpon>ServiceRepairTimeOutAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairTimeOutAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceRepairTimeOutAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceTouSuFromCountAnalysis.aspx.cs">
+      <DependentUpon>ServiceTouSuFromCountAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceTouSuFromCountAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceTouSuFromCountAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceListAnalysis.aspx.cs">
+      <DependentUpon>ServiceListAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceListAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceListAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabTouSuFeeSummaryAnalysis.aspx.cs">
+      <DependentUpon>ServiceTabTouSuFeeSummaryAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabTouSuFeeSummaryAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceTabTouSuFeeSummaryAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceWuYeTouSuFeeAnalysis.aspx.cs">
+      <DependentUpon>ServiceWuYeTouSuFeeAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceWuYeTouSuFeeAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceWuYeTouSuFeeAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceYingXiaoTouSuFeeAnalysis.aspx.cs">
+      <DependentUpon>ServiceYingXiaoTouSuFeeAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceYingXiaoTouSuFeeAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceYingXiaoTouSuFeeAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairFeeAnalysis.aspx.cs">
+      <DependentUpon>ServiceRepairFeeAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairFeeAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceRepairFeeAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairShiXiaoAnalysis.aspx.cs">
+      <DependentUpon>ServiceRepairShiXiaoAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairShiXiaoAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceRepairShiXiaoAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairManyiAnalysis.aspx.cs">
+      <DependentUpon>ServiceRepairManyiAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairManyiAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceRepairManyiAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabChaoShiSummaryAnalysis.aspx.cs">
+      <DependentUpon>ServiceTabChaoShiSummaryAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabChaoShiSummaryAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceTabChaoShiSummaryAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabTouSuShiXiaoSummaryAnalysis.aspx.cs">
+      <DependentUpon>ServiceTabTouSuShiXiaoSummaryAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabTouSuShiXiaoSummaryAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceTabTouSuShiXiaoSummaryAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairChaoShiAnalysis.aspx.cs">
+      <DependentUpon>ServiceRepairChaoShiAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairChaoShiAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceRepairChaoShiAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceTouSuChaoShiAnalysis.aspx.cs">
+      <DependentUpon>ServiceTouSuChaoShiAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceTouSuChaoShiAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceTouSuChaoShiAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceWuYeTouSuShiXiaoAnalysis.aspx.cs">
+      <DependentUpon>ServiceWuYeTouSuShiXiaoAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceWuYeTouSuShiXiaoAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceWuYeTouSuShiXiaoAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceYingXiaoTouSuCountAnalysis.aspx.cs">
+      <DependentUpon>ServiceYingXiaoTouSuCountAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceYingXiaoTouSuCountAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceYingXiaoTouSuCountAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceYingXiaoTouSuShiXiaoAnalysis.aspx.cs">
+      <DependentUpon>ServiceYingXiaoTouSuShiXiaoAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceYingXiaoTouSuShiXiaoAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceYingXiaoTouSuShiXiaoAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceYingXiaoManyiAnalysis.aspx.cs">
+      <DependentUpon>ServiceYingXiaoManyiAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceYingXiaoManyiAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceYingXiaoManyiAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabChuliSummaryAnalysis.aspx.cs">
+      <DependentUpon>ServiceTabChuliSummaryAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabChuliSummaryAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceTabChuliSummaryAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairCountAnalysis.aspx.cs">
+      <DependentUpon>ServiceRepairCountAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairCountAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceRepairCountAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairFromCountAnalysis.aspx.cs">
+      <DependentUpon>ServiceRepairFromCountAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceRepairFromCountAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceRepairFromCountAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceWuYeTouSuCountAnalysis.aspx.cs">
+      <DependentUpon>ServiceWuYeTouSuCountAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceWuYeTouSuCountAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceWuYeTouSuCountAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceFeeDetailAnalysis.aspx.cs">
+      <DependentUpon>ServiceFeeDetailAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceFeeDetailAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceFeeDetailAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabTouSuCountAnalysis.aspx.cs">
+      <DependentUpon>ServiceTabTouSuCountAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceTabTouSuCountAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceTabTouSuCountAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceTimeOutDetailAnalysis.aspx.cs">
+      <DependentUpon>ServiceTimeOutDetailAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceTimeOutDetailAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceTimeOutDetailAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceDetailAnalysis.aspx.cs">
+      <DependentUpon>ServiceDetailAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceDetailAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceDetailAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analysis\ServiceCallSummaryAnalysis.aspx.cs">
+      <DependentUpon>ServiceCallSummaryAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\ServiceCallSummaryAnalysis.aspx.designer.cs">
+      <DependentUpon>ServiceCallSummaryAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="APPCode\AppCacheHelper.cs" />
+    <Compile Include="APPCode\CacheHelper.cs" />
+    <Compile Include="APPCode\ExportHelper.cs" />
+    <Compile Include="APPCode\JPushHelper.cs" />
+    <Compile Include="APPCode\MasterBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="APPCode\SocketNotify.cs" />
+    <Compile Include="CangKu\DepartmentMgr.aspx.cs">
+      <DependentUpon>DepartmentMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CangKu\DepartmentMgr.aspx.designer.cs">
+      <DependentUpon>DepartmentMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CangKu\EditDepartment.aspx.cs">
+      <DependentUpon>EditDepartment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CangKu\EditDepartment.aspx.designer.cs">
+      <DependentUpon>EditDepartment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\CustomerServiceTypeEdit.aspx.cs">
+      <DependentUpon>CustomerServiceTypeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\CustomerServiceTypeEdit.aspx.designer.cs">
+      <DependentUpon>CustomerServiceTypeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceCallRateEdit.aspx.cs">
+      <DependentUpon>ServiceCallRateEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceCallRateEdit.aspx.designer.cs">
+      <DependentUpon>ServiceCallRateEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceProcessFileView.aspx.cs">
+      <DependentUpon>ServiceProcessFileView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceProcessFileView.aspx.designer.cs">
+      <DependentUpon>ServiceProcessFileView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceSuggestionList.aspx.cs">
+      <DependentUpon>ServiceSuggestionList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceSuggestionList.aspx.designer.cs">
+      <DependentUpon>ServiceSuggestionList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServicePhoneListen.aspx.cs">
+      <DependentUpon>ServicePhoneListen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServicePhoneListen.aspx.designer.cs">
+      <DependentUpon>ServicePhoneListen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceRecordMgr.aspx.cs">
+      <DependentUpon>ServiceRecordMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceRecordMgr.aspx.designer.cs">
+      <DependentUpon>ServiceRecordMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceCallMgr.aspx.cs">
+      <DependentUpon>ServiceCallMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceCallMgr.aspx.designer.cs">
+      <DependentUpon>ServiceCallMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceProcessMgr.aspx.cs">
+      <DependentUpon>ServiceProcessMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceProcessMgr.aspx.designer.cs">
+      <DependentUpon>ServiceProcessMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceSend.aspx.cs">
+      <DependentUpon>ServiceSend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceSend.aspx.designer.cs">
+      <DependentUpon>ServiceSend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceSuggestionEdit.aspx.cs">
+      <DependentUpon>ServiceSuggestionEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceSuggestionEdit.aspx.designer.cs">
+      <DependentUpon>ServiceSuggestionEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceSuggestionMgr.aspx.cs">
+      <DependentUpon>ServiceSuggestionMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceSuggestionMgr.aspx.designer.cs">
+      <DependentUpon>ServiceSuggestionMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\AnalysisHandler.ashx.cs">
+      <DependentUpon>AnalysisHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\CKHandler.ashx.cs">
+      <DependentUpon>CKHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\SysSettingHandler.ashx.cs">
+      <DependentUpon>SysSettingHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\AddProjectProperty.aspx.cs">
+      <DependentUpon>AddProjectProperty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\AddProjectProperty.aspx.designer.cs">
+      <DependentUpon>AddProjectProperty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\PublicProjectEdit.aspx.cs">
+      <DependentUpon>PublicProjectEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\PublicProjectEdit.aspx.designer.cs">
+      <DependentUpon>PublicProjectEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\PublicProjectMgr.aspx.cs">
+      <DependentUpon>PublicProjectMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\PublicProjectMgr.aspx.designer.cs">
+      <DependentUpon>PublicProjectMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\NavContent8.Master.cs">
+      <DependentUpon>NavContent8.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\NavContent8.Master.designer.cs">
+      <DependentUpon>NavContent8.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\NavContent7.Master.cs">
+      <DependentUpon>NavContent7.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\NavContent7.Master.designer.cs">
+      <DependentUpon>NavContent7.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Mobile\API.ashx.cs">
+      <DependentUpon>API.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Mobile\Wechat.ashx.cs">
+      <DependentUpon>Wechat.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="APPCode\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="APPCode\CommHelper.cs" />
+    <Compile Include="APPCode\HttpRequest.cs" />
+    <Compile Include="APPCode\WebUtil.cs" />
+    <Compile Include="CustomerService\EditServiceMaterial.aspx.cs">
+      <DependentUpon>EditServiceMaterial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\EditServiceMaterial.aspx.designer.cs">
+      <DependentUpon>EditServiceMaterial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\CustomerServiceTypeMgr.aspx.cs">
+      <DependentUpon>CustomerServiceTypeMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\CustomerServiceTypeMgr.aspx.designer.cs">
+      <DependentUpon>CustomerServiceTypeMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceEdit.aspx.cs">
+      <DependentUpon>ServiceEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceEdit.aspx.designer.cs">
+      <DependentUpon>ServiceEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceComplete.aspx.cs">
+      <DependentUpon>ServiceComplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceComplete.aspx.designer.cs">
+      <DependentUpon>ServiceComplete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceCall.aspx.cs">
+      <DependentUpon>ServiceCall.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceCall.aspx.designer.cs">
+      <DependentUpon>ServiceCall.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceProcess.aspx.cs">
+      <DependentUpon>ServiceProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceProcess.aspx.designer.cs">
+      <DependentUpon>ServiceProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceDetailSummary.aspx.cs">
+      <DependentUpon>ServiceDetailSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceDetailSummary.aspx.designer.cs">
+      <DependentUpon>ServiceDetailSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceMgr.aspx.cs">
+      <DependentUpon>ServiceMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceMgr.aspx.designer.cs">
+      <DependentUpon>ServiceMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceMaterialList.aspx.cs">
+      <DependentUpon>ServiceMaterialList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceMaterialList.aspx.designer.cs">
+      <DependentUpon>ServiceMaterialList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceList.aspx.cs">
+      <DependentUpon>ServiceList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceList.aspx.designer.cs">
+      <DependentUpon>ServiceList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceStatic.aspx.cs">
+      <DependentUpon>ServiceStatic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceStatic.aspx.designer.cs">
+      <DependentUpon>ServiceStatic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\Base\BaseHandler.ashx.cs">
+      <DependentUpon>BaseHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\CheckStatusHandler.ashx.cs">
+      <DependentUpon>CheckStatusHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\LoginHandler.ashx.cs">
+      <DependentUpon>LoginHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\ProjectPropertyHandler.ashx.cs">
+      <DependentUpon>ProjectPropertyHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\ServiceHandler.ashx.cs">
+      <DependentUpon>ServiceHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\AddProperty.aspx.cs">
+      <DependentUpon>AddProperty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\AddProperty.aspx.designer.cs">
+      <DependentUpon>AddProperty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\EditColumns.aspx.cs">
+      <DependentUpon>EditColumns.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\EditColumns.aspx.designer.cs">
+      <DependentUpon>EditColumns.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\PropertySetup.aspx.cs">
+      <DependentUpon>PropertySetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\PropertySetup.aspx.designer.cs">
+      <DependentUpon>PropertySetup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\ShowYT.aspx.cs">
+      <DependentUpon>ShowYT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\ShowYT.aspx.designer.cs">
+      <DependentUpon>ShowYT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\NavContent6.Master.cs">
+      <DependentUpon>NavContent6.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\NavContent6.Master.designer.cs">
+      <DependentUpon>NavContent6.Master</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomName.aspx.cs">
+      <DependentUpon>EditRoomName.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomName.aspx.designer.cs">
+      <DependentUpon>EditRoomName.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\EditAPPAccount.aspx.cs">
+      <DependentUpon>EditAPPAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\EditAPPAccount.aspx.designer.cs">
+      <DependentUpon>EditAPPAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\AuthMgrHandler.ashx.cs">
+      <DependentUpon>AuthMgrHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\ImportSourceHandler.ashx.cs">
+      <DependentUpon>ImportSourceHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\RoomResourceHandler.ashx.cs">
+      <DependentUpon>RoomResourceHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\UserHandler.ashx.cs">
+      <DependentUpon>UserHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\UserRoleHandler.ashx.cs">
+      <DependentUpon>UserRoleHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\AddSubProject.aspx.cs">
+      <DependentUpon>AddSubProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\AddSubProject.aspx.designer.cs">
+      <DependentUpon>AddSubProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\AddProject.aspx.cs">
+      <DependentUpon>AddProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\AddProject.aspx.designer.cs">
+      <DependentUpon>AddProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\AddTopyt.aspx.cs">
+      <DependentUpon>AddTopyt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\AddTopyt.aspx.designer.cs">
+      <DependentUpon>AddTopyt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\Addyt.aspx.cs">
+      <DependentUpon>Addyt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\Addyt.aspx.designer.cs">
+      <DependentUpon>Addyt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\Setup.aspx.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\Setup.aspx.designer.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Main\subpage.aspx.cs">
+      <DependentUpon>subpage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main\subpage.aspx.designer.cs">
+      <DependentUpon>subpage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Master\NavContent.Master.cs">
+      <DependentUpon>NavContent.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\NavContent.Master.designer.cs">
+      <DependentUpon>NavContent.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Content.Master.cs">
+      <DependentUpon>Content.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\Content.Master.designer.cs">
+      <DependentUpon>Content.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\NavContent4.Master.cs">
+      <DependentUpon>NavContent4.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\NavContent4.Master.designer.cs">
+      <DependentUpon>NavContent4.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\ProjectHandler.ashx.cs">
+      <DependentUpon>ProjectHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomResource\AddRelateResource.aspx.cs">
+      <DependentUpon>AddRelateResource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\AddRelateResource.aspx.designer.cs">
+      <DependentUpon>AddRelateResource.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\EditRelateFamily.aspx.cs">
+      <DependentUpon>EditRelateFamily.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\EditRelateFamily.aspx.designer.cs">
+      <DependentUpon>EditRelateFamily.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource_Fee.aspx.cs">
+      <DependentUpon>EditRoomResource_Fee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource_Fee.aspx.designer.cs">
+      <DependentUpon>EditRoomResource_Fee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource_Relation.aspx.cs">
+      <DependentUpon>EditRoomResource_Relation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource_Relation.aspx.designer.cs">
+      <DependentUpon>EditRoomResource_Relation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource_Rent.aspx.cs">
+      <DependentUpon>EditRoomResource_Rent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource_Rent.aspx.designer.cs">
+      <DependentUpon>EditRoomResource_Rent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource_Owner.aspx.cs">
+      <DependentUpon>EditRoomResource_Owner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource_Owner.aspx.designer.cs">
+      <DependentUpon>EditRoomResource_Owner.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource_Basic.aspx.cs">
+      <DependentUpon>EditRoomResource_Basic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource_Basic.aspx.designer.cs">
+      <DependentUpon>EditRoomResource_Basic.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource.aspx.cs">
+      <DependentUpon>EditRoomResource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\EditRoomResource.aspx.designer.cs">
+      <DependentUpon>EditRoomResource.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\ImportSource.aspx.cs">
+      <DependentUpon>ImportSource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\ImportSource.aspx.designer.cs">
+      <DependentUpon>ImportSource.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RoomResource\Setup.aspx.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RoomResource\Setup.aspx.designer.cs">
+      <DependentUpon>Setup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysSeting\AssignProjectNumber.aspx.cs">
+      <DependentUpon>AssignProjectNumber.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysSeting\AssignProjectNumber.aspx.designer.cs">
+      <DependentUpon>AssignProjectNumber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysSeting\EditCustomerServiceTaskCombobox.aspx.cs">
+      <DependentUpon>EditCustomerServiceTaskCombobox.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysSeting\EditCustomerServiceTaskCombobox.aspx.designer.cs">
+      <DependentUpon>EditCustomerServiceTaskCombobox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysSeting\OperationMgr.aspx.cs">
+      <DependentUpon>OperationMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysSeting\OperationMgr.aspx.designer.cs">
+      <DependentUpon>OperationMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysSeting\OrderNumberMgr.aspx.cs">
+      <DependentUpon>OrderNumberMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysSeting\OrderNumberMgr.aspx.designer.cs">
+      <DependentUpon>OrderNumberMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysSeting\ImportantTouSuRuleEdit.aspx.cs">
+      <DependentUpon>ImportantTouSuRuleEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysSeting\ImportantTouSuRuleEdit.aspx.designer.cs">
+      <DependentUpon>ImportantTouSuRuleEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysSeting\TableSetUp.aspx.cs">
+      <DependentUpon>TableSetUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysSeting\TableSetUp.aspx.designer.cs">
+      <DependentUpon>TableSetUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysSeting\SeatEdit.aspx.cs">
+      <DependentUpon>SeatEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysSeting\SeatEdit.aspx.designer.cs">
+      <DependentUpon>SeatEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysSeting\UserStaffEdit.aspx.cs">
+      <DependentUpon>UserStaffEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysSeting\UserStaffEdit.aspx.designer.cs">
+      <DependentUpon>UserStaffEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysSeting\UserStaffMgr.aspx.cs">
+      <DependentUpon>UserStaffMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysSeting\UserStaffMgr.aspx.designer.cs">
+      <DependentUpon>UserStaffMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ueditor\App_Code\Config.cs" />
+    <Compile Include="Ueditor\App_Code\ConfigHandler.cs" />
+    <Compile Include="Ueditor\App_Code\CrawlerHandler.cs" />
+    <Compile Include="Ueditor\App_Code\Handler.cs" />
+    <Compile Include="Ueditor\App_Code\ListFileHandler.cs" />
+    <Compile Include="Ueditor\App_Code\NotSupportedHandler.cs" />
+    <Compile Include="Ueditor\App_Code\PathFormater.cs" />
+    <Compile Include="Ueditor\App_Code\UploadHandler.cs" />
+    <Compile Include="UserInfo\EditRole.aspx.cs">
+      <DependentUpon>EditRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\EditRole.aspx.designer.cs">
+      <DependentUpon>EditRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\PersionalInfo.aspx.cs">
+      <DependentUpon>PersionalInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\PersionalInfo.aspx.designer.cs">
+      <DependentUpon>PersionalInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\EditUser.aspx.cs">
+      <DependentUpon>EditUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\EditUser.aspx.designer.cs">
+      <DependentUpon>EditUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\EditUserPwd.aspx.cs">
+      <DependentUpon>EditUserPwd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\EditUserPwd.aspx.designer.cs">
+      <DependentUpon>EditUserPwd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\RoleMgr.aspx.cs">
+      <DependentUpon>RoleMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\RoleMgr.aspx.designer.cs">
+      <DependentUpon>RoleMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\UserMgr.aspx.cs">
+      <DependentUpon>UserMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\UserMgr.aspx.designer.cs">
+      <DependentUpon>UserMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\UserAnalysisMgr.aspx.cs">
+      <DependentUpon>UserAnalysisMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\UserAnalysisMgr.aspx.designer.cs">
+      <DependentUpon>UserAnalysisMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\UserCKCategoryMgr.aspx.cs">
+      <DependentUpon>UserCKCategoryMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\UserCKCategoryMgr.aspx.designer.cs">
+      <DependentUpon>UserCKCategoryMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\UserAuthMgr.aspx.cs">
+      <DependentUpon>UserAuthMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\UserAuthMgr.aspx.designer.cs">
+      <DependentUpon>UserAuthMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\UserServiceTypeMgr.aspx.cs">
+      <DependentUpon>UserServiceTypeMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\UserServiceTypeMgr.aspx.designer.cs">
+      <DependentUpon>UserServiceTypeMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\UserProjectMgr.aspx.cs">
+      <DependentUpon>UserProjectMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\UserProjectMgr.aspx.designer.cs">
+      <DependentUpon>UserProjectMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\UserModuleMgr.aspx.cs">
+      <DependentUpon>UserModuleMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\UserModuleMgr.aspx.designer.cs">
+      <DependentUpon>UserModuleMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\UserDepartmentMgr.aspx.cs">
+      <DependentUpon>UserDepartmentMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\UserDepartmentMgr.aspx.designer.cs">
+      <DependentUpon>UserDepartmentMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\UserRoleMgr.aspx.cs">
+      <DependentUpon>UserRoleMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\UserRoleMgr.aspx.designer.cs">
+      <DependentUpon>UserRoleMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo\ChooseWehcatUser.aspx.cs">
+      <DependentUpon>ChooseWehcatUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo\ChooseWehcatUser.aspx.designer.cs">
+      <DependentUpon>ChooseWehcatUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Wechat\SuggesitonRedirect.aspx.cs">
+      <DependentUpon>SuggesitonRedirect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Wechat\SuggesitonRedirect.aspx.designer.cs">
+      <DependentUpon>SuggesitonRedirect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Wechat\ServiceRedirect.aspx.cs">
+      <DependentUpon>ServiceRedirect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Wechat\ServiceRedirect.aspx.designer.cs">
+      <DependentUpon>ServiceRedirect.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{5186e1b0-f2a8-4e86-a50e-498d1821ea80}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Encript\Encript.csproj">
+      <Project>{005a366c-b184-47a6-9522-e51b80f7b3e0}</Project>
+      <Name>Encript</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelProcess\ExcelProcess.csproj">
+      <Project>{920295a4-8797-43ca-bc74-0c70f4473b0c}</Project>
+      <Name>ExcelProcess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JPush\JPush.csproj">
+      <Project>{b3c2d504-2d66-4e39-a70c-f0db162fa68c}</Project>
+      <Name>JPush</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocketIOClient\SocketIOClient.csproj">
+      <Project>{fe7adb35-e495-4b14-91d8-8dd2dff73a3a}</Project>
+      <Name>SocketIOClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{a8c330c1-5525-4ecf-ae86-974fbc3ab142}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2761</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2030/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:2025/" workingDir="" />
+          </servers>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

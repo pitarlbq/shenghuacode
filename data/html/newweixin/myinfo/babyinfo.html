@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-toast.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <style type="text/css">
+    [v-cloak] {
+        display: none;
+    }
+
+    body {
+        background: #f0f0f0;
+    }
+
+    .aui-content.main {
+        margin-bottom: 50px;
+    }
+
+    .aui_main {
+        margin: 0 10px;
+    }
+
+    .aui-list.aui-form-list {
+        margin-top: 0px;
+        border-radius: 5px;
+        background-size: 0px;
+    }
+
+    .aui-list.aui-form-list .aui-list-item {
+        padding-left: 0.5rem;
+        background-size: 0px;
+    }
+
+    .aui-list.aui-form-list .aui-list-item-label {
+        width: 4rem;
+        font-size: 0.6rem;
+    }
+
+    input[type="text"],
+    input[type='number'] {
+        font-size: 0.6rem;
+    }
+
+    .aui-list.aui-form-list .aui-list-item-input {
+        font-size: 0.6rem;
+    }
+
+    .aui-list.aui-form-list .aui-list-item-input label {
+        font-size: 0.6rem;
+    }
+
+    .aui-list.aui-form-list .aui-list-item-input label.time_label {
+        width: 30%;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .aui-radio {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 5px;
+    }
+
+    .aui_title {
+        font-size: 0.7rem;
+        padding: 10px;
+    }
+
+    .aui-list-item-inner .aui-btn-primary {
+        display: block;
+        margin: 0 auto;
+    }
+    .aui-bar-tab{
+        min-height: 2rem;
+    }
+    .aui-bar-tab .aui-bar-tab-item{
+        height: 2rem;
+    }
+    .aui-bar-tab .aui-btn{
+        height: 2rem;
+        line-height: 2rem;
+        font-size: 0.8rem;
+        border-radius: 0px;
+        width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <section class="aui-content main">
+            <template v-for="(item,index) in list">
+                <div class="aui_title">第{{index+1}}个孩子</div>
+                <div class="aui_main">
+                    <ul class="aui-list aui-form-list">
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                    孩子姓名
+                                </div>
+                                <div class="aui-list-item-input">
+                                    <input type="text" v-model="item.name" placeholder="请输入">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                    孩子性别
+                                </div>
+                                <div class="aui-list-item-input">
+                                    <label v-on:click="do_select_sex(1)"><input class="aui-radio" type="radio" v-bind:name="'sex_'+index" v-bind:checked="item.sex==1">男孩</label>
+                                    <label v-on:click="do_select_sex(2)"><input class="aui-radio" type="radio" v-bind:name="'sex_'+index" v-bind:checked="item.sex==2">女孩</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label">
+                                    出生日期
+                                </div>
+                                <div class="aui-list-item-input">
+                                    <input type="text" v-model="item.birthday" placeholder="请输入">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-btn aui-btn-primary" v-on:click="do_save(item)">保存</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </template>
+        </section>
+        <footer class="aui-bar aui-bar-tab" id="footer">
+            <div class="aui-bar-tab-item" tapmode v-on:click="do_add()">
+                <div class="aui-btn aui-btn-primary">新增</div>
+            </div>
+        </footer>
+    </div>
+</body>
+<script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript">
+init_js('js/babyinfo.js');
+</script>
+
+</html>

@@ -1,0 +1,146 @@
+2019-03-10 16:56:33,922 [14892] ERROR root - [AnalysisHandler]visit: loadcallsummaryanalysis
+System.Data.SqlClient.SqlException (0x80131904): 列名 'AddUseID' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1108
+   在 Foresight.DataAccess.CallSummaryAnalysis.GetCallSummaryAnalysisGrid(List`1 RoomIDList, List`1 EqualProjectIDList, List`1 InProjectIDList, DateTime StartTime, DateTime EndTime, Int32 UserID, Int32 AddUserID) 位置 f:\code\CustomerPro\platform\DataAccess\AnalysisAccess.cs:行号 87
+   在 Web.Handler.AnalysisHandler.loadcallsummaryanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 63
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 33
+ClientConnectionId:84711455-4e57-4e77-9363-e8f3c93be6f6
+Error Number:207,State:1,Class:16
+2019-03-10 16:58:16,396 [19628] ERROR root - [AnalysisHandler]visit: loadcallsummaryanalysis
+System.Data.SqlClient.SqlException (0x80131904): 关键字 'exists' 附近有语法错误。
+关键字 'group' 附近有语法错误。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1108
+   在 Foresight.DataAccess.CallSummaryAnalysis.GetCallSummaryAnalysisGrid(List`1 RoomIDList, List`1 EqualProjectIDList, List`1 InProjectIDList, DateTime StartTime, DateTime EndTime, Int32 UserID, Int32 AddUserID) 位置 f:\code\CustomerPro\platform\DataAccess\AnalysisAccess.cs:行号 100
+   在 Web.Handler.AnalysisHandler.loadcallsummaryanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 63
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 33
+ClientConnectionId:29daaa24-ea33-49c4-96e6-e72267e3bb89
+Error Number:156,State:1,Class:15
+2019-03-10 16:58:21,268 [19628] ERROR root - [AnalysisHandler]visit: loadcallsummaryanalysis
+System.Data.SqlClient.SqlException (0x80131904): 关键字 'exists' 附近有语法错误。
+关键字 'group' 附近有语法错误。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1108
+   在 Foresight.DataAccess.CallSummaryAnalysis.GetCallSummaryAnalysisGrid(List`1 RoomIDList, List`1 EqualProjectIDList, List`1 InProjectIDList, DateTime StartTime, DateTime EndTime, Int32 UserID, Int32 AddUserID) 位置 f:\code\CustomerPro\platform\DataAccess\AnalysisAccess.cs:行号 100
+   在 Web.Handler.AnalysisHandler.loadcallsummaryanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 63
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 33
+ClientConnectionId:29daaa24-ea33-49c4-96e6-e72267e3bb89
+Error Number:156,State:1,Class:15
+2019-03-10 16:59:58,678 [10416] ERROR root - [AnalysisHandler]visit: loadcallsummaryanalysis
+System.Data.SqlClient.SqlException (0x80131904): 关键字 'exists' 附近有语法错误。
+关键字 'group' 附近有语法错误。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList, CommandBehavior behavior, Int32 timeout) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 250
+   在 Foresight.DataAccess.Framework.SqlHelperBase.ExecuteDataReader(String command, CommandType commandType, List`1 parameterList) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 203
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1108
+   在 Foresight.DataAccess.CallSummaryAnalysis.GetCallSummaryAnalysisGrid(List`1 RoomIDList, List`1 EqualProjectIDList, List`1 InProjectIDList, DateTime StartTime, DateTime EndTime, Int32 UserID, Int32 AddUserID) 位置 f:\code\CustomerPro\platform\DataAccess\AnalysisAccess.cs:行号 100
+   在 Web.Handler.AnalysisHandler.loadcallsummaryanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 63
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 33
+ClientConnectionId:f726fd43-b0e7-4bdc-a42d-f716ba12c0d3
+Error Number:156,State:1,Class:15
+2019-03-10 18:09:43,690 [18420] ERROR root - [AnalysisHandler]visit: loadtousushixiaoanalysis
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Foresight.DataAccess.TouSuShiXiaoAnalysis.<>c__DisplayClass24.<GetTouSuShiXiaoAnalysisGrid>b__a(ViewCustomerService p) 位置 f:\code\CustomerPro\platform\DataAccess\AnalysisAccess.cs:行号 700
+   在 System.Linq.Enumerable.WhereArrayIterator`1.MoveNext()
+   在 System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   在 System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   在 Foresight.DataAccess.TouSuShiXiaoAnalysis.GetTouSuShiXiaoAnalysisGrid(List`1 RoomIDList, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32 UserID, DateTime StartTime, DateTime EndTime, Int32[] CompanyIDList, Int32 ServiceTypeID, Int32[] ServiceType2IDList) 位置 f:\code\CustomerPro\platform\DataAccess\AnalysisAccess.cs:行号 700
+   在 Web.Handler.AnalysisHandler.loadtousushixiaoanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 81
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 48
+2019-03-10 18:10:56,881 [21520] ERROR root - [AnalysisHandler]visit: loadtousushixiaoanalysis
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Foresight.DataAccess.TouSuShiXiaoAnalysis.<>c__DisplayClass24.<GetTouSuShiXiaoAnalysisGrid>b__a(ViewCustomerService p) 位置 f:\code\CustomerPro\platform\DataAccess\AnalysisAccess.cs:行号 700
+   在 System.Linq.Enumerable.WhereArrayIterator`1.MoveNext()
+   在 System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   在 System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   在 Foresight.DataAccess.TouSuShiXiaoAnalysis.GetTouSuShiXiaoAnalysisGrid(List`1 RoomIDList, List`1 EqualProjectIDList, List`1 InProjectIDList, Int32 UserID, DateTime StartTime, DateTime EndTime, Int32[] CompanyIDList, Int32 ServiceTypeID, Int32[] ServiceType2IDList) 位置 f:\code\CustomerPro\platform\DataAccess\AnalysisAccess.cs:行号 700
+   在 Web.Handler.AnalysisHandler.loadtousushixiaoanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 81
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 48
+2019-03-10 18:15:03,331 [12008] ERROR root - [AnalysisHandler]visit: loadtousushixiaoanalysis
+Newtonsoft.Json.JsonSerializationException: Error converting value {null} to type 'System.Int32'. Path '[0]', line 1, position 3. ---> System.InvalidCastException: 空对象不能转换为值类型。
+   在 System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonSerializer.Deserialize(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 Utility.JsonConvert.DeserializeObject[T](String value) 位置 f:\code\CustomerPro\platform\Utility\Newtonsoft.cs:行号 16
+   在 Web.Handler.AnalysisHandler.loadtousushixiaoanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 79
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 48
+2019-03-10 18:19:14,703 [15040] ERROR root - [AnalysisHandler]visit: loadtousushixiaoanalysis
+Newtonsoft.Json.JsonSerializationException: Error converting value {null} to type 'System.Int32'. Path '[0]', line 1, position 3. ---> System.InvalidCastException: 空对象不能转换为值类型。
+   在 System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.EnsureType(JsonReader reader, Object value, CultureInfo culture, JsonContract contract, Type targetType)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 Utility.JsonConvert.DeserializeObject[T](String value) 位置 f:\code\CustomerPro\platform\Utility\Newtonsoft.cs:行号 16
+   在 Web.Handler.AnalysisHandler.loadtousushixiaoanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 79
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 48

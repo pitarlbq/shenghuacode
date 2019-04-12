@@ -1,0 +1,18 @@
+<root>
+  <template_id>CQhZR4KlAxPmHNvzbGHnAHctKl_2u9trrxqOBgLNfUQ</template_id>
+  <parm name="first" color="#000000">
+    <remark>消息头</remark>
+  </parm>
+  <parm name="keyword1" color="#646464">
+    <remark>标题</remark>
+  </parm>
+  <parm name="keyword2" color="#646464">
+    <remark>发布时间</remark>
+  </parm>
+  <parm name="keyword3" color="#646464">
+    <remark>内容</remark>
+  </parm>
+  <parm name="remark" color="#000000">
+    <remark>备注</remark>
+  </parm>
+</root>

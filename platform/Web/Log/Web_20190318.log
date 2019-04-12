@@ -1,0 +1,26 @@
+2019-03-18 14:40:10,709 [15596] ERROR root - [RoomResourceHandler]命令:loadtablecolumn
+System.ArgumentException: 已添加了具有相同键的项。
+   在 System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   在 System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   在 System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnProperties(Type type) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 425
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetDatabaseColumnPropertyInfo(Type type, String propertyName) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 384
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 449
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1.Initialize(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 106
+   在 Foresight.DataAccess.Framework.EntityListReadOnly`1..ctor(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityListReadOnly.cs:行号 398
+   在 Foresight.DataAccess.Framework.EntityList`1..ctor(IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityList.cs:行号 206
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.InitializeList[T](IDataReader reader) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1311
+   在 Foresight.DataAccess.Framework.EntityBaseReadOnly.GetList[T](String commandText, List`1 parameters) 位置 f:\code\CustomerPro\platform\DataAccess\Framework\Generated.EntityBaseReadOnly.cs:行号 1110
+   在 Foresight.DataAccess.TableColumn.GetTableColumnByPageCode(String PageCode, Boolean OnlyShow, Int32 ColumnServiceStatus, Int32 ColumnServiceType) 位置 f:\code\CustomerPro\platform\DataAccess\TableColumn.cs:行号 34
+   在 Web.Handler.RoomResourceHandler.loadtablecolumn(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 285
+   在 Web.Handler.RoomResourceHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\RoomResourceHandler.ashx.cs:行号 70
+2019-03-18 14:40:14,083 [10360] DEBUG root - [ServiceHandler]visit为空
+2019-03-18 14:41:22,496 [12264] DEBUG root - [ServiceHandler]visit为空
+2019-03-18 14:43:14,659 [10360] DEBUG root - [ServiceHandler]visit为空
+2019-03-18 14:43:24,757 [8536] DEBUG root - [ServiceHandler]visit为空
+2019-03-18 14:44:20,425 [11980] DEBUG root - [ServiceHandler]visit为空
+2019-03-18 14:45:36,985 [15596] DEBUG root - [ServiceHandler]visit为空
+2019-03-18 14:46:12,865 [12936] DEBUG root - [ServiceHandler]visit为空
+2019-03-18 14:46:37,953 [12936] DEBUG root - [ServiceHandler]visit为空
+2019-03-18 14:47:26,086 [11980] DEBUG root - [ServiceHandler]visit为空
+2019-03-18 14:47:41,455 [12936] DEBUG root - [ServiceHandler]visit为空

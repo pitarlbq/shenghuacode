@@ -1,0 +1,16 @@
+
+fs_cli 里面或者 freeswitch  执行 sofia global siptrace on  打开信令跟踪
+
+
+send 是发送的  sip数据
+
+recv 是接收的 sip数据
+
+1 可以自己根据 sip信令流程分析
+
+2 如果需要我协助 请提供日志文件 和callid
+
+
+日志文件
+来源 1 fs-cli输出的内容 使用ssh工具的记录功能记录到 文件
+来源 2 fs安装目录/log/ 有freesiwtch的完整日志 

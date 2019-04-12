@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Tools\SocketIOClient" Label="SocketIOClient" Category="项目" />
+    <Node Id="EngineIoClientDotNet 1.0.7" Label="EngineIoClientDotNet 1.0.7" Category="包" />
+    <Node Id="Newtonsoft.Json 9.0.1" Label="Newtonsoft.Json 9.0.1" Category="包" />
+    <Node Id="SocketIoClientDotNet 1.0.7.1" Label="SocketIoClientDotNet 1.0.7.1" Category="包" />
+    <Node Id="SuperSocket.ClientEngine.Core 0.10.0" Label="SuperSocket.ClientEngine.Core 0.10.0" Category="包" />
+    <Node Id="WebSocket4Net 0.15.2" Label="WebSocket4Net 0.15.2" Category="包" />
+    <Node Id="Tools\Utility" Label="Utility" Category="项目" />
+    <Node Id="Newtonsoft.Json 9.0.1" Label="Newtonsoft.Json 9.0.1" Category="包" />
+    <Node Id="Tools\JPush" Label="JPush" Category="项目" />
+    <Node Id="cn.jpush.api 3.3.3" Label="cn.jpush.api 3.3.3" Category="包" />
+    <Node Id="Newtonsoft.Json 9.0.1" Label="Newtonsoft.Json 9.0.1" Category="包" />
+    <Node Id="Web" Label="Web" Category="项目" />
+    <Node Id="Newtonsoft.Json 9.0.1" Label="Newtonsoft.Json 9.0.1" Category="包" />
+    <Node Id="vue.js 1.0.22" Label="vue.js 1.0.22" Category="包" />
+  </Nodes>
+  <Links>
+    <Link Source="EngineIoClientDotNet 1.0.7" Target="WebSocket4Net 0.15.2" Category="程序包依赖项" />
+    <Link Source="EngineIoClientDotNet 1.0.7" Target="SuperSocket.ClientEngine.Core 0.10.0" Category="程序包依赖项" />
+    <Link Source="EngineIoClientDotNet 1.0.7" Target="Newtonsoft.Json 9.0.1" Category="程序包依赖项" />
+    <Link Source="EngineIoClientDotNet 1.0.7" Target="WebSocket4Net 0.15.2" Category="程序包依赖项" />
+    <Link Source="EngineIoClientDotNet 1.0.7" Target="SuperSocket.ClientEngine.Core 0.10.0" Category="程序包依赖项" />
+    <Link Source="EngineIoClientDotNet 1.0.7" Target="Newtonsoft.Json 9.0.1" Category="程序包依赖项" />
+    <Link Source="EngineIoClientDotNet 1.0.7" Target="WebSocket4Net 0.15.2" Category="程序包依赖项" />
+    <Link Source="EngineIoClientDotNet 1.0.7" Target="SuperSocket.ClientEngine.Core 0.10.0" Category="程序包依赖项" />
+    <Link Source="EngineIoClientDotNet 1.0.7" Target="Newtonsoft.Json 9.0.1" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="WebSocket4Net 0.15.2" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="SuperSocket.ClientEngine.Core 0.10.0" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="Newtonsoft.Json 9.0.1" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="EngineIoClientDotNet 1.0.7" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="WebSocket4Net 0.15.2" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="SuperSocket.ClientEngine.Core 0.10.0" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="Newtonsoft.Json 9.0.1" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="EngineIoClientDotNet 1.0.7" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="WebSocket4Net 0.15.2" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="SuperSocket.ClientEngine.Core 0.10.0" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="Newtonsoft.Json 9.0.1" Category="程序包依赖项" />
+    <Link Source="SocketIoClientDotNet 1.0.7.1" Target="EngineIoClientDotNet 1.0.7" Category="程序包依赖项" />
+    <Link Source="WebSocket4Net 0.15.2" Target="SuperSocket.ClientEngine.Core 0.10.0" Category="程序包依赖项" />
+    <Link Source="WebSocket4Net 0.15.2" Target="SuperSocket.ClientEngine.Core 0.10.0" Category="程序包依赖项" />
+    <Link Source="Tools\SocketIOClient" Target="SocketIoClientDotNet 1.0.7.1" Category="安装的程序包" />
+    <Link Source="Tools\Utility" Target="Newtonsoft.Json 9.0.1" Category="安装的程序包" />
+    <Link Source="cn.jpush.api 3.3.3" Target="Newtonsoft.Json 9.0.1" Category="程序包依赖项" />
+    <Link Source="Tools\JPush" Target="cn.jpush.api 3.3.3" Category="安装的程序包" />
+    <Link Source="Web" Target="Newtonsoft.Json 9.0.1" Category="安装的程序包" />
+    <Link Source="Web" Target="vue.js 1.0.22" Category="安装的程序包" />
+  </Links>
+  <Categories>
+    <Category Id="项目" />
+    <Category Id="包" />
+  </Categories>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="项目" ValueLabel="True">
+      <Condition Expression="HasCategory('项目')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="程序包依赖项" ValueLabel="True">
+      <Condition Expression="HasCategory('程序包依赖项')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>

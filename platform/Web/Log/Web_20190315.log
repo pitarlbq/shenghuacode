@@ -1,0 +1,21 @@
+2019-03-15 11:15:02,323 [22328] ERROR root - [AnalysisHandler]visit: loadtousushixiaoanalysis
+System.InvalidOperationException: 此 SqlTransaction 已完成；它再也无法使用。
+   在 System.Data.SqlClient.SqlTransaction.ZombieCheck()
+   在 System.Data.SqlClient.SqlTransaction.Rollback()
+   在 Foresight.DataAccess.Framework.SqlHelperBase.Rollback() 位置 f:\code\CustomerPro\platform\DataAccess\Framework\SqlHelperBase.cs:行号 71
+   在 Foresight.DataAccess.HolidayLog.GetHolidayTypeList(DateTime MinTime, DateTime MaxTime) 位置 f:\code\CustomerPro\platform\DataAccess\HolidayLog.cs:行号 54
+   在 Foresight.DataAccess.ViewCustomerService.GetTimeOutViewCustomerDataGrid(ViewCustomerService[] list, ServiceType[] serviceTypeList, CustomerService_Accpet[] serviceAccpetList, CustomerServiceHuifang[] serviceHuifangList, CustomerServiceChuli[] serviceProcessList) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 610
+   在 Foresight.DataAccess.ViewCustomerService.GetFinalViewCustomerDataGrid(ViewCustomerService[] list, Boolean IncludeTimeOutData) 位置 f:\code\CustomerPro\platform\DataAccess\CustomerService\ViewCustomerService.cs:行号 599
+   在 Foresight.DataAccess.TouSuShiXiaoAnalysis.GetTouSuShiXiaoAnalysisGrid(List`1 RoomIDList, List`1 EqualProjectIDList, List`1 InProjectIDList, List`1 TopProjectIDList, Int32 TopCompanyID, Int32 UserID, DateTime StartTime, DateTime EndTime, Int32[] CompanyIDList, Int32 ServiceTypeID2, Int32 ServiceTypeID3, Int32 ServiceTypeID) 位置 f:\code\CustomerPro\platform\DataAccess\Analysis\AnalysisAccess.cs:行号 771
+   在 Web.Handler.AnalysisHandler.loadtousushixiaoanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 108
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 48
+2019-03-15 17:08:45,586 [19464] ERROR root - [AnalysisHandler]visit: loadcallsummaryanalysis
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Web.APPCode.ExportHelper.DownLoadCallSummaryAnalysis(DataGrid dg, String& downloadurl, String& error) 位置 f:\code\CustomerPro\platform\Web\APPCode\ExportHelper.cs:行号 24
+   在 Web.Handler.AnalysisHandler.loadcallsummaryanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 216
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 33
+2019-03-15 17:10:01,691 [19464] ERROR root - [AnalysisHandler]visit: loadcallsummaryanalysis
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Web.APPCode.ExportHelper.DownLoadCallSummaryAnalysis(DataGrid dg, String& downloadurl, String& error) 位置 f:\code\CustomerPro\platform\Web\APPCode\ExportHelper.cs:行号 24
+   在 Web.Handler.AnalysisHandler.loadcallsummaryanalysis(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 216
+   在 Web.Handler.AnalysisHandler.ProcessRequest(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\AnalysisHandler.ashx.cs:行号 33

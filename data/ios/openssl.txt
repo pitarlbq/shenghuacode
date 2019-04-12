@@ -1,0 +1,7 @@
+set RANDFILE=.rnd 
+set OPENSSL_CONF=C:\OpenSSL-Win32\bin\openssl.cfg
+openssl genrsa -out saasyy 2048
+openssl req -new -key saasyy -out saasyy.certSigningRequest -subj "/emailAddress=409537332@qq.com,CN=Common Name,C=CN"
+
+openssl x509 -in com.saasyy.customermall.push.cer -inform DER -out com.saasyy.customermall.push.cer.pem
+openssl pkcs12 -export -inkey saasyy -in com.saasyy.customermall.push.cer.pem -out com.saasyy.customermall.push.cer.p12

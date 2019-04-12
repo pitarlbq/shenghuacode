@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>投诉建议</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui-toast.css" />
+    <link rel="stylesheet" type="text/css" href="../css/mui/mui.simple.css" />
+    <link rel="stylesheet" type="text/css" href="../css/mui/mui.picker.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/page/comm.css" />
+    <link rel="stylesheet" type="text/css" href="css/servicecreate.css?v=1003" />
+    <script type="text/javascript">
+    var IsSuggestion = true;
+    </script>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div v-if="!projectForm.showProject&&!typeForm.showType">
+            <form id="ff" method="post" enctype="multipart/form-data">
+                <div class="aui-content aui-margin-b-15">
+                    <div class="topBanner">
+                        <img v-bind:src="bannersrc"></img>
+                    </div>
+                    <ul class="aui-list aui-form-list">
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label-icon">
+                                    <i class="icon iconfont icon-fangjianlou-copy" style="font-size:1rem;"></i>
+                                </div>
+                                <div class="aui-list-item-input" v-on:click="do_select_project()">
+                                    <input type="text" readonly="readonly" placeholder="请选择项目" v-model="form.ProjectName">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item" v-if="false">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label-icon">
+                                    <i class="icon iconfont icon-fuwu" style="font-size:1rem;"></i>
+                                </div>
+                                <div class="aui-list-item-input" v-on:click="do_select_type()">
+                                    <input type="text" readonly="readonly" placeholder="请选择类型" v-model="form.TypeName">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item" v-if="false">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label-icon">
+                                    <i class="icon iconfont icon-fangjianlou-copy" style="font-size:1rem;"></i>
+                                </div>
+                                <div class="aui-list-item-input">
+                                    <input type="text" placeholder="请填写详细地址" v-model="form.FullName">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label-icon">
+                                    <i class="icon iconfont icon-lianxiren" style="font-size:1rem;"></i>
+                                </div>
+                                <div class="aui-list-item-input">
+                                    <input type="text" placeholder="请填写联系人姓名" v-model="form.AddCustomerName">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label-icon">
+                                    <i class="icon iconfont icon-iconfontcolor39" style="font-size:0.8rem;"></i>
+                                </div>
+                                <div class="aui-list-item-input">
+                                    <input type="number" placeholder="请填写联系电话" v-model="form.PhoneNo">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item" v-if="false">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label-icon">
+                                    <i class="icon iconfont icon-shijian" style="font-size:1rem;"></i>
+                                </div>
+                                <div class="aui-list-item-input datetime_box">
+                                    <input class="time_btn" data-options='{"type":"date"}' type="text" readonly="readonly" v-model="form.AppointTime" placeholder="请填写预约日期" />
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-input">
+                                    <textarea v-bind:placeholder="form.CotentHolder" v-model="form.Content" style="height: 8rem;"></textarea>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="aui-list aui-media-list" v-if="imglist.length>0">
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-row aui-row-padded">
+                                    <div class="aui-col-xs-4" v-for="item in imglist">
+                                        <img v-bind:src="item.objectUrl" />
+                                        <i v-on:click="delete_img(item.index)" class="icon iconfont icon-chushaixuanxiang" style="font-size:1.2rem; color:#b18951; position: absolute;top:0.1rem;right:0.1rem;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div style="margin: 1rem 0 0 1rem;" v-if="showCamera">
+                        <label for="upload">
+                            <i class="icon iconfont icon-zhaopianpaizhao" style="font-size:3rem; color:#cb8e39;"></i>
+                        </label>
+                        <input type="file" id="upload" style="display:none;" multiple="multiple" accpet="image/*" capture="camera">
+                    </div>
+                </div>
+            </form>
+            <div class="aui-btn aui-btn-primary aui-btn-block bottombtn bottombtnleft" v-on:click="do_save()">提交</div>
+            <div class="aui-btn aui-btn-primary aui-btn-block bottombtn bottombtnright" v-on:click="do_call()">400热线</div>
+        </div>
+        <div class="aui-content aui-margin-b-15" v-if="projectForm.showProject">
+            <ul class="aui-list aui-list-in">
+                <li class="aui-list-header">
+                    选择 {{projectForm.CompanyName}} {{projectForm.ProjectName}}<span v-on:click="go_back_project()">返回</span>
+                </li>
+                <li class="aui-list-item aui-list-item-middle" v-for="item in projectForm.list">
+                    <div class="aui-list-item-inner aui-list-item-arrow" v-on:click="go_next_project(item)">
+                        {{item.name}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="aui-content aui-margin-b-15" v-if="typeForm.showType">
+            <ul class="aui-list aui-list-in">
+                <li class="aui-list-header">
+                    选择 {{typeForm.TypeName1}} {{typeForm.TypeName2}} {{typeForm.TypeName3}}<span v-on:click="go_back_type()">返回</span>
+                </li>
+                <li class="aui-list-item aui-list-item-middle" v-for="item in typeForm.list">
+                    <div class="aui-list-item-inner aui-list-item-arrow" v-on:click="go_next_type(item)">
+                        {{item.name}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../script/aui-toast.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" src="../script/mui/mui.min.js"></script>
+<script type="text/javascript" src="../script/mui/mui.picker.min.js"></script>
+<script type="text/javascript">
+init_js('js/servicecreate.js');
+</script>
+
+</html>

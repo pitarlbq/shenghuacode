@@ -1,0 +1,56 @@
+﻿body {
+    background: #fff;
+    margin: 0 auto;
+    font-family: 'Microsoft YaHei';
+}
+
+table.info, table.basic, table.result1, table.result2 {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: solid 1px #ccc;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-family: 'Microsoft YaHei';
+}
+
+    table.info td, table.basic td {
+        padding: 5px 0px;
+        border: solid 1px #ccc;
+        text-align: left;
+        width: 20%;
+        font-size: 12px;
+        font-family: 'Microsoft YaHei';
+    }
+
+        table.info td:nth-child(2n-1) {
+            text-align: right;
+            width: 10%;
+        }
+
+input[type=text] {
+    width: 200px;
+}
+
+table.result1 td, table.result2 td {
+    padding: 5px 0px;
+    border: solid 1px #ccc;
+    text-align: left;
+    width: 15%;
+    font-size: 12px;
+    font-family: 'Microsoft YaHei';
+}
+
+    table.result1 td:nth-child(2n-1), table.result2 td:nth-child(2n-1) {
+        text-align: right;
+        width: 10%;
+    }
+
+table.result2 {
+    border-top: 0px;
+    margin-top: 0px;
+}
+
+    table.result2 td {
+        border-top: 0px;
+    }

@@ -1,0 +1,403 @@
+﻿html, body, form {
+    height: 100%;
+    margin: 0 auto;
+}
+
+body {
+    font-family: 'Microsoft YaHei';
+    font-size: 12px;
+}
+
+#nav ul {
+    padding-left: 0px;
+    font-size: 16px;
+}
+
+    #nav ul li {
+        list-style-type: none;
+        line-height: 50px;
+        padding: 0 0 0 40px;
+        cursor: pointer;
+    }
+
+        #nav ul li.cssz {
+            background: url(../styles/images/Icons/房源档案.png) no-repeat;
+            background-size: 35px 35px;
+            background-position: 0% 50%;
+        }
+
+        #nav ul li.skgl {
+            background: url(../styles/images/Icons/收款管理.png) no-repeat;
+            background-size: 35px 35px;
+            background-position: 0% 50%;
+        }
+
+        #nav ul li.tjbb {
+            background: url(../styles/images/Icons/财务审计.png) no-repeat;
+            background-size: 35px 35px;
+            background-position: 0% 50%;
+        }
+
+        #nav ul li.xtsz {
+            background: url(../styles/images/Icons/系统设置.png) no-repeat;
+            background-size: 35px 35px;
+            background-position: 0% 50%;
+        }
+
+        #nav ul li.znfa {
+            background: url(../styles/images/Icons/单号设置.png) no-repeat;
+            background-size: 35px 35px;
+            background-position: 0% 50%;
+        }
+
+.panel-header, .panel-body {
+    border-width: 0px;
+}
+
+.datagrid, .combo-p {
+    border: solid 1px #D4D4D4;
+}
+
+    .datagrid * {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+
+.datagrid-row-selected a {
+    color: #fff;
+}
+
+.dialogtitle {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.btntoolbar.l-btn.btn_dialog_close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+}
+
+    .btntoolbar.l-btn.btn_dialog_close:hover {
+        padding: 0;
+    }
+
+.datagrid-row-selected {
+    background-color: #d0d0d0;
+    color: #000;
+}
+
+::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 5px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #C0C0C0;
+}
+
+::-webkit-scrollbar-track { /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #EDEDED;
+}
+
+.operation_box {
+    text-align: right;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: #f9f9f9;
+    padding: 0;
+}
+
+
+.firsttab {
+    margin-top: 30px;
+}
+
+table.info {
+    width: 95%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    background: #fff;
+    border-radius: 6px;
+}
+
+    table.info label.title {
+        display: inline-block;
+        line-height: 30px;
+        width: 100px;
+        padding-left: 10px;
+    }
+
+.table_container {
+    padding: 40px 0;
+}
+
+table.info td {
+    padding: 10px;
+    width: 35%;
+}
+
+    table.info td input[type=text], table.info td select, table.info td input[type=password] {
+        width: 25%;
+    }
+
+table.info tr:first-child td {
+    padding-top: 15px;
+}
+
+table.info tr:last-child td {
+    padding-bottom: 15px;
+}
+
+table.info td:nth-child(2n-1) {
+    width: 15%;
+}
+
+.table_title {
+    font-size: 14px;
+    padding: 10px;
+}
+
+.tabs-header ul.tabs {
+    border-width: 0px;
+    padding-left: 0;
+}
+
+.tabs li a.tabs-inner {
+    color: #000;
+}
+
+.tabs-header {
+    background-color: #fff;
+    border-color: #fff;
+    padding-top: 0px;
+}
+
+.tabs li.tabs-selected {
+    background: #fff;
+}
+
+.tabs li a.tabs-inner {
+    margin: 0 10px;
+    border: 0;
+    border-radius: 0;
+}
+
+.tabs li.tabs-selected a.tabs-inner {
+    background: none;
+}
+
+    .tabs li.tabs-selected a.tabs-inner span.tabs-title {
+        border-bottom: solid 2px #409eff;
+        padding-bottom: 5px;
+    }
+
+.tabs li.tabs-selected {
+}
+
+.tabs-closable {
+    padding-right: 0;
+    margin-right: 8px;
+}
+
+.tabs-header.tabs-header-left {
+    background-color: #fff;
+}
+
+    .tabs-header.tabs-header-left .tabs {
+        border-width: 0px;
+    }
+
+        .tabs-header.tabs-header-left .tabs li.tabs-selected {
+            background: #fff;
+        }
+
+        .tabs-header.tabs-header-left .tabs li a.tabs-inner {
+            color: #000;
+            margin: 0 10px;
+        }
+
+        .tabs-header.tabs-header-left .tabs li.tabs-selected a.tabs-inner {
+            background: #fff;
+            border-radius: 0;
+            color: #409eff;
+            border: 0;
+        }
+
+.accordion {
+    border-width: 0px;
+}
+
+    .accordion .accordion-header {
+        background-color: #f0f0f0;
+        padding: 10px 0;
+        border-width: 0px;
+    }
+
+    .accordion .accordion-header-selected {
+        background-color: #f0f0f0;
+    }
+
+        .accordion .accordion-header .panel-title, .accordion .accordion-header-selected .panel-title {
+            color: #000;
+            margin-left: 0;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+    .accordion .accordion-body {
+        border-width: 0px;
+    }
+
+    .accordion .datagrid {
+        width: 96%;
+        margin: 0 auto;
+        border-radius: 6px;
+    }
+
+    .accordion .datagrid-header {
+        background: #fff;
+    }
+
+    .accordion .datagrid-body {
+        background: #fff;
+    }
+
+.datagrid-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    display: none;
+}
+
+.datagrid-mask-msg {
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    padding: 12px 5px 12px 30px;
+    width: auto;
+    height: 20px;
+    border-width: 2px;
+    border-style: solid;
+    display: none;
+}
+
+.datagrid-body .datagrid-editable {
+    margin-right: 0px;
+}
+
+.mainLayoutFrame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 100px;
+}
+
+.mainDialogForm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: #fff;
+}
+
+.layout-panel-north label {
+    display: inline-block;
+    line-height: 28px;
+    position: relative;
+    padding-right: 5px;
+}
+
+.datagrid {
+    border: 0px;
+    border-left: solid 5px #fff;
+    border-right: solid 5px #fff;
+}
+
+    .datagrid .panel-body {
+        background: #fff;
+    }
+
+.datagrid-header {
+    min-height: 35px;
+    background: #f0f1f5;
+}
+
+.datagrid-htable {
+    min-height: 35px;
+    color: #808080;
+}
+
+.datagrid-row {
+    height: 30px;
+}
+
+.datagrid-toolbar {
+    border: 0px;
+    background-color: transparent;
+}
+
+.l-btn-icon-left .l-btn-icon {
+}
+
+.l-btn-icon-left .l-btn-text {
+    margin: 0 8px;
+}
+
+.btnlinkbar .l-btn-text {
+    margin: 0 5px;
+}
+
+.tabs-panels {
+    border: 0px;
+}
+
+.tableContent {
+    width: 96%;
+    display: inline-table;
+    margin-left: 2%;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.tableItem {
+    display: inline-block;
+    width: 49%;
+    padding: 5px 0;
+}
+
+    .tableItem label.title {
+        display: inline-block;
+        line-height: 30px;
+        width: 100px;
+        padding-left: 10px;
+    }
+
+    .tableItem input[type=text], .tableItem select, .tableItem input[type=password] {
+        width: 200px;
+    }

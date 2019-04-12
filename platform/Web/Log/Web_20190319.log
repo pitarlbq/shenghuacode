@@ -1,0 +1,16 @@
+2019-03-19 15:23:49,642 [6356] ERROR root - [ServiceHandler]命令:loadservicelist
+System.Data.DuplicateNameException: 名为“TimeOutDesc”的列已属于此 DataTable。
+   在 System.Data.DataColumnCollection.RegisterColumnName(String name, DataColumn column)
+   在 System.Data.DataColumnCollection.BaseAdd(DataColumn column)
+   在 System.Data.DataColumnCollection.AddAt(Int32 index, DataColumn column)
+   在 System.Data.DataColumnCollection.Add(String columnName)
+   在 Web.APPCode.ExportHelper.DownLoadCustomerServiceData(DataGrid dg, String& downloadurl, String& error) 位置 f:\code\CustomerPro\platform\Web\APPCode\ExportHelper.cs:行号 781
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1719
+2019-03-19 15:25:31,133 [6356] ERROR root - [ServiceHandler]命令:loadservicelist
+System.Data.DuplicateNameException: 名为“TimeOutDesc”的列已属于此 DataTable。
+   在 System.Data.DataColumnCollection.RegisterColumnName(String name, DataColumn column)
+   在 System.Data.DataColumnCollection.BaseAdd(DataColumn column)
+   在 System.Data.DataColumnCollection.AddAt(Int32 index, DataColumn column)
+   在 System.Data.DataColumnCollection.Add(String columnName)
+   在 Web.APPCode.ExportHelper.DownLoadCustomerServiceData(DataGrid dg, String& downloadurl, String& error) 位置 f:\code\CustomerPro\platform\Web\APPCode\ExportHelper.cs:行号 781
+   在 Web.Handler.ServiceHandler.loadservicelist(HttpContext context) 位置 f:\code\CustomerPro\platform\Web\Handler\ServiceHandler.ashx.cs:行号 1719

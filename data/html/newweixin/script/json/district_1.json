@@ -1,0 +1,48 @@
+[{
+    "districtID": 2199,
+    "cityID": 238,
+    "divisionCode": "500103",
+    "districtName": "渝中区"
+},
+{
+    "districtID": 2200,
+    "cityID": 238,
+    "divisionCode": "500104",
+    "districtName": "大渡口区"
+},
+{
+    "districtID": 2201,
+    "cityID": 238,
+    "divisionCode": "500105",
+    "districtName": "江北区"
+},
+{
+    "districtID": 2202,
+    "cityID": 238,
+    "divisionCode": "500106",
+    "districtName": "沙坪坝区"
+},
+{
+    "districtID": 2203,
+    "cityID": 238,
+    "divisionCode": "500107",
+    "districtName": "九龙坡区"
+},
+{
+    "districtID": 2204,
+    "cityID": 238,
+    "divisionCode": "500108",
+    "districtName": "南岸区"
+},
+{
+    "districtID": 2208,
+    "cityID": 238,
+    "divisionCode": "500112",
+    "districtName": "渝北区"
+},
+{
+    "districtID": 2209,
+    "cityID": 238,
+    "divisionCode": "500113",
+    "districtName": "巴南区"
+}]
