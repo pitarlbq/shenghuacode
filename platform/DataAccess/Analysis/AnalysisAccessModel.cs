@@ -90,6 +90,7 @@ namespace Foresight.DataAccess
                 return (percentValue * 100).ToString() + "%";
             }
         }
+        public int TotalCallBackNotHuiFangCount { get; set; }
     }
     public partial class CallTotalAnalysisModel : AnalysisAccessModel
     {

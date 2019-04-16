@@ -2165,6 +2165,7 @@ namespace Web.Handler
             service.TaskType = WebUtil.getServerIntValue(context, "tdTaskType");
             service.DepartmentID = WebUtil.getServerIntValue(context, "tdBelongTeamName");
             service.ServiceFrom = WebUtil.getServerValue(context, "hdServiceFrom");
+            service.IsInvalidCall= WebUtil.GetIntValue(context, "tdIsInvalidCall") == 1;
             if (service.IsRequireCost)
             {
                 service.HandelFee = getValue(context, "tdHandelFee");

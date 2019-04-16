@@ -1339,7 +1339,7 @@ namespace Foresight.DataAccess
         {
             get
             {
-                return this.IsInvalidCall ? "否" : "是";
+                return this.IsInvalidCall ? "是" : "否";
             }
         }
         public string ServiceFromDesc

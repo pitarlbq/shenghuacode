@@ -54,7 +54,7 @@ namespace Foresight.DataAccess
             List<string> conditions = new List<string>();
             List<string> cmdlist = new List<string>();
             conditions.Add("ServiceStatus not in (2,5)");
-            conditions.Add("(CanNotCallback is null or CanNotCallback=0)");
+            //conditions.Add("(CanNotCallback is null or CanNotCallback=0)");
             //if (StartTime > DateTime.MinValue)
             //{
             //    conditions.Add("[AddTime]>=@StartTime");
@@ -149,7 +149,7 @@ namespace Foresight.DataAccess
             var recordList = GetList<PhoneRecord>("select [ServiceID], [PickUpTime],[HangUpTime],[PhoneType] from [PhoneRecord] where PhoneType=2", new List<SqlParameter>()).ToArray();
 
             var recordServiceIDList = recordList.Select(p => p.ServiceID).ToArray();
-            var recordServiceList = serviceList.Where(p => recordServiceIDList.Contains(p.ID)).ToArray();
+            var recordServiceList = serviceList.Where(p => recordServiceIDList.Contains(p.ID) && !p.CanNotCallback).ToArray();
 
             var recordServicePickUpIDList = recordList.Where(p => p.FinalPickUpTime > DateTime.MinValue).Select(p => p.ServiceID).ToArray();
             var recordServicePickUpList = serviceList.Where(p => recordServicePickUpIDList.Contains(p.ID)).ToArray();
@@ -170,6 +170,7 @@ namespace Foresight.DataAccess
             int BaoXiuTotalCount = baoXiuList.Length;
             int BaoXiuCallBackCount = 0;
             int TotalCount = 0;
+            int TotalCallBackNotHuiFangCount = tousuList.Where(p => p.HuiFangAddUserIDList == null || p.HuiFangAddUserIDList.Length == 0 && !p.CanNotCallback).ToArray().Length;
             foreach (var item in userList)
             {
                 var data = new CallSummaryAnalysisModel();
@@ -185,11 +186,12 @@ namespace Foresight.DataAccess
                 CallBackFromPhonePickUpCount += data.CallBackFromPhonePickUpCount;
 
                 //投诉回访统计
-                var mySericeHuiFangList = serviceList.Where(p => p.HuiFangAddUserIDList != null && p.HuiFangAddUserIDList.Contains(item.UserID)).ToArray();
+                var mySericeHuiFangList = serviceList.Where(p => p.HuiFangAddUserIDList != null && p.HuiFangAddUserIDList.Contains(item.UserID) && !p.CanNotCallback).ToArray();
                 mySericeHuiFangList = mySericeHuiFangList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).ToArray();
 
                 data.TotalCallBackTimeOutCount = mySericeHuiFangList.Where(p => p.CallBackTimeOutStatus > 1).ToArray().Length;//投诉回访超时条数
                 TotalCallBackTimeOutCount += data.TotalCallBackTimeOutCount;
+                data.TotalCallBackNotHuiFangCount = TotalCallBackNotHuiFangCount;
 
                 data.TouSuTotalCount = TouSuTotalCount;//投诉工单数量
 
@@ -217,6 +219,7 @@ namespace Foresight.DataAccess
             footerData.RealName = "合计";
             footerData.TotalCallBackTimeOutCount = TotalCallBackTimeOutCount;
             footerData.TotalAddServiceTimeOutCount = TotalAddServiceTimeOutCount;
+            footerData.TotalCallBackNotHuiFangCount = TotalCallBackNotHuiFangCount;
             footerData.CallBackFromPhoneTotalCount = CallBackFromPhoneTotalCount;
             footerData.CallBackFromPhonePickUpCount = CallBackFromPhonePickUpCount;
             footerData.TouSuTotalCount = TouSuTotalCount;
