@@ -113,6 +113,8 @@ function get_options() {
         "isServiceAnalysis": true,
         "ServiceStatus": -1,
         "ServiceType1ID": $('#tdServiceTypeName1').combobox('getValue'),
+        "ServiceType2ID": $('#tdServiceTypeName2').combobox('getValue'),
+        "ServiceType3ID": $('#tdServiceTypeName3').combobox('getValue'),
         "TimeOutType": $('#tdTimeOutType').combobox('getValue'),
         "ColumnServiceStatus": ColumnServiceStatus,
         "ColumnServiceType": ColumnServiceType,

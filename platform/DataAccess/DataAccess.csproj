@@ -46,8 +46,12 @@
     <Compile Include="Analysis\AnalysisAccessModel.cs" />
     <Compile Include="Analysis\AnalysisHelper.cs" />
     <Compile Include="CangKu\CKDepartment.cs" />
+    <Compile Include="CangKu\CKProduct.cs" />
+    <Compile Include="CangKu\CKProductCategory.cs" />
     <Compile Include="CangKu\CKProudctInDetail.cs" />
     <Compile Include="CangKu\Generated.CKDepartment.cs" />
+    <Compile Include="CangKu\Generated.CKProduct.cs" />
+    <Compile Include="CangKu\Generated.CKProductCategory.cs" />
     <Compile Include="CangKu\Generated.CKProudctInDetail.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="CustomerService\CustomerService.cs" />

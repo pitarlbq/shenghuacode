@@ -5,21 +5,71 @@
         var ColumnServiceStatus = 30, ColumnServiceType = 3;
         var timeValue = 1, hdServiceTypeName1, typeList = [];
         $(function () {
-            hdServiceTypeName1 = $('#<%=this.hdServiceTypeName1.ClientID%>');
-            if (hdServiceTypeName1.val() != '') {
-                typeList = eval('(' + hdServiceTypeName1.val() + ')');
-            }
-            $('#tdServiceTypeName1').combobox({
-                editable: false,
-                data: typeList,
-                valueField: 'ID',
-                textField: 'Name'
-            })
             set_time_value();
             search_bar_click();
             getProjectParams();
             $('.easyui-combobox').combobox('clear');
         })
+        var hdServiceTypeName1, hdServiceTypeName2, hdServiceTypeName3, typeList1 = [], typeList2 = [], typeList3 = [];
+        $(function () {
+            hdServiceTypeName1 = $('#<%=this.hdServiceTypeName1.ClientID%>');
+            hdServiceTypeName2 = $('#<%=this.hdServiceTypeName2.ClientID%>');
+            hdServiceTypeName3 = $('#<%=this.hdServiceTypeName3.ClientID%>');
+            if (hdServiceTypeName1.val() != '') {
+                typeList1 = eval('(' + hdServiceTypeName1.val() + ')');
+            }
+            if (hdServiceTypeName2.val() != '') {
+                typeList2 = eval('(' + hdServiceTypeName2.val() + ')');
+            }
+            if (hdServiceTypeName3.val() != '') {
+                typeList3 = eval('(' + hdServiceTypeName3.val() + ')');
+            }
+            $('#tdServiceTypeName1').combobox({
+                editable: false,
+                data: typeList1,
+                valueField: 'ID',
+                textField: 'Name',
+                onSelect: function (ret) {
+                    getTypeList2Combobox(ret.ID)
+                }
+            })
+            $('.easyui-combobox').combobox('clear');
+        })
+        function getTypeList2Combobox(ParentID) {
+            var list = [];
+            list.push({ ID: 0, Name: '全部' });
+            $.each(typeList2, function (index, item) {
+                if (item.ParentID == ParentID) {
+                    list.push(item);
+                }
+            })
+            $('#tdServiceTypeName2').combobox({
+                editable: false,
+                data: list,
+                valueField: 'ID',
+                textField: 'Name',
+                onSelect: function (ret) {
+                    getTypeList3Combobox(ret.ID)
+                }
+            })
+            $('#tdServiceTypeName2').combobox('setValue', 0);
+        }
+        function getTypeList3Combobox(ParentID) {
+            var list = [];
+            list.push({ ID: 0, Name: '全部' });
+            $.each(typeList3, function (index, item) {
+                if (item.ParentID == ParentID) {
+                    list.push(item);
+                }
+            })
+            $('#tdServiceTypeName3').combobox({
+                editable: false,
+                data: list,
+                valueField: 'ID',
+                textField: 'Name'
+            })
+            $('#tdServiceTypeName3').combobox('setValue', 0);
+        }
         var projectList = [];
         function getProjectParams() {
             var options = { visit: "getprojectparams" }
@@ -171,8 +221,16 @@
                     <input class="easyui-combobox" id="tdProjectID" data-options="prompt:'请选择项目',editable:false,multiple:true" style="height: 28px; width: 100px;" />
                 </div>
                 <div class="search_item">
-                    <input class="easyui-combobox" id="tdServiceTypeName1" style="height: 28px; width: 100px;" data-options="prompt:'请选择类型',editable:false" />
+                    <input class="easyui-combobox" id="tdServiceTypeName1" style="height: 28px; width: 150px;" data-options="prompt:'请选择一级维修类型',editable:false" />
                     <asp:HiddenField runat="server" ID="hdServiceTypeName1" />
+                </div>
+                <div class="search_item">
+                    <input class="easyui-combobox" id="tdServiceTypeName2" style="height: 28px; width: 150px;" data-options="prompt:'请选择二级维修类型',editable:false" />
+                    <asp:HiddenField runat="server" ID="hdServiceTypeName2" />
+                </div>
+                <div class="search_item">
+                    <input class="easyui-combobox" id="tdServiceTypeName3" style="height: 28px; width: 150px;" data-options="prompt:'请选择三级维修类型',editable:false" />
+                    <asp:HiddenField runat="server" ID="hdServiceTypeName3" />
                 </div>
                 <div class="search_item">
                     <select class="easyui-combobox" id="tdCloseType" style="height: 28px; width: 100px;" data-options="prompt:'请选择关单类型',editable:false">
