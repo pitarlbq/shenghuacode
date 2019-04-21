@@ -159,3 +159,4 @@ storage.ide-wal
 /bin
 *.txt
 *.xlsx
+*.config

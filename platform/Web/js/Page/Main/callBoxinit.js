@@ -488,7 +488,8 @@ function callListPush() {
             RelatedPhoneRecordID: RelatedPhoneRecordID,
             ServiceID: ServiceID,
             RecordName: RecordName,
-            PhoneType: PhoneType
+            PhoneType: PhoneType,
+            RecordPath: RecordPath
         })
     }
     reSetData();
@@ -631,7 +632,7 @@ function uploadFileRecord() {
         return;
     }
     var params = '?visit=uploadvoicerecord&CallTime=' + callItem.CallTime + '&PickUpTime=' + callItem.PickUpTime + '&HangUpTime=' + callItem.HangUpTime + '&ComingPhone=' + callItem.ComingPhoneNumber + '&ServiceID=' + callItem.ServiceID + '&PhoneType=' + callItem.PhoneType + '&UserID=' + UserID + '&AddUserName=' + AddUserName + '&RelatedPhoneRecordID=' + callItem.RelatedPhoneRecordID;
-    TV_uploadFile(contextPath + '/Handler/ServiceHandler.ashx' + params, RecordPath);
+    TV_uploadFile(contextPath + '/Handler/ServiceHandler.ashx' + params, callItem.RecordPath);
     setTimeout(function () {
         callList.splice(callList.length - 1, 1);
         uploadFileRecord();

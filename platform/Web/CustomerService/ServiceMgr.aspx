@@ -182,6 +182,8 @@
                             <option value="2">投诉</option>
                         </select>
                     </div>
+                    <%if (this.status != 12)
+                        { %>
                     <div class="search_item">
                         <input class="easyui-combobox" id="tdServiceTypeName1" style="height: 28px; width: 150px;" data-options="prompt:'请选择一级维修类型',editable:false" />
                         <asp:HiddenField runat="server" ID="hdServiceTypeName1" />
@@ -194,6 +196,7 @@
                         <input class="easyui-combobox" id="tdServiceTypeName3" style="height: 28px; width: 150px;" data-options="prompt:'请选择三级维修类型',editable:false" />
                         <asp:HiddenField runat="server" ID="hdServiceTypeName3" />
                     </div>
+                    <%} %>
                     <div class="search_item">
                         <a href="javascript:void(0)" onclick="SearchTT()" class="easyui-linkbutton btntoolbar" data-options="plain:true,iconCls:'icon-search'">搜索</a>
                     </div>

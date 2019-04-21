@@ -11,9 +11,9 @@ function getColumns() {
     columns.push({ field: 'AddCallPhone', title: '电话', width: 100 });
     columns.push({ field: 'CategoryPartA', title: '一级类型', width: 100 });
     if (typeid == 1) {
-        columns.push({ field: 'AddTime', formatter: formatDateTime, title: '添加时间', width: 100 });
-        columns.push({ field: 'XiaDanDate', formatter: formatDateTime, title: '下单时间', width: 100 });
-        columns.push({ field: 'XiaDanTakeHour', title: '处理时效', width: 100 });
+        columns.push({ field: 'PaiDanDate', formatter: formatDateTime, title: '派单时间', width: 100 });
+        columns.push({ field: 'ResponseTime', formatter: formatDateTime, title: '回复时间', width: 100 });
+        columns.push({ field: 'ResponseTakeHour', title: '处理时效', width: 100 });
     }
     if (typeid == 2) {
         columns.push({ field: 'AddTime', formatter: formatDateTime, title: '添加时间', width: 100 });

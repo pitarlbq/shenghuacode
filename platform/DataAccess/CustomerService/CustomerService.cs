@@ -333,7 +333,7 @@ namespace Foresight.DataAccess
                     error = "工单已关单，不能重复关单";
                     return false;
                 }
-                if (item.CloseServiceType == 1)
+                if (item.CloseServiceType == 1|| item.IsImportantTouSu)
                 {
                     if (item.ServiceStatus != 1)
                     {

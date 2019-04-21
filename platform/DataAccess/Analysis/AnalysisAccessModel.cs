@@ -488,12 +488,12 @@ namespace Foresight.DataAccess
         public int ProjectID { get; set; }
         public string ProjectName { get; set; }
         public decimal TotalCount { get; set; }
-        public decimal XiaDanTotalTakeHour { get; set; }
+        public decimal ResponseTotalTakeHour { get; set; }
         public decimal PaiDanTotalTakeHour { get; set; }
         public decimal ChuLiTotalTakeHour { get; set; }
         public decimal BanJieTotalTakeHour { get; set; }
         public decimal HuiFangTotalTakeHour { get; set; }
-        public decimal AverageXiaDanTotalTakeHour
+        public decimal AverageResponseTotalTakeHour
         {
             get
             {
@@ -501,7 +501,7 @@ namespace Foresight.DataAccess
                 {
                     return 0;
                 }
-                return Math.Round((decimal)this.XiaDanTotalTakeHour / this.TotalCount, 2, MidpointRounding.AwayFromZero);
+                return Math.Round((decimal)this.ResponseTotalTakeHour / this.TotalCount, 2, MidpointRounding.AwayFromZero);
             }
         }
         public decimal AveragePaiDanTotalTakeHour

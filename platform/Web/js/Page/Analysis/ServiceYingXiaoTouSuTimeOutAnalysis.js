@@ -17,7 +17,7 @@ function getColumns() {
         columns.push({ field: 'ProjectName', title: '项目', width: 100 });
     }
     columns.push({ field: 'TotalCount', title: '总工单数', width: 100 });
-    columns.push({ field: 'AverageXiaDanTotalTakeHour', formatter: formatXiaDan, title: '下单平均处理时效', width: 100 });
+    columns.push({ field: 'AverageResponseTotalTakeHour', formatter: formatXiaDan, title: '回复平均处理时效', width: 100 });
     columns.push({ field: 'AveragePaiDanTotalTakeHour', formatter: formatPaiDan, title: '派单平均处理时效', width: 100 });
     columns.push({ field: 'AverageChuLiTotalTakeHour', formatter: formatChuLi, title: '处理平均处理时效', width: 100 });
     columns.push({ field: 'AverageBanJieTotalTakeHour', formatter: formatBanJie, title: '办结平均处理时效', width: 100 });

@@ -54,6 +54,7 @@ namespace Foresight.DataAccess
             List<string> conditions = new List<string>();
             List<string> cmdlist = new List<string>();
             conditions.Add("ServiceStatus not in (2,5)");
+            conditions.Add("(IsImportantTouSu is null or IsImportantTouSu=0)");
             //conditions.Add("(CanNotCallback is null or CanNotCallback=0)");
             //if (StartTime > DateTime.MinValue)
             //{
@@ -558,13 +559,16 @@ namespace Foresight.DataAccess
             var dataList = new List<TouSuFromAnalysisModel>();
             foreach (Utility.EnumModel.WechatServiceFromDefine item in Enum.GetValues(typeof(Utility.EnumModel.WechatServiceFromDefine)))
             {
-                if (item.ToString().Equals("app"))
+                if (ServiceTypeID != 1)
                 {
-                    continue;
+                    if (item.ToString().Equals("app"))
+                    {
+                        continue;
+                    }
                 }
                 var data = new TouSuFromAnalysisModel();
                 data.ServiceFrom = item.ToString();
-                var myItem = list.FirstOrDefault(p => p.ServiceFrom.Equals(item.ToString()));
+                var myItem = list.FirstOrDefault(p => !string.IsNullOrEmpty(p.ServiceFrom) && p.ServiceFrom.Equals(item.ToString()));
                 if (myItem != null)
                 {
                     data.TotalCount = myItem.TotalCount;
@@ -1324,7 +1328,7 @@ namespace Foresight.DataAccess
                 data.ProjectID = 0;
                 data.ProjectName = "";
                 data.TotalCount = serviceList.Length;
-                data.XiaDanTotalTakeHour = serviceList.Sum(p => p.XiaDanTakeHour);
+                data.ResponseTotalTakeHour = serviceList.Sum(p => p.ResponseTakeHour);
                 data.PaiDanTotalTakeHour = serviceList.Sum(p => p.PaiDanTakeHour);
                 data.ChuLiTotalTakeHour = serviceList.Sum(p => p.ProcessTakeHour);
                 data.BanJieTotalTakeHour = serviceList.Sum(p => p.BanJieTakeHour);
@@ -1349,7 +1353,7 @@ namespace Foresight.DataAccess
                         data.ProjectID = 0;
                         data.ProjectName = "";
                         data.TotalCount = myServiceList.Length;
-                        data.XiaDanTotalTakeHour = myServiceList.Sum(p => p.XiaDanTakeHour);
+                        data.ResponseTotalTakeHour = myServiceList.Sum(p => p.ResponseTakeHour);
                         data.PaiDanTotalTakeHour = myServiceList.Sum(p => p.PaiDanTakeHour);
                         data.ChuLiTotalTakeHour = myServiceList.Sum(p => p.ProcessTakeHour);
                         data.BanJieTotalTakeHour = myServiceList.Sum(p => p.BanJieTakeHour);
@@ -1370,7 +1374,7 @@ namespace Foresight.DataAccess
                         data.ProjectID = item.ID;
                         data.ProjectName = item.Name;
                         data.TotalCount = myList.Length;
-                        data.XiaDanTotalTakeHour = myList.Sum(p => p.XiaDanTakeHour);
+                        data.ResponseTotalTakeHour = myList.Sum(p => p.ResponseTakeHour);
                         data.PaiDanTotalTakeHour = myList.Sum(p => p.PaiDanTakeHour);
                         data.ChuLiTotalTakeHour = myList.Sum(p => p.ProcessTakeHour);
                         data.BanJieTotalTakeHour = myList.Sum(p => p.BanJieTakeHour);

@@ -107,8 +107,8 @@ namespace Web.APPCode
             }
             SaveNpoiHead("总工单数", "TotalCount", head_list: head_list, HAlign: "center");
             dt.Columns.Add("TotalCount");
-            SaveNpoiHead("下单平均处理时效", "AverageXiaDanTotalTakeHour", head_list: head_list, HAlign: "center");
-            dt.Columns.Add("AverageXiaDanTotalTakeHour");
+            SaveNpoiHead("回复平均处理时效", "AverageResponseTotalTakeHour", head_list: head_list, HAlign: "center");
+            dt.Columns.Add("AverageResponseTotalTakeHour");
             SaveNpoiHead("派单平均处理时效", "AveragePaiDanTotalTakeHour", head_list: head_list, HAlign: "center");
             dt.Columns.Add("AveragePaiDanTotalTakeHour");
             SaveNpoiHead("处理平均处理时效", "AverageChuLiTotalTakeHour", head_list: head_list, HAlign: "center");

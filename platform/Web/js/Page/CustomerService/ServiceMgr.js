@@ -150,13 +150,15 @@ function get_options() {
         "CallServiceType": CallServiceType,
         "ColumnServiceStatus": ColumnServiceStatus,
         "ColumnServiceType": ColumnServiceType,
-        "BeforeBanJieTimeOutHour": BeforeBanJieTimeOutHour,
-        "ServiceType1ID": $('#tdServiceTypeName1').combobox('getValue'),
-        "ServiceType2ID": $('#tdServiceTypeName2').combobox('getValue'),
-        "ServiceType3ID": $('#tdServiceTypeName3').combobox('getValue')
+        "BeforeBanJieTimeOutHour": BeforeBanJieTimeOutHour
     };
     if (Status == 101) {
         options.ChooseStatus = $('#tdServiceStatus').combobox('getValue');
+    }
+    if (Status != 12) {
+        options.ServiceType1ID = $('#tdServiceTypeName1').combobox('getValue');
+        options.ServiceType2ID = $('#tdServiceTypeName2').combobox('getValue');
+        options.ServiceType3ID = $('#tdServiceTypeName3').combobox('getValue');
     }
     options.url = '../Handler/ServiceHandler.ashx';
     return options;

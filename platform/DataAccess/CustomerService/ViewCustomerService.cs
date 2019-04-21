@@ -399,6 +399,7 @@ namespace Foresight.DataAccess
             var footerList = new List<ViewCustomerService>();
             var footerItem = new ViewCustomerService();
             footerItem.XiaDanTakeHour = list.Sum(p => p.XiaDanTakeHour);
+            footerItem.ResponseTakeHour = list.Sum(p => p.ResponseTakeHour);
             footerItem.PaiDanTakeHour = list.Sum(p => p.PaiDanTakeHour);
             footerItem.ProcessTakeHour = list.Sum(p => p.ProcessTakeHour);
             footerItem.BanJieTakeHour = list.Sum(p => p.BanJieTakeHour);
