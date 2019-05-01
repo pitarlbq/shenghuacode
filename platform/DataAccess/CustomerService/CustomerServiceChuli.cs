@@ -113,7 +113,7 @@ namespace Foresight.DataAccess
             List<SqlParameter> parameters = new List<SqlParameter>();
             List<string> conditions = new List<string>();
             conditions.Add("[ServiceID] between " + MinServiceID + " and " + MaxServiceID);
-            return GetList<CustomerServiceChuli>("select * from [CustomerServiceChuli] where " + string.Join(" and ", conditions.ToArray()), parameters).ToArray();
+            return GetList<CustomerServiceChuli>("select [ID],[ServiceID],[ChuliDate],[AddTime],[HandelType],[ResponseTime],[CheckTime],[HandelFee] from [CustomerServiceChuli] where " + string.Join(" and ", conditions.ToArray()), parameters).ToArray();
         }
     }
     public partial class CustomerServiceChuliDetail : CustomerServiceChuli

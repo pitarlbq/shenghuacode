@@ -187,6 +187,54 @@ namespace Foresight.DataAccess
 			}
 		}
 		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private int _phoneCallBackType = int.MinValue;
+        /// <summary>
+        /// 1-电话接通 2-电话未接通 3-未拨打
+        /// </summary>
+        [Description("1-电话接通 2-电话未接通 3-未拨打")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public int PhoneCallBackType
+		{
+			[DebuggerStepThrough()]
+			get { return this._phoneCallBackType; }
+			set 
+			{
+				if (this._phoneCallBackType != value) 
+				{
+					this._phoneCallBackType = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("PhoneCallBackType");
+				}
+			}
+		}
+		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private DateTime _phoneCallBackTime = DateTime.MinValue;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public DateTime PhoneCallBackTime
+		{
+			[DebuggerStepThrough()]
+			get { return this._phoneCallBackTime; }
+			set 
+			{
+				if (this._phoneCallBackTime != value) 
+				{
+					this._phoneCallBackTime = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("PhoneCallBackTime");
+				}
+			}
+		}
+		
 		
 		
 		#endregion
@@ -209,7 +257,9 @@ DECLARE @table TABLE(
 	[HuiFangNote] ntext,
 	[AddTime] datetime,
 	[ChuLiRate] decimal(18, 2),
-	[AddUserID] int
+	[AddUserID] int,
+	[PhoneCallBackType] int,
+	[PhoneCallBackTime] datetime
 );
 
 INSERT INTO [dbo].[CustomerServiceHuifang] (
@@ -218,7 +268,9 @@ INSERT INTO [dbo].[CustomerServiceHuifang] (
 	[CustomerServiceHuifang].[HuiFangNote],
 	[CustomerServiceHuifang].[AddTime],
 	[CustomerServiceHuifang].[ChuLiRate],
-	[CustomerServiceHuifang].[AddUserID]
+	[CustomerServiceHuifang].[AddUserID],
+	[CustomerServiceHuifang].[PhoneCallBackType],
+	[CustomerServiceHuifang].[PhoneCallBackTime]
 ) 
 output 
 	INSERTED.[ID],
@@ -227,7 +279,9 @@ output
 	INSERTED.[HuiFangNote],
 	INSERTED.[AddTime],
 	INSERTED.[ChuLiRate],
-	INSERTED.[AddUserID]
+	INSERTED.[AddUserID],
+	INSERTED.[PhoneCallBackType],
+	INSERTED.[PhoneCallBackTime]
 into @table
 VALUES ( 
 	@ServiceID,
@@ -235,7 +289,9 @@ VALUES (
 	@HuiFangNote,
 	@AddTime,
 	@ChuLiRate,
-	@AddUserID 
+	@AddUserID,
+	@PhoneCallBackType,
+	@PhoneCallBackTime 
 ); 
 
 SELECT 
@@ -245,7 +301,9 @@ SELECT
 	[HuiFangNote],
 	[AddTime],
 	[ChuLiRate],
-	[AddUserID] 
+	[AddUserID],
+	[PhoneCallBackType],
+	[PhoneCallBackTime] 
 FROM @table;
 ";
 			}
@@ -268,7 +326,9 @@ DECLARE @table TABLE(
 	[HuiFangNote] ntext,
 	[AddTime] datetime,
 	[ChuLiRate] decimal(18, 2),
-	[AddUserID] int
+	[AddUserID] int,
+	[PhoneCallBackType] int,
+	[PhoneCallBackTime] datetime
 );
 
 UPDATE [dbo].[CustomerServiceHuifang] SET 
@@ -277,7 +337,9 @@ UPDATE [dbo].[CustomerServiceHuifang] SET
 	[CustomerServiceHuifang].[HuiFangNote] = @HuiFangNote,
 	[CustomerServiceHuifang].[AddTime] = @AddTime,
 	[CustomerServiceHuifang].[ChuLiRate] = @ChuLiRate,
-	[CustomerServiceHuifang].[AddUserID] = @AddUserID 
+	[CustomerServiceHuifang].[AddUserID] = @AddUserID,
+	[CustomerServiceHuifang].[PhoneCallBackType] = @PhoneCallBackType,
+	[CustomerServiceHuifang].[PhoneCallBackTime] = @PhoneCallBackTime 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceID],
@@ -285,7 +347,9 @@ output
 	INSERTED.[HuiFangNote],
 	INSERTED.[AddTime],
 	INSERTED.[ChuLiRate],
-	INSERTED.[AddUserID]
+	INSERTED.[AddUserID],
+	INSERTED.[PhoneCallBackType],
+	INSERTED.[PhoneCallBackTime]
 into @table
 WHERE 
 	[CustomerServiceHuifang].[ID] = @ID
@@ -297,7 +361,9 @@ SELECT
 	[HuiFangNote],
 	[AddTime],
 	[ChuLiRate],
-	[AddUserID] 
+	[AddUserID],
+	[PhoneCallBackType],
+	[PhoneCallBackTime] 
 FROM @table;
 ";
 			}
@@ -367,7 +433,9 @@ WHERE
 	[CustomerServiceHuifang].[HuiFangNote],
 	[CustomerServiceHuifang].[AddTime],
 	[CustomerServiceHuifang].[ChuLiRate],
-	[CustomerServiceHuifang].[AddUserID]
+	[CustomerServiceHuifang].[AddUserID],
+	[CustomerServiceHuifang].[PhoneCallBackType],
+	[CustomerServiceHuifang].[PhoneCallBackTime]
 ";
 			}
 		}
@@ -397,14 +465,16 @@ WHERE
 		/// <param name="addTime">addTime</param>
 		/// <param name="chuLiRate">chuLiRate</param>
 		/// <param name="addUserID">addUserID</param>
-		public static void InsertCustomerServiceHuifang(int @serviceID, DateTime @huiFangTime, string @huiFangNote, DateTime @addTime, decimal @chuLiRate, int @addUserID)
+		/// <param name="phoneCallBackType">phoneCallBackType</param>
+		/// <param name="phoneCallBackTime">phoneCallBackTime</param>
+		public static void InsertCustomerServiceHuifang(int @serviceID, DateTime @huiFangTime, string @huiFangNote, DateTime @addTime, decimal @chuLiRate, int @addUserID, int @phoneCallBackType, DateTime @phoneCallBackTime)
 		{
             using (SqlHelper helper = new SqlHelper())
             {
                 try
                 {
                     helper.BeginTransaction();
-            		InsertCustomerServiceHuifang(@serviceID, @huiFangTime, @huiFangNote, @addTime, @chuLiRate, @addUserID, helper);
+            		InsertCustomerServiceHuifang(@serviceID, @huiFangTime, @huiFangNote, @addTime, @chuLiRate, @addUserID, @phoneCallBackType, @phoneCallBackTime, helper);
                     helper.Commit();
                 }
                 catch
@@ -425,8 +495,10 @@ WHERE
 		/// <param name="addTime">addTime</param>
 		/// <param name="chuLiRate">chuLiRate</param>
 		/// <param name="addUserID">addUserID</param>
+		/// <param name="phoneCallBackType">phoneCallBackType</param>
+		/// <param name="phoneCallBackTime">phoneCallBackTime</param>
 		/// <param name="helper">helper</param>
-		internal static void InsertCustomerServiceHuifang(int @serviceID, DateTime @huiFangTime, string @huiFangNote, DateTime @addTime, decimal @chuLiRate, int @addUserID, SqlHelper @helper)
+		internal static void InsertCustomerServiceHuifang(int @serviceID, DateTime @huiFangTime, string @huiFangNote, DateTime @addTime, decimal @chuLiRate, int @addUserID, int @phoneCallBackType, DateTime @phoneCallBackTime, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
@@ -436,7 +508,9 @@ DECLARE @table TABLE(
 	[HuiFangNote] ntext,
 	[AddTime] datetime,
 	[ChuLiRate] decimal(18, 2),
-	[AddUserID] int
+	[AddUserID] int,
+	[PhoneCallBackType] int,
+	[PhoneCallBackTime] datetime
 );
 
 INSERT INTO [dbo].[CustomerServiceHuifang] (
@@ -445,7 +519,9 @@ INSERT INTO [dbo].[CustomerServiceHuifang] (
 	[CustomerServiceHuifang].[HuiFangNote],
 	[CustomerServiceHuifang].[AddTime],
 	[CustomerServiceHuifang].[ChuLiRate],
-	[CustomerServiceHuifang].[AddUserID]
+	[CustomerServiceHuifang].[AddUserID],
+	[CustomerServiceHuifang].[PhoneCallBackType],
+	[CustomerServiceHuifang].[PhoneCallBackTime]
 ) 
 output 
 	INSERTED.[ID],
@@ -454,7 +530,9 @@ output
 	INSERTED.[HuiFangNote],
 	INSERTED.[AddTime],
 	INSERTED.[ChuLiRate],
-	INSERTED.[AddUserID]
+	INSERTED.[AddUserID],
+	INSERTED.[PhoneCallBackType],
+	INSERTED.[PhoneCallBackTime]
 into @table
 VALUES ( 
 	@ServiceID,
@@ -462,7 +540,9 @@ VALUES (
 	@HuiFangNote,
 	@AddTime,
 	@ChuLiRate,
-	@AddUserID 
+	@AddUserID,
+	@PhoneCallBackType,
+	@PhoneCallBackTime 
 ); 
 
 SELECT 
@@ -472,7 +552,9 @@ SELECT
 	[HuiFangNote],
 	[AddTime],
 	[ChuLiRate],
-	[AddUserID] 
+	[AddUserID],
+	[PhoneCallBackType],
+	[PhoneCallBackTime] 
 FROM @table;
 ";
 			
@@ -483,6 +565,8 @@ FROM @table;
 			parameters.Add(new SqlParameter("@AddTime", EntityBase.GetDatabaseValue(@addTime)));
 			parameters.Add(new SqlParameter("@ChuLiRate", EntityBase.GetDatabaseValue(@chuLiRate)));
 			parameters.Add(new SqlParameter("@AddUserID", EntityBase.GetDatabaseValue(@addUserID)));
+			parameters.Add(new SqlParameter("@PhoneCallBackType", EntityBase.GetDatabaseValue(@phoneCallBackType)));
+			parameters.Add(new SqlParameter("@PhoneCallBackTime", EntityBase.GetDatabaseValue(@phoneCallBackTime)));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -498,14 +582,16 @@ FROM @table;
 		/// <param name="addTime">addTime</param>
 		/// <param name="chuLiRate">chuLiRate</param>
 		/// <param name="addUserID">addUserID</param>
-		public static void UpdateCustomerServiceHuifang(int @iD, int @serviceID, DateTime @huiFangTime, string @huiFangNote, DateTime @addTime, decimal @chuLiRate, int @addUserID)
+		/// <param name="phoneCallBackType">phoneCallBackType</param>
+		/// <param name="phoneCallBackTime">phoneCallBackTime</param>
+		public static void UpdateCustomerServiceHuifang(int @iD, int @serviceID, DateTime @huiFangTime, string @huiFangNote, DateTime @addTime, decimal @chuLiRate, int @addUserID, int @phoneCallBackType, DateTime @phoneCallBackTime)
 		{
 			using (SqlHelper helper = new SqlHelper()) 
 			{
 				try
 				{
 					helper.BeginTransaction();
-					UpdateCustomerServiceHuifang(@iD, @serviceID, @huiFangTime, @huiFangNote, @addTime, @chuLiRate, @addUserID, helper);
+					UpdateCustomerServiceHuifang(@iD, @serviceID, @huiFangTime, @huiFangNote, @addTime, @chuLiRate, @addUserID, @phoneCallBackType, @phoneCallBackTime, helper);
 					helper.Commit();
 				}
 				catch 
@@ -527,8 +613,10 @@ FROM @table;
 		/// <param name="addTime">addTime</param>
 		/// <param name="chuLiRate">chuLiRate</param>
 		/// <param name="addUserID">addUserID</param>
+		/// <param name="phoneCallBackType">phoneCallBackType</param>
+		/// <param name="phoneCallBackTime">phoneCallBackTime</param>
 		/// <param name="helper">helper</param>
-		internal static void UpdateCustomerServiceHuifang(int @iD, int @serviceID, DateTime @huiFangTime, string @huiFangNote, DateTime @addTime, decimal @chuLiRate, int @addUserID, SqlHelper @helper)
+		internal static void UpdateCustomerServiceHuifang(int @iD, int @serviceID, DateTime @huiFangTime, string @huiFangNote, DateTime @addTime, decimal @chuLiRate, int @addUserID, int @phoneCallBackType, DateTime @phoneCallBackTime, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
@@ -538,7 +626,9 @@ DECLARE @table TABLE(
 	[HuiFangNote] ntext,
 	[AddTime] datetime,
 	[ChuLiRate] decimal(18, 2),
-	[AddUserID] int
+	[AddUserID] int,
+	[PhoneCallBackType] int,
+	[PhoneCallBackTime] datetime
 );
 
 UPDATE [dbo].[CustomerServiceHuifang] SET 
@@ -547,7 +637,9 @@ UPDATE [dbo].[CustomerServiceHuifang] SET
 	[CustomerServiceHuifang].[HuiFangNote] = @HuiFangNote,
 	[CustomerServiceHuifang].[AddTime] = @AddTime,
 	[CustomerServiceHuifang].[ChuLiRate] = @ChuLiRate,
-	[CustomerServiceHuifang].[AddUserID] = @AddUserID 
+	[CustomerServiceHuifang].[AddUserID] = @AddUserID,
+	[CustomerServiceHuifang].[PhoneCallBackType] = @PhoneCallBackType,
+	[CustomerServiceHuifang].[PhoneCallBackTime] = @PhoneCallBackTime 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceID],
@@ -555,7 +647,9 @@ output
 	INSERTED.[HuiFangNote],
 	INSERTED.[AddTime],
 	INSERTED.[ChuLiRate],
-	INSERTED.[AddUserID]
+	INSERTED.[AddUserID],
+	INSERTED.[PhoneCallBackType],
+	INSERTED.[PhoneCallBackTime]
 into @table
 WHERE 
 	[CustomerServiceHuifang].[ID] = @ID
@@ -567,7 +661,9 @@ SELECT
 	[HuiFangNote],
 	[AddTime],
 	[ChuLiRate],
-	[AddUserID] 
+	[AddUserID],
+	[PhoneCallBackType],
+	[PhoneCallBackTime] 
 FROM @table;
 ";
 			
@@ -579,6 +675,8 @@ FROM @table;
 			parameters.Add(new SqlParameter("@AddTime", EntityBase.GetDatabaseValue(@addTime)));
 			parameters.Add(new SqlParameter("@ChuLiRate", EntityBase.GetDatabaseValue(@chuLiRate)));
 			parameters.Add(new SqlParameter("@AddUserID", EntityBase.GetDatabaseValue(@addUserID)));
+			parameters.Add(new SqlParameter("@PhoneCallBackType", EntityBase.GetDatabaseValue(@phoneCallBackType)));
+			parameters.Add(new SqlParameter("@PhoneCallBackTime", EntityBase.GetDatabaseValue(@phoneCallBackTime)));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -863,6 +961,8 @@ SELECT " + CustomerServiceHuifang.SelectFieldList + "FROM [dbo].[CustomerService
 			public const string AddTime = "AddTime";
 			public const string ChuLiRate = "ChuLiRate";
 			public const string AddUserID = "AddUserID";
+			public const string PhoneCallBackType = "PhoneCallBackType";
+			public const string PhoneCallBackTime = "PhoneCallBackTime";
             
             public static Dictionary<string,string> AllPropertiesDescription=new Dictionary<string,string>(){
     			 {"ID" , "int:"},
@@ -872,6 +972,8 @@ SELECT " + CustomerServiceHuifang.SelectFieldList + "FROM [dbo].[CustomerService
     			 {"AddTime" , "DateTime:"},
     			 {"ChuLiRate" , "decimal:"},
     			 {"AddUserID" , "int:"},
+    			 {"PhoneCallBackType" , "int:0- 未拨打电话 1-电话接通 2-电话未接通"},
+    			 {"PhoneCallBackTime" , "DateTime:"},
             };
 		}
 		#endregion

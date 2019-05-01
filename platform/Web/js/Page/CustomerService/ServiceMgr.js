@@ -150,7 +150,8 @@ function get_options() {
         "CallServiceType": CallServiceType,
         "ColumnServiceStatus": ColumnServiceStatus,
         "ColumnServiceType": ColumnServiceType,
-        "BeforeBanJieTimeOutHour": BeforeBanJieTimeOutHour
+        "BeforeBanJieTimeOutHour": BeforeBanJieTimeOutHour,
+        "IsImportantTouSu": $('#tdIsImportantTouSu').combobox('getValue')
     };
     if (Status == 101) {
         options.ChooseStatus = $('#tdServiceStatus').combobox('getValue');

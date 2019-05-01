@@ -84,6 +84,7 @@
                 textField: 'Name'
             })
             $('#tdServiceTypeName3').combobox('setValue', 0);
+            $('#tdIsImportantTouSu').combobox('setValue', 1);
         }
     </script>
     <script src="../js/Lodop/LodopFuncs.js?t=<%=base.getToken() %>"></script>
@@ -180,6 +181,12 @@
                         <select class="easyui-combobox" id="tdCallServiceType" style="width: 100px; height: 28px;" data-options="prompt:'回访类别',editable:false">
                             <option value="1">报修</option>
                             <option value="2">投诉</option>
+                        </select>
+                    </div>
+                    <div class="search_item tdCallBack">
+                        <select class="easyui-combobox" id="tdIsImportantTouSu" style="width: 100px; height: 28px;" data-options="prompt:'重大投诉',editable:false">
+                            <option value="1">不显示</option>
+                            <option value="2">显示</option>
                         </select>
                     </div>
                     <%if (this.status != 12)

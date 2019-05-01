@@ -49,7 +49,7 @@ namespace Foresight.DataAccess
         {
             return GetCustomerServiceGridByKeywords(Keywords, RoomIDList, DateTime.MinValue, DateTime.MinValue, 13, orderBy, startRowIndex, pageSize, UserID, canViewAll, EqualProjectIDList: EqualProjectIDList, InProjectIDList: InProjectIDList, canexport: canexport, canViewWechatAPPService: canViewWechatAPPService, canViewWechatAPPSuggestoin: canViewWechatAPPSuggestoin, BeforeBanJieTimeOutHour: BeforeBanJieTimeOutHour);
         }
-        public static Ui.DataGrid GetCustomerServiceGridByKeywords(string Keywords, List<int> RoomIDList, DateTime StartTime, DateTime EndTime, int ServiceStatus, string orderBy, long startRowIndex, int pageSize, int UserID, bool canViewAll, List<int> EqualProjectIDList = null, List<int> InProjectIDList = null, int[] CompanyIDList = null, int ServiceType = 0, bool canexport = false, bool canViewWechatAPPService = false, bool canViewWechatAPPSuggestoin = false, bool isServiceAnalysis = false, int CloseType = 0, int TimeOutType = 0, bool IsTouSuChaoShi = false, bool IsRepairChaoShi = false, int CallBackStatus = 0, int CallServiceType = 0, int ServiceType1ID = 0, int ServiceType2ID = 0, int ServiceType3ID = 0, int PayStatus = 0, decimal BeforeBanJieTimeOutHour = 0)
+        public static Ui.DataGrid GetCustomerServiceGridByKeywords(string Keywords, List<int> RoomIDList, DateTime StartTime, DateTime EndTime, int ServiceStatus, string orderBy, long startRowIndex, int pageSize, int UserID, bool canViewAll, List<int> EqualProjectIDList = null, List<int> InProjectIDList = null, int[] CompanyIDList = null, int ServiceType = 0, bool canexport = false, bool canViewWechatAPPService = false, bool canViewWechatAPPSuggestoin = false, bool isServiceAnalysis = false, int CloseType = 0, int TimeOutType = 0, bool IsTouSuChaoShi = false, bool IsRepairChaoShi = false, int CallBackStatus = 0, int CallServiceType = 0, int ServiceType1ID = 0, int ServiceType2ID = 0, int ServiceType3ID = 0, int PayStatus = 0, decimal BeforeBanJieTimeOutHour = 0, int IsImportantTouSu = 0)
         {
             ResetCache();
             long totalRows = 0;
@@ -59,6 +59,14 @@ namespace Foresight.DataAccess
             conditions.Add("1=1");
             conditions.Add("(exists(select 1 from [UserServiceType] where [ServiceTypeID]=A.ServiceType1ID and ([UserID]=@UserID or exists(select 1 from [UserRoles] where [RoleID]=[UserServiceType].RoleID and [UserID]=@UserID))) or A.ServiceType1ID=0)");
             parameters.Add(new SqlParameter("@UserID", UserID));
+            if (IsImportantTouSu == 1)
+            {
+                conditions.Add("([IsImportantTouSu] is null or [IsImportantTouSu]=0)");
+            }
+            if (IsImportantTouSu == 2)
+            {
+                conditions.Add("[IsImportantTouSu]=1");
+            }
             if (PayStatus == 1)
             {
                 conditions.Add("exists(select 1 from [CustomerServiceChuli] where [ServiceID]=A.ID and HandelFee>0)");
@@ -157,27 +165,30 @@ namespace Foresight.DataAccess
             if (UserID > 0 && ServiceStatus != 12 && !isServiceAnalysis)
             {
                 cmdlist = new List<string>();
-                cmdlist.Add("[AddUserID]=@UserID");
-                cmdlist.Add("exists(select 1 from [CustomerService_Accpet] where [ServiceID]=A.ID and AccpetManID=@UserID and AccpetStatus!=3)");
-                if (canViewWechatAPPService)
+                if (!canViewAll || !canViewWechatAPPService || !canViewWechatAPPSuggestoin)
                 {
-                    cmdlist.Add("(([ServiceFrom]=@ServiceFrom1 or [ServiceFrom]=@ServiceFrom2) and ((isnull(IsSuggestion,0)=0 and ServiceType1ID=0) or ServiceType1ID = " + BaoXiuServiceID + "))");
-                }
-                else
-                {
-                    cmdlist.Add("([ServiceFrom]!=@ServiceFrom1 and [ServiceFrom]!=@ServiceFrom2 and (isnull(IsSuggestion,0)=0 or ServiceType1ID = " + BaoXiuServiceID + "))");
-                }
-                if (canViewWechatAPPSuggestoin)
-                {
-                    cmdlist.Add("(([ServiceFrom]=@ServiceFrom1 or [ServiceFrom]=@ServiceFrom2) and ((isnull(IsSuggestion,0)=1 and ServiceType1ID=0) or ServiceType1ID in (" + LianJieTouSuServiceID + "," + WuYeTouSuServiceID + "," + YingXiaoTouSuServiceID + ")))");
-                }
-                else
-                {
-                    cmdlist.Add("([ServiceFrom]!=@ServiceFrom1 and [ServiceFrom]!=@ServiceFrom2 and (isnull(IsSuggestion,0)=1 or ServiceType1ID in (" + LianJieTouSuServiceID + "," + WuYeTouSuServiceID + "," + YingXiaoTouSuServiceID + ")))");
-                }
-                if (canViewAll)
-                {
-                    cmdlist.Add("([ServiceFrom]!=@ServiceFrom1 and [ServiceFrom]!=@ServiceFrom2)");
+                    cmdlist.Add("[AddUserID]=@UserID");
+                    cmdlist.Add("exists(select 1 from [CustomerService_Accpet] where [ServiceID]=A.ID and AccpetManID=@UserID and AccpetStatus!=3)");
+                    if (canViewWechatAPPService)
+                    {
+                        cmdlist.Add("(([ServiceFrom]=@ServiceFrom1 or [ServiceFrom]=@ServiceFrom2) and ((isnull(IsSuggestion,0)=0 and ServiceType1ID=0) or ServiceType1ID = " + BaoXiuServiceID + "))");
+                    }
+                    else
+                    {
+                        cmdlist.Add("([ServiceFrom]!=@ServiceFrom1 and [ServiceFrom]!=@ServiceFrom2 and (isnull(IsSuggestion,0)=0 or ServiceType1ID = " + BaoXiuServiceID + "))");
+                    }
+                    if (canViewWechatAPPSuggestoin)
+                    {
+                        cmdlist.Add("(([ServiceFrom]=@ServiceFrom1 or [ServiceFrom]=@ServiceFrom2) and ((isnull(IsSuggestion,0)=1 and ServiceType1ID=0) or ServiceType1ID in (" + LianJieTouSuServiceID + "," + WuYeTouSuServiceID + "," + YingXiaoTouSuServiceID + ")))");
+                    }
+                    else
+                    {
+                        cmdlist.Add("([ServiceFrom]!=@ServiceFrom1 and [ServiceFrom]!=@ServiceFrom2 and (isnull(IsSuggestion,0)=1 or ServiceType1ID in (" + LianJieTouSuServiceID + "," + WuYeTouSuServiceID + "," + YingXiaoTouSuServiceID + ")))");
+                    }
+                    if (canViewAll)
+                    {
+                        cmdlist.Add("([ServiceFrom]!=@ServiceFrom1 and [ServiceFrom]!=@ServiceFrom2)");
+                    }
                 }
                 parameters.Add(new SqlParameter("@ServiceFrom1", Utility.EnumModel.WechatServiceFromDefine.weixin.ToString()));
                 parameters.Add(new SqlParameter("@ServiceFrom2", Utility.EnumModel.WechatServiceFromDefine.app.ToString()));
@@ -188,23 +199,19 @@ namespace Foresight.DataAccess
                 }
             }
             cmdlist = new List<string>();
-            if (InProjectIDList != null && InProjectIDList.Count > 0)
-            {
-                cmdlist = ViewRoomFeeHistory.GetProjectIDListConditions(InProjectIDList, IncludeRelation: false, RoomIDName: "[ProjectID]", UserID: UserID);
-            }
-            if (EqualProjectIDList != null && EqualProjectIDList.Count > 0)
-            {
-                cmdlist.Add("([ProjectID] in (" + string.Join(",", EqualProjectIDList.ToArray()) + "))");
-            }
-            if (cmdlist.Count > 0)
-            {
-                conditions.Add("(" + string.Join(" or ", cmdlist.ToArray()) + ")");
-            }
+            var myProjectIDList = new int[] { };
             if (RoomIDList.Count > 0)
             {
-                cmdlist = new List<string>();
-                cmdlist = ViewRoomFeeHistory.GetRoomIDListConditions(RoomIDList, IncludeRelation: false, RoomIDName: "[ProjectID]");
-                conditions.Add("(" + string.Join(" or ", cmdlist.ToArray()) + ")");
+                conditions.Add("[ProjectID] in (" + string.Join(",", RoomIDList) + ")");
+            }
+            else
+            {
+                myProjectIDList = Project.GetProjectIDListbyIDList(InProjectIDList: InProjectIDList, EqualProjectIDList: EqualProjectIDList);
+                //if (myProjectIDList.Length > 0)
+                //{
+                //    cmdlist = ViewRoomFeeHistory.GetProjectIDListConditions(myProjectIDList.ToList(), RoomIDName: "[ProjectID]", UserID: UserID);
+                //    conditions.Add("(" + string.Join(" or ", cmdlist.ToArray()) + ")");
+                //}
             }
             if (CompanyIDList != null && CompanyIDList.Length > 0)
             {
@@ -276,7 +283,7 @@ namespace Foresight.DataAccess
             string fieldList = "A.*";
             string Statement = " from (select *,(select count(1) from [CustomerService_Accpet] where [ServiceID]=ViewCustomerService.ID and AccpetUserType=1 and AccpetStatus in (0,1)) as AccpetUserCount,(select count(1) from [CustomerService_Accpet] where [ServiceID]=ViewCustomerService.ID and AccpetUserType=2 and AccpetStatus in (0,1)) as ProcessUserCount from [ViewCustomerService])A where  " + string.Join(" and ", conditions.ToArray()) + cmd;
             ViewCustomerService[] list = new ViewCustomerService[] { };
-            if (canexport || TimeOutType > 0 || ServiceStatus == 13 || ServiceType2ID > 0 || ServiceType3ID > 0)
+            if (canexport || TimeOutType > 0 || ServiceStatus == 13 || ServiceType2ID > 0 || ServiceType3ID > 0 || myProjectIDList.Length > 0)
             {
                 list = GetList<ViewCustomerService>("select " + fieldList + Statement + " " + orderBy, parameters).ToArray();
                 totalRows = list.Length;
@@ -285,7 +292,18 @@ namespace Foresight.DataAccess
             {
                 list = GetList<ViewCustomerService>(fieldList, Statement, parameters, orderBy, startRowIndex, pageSize, out totalRows).ToArray();
             }
-
+            if (myProjectIDList.Length > 0)
+            {
+                list = list.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();
+            }
+            if (ServiceType2ID > 0)
+            {
+                list = list.Where(p => p.ServiceType2IDList.Contains(ServiceType2ID)).ToArray();
+            }
+            if (ServiceType3ID > 0)
+            {
+                list = list.Where(p => p.ServiceType3IDList.Contains(ServiceType3ID)).ToArray();
+            }
             DataAccess.Ui.DataGrid dg = new Ui.DataGrid();
             if (list.Length == 0)
             {
@@ -295,14 +313,6 @@ namespace Foresight.DataAccess
                 return dg;
             }
             GetFinalViewCustomerDataGrid(list, IncludeTimeOutData: true);
-            if (ServiceType2ID > 0)
-            {
-                list = list.Where(p => p.ServiceType2IDList.Contains(ServiceType2ID)).ToArray();
-            }
-            if (ServiceType3ID > 0)
-            {
-                list = list.Where(p => p.ServiceType3IDList.Contains(ServiceType3ID)).ToArray();
-            }
             if (TimeOutType > 0)//1-正常 2-超时
             {
                 list = list.Where(p => p.TimeOutStatus == TimeOutType).ToArray();
@@ -318,7 +328,7 @@ namespace Foresight.DataAccess
                     list = list.Where(p => p.TimeOutStatus == 2).ToArray();
                 }
             }
-            if (TimeOutType > 0 || ServiceStatus == 13 || ServiceType2ID > 0 || ServiceType3ID > 0)
+            if (TimeOutType > 0 || ServiceStatus == 13 || ServiceType2ID > 0 || ServiceType3ID > 0 || myProjectIDList.Length > 0)
             {
                 if (!canexport)
                 {
@@ -339,18 +349,7 @@ namespace Foresight.DataAccess
             List<string> conditions = new List<string>();
             List<string> cmdlist = new List<string>();
             conditions.Add("ServiceStatus not in (2,5)");
-            if (InProjectIDList != null && InProjectIDList.Count > 0)
-            {
-                cmdlist = ViewRoomFeeHistory.GetProjectIDListConditions(InProjectIDList, IncludeRelation: false, RoomIDName: "A.[ProjectID]", UserID: UserID);
-            }
-            if (EqualProjectIDList != null && EqualProjectIDList.Count > 0)
-            {
-                cmdlist.Add("(A.[ProjectID] in (" + string.Join(",", EqualProjectIDList.ToArray()) + "))");
-            }
-            if (cmdlist.Count > 0)
-            {
-                conditions.Add("(" + string.Join(" or ", cmdlist.ToArray()) + ")");
-            }
+            var myProjectIDList = Project.GetProjectIDListbyIDList(InProjectIDList: InProjectIDList, EqualProjectIDList: EqualProjectIDList);
             if (CompanyIDList.Length > 0)
             {
                 conditions.Add("exists(select 1 from [Project] where A.ProjectID=Project.ID and [Project].CompanyID in (" + string.Join(",", CompanyIDList) + "))");
@@ -385,6 +384,10 @@ namespace Foresight.DataAccess
             string Statement = " from (select *,(select count(1) from [CustomerService_Accpet] where [ServiceID]=ViewCustomerService.ID and AccpetUserType=1 and AccpetStatus in (0,1)) as AccpetUserCount,(select count(1) from [CustomerService_Accpet] where [ServiceID]=ViewCustomerService.ID and AccpetUserType=2 and AccpetStatus in (0,1)) as ProcessUserCount from [ViewCustomerService])A where  " + string.Join(" and ", conditions.ToArray());
             ViewCustomerService[] list = new ViewCustomerService[] { };
             list = GetList<ViewCustomerService>("select " + fieldList + Statement + orderBy, parameters).ToArray();
+            if (myProjectIDList.Length > 0)
+            {
+                list = list.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();
+            }
             GetFinalViewCustomerDataGrid(list, IncludeTimeOutData: true);
             DataAccess.Ui.DataGrid dg = new Ui.DataGrid();
             if (list.Length == 0)
@@ -494,14 +497,10 @@ namespace Foresight.DataAccess
                 }
             }
             #endregion
+            var myProjectIDList = new int[] { };
             if (ProjectIDList != null && ProjectIDList.Count > 0)
             {
-                List<string> cmdlist = ViewRoomFeeHistory.GetProjectIDListConditions(ProjectIDList, IncludeRelation: false, RoomIDName: "[ProjectID]", UserID: UserID);
-                if (UserID > -1)
-                {
-                    cmdlist.Add("[ProjectID]=0");
-                }
-                conditions.Add("(" + string.Join(" or ", cmdlist.ToArray()) + ")");
+                myProjectIDList = Project.GetProjectIDListbyIDList(ProjectIDList: ProjectIDList, UserID: UserID);
             }
             parameters.Add(new SqlParameter("@UserID", UserID));
             if (status == 0)//处理中工单
@@ -572,6 +571,10 @@ namespace Foresight.DataAccess
             string Statement = " from (select *,(select count(1) from [CustomerService_Accpet] where [ServiceID]=ViewCustomerService.ID and AccpetUserType=1 and AccpetStatus in (0,1)) as AccpetUserCount from [ViewCustomerService])A where " + string.Join(" and ", conditions.ToArray()) + cmd;
             //Utility.LogHelper.WriteDebug("GetViewCustomerServiceListByStatus", Statement);
             var list = GetList<ViewCustomerService>(fieldList, Statement, parameters, orderby, startRowIndex, pageSize, out totalRows).ToArray();
+            if (myProjectIDList.Length > 0)
+            {
+                list = list.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();
+            }
             GetFinalViewCustomerDataGrid(list);
             return list;
         }
@@ -581,13 +584,10 @@ namespace Foresight.DataAccess
             List<SqlParameter> parameters = new List<SqlParameter>();
             List<string> conditions = new List<string>();
             var myProjectIDList = Project.GetProjectIDListbyIDList(UserID: UserID);
-            if (myProjectIDList.Length > 0)
-            {
-                conditions.Add("CustomerService.[ProjectID] in (" + string.Join(",", myProjectIDList) + ")");
-            }
             List<string> cmdlist = new List<string>();
             if (Status == 10)//待派单
             {
+                cmdlist = new List<string>();
                 conditions.Add("exists(select 1 from [ServiceType] where [DisableSend]=0 and [ID]=[CustomerService].ServiceType1ID)");
                 conditions.Add("ServiceStatus in (3,10)");
                 cmdlist = new List<string>();
@@ -615,17 +615,13 @@ namespace Foresight.DataAccess
                 conditions.Add("exists(select 1 from [CustomerService_Accpet] where [ServiceID]=[CustomerService].ID and [AccpetManID]=@UserID and [AccpetUserType]=2 and [AccpetStatus] in (0,1))");
             }
             parameters.Add(new SqlParameter("@UserID", UserID));
-            int count = 0;
-            using (SqlHelper helper = new SqlHelper())
+            string cmdtext = "select ProjectID from [CustomerService] where " + string.Join(" and ", conditions.ToArray());
+            var list = GetList<CustomerService>(cmdtext, parameters).ToArray();
+            if (myProjectIDList.Length > 0)
             {
-                string cmdtext = "select count(1) from [CustomerService] where " + string.Join(" and ", conditions.ToArray());
-                var result = helper.ExecuteScalar(cmdtext, CommandType.Text, parameters);
-                if (result != null)
-                {
-                    count = Convert.ToInt32(result);
-                }
+                list = list.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();
             }
-            return count;
+            return list.Length;
         }
         public static ViewCustomerService[] GetViewCustomerServiceByAddUserIDList(List<int> UserIDList)
         {
@@ -697,6 +693,18 @@ namespace Foresight.DataAccess
                 }
                 var myServiceHuiFangList = serviceHuifangList.Where(q => q.ServiceID == item.ID).ToArray();
                 item.ServiceHuiFangCount = myServiceHuiFangList.Length;
+                if (myServiceHuiFangList.FirstOrDefault(p => p.PhoneCallBackType == 1) != null)
+                {
+                    item.ManuallyPhoneCallBackType = 1;
+                }
+                else if (myServiceHuiFangList.FirstOrDefault(p => p.PhoneCallBackType == 2) != null)
+                {
+                    item.ManuallyPhoneCallBackType = 2;
+                }
+                else
+                {
+                    item.ManuallyPhoneCallBackType = 3;
+                }
                 item.HuiFangAddUserIDList = myServiceHuiFangList.Where(p => p.AddUserID > 0).Select(p => p.AddUserID).ToArray();
                 var myHuiFangUserList = userList.Where(p => item.HuiFangAddUserIDList.Contains(p.UserID)).ToArray();
                 if (myHuiFangUserList.Length > 0)
@@ -1115,7 +1123,7 @@ namespace Foresight.DataAccess
             return nowHourRange - DefineTimeHour;
         }
         public string HuiFangAddUserNames { get; set; }
-        public int[] HuiFangAddUserIDList { get; set; }
+        public int[] HuiFangAddUserIDList { get; set; } = new int[] { };
         public decimal CheckTakeHour { get; set; }
         public decimal CheckChaoShiTakeHour { get; set; }
         public decimal FinalCheckChaoShiTakeHour
@@ -1599,5 +1607,9 @@ namespace Foresight.DataAccess
                 return this.CanNotCallback ? "暂不回访" : "";
             }
         }
+        /// <summary>
+        /// 1-电话接通 2-电话未接通 3-未拨打
+        /// </summary>
+        public int ManuallyPhoneCallBackType { get; set; }
     }
 }

@@ -22,28 +22,24 @@ namespace Foresight.DataAccess
     }
     public partial class CallSummaryAnalysisModel : AnalysisAccessModel
     {
-        [DatabaseColumn("UserID")]
         public int UserID { get; set; }
-        [DatabaseColumn("RealName")]
         public string RealName { get; set; }
-        [DatabaseColumn("TotalCallBackTimeOutCount")]
-        public int TotalCallBackTimeOutCount { get; set; }
+        public int TotalCallBackTimeOutCount { get; set; } = 0;
+        public int TotalCallBackCount { get; set; } = 0;
         public string TotalCallBackTimeOutPercent
         {
             get
             {
-                if (this.TouSuTotalCount <= 0)
+                if (this.TotalCallBackCount <= 0)
                 {
                     return "";
                 }
-                decimal percentValue = Math.Round((decimal)this.TotalCallBackTimeOutCount / this.TouSuTotalCount, 2, MidpointRounding.AwayFromZero);
+                decimal percentValue = Math.Round((decimal)this.TotalCallBackTimeOutCount / this.TotalCallBackCount, 2, MidpointRounding.AwayFromZero);
                 return (percentValue * 100).ToString() + "%";
             }
         }
-        [DatabaseColumn("CallBackFromPhoneTotalCount")]
-        public int CallBackFromPhoneTotalCount { get; set; }
-        [DatabaseColumn("CallBackFromPhonePickUpCount")]
-        public int CallBackFromPhonePickUpCount { get; set; }
+        public int CallBackFromPhoneTotalCount { get; set; } = 0;
+        public int CallBackFromPhonePickUpCount { get; set; } = 0;
         public string CallBackIsOnPercentDesc
         {
             get
@@ -56,10 +52,8 @@ namespace Foresight.DataAccess
                 return (percentValue * 100).ToString() + "%";
             }
         }
-        [DatabaseColumn("BaoXiuTotalCount")]
-        public int BaoXiuTotalCount { get; set; }
-        [DatabaseColumn("BaoXiuCallBackCount")]
-        public int BaoXiuCallBackCount { get; set; }
+        public int BaoXiuTotalCount { get; set; } = 0;
+        public int BaoXiuCallBackCount { get; set; } = 0;
         public string BaoXiuCallBackPercentDesc
         {
             get
@@ -72,25 +66,37 @@ namespace Foresight.DataAccess
                 return (percentValue * 100).ToString() + "%";
             }
         }
-        [DatabaseColumn("TotalCount")]
-        public int TotalCount { get; set; }
-        [DatabaseColumn("TotalAddServiceTimeOutCount")]
-        public int TotalAddServiceTimeOutCount { get; set; }
-        public decimal TouSuTotalCount { get; set; }
-        public int TouSuCallBackCount { get; set; }
+        public int TotalCount { get; set; } = 0;
+        public int TotalAddServiceTimeOutCount { get; set; } = 0;
+        /// <summary>
+        /// 投诉总数
+        /// </summary>
+        public decimal TouSuTotalCount { get; set; } = 0;
+        /// <summary>
+        /// 投诉可回访总数
+        /// </summary>
+        public decimal TouSuTotalCallbackCount { get; set; } = 0;
+        /// <summary>
+        /// 投诉已回访总数
+        /// </summary>
+        public int TouSuCallBackCount { get; set; } = 0;
         public string TouSuCallBackPercentDesc
         {
             get
             {
-                if (this.TouSuTotalCount <= 0)
+                if (this.TouSuTotalCallbackCount <= 0)
                 {
                     return "";
                 }
-                decimal percentValue = Math.Round((decimal)this.TouSuCallBackCount / this.TouSuTotalCount, 2, MidpointRounding.AwayFromZero);
+                decimal percentValue = Math.Round((decimal)this.TouSuCallBackCount / this.TouSuTotalCallbackCount, 2, MidpointRounding.AwayFromZero);
+                if (percentValue > 1)
+                {
+                    return "100%";
+                }
                 return (percentValue * 100).ToString() + "%";
             }
         }
-        public int TotalCallBackNotHuiFangCount { get; set; }
+        public int TotalCallBackNotHuiFangCount { get; set; } = 0;
     }
     public partial class CallTotalAnalysisModel : AnalysisAccessModel
     {

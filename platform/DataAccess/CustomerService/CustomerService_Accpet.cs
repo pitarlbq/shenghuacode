@@ -37,7 +37,7 @@ namespace Foresight.DataAccess
             List<string> conditions = new List<string>();
             conditions.Add("[ServiceID] between " + MinServiceID + " and " + MaxServiceID);
             conditions.Add("[AccpetStatus] in (0,1)");
-            return GetList<CustomerService_Accpet>("select * from [CustomerService_Accpet] where " + string.Join(" and ", conditions.ToArray()) + " order by AddTime desc", parameters).ToArray();
+            return GetList<CustomerService_Accpet>("select [ID],[ServiceID],[AccpetManID],[AddTime],[AccpetUserType],[AccpetTime] from [CustomerService_Accpet] where " + string.Join(" and ", conditions.ToArray()) + " order by AddTime desc", parameters).ToArray();
         }
         public static CustomerService_Accpet GetCustomerService_AccpetByUserID(int ServiceID,int UserID, SqlHelper helper, int AccpetUserType = 1)
         {

@@ -124,10 +124,10 @@ namespace Foresight.DataAccess
             }
             return cmdlist;
         }
-        public static List<string> GetProjectIDListConditions(List<int> ProjectIDList, bool IncludeRelation = true, bool IsContractFee = false, string RoomIDName = "[RoomID]", int UserID = 0, string ContractIDName = "[ContractID]")
+        public static List<string> GetProjectIDListConditions(List<int> ProjectIDList, string RoomIDName = "[RoomID]", int UserID = 0)
         {
             List<string> cmdlist = new List<string>();
-            ProjectIDList = ProjectIDList.Where(p => p != 0).ToList();
+            ProjectIDList = ProjectIDList.Where(p => p != 0 && p != 1).ToList();
             if (ProjectIDList.Count == 0)
             {
                 cmdlist.Add("1=1");
@@ -146,15 +146,8 @@ namespace Foresight.DataAccess
                     cmdwhere.Add("([AllParentID] like '%," + ProjectID + ",%' or [ID] =" + ProjectID + ")");
                 }
             }
-            cmdlist.Add("(" + RoomIDName + " in (select ID from [Project] where " + string.Join(" or ", cmdwhere) + "))");
-            if (IncludeRelation)
-            {
-                cmdlist.Add("(" + RoomIDName + " in (select [RoomID] from [RoomRelation] where [GUID] in (select [GUID] from [RoomRelation] where [RoomID] in (select ID from [Project] where " + string.Join(" or ", cmdwhere) + "))))");
-            }
-            if (IsContractFee)
-            {
-                cmdlist.Add("(" + RoomIDName + "=0 and isnull(" + ContractIDName + ",0)>0 and " + ContractIDName + " in (select ContractID from [Contract_Room] where [RoomID] in (select ID from [Project] where " + string.Join(" or ", cmdwhere) + ")))");
-            }
+            //cmdlist.Add("(" + RoomIDName + " in (select ID from [Project] where " + string.Join(" or ", cmdwhere) + "))");
+            cmdlist.Add("exists (select 1 from [Project] where ID=" + RoomIDName + " and (" + string.Join(" or ", cmdwhere) + "))");
             return cmdlist;
         }
         public static List<string> GetPublicProjectIDListConditions(List<int> ProjectIDList, string RoomIDName = "[PublicProjectID]", int UserID = 0)

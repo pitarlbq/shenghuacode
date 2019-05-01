@@ -13,6 +13,7 @@ namespace Web.CustomerService
         public Foresight.DataAccess.CustomerService service;
         public int ID = 0;
         public string PhoneNumber = string.Empty;
+        public bool CanManualyAddPhoneState = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             ID = 0;
@@ -38,6 +39,31 @@ namespace Web.CustomerService
             }
             PhoneNumber = service.AddCallPhone;
             this.tdHuiFangTime.Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            var phoneRecordList = Foresight.DataAccess.PhoneRecord.GetPhoneRecorByServiceID(service.ID, 2);
+            var pickUpPhoneData = phoneRecordList.FirstOrDefault(p => p.FinalPickUpTime > DateTime.MinValue);
+            var huifangList = CustomerServiceHuifang.GetCustomerServiceHuifangList(service.ID);
+            if (pickUpPhoneData == null)
+            {
+                if (huifangList.FirstOrDefault(p => p.PhoneCallBackType == 1) != null)
+                {
+                    this.tdPhoneCallBackType.Value = "1";
+                    this.labelPhoneStatusDesc.InnerHtml = "电话回访手动修改为接通";
+                }
+                else if (huifangList.FirstOrDefault(p => p.PhoneCallBackType == 2) != null)
+                {
+                    CanManualyAddPhoneState = true;
+                    this.tdPhoneCallBackType.Value = "2";
+                }
+                else
+                {
+                    CanManualyAddPhoneState = true;
+                    this.tdPhoneCallBackType.Value = "3";
+                }
+            }
+            else if (pickUpPhoneData != null)
+            {
+                this.labelPhoneStatusDesc.InnerHtml = "电话回访已接通";
+            }
         }
     }
 }

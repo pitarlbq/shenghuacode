@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
-
+using System.Linq;
 using Foresight.DataAccess.Framework;
 
 namespace Foresight.DataAccess
@@ -43,15 +43,15 @@ namespace Foresight.DataAccess
                 conditions.Add("isnull([BalanceStatus],'balanceno')=@BalanceStatus");
                 parameters.Add(new SqlParameter("@BalanceStatus", BalanceStatus));
             }
-            if (ProjectIDList.Count > 0)
-            {
-                List<string> cmdlist = ViewRoomFeeHistory.GetProjectIDListConditions(ProjectIDList, IncludeRelation: false, RoomIDName: "[ProjectID]", UserID: UserID);
-                conditions.Add("(" + string.Join(" or ", cmdlist.ToArray()) + ")");
-            }
+            var myProjectIDList = new int[] { };
             if (RoomIDList.Count > 0)
             {
                 List<string> cmdlist = ViewRoomFeeHistory.GetRoomIDListConditions(RoomIDList, IncludeRelation: false, RoomIDName: "[ProjectID]");
                 conditions.Add("(" + string.Join(" or ", cmdlist.ToArray()) + ")");
+            }
+            else if (ProjectIDList.Count > 0)
+            {
+                myProjectIDList = Project.GetProjectIDListbyIDList(ProjectIDList: ProjectIDList, UserID: UserID);
             }
             string fieldList = "[ViewCustomerServiceInDetail].*";
             string Statement = " from [ViewCustomerServiceInDetail] where  " + string.Join(" and ", conditions.ToArray());
@@ -60,9 +60,14 @@ namespace Foresight.DataAccess
             {
                 list = GetList<ViewCustomerServiceInDetail>("select " + fieldList + Statement + " " + orderBy, parameters).ToArray();
             }
-            else
+            if (myProjectIDList.Length > 0)
             {
-                list = GetList<ViewCustomerServiceInDetail>(fieldList, Statement, parameters, orderBy, startRowIndex, pageSize, out totalRows).ToArray();
+                list = list.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();
+            }
+            totalRows = list.Length;
+            if (!canexport)
+            {
+                list = list.Skip((int)startRowIndex).Take(pageSize).ToArray();
             }
             DataAccess.Ui.DataGrid dg = new Ui.DataGrid();
             dg.rows = list;

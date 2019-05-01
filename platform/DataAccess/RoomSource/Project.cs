@@ -337,29 +337,30 @@ select * from [Project] where ID in (select [ID] from temp where [isParent]=0)";
             list = GetList<Project>("select * from [Project] where  " + string.Join(" and ", conditions.ToArray()), parameters).ToArray();
             return list;
         }
-        public static int[] GetProjectIDListbyIDList(List<int> ProjectIDList = null, int UserID = 0)
+        public static int[] GetProjectIDListbyIDList(List<int> ProjectIDList = null, List<int> EqualProjectIDList = null, List<int> InProjectIDList = null, int UserID = 0)
         {
-            List<int> EqualIDList = new List<int>();
-            List<int> InIDList = new List<int>();
-            if (UserID > 0)
+            if (EqualProjectIDList == null || InProjectIDList == null)
             {
-                Project.GetMyProjectListByUserID(UserID, out EqualIDList, out InIDList, ProjectIDList: ProjectIDList);
-            }
-            else if (ProjectIDList != null)
-            {
-                Project.GetMyProjectListByProjectIDList(ProjectIDList, out EqualIDList, out InIDList);
+                if (UserID > 0)
+                {
+                    Project.GetMyProjectListByUserID(UserID, out EqualProjectIDList, out InProjectIDList, ProjectIDList: ProjectIDList);
+                }
+                else if (ProjectIDList != null)
+                {
+                    Project.GetMyProjectListByProjectIDList(ProjectIDList, out EqualProjectIDList, out InProjectIDList);
+                }
             }
             var cmdlist = new List<string>();
-            if (InIDList.Count > 0)
+            if (InProjectIDList != null && InProjectIDList.Count > 0)
             {
-                foreach (var InID in InIDList)
+                foreach (var InID in InProjectIDList)
                 {
                     cmdlist.Add("([Project].AllParentID like '%," + InID + ",%' or ID=" + InID + ")");
                 }
             }
-            if (EqualIDList.Count > 0)
+            if (EqualProjectIDList.Count > 0)
             {
-                foreach (var EqualID in EqualIDList)
+                foreach (var EqualID in EqualProjectIDList)
                 {
                     cmdlist.Add("([Project].ID=" + EqualID + ")");
                 }

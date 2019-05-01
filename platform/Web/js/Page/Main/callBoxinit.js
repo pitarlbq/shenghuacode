@@ -567,14 +567,19 @@ function doCustomerPickUpPhone() {
 //挂机
 function hangUpPhone() {
     RingOnCount = 0;
+    uID = 0;
     try {
         stopRecord();
         closeMic();
         TV_HangUpCtrl(uID);
+        top.close_message();
     } catch (e) {
     }
-    uID = 0;
-    top.close_message();
+    if (callList.length == 0) {
+        var messages = '电话录音上传失败，请检查本地电话录音文件是否存在'
+        top.alertNotify(messages, 0);
+        return;
+    }
 }
 //拒接来电
 function rejectPickUpPhone() {
@@ -619,7 +624,7 @@ function stopRecord() {
         }
         setTimeout(function () {
             uploadFileRecord();
-        }, 2000);
+        }, 500);
     }
 }
 var tryCount = 0;
@@ -628,12 +633,11 @@ function uploadFileRecord() {
         return;
     }
     var callItem = callList[callList.length - 1];
-    if (callItem.HangUpTime == '') {
-        return;
-    }
-    var params = '?visit=uploadvoicerecord&CallTime=' + callItem.CallTime + '&PickUpTime=' + callItem.PickUpTime + '&HangUpTime=' + callItem.HangUpTime + '&ComingPhone=' + callItem.ComingPhoneNumber + '&ServiceID=' + callItem.ServiceID + '&PhoneType=' + callItem.PhoneType + '&UserID=' + UserID + '&AddUserName=' + AddUserName + '&RelatedPhoneRecordID=' + callItem.RelatedPhoneRecordID;
+    var params = '?visit=uploadvoicerecord&CallTime=' + callItem.CallTime + '&PickUpTime=' + callItem.PickUpTime + '&HangUpTime=' + callItem.HangUpTime + '&ComingPhone=' + callItem.ComingPhoneNumber + '&ServiceID=' + callItem.ServiceID + '&PhoneType=' + callItem.PhoneType + '&UserID=' + UserID + '&AddUserName=' + AddUserName + '&RelatedPhoneRecordID=' + callItem.RelatedPhoneRecordID + "&RecordName=" + callItem.RecordName;
     TV_uploadFile(contextPath + '/Handler/ServiceHandler.ashx' + params, callItem.RecordPath);
     setTimeout(function () {
+        var messages = '电话录音上传成功'
+        top.alertNotify(messages, 3);
         callList.splice(callList.length - 1, 1);
         uploadFileRecord();
     }, 2000);

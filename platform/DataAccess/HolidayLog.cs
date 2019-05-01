@@ -42,7 +42,7 @@ namespace Foresight.DataAccess
             }
             if (data != null && db_yy >= (now_yy + 1) && db_mm == 12)
             {
-                return GetList<HolidayLog>("select * from [HolidayLog]", parameters).ToArray();
+                return list;
             }
             if (db_mm == 12)
             {

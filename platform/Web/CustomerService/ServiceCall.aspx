@@ -2,12 +2,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-        var ID, tdHuiFangTime;
+        var ID, tdHuiFangTime, CanManualyAddPhoneState = 0;
         $(function () {
             $('#btnSave').hide();
             ID = "<%=this.ID%>";
             tdHuiFangTime = $('#<%=this.tdHuiFangTime.ClientID%>');
             tdHuiFangNote = $('#<%=this.tdHuiFangNote.ClientID%>');
+            CanManualyAddPhoneState = <%=this.CanManualyAddPhoneState?1:0%>;
             var phoneNumber = '<%=this.PhoneNumber%>';
             if (phoneNumber == '') {
                 $('#btnCall').hide();
@@ -34,6 +35,7 @@
                 onSubmit: function (param) {
                     param.visit = 'saveservicehuifang';
                     param.ID = ID;
+                    param.CanManualyAddPhoneState = CanManualyAddPhoneState;
                 },
                 success: function (data) {
                     MaskUtil.unmask();
@@ -70,12 +72,9 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="server">
-    <form id="ff" runat="server">
+    <form id="ff" runat="server" method="post" enctype="multipart/form-data">
         <div class="operation_box">
-            <%if (service.CanCallBack)
-              { %>
             <a id="btnSave" href="javascript:void(0)" onclick="do_save()" class="easyui-linkbutton btntoolbar" data-options="plain:true,iconCls:'icon-save'">保存</a>
-            <%} %>
             <a href="javascript:void(0)" onclick="do_close()" class="easyui-linkbutton btntoolbar" data-options="plain:true,iconCls:'icon-close'">关闭</a>
         </div>
         <div class="table_container">
@@ -103,6 +102,29 @@
                         <option value="5">5分</option>
                     </select>
                 </div>
+                <%if (this.CanManualyAddPhoneState)
+                    { %>
+                <div class="tableItem">
+                    <label class="title">电话回访状态</label>
+                    <select class="easyui-combobox" id="tdPhoneCallBackType" runat="server" data-options="editable:false">
+                        <option value="">请选择</option>
+                        <option value="1">正常接通</option>
+                        <option value="2">未接通</option>
+                        <option value="3">未拨打</option>
+                    </select>
+                </div>
+                <div class="tableItem">
+                    <label class="title">电话录音上传</label>
+                    <input class="easyui-filebox" name="attachfile" data-options="prompt:'请选择文件',buttonText: '选择文件'" style="width: 60%; height: 28px;" />
+                </div>
+                <%}
+                    else
+                    { %>
+                <div class="tableItem">
+                    <label class="title">电话回访状态</label>
+                    <label runat="server" id="labelPhoneStatusDesc"></label>
+                </div>
+                <%} %>
             </div>
         </div>
     </form>

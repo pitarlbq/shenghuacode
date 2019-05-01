@@ -15,6 +15,11 @@
                     $('.operation_box').show();
                 }, 100);
             }
+            if (Status == 12) {
+                $('.tdCallBack').show();
+            } else {
+                $('.tdCallBack').hide();
+            }
         })
         function do_close() {
             parent.do_close_dialog()
@@ -172,6 +177,13 @@
                         <select class="easyui-combobox" id="tdCallServiceType" style="width: 100px; height: 28px;" data-options="prompt:'回访类别',editable:false">
                             <option value="1">报修</option>
                             <option value="2">投诉</option>
+                        </select>
+                    </div>
+                    <div class="search_item tdCallBack">
+                        <select class="easyui-combobox" id="tdIsImportantTouSu" style="width: 100px; height: 28px;" data-options="prompt:'选择重大投诉',editable:false">
+                            <option value="1">隐藏</option>
+                            <option value="2">显示</option>
+                            <option value="0">全部</option>
                         </select>
                     </div>
                     <div class="search_item">

@@ -519,7 +519,10 @@ namespace Web.Handler
                     RecordVoicePath = filepath + fileName;
                 }
             }
-            string ComingPhone = context.Request["ComingPhone"];
+            if (string.IsNullOrEmpty(fileName))
+            {
+                fileName = context.Request["RecordName"];
+            }
             if (string.IsNullOrEmpty(fileName))
             {
                 WebUtil.WriteJson(context, "0");
@@ -536,7 +539,7 @@ namespace Web.Handler
             record.ServiceID = WebUtil.GetIntValue(context, "ServiceID");
             record.AddTime = DateTime.Now;
             record.AddUserName = context.Request["AddUserName"];
-            record.PhoneNumber = ComingPhone;
+            record.PhoneNumber = context.Request["ComingPhone"];
             DateTime CallTime = WebUtil.GetDateValue(context, "CallTime");
             record.CallTime = CallTime == DateTime.MinValue ? DateTime.Now : CallTime;
             DateTime PickUpTime = WebUtil.GetDateValue(context, "PickUpTime");
@@ -1704,6 +1707,59 @@ namespace Web.Handler
             //huifang.ChuLiRate = WebUtil.getServerDecimalValue(context, "tdChuLiRate");
             huifang.AddTime = DateTime.Now;
             huifang.AddUserID = user.UserID;
+            int CanManualyAddPhoneState = WebUtil.GetIntValue(context, "CanManualyAddPhoneState");
+            PhoneRecord record = null;
+            if (CanManualyAddPhoneState == 1)
+            {
+                huifang.PhoneCallBackType = WebUtil.getServerIntValue(context, "tdPhoneCallBackType");
+                huifang.PhoneCallBackTime = DateTime.Now;
+                string RecordVoicePath = string.Empty;
+                string fileName = string.Empty;
+                string filepath = string.Empty;
+                HttpFileCollection uploadFiles = context.Request.Files;
+                if (uploadFiles.Count > 0)
+                {
+                    HttpPostedFile postedFile = uploadFiles[0];
+                    string fileOriName = postedFile.FileName;
+                    if (!string.IsNullOrEmpty(fileOriName))
+                    {
+                        string extension = System.IO.Path.GetExtension(fileOriName).ToLower();
+                        fileName = System.IO.Path.GetFileName(fileOriName);
+                        filepath = "/upload/Record/";
+                        string rootPath = HttpContext.Current.Server.MapPath("~" + filepath);
+                        if (!System.IO.Directory.Exists(rootPath))
+                        {
+                            System.IO.Directory.CreateDirectory(rootPath);
+                        }
+                        string Path = rootPath + fileName;
+                        postedFile.SaveAs(Path);
+                        RecordVoicePath = filepath + fileName;
+                    }
+                }
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    record = PhoneRecord.GetPhoneRecordByFileName(fileName);
+                    if (record == null)
+                    {
+                        record = new PhoneRecord();
+                        record.UserID = user.UserID;
+                        record.ServiceID = huifang.ServiceID;
+                        record.AddTime = DateTime.Now;
+                        record.AddUserName = user.RealName;
+                        record.PhoneNumber = service.AddCallPhone;
+                        record.CallTime = DateTime.Now;
+                        if (huifang.PhoneCallBackType == 1)
+                        {
+                            record.PickUpTime = DateTime.Now;
+                        }
+                        record.HangUpTime = DateTime.Now.AddSeconds(30);
+                        record.RecordVoicePath = RecordVoicePath;
+                        record.PhoneType = 2;
+                        record.FileOriName = fileName;
+                        record.RelatedPhoneRecordID = 0;
+                    }
+                }
+            }
             using (SqlHelper helper = new SqlHelper())
             {
                 try
@@ -1716,6 +1772,10 @@ namespace Web.Handler
                         service.Save(helper);
                     }
                     huifang.Save(helper);
+                    if (record != null)
+                    {
+                        record.Save(helper);
+                    }
                     helper.Commit();
                 }
                 catch (Exception ex)
@@ -1922,8 +1982,9 @@ namespace Web.Handler
                 int ServiceType2ID = WebUtil.GetIntValue(context, "ServiceType2ID");
                 int ServiceType3ID = WebUtil.GetIntValue(context, "ServiceType3ID");
                 int PayStatus = WebUtil.GetIntValue(context, "PayStatus");
+                int IsImportantTouSu = WebUtil.GetIntValue(context, "IsImportantTouSu");
                 decimal BeforeBanJieTimeOutHour = WebUtil.GetDecimalValue(context, "BeforeBanJieTimeOutHour");
-                DataGrid dg = Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(Keywords, RoomIDList, StartTime, EndTime, ServiceStatus, SortOrder, startRowIndex, pageSize, user.UserID, canViewAll, EqualProjectIDList: EqualProjectIDList, InProjectIDList: InProjectIDList, CompanyIDList: CompanyIDList, ServiceType: ServiceType, canexport: canexport, canViewWechatAPPService: canViewWechatAPPService, canViewWechatAPPSuggestoin: canViewWechatAPPSuggestoin, isServiceAnalysis: isServiceAnalysis, CloseType: CloseType, TimeOutType: TimeOutType, IsTouSuChaoShi: IsTouSuChaoShi, IsRepairChaoShi: IsRepairChaoShi, CallBackStatus: CallBackStatus, CallServiceType: CallServiceType, ServiceType1ID: ServiceType1ID, ServiceType2ID: ServiceType2ID, ServiceType3ID: ServiceType3ID, PayStatus: PayStatus, BeforeBanJieTimeOutHour: BeforeBanJieTimeOutHour);
+                DataGrid dg = Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(Keywords, RoomIDList, StartTime, EndTime, ServiceStatus, SortOrder, startRowIndex, pageSize, user.UserID, canViewAll, EqualProjectIDList: EqualProjectIDList, InProjectIDList: InProjectIDList, CompanyIDList: CompanyIDList, ServiceType: ServiceType, canexport: canexport, canViewWechatAPPService: canViewWechatAPPService, canViewWechatAPPSuggestoin: canViewWechatAPPSuggestoin, isServiceAnalysis: isServiceAnalysis, CloseType: CloseType, TimeOutType: TimeOutType, IsTouSuChaoShi: IsTouSuChaoShi, IsRepairChaoShi: IsRepairChaoShi, CallBackStatus: CallBackStatus, CallServiceType: CallServiceType, ServiceType1ID: ServiceType1ID, ServiceType2ID: ServiceType2ID, ServiceType3ID: ServiceType3ID, PayStatus: PayStatus, BeforeBanJieTimeOutHour: BeforeBanJieTimeOutHour, IsImportantTouSu: IsImportantTouSu);
                 if (canexport)
                 {
                     string downloadurl = string.Empty;
@@ -2165,7 +2226,7 @@ namespace Web.Handler
             service.TaskType = WebUtil.getServerIntValue(context, "tdTaskType");
             service.DepartmentID = WebUtil.getServerIntValue(context, "tdBelongTeamName");
             service.ServiceFrom = WebUtil.getServerValue(context, "hdServiceFrom");
-            service.IsInvalidCall= WebUtil.GetIntValue(context, "tdIsInvalidCall") == 1;
+            service.IsInvalidCall = WebUtil.GetIntValue(context, "tdIsInvalidCall") == 1;
             if (service.IsRequireCost)
             {
                 service.HandelFee = getValue(context, "tdHandelFee");

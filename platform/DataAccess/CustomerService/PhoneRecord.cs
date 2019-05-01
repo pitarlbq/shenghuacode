@@ -85,6 +85,14 @@ namespace Foresight.DataAccess
             parameters.Add(new SqlParameter("@FileName", FileName));
             return GetOne<PhoneRecord>("select * from [PhoneRecord] where FileOriName=@FileName", parameters);
         }
+        public static PhoneRecord[] GetPhoneRecorByServiceID(int ServiceID, int PhoneType)
+        {
+            string cmdtext = "select * from [PhoneRecord] where [ServiceID]=@ServiceID and PhoneType=@PhoneType";
+            var parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@ServiceID", ServiceID));
+            parameters.Add(new SqlParameter("@PhoneType", PhoneType));
+            return GetList<PhoneRecordDetail>(cmdtext, parameters).ToArray();
+        }
         public static void GetPhoneRecordCountAnalysis(out int NormalSeatCount)
         {
             NormalSeatCount = 0;
@@ -103,6 +111,7 @@ namespace Foresight.DataAccess
             string cmdtext = "select * from [PhoneRecord] where [ServiceID] between " + MinServerID + " and " + MaxServerID;
             return GetList<PhoneRecordDetail>(cmdtext, new List<SqlParameter>()).ToArray();
         }
+
         public static void GetHomeDataCount(int UserID, out int NormalSeatCount, out int InvalidSeatCount, out int ServiceCount, out int SuggestionCount, out int TotalInCallCount, out int TotalOutCallCount, out decimal TotalInCallMin, out decimal TotalOutCallMin)
         {
             NormalSeatCount = 0;
