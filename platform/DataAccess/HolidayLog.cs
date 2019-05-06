@@ -121,7 +121,7 @@ namespace Foresight.DataAccess
             }
             StartHour = string.IsNullOrEmpty(StartHour) ? "00:00" : StartHour;
             EndHour = string.IsNullOrEmpty(EndHour) ? "00:00" : EndHour;
-            if (DisableHolidayTime)
+            if (!DisableHolidayTime)
             {
                 return CalculateTotalHours(StartTime, EndTime);
             }

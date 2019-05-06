@@ -26,7 +26,7 @@ function getColumns() {
         columns.push({ field: 'ProcessTakeHour', title: '处理时效', width: 100 });
     }
     if (typeid == 4) {
-        columns.push({ field: 'ChuliDate', formatter: formatDateTime, title: '处理时间', width: 100 });
+        columns.push({ field: 'AddTime', formatter: formatDateTime, title: '添加时间', width: 100 });
         columns.push({ field: 'BanJieTime', formatter: formatDateTime, title: '办结时间', width: 100 });
         columns.push({ field: 'BanJieTakeHour', title: '处理时效', width: 100 });
     }

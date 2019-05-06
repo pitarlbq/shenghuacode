@@ -473,6 +473,9 @@ function reSetData() {
 }
 function callListPush() {
     var canPush = true;
+    if (RecordName == '') {
+        canPush = false;
+    }
     $.each(callList, function (index, item) {
         if (item.RecordName == RecordName) {
             canPush = false;
@@ -539,7 +542,7 @@ function pickUpPhone() {
 //响铃事件
 function isRingOn() {
     if (RingOnCount == 0) {
-        reSetData();
+        //reSetData();
     }
     RingOnCount++;
     startRecord();
@@ -615,9 +618,9 @@ function startRecord() {
 }
 //结束录音
 function stopRecord() {
+    callListPush();
     if (isStartRecording) {
         HangUpTime = getNowTimeStr();
-        callListPush();
         try {
             TV_StopRecordFile(uID);
         } catch (e) {

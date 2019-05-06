@@ -126,15 +126,18 @@ namespace Foresight.DataAccess
             }
             var recordList = GetList<PhoneRecord>("select [ServiceID], [PickUpTime],[HangUpTime],[PhoneType] from [PhoneRecord] where PhoneType=2", new List<SqlParameter>()).ToArray();
 
-            var recordServiceIDList = recordList.Select(p => p.ServiceID).ToArray();
-            var recordServiceList = huiFangTimeList.Where(p => recordServiceIDList.Contains(p.ID) && !p.CanNotCallback).ToArray();
-            var recordManuallyServiceList = huiFangTimeList.Where(p => !recordServiceIDList.Contains(p.ID) && !p.CanNotCallback && (p.ManuallyPhoneCallBackType == 1 || p.ManuallyPhoneCallBackType == 2)).ToArray();
-
-            var recordServicePickUpIDList = recordList.Where(p => p.FinalPickUpTime > DateTime.MinValue).Select(p => p.ServiceID).ToArray();
-            var recordServicePickUpList = huiFangTimeList.Where(p => recordServicePickUpIDList.Contains(p.ID)).ToArray();
             int LianJieTouSuServiceID = new Utility.SiteConfig().LianJieTouSuServiceID;
             int WuYeTouSuServiceID = new Utility.SiteConfig().WuYeTouSuServiceID;
             int YingXiaoTouSuServiceID = new Utility.SiteConfig().YingXiaoTouSuServiceID;
+
+            var recordServiceIDList = recordList.Select(p => p.ServiceID).ToArray();
+            var recordServiceList = huiFangTimeList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).Where(p => recordServiceIDList.Contains(p.ID) && !p.CanNotCallback).ToArray();
+
+            var recordManuallyServiceList = huiFangTimeList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).Where(p => !recordServiceIDList.Contains(p.ID) && !p.CanNotCallback && (p.ManuallyPhoneCallBackType == 1 || p.ManuallyPhoneCallBackType == 2)).ToArray();
+
+            var recordServicePickUpIDList = recordList.Where(p => p.FinalPickUpTime > DateTime.MinValue).Select(p => p.ServiceID).ToArray();
+            var recordServicePickUpList = huiFangTimeList.Where(p => recordServicePickUpIDList.Contains(p.ID)).ToArray();
+            
             var tousuHuiFangTimeList = huiFangTimeList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).ToArray();
             int BaoXiuServiceID = new Utility.SiteConfig().BaoXiuServiceID;
             var baoXiuHuiFangTimeList = huiFangTimeList.Where(p => p.ServiceType1ID == BaoXiuServiceID).ToArray();

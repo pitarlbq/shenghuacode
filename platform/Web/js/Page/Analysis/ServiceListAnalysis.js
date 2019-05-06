@@ -108,6 +108,7 @@ function get_options() {
         "ServiceType1ID": $('#tdServiceTypeName1').combobox('getValue'),
         "ServiceType2ID": $('#tdServiceTypeName2').combobox('getValue'),
         "ServiceType3ID": $('#tdServiceTypeName3').combobox('getValue'),
+        "ServiceStatus": 250
     };
     options.url = '../Handler/ServiceHandler.ashx';
     return options;

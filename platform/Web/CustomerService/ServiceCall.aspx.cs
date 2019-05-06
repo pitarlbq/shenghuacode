@@ -44,19 +44,18 @@ namespace Web.CustomerService
             var huifangList = CustomerServiceHuifang.GetCustomerServiceHuifangList(service.ID);
             if (pickUpPhoneData == null)
             {
+                CanManualyAddPhoneState = true;
                 if (huifangList.FirstOrDefault(p => p.PhoneCallBackType == 1) != null)
                 {
                     this.tdPhoneCallBackType.Value = "1";
-                    this.labelPhoneStatusDesc.InnerHtml = "电话回访手动修改为接通";
+                    //this.labelPhoneStatusDesc.InnerHtml = "电话回访手动修改为接通";
                 }
                 else if (huifangList.FirstOrDefault(p => p.PhoneCallBackType == 2) != null)
                 {
-                    CanManualyAddPhoneState = true;
                     this.tdPhoneCallBackType.Value = "2";
                 }
                 else
                 {
-                    CanManualyAddPhoneState = true;
                     this.tdPhoneCallBackType.Value = "3";
                 }
             }

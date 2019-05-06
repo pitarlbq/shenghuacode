@@ -26,8 +26,8 @@ function getColumns() {
         columns.push({ field: 'ServiceTypeName3', title: '投诉类型（三级）', width: 150 });
     }
     columns.push({ field: 'TotalCount', title: '投诉总数', width: 100 });
-    columns.push({ field: 'MoreChaoShiCount', title: '超时条数（含未关单）', width: 150 });
-    columns.push({ field: 'TouSuTimeOutPercent', title: '投诉超时率', width: 100 });
+    columns.push({ field: 'ChaoShiCount', title: '超时条数（含未关单）', width: 150 });
+    columns.push({ field: 'TimeOutPercent', title: '投诉超时率', width: 100 });
     columns.push({ field: 'AverageResponseTimeOut', title: '回复时效率', width: 100 });
     columns.push({ field: 'AverageTouSuProcessTimeOut', title: '平均处理时效', width: 150 });
     finalColumns.push(columns);

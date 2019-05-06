@@ -233,6 +233,10 @@ namespace Foresight.DataAccess
                 {
                     conditions.Add("[IsClosed]=1");
                 }
+                else if (ServiceStatus == 250)
+                {
+                    conditions.Add("ServiceStatus not in (2,5)");
+                }
                 else if (ServiceStatus == 12)//回访管理
                 {
                     cmdlist = new List<string>();
@@ -830,7 +834,7 @@ namespace Foresight.DataAccess
                 //DateTime closeTime = DateTime.MinValue;
                 decimal nowHourRange = 0;
                 #region 下单超时
-                var myServiceAccpetMan = serviceAccpetList.OrderBy(p => p.AddTime).FirstOrDefault(p => p.ServiceID == item.ID && (p.AccpetStatus == 1 || p.AccpetStatus == 0) && p.AccpetUserType == 1);
+                var myServiceAccpetMan = serviceAccpetList.OrderBy(p => p.AddTime).FirstOrDefault(p => p.ServiceID == item.ID && p.AccpetUserType == 1);
                 var myXiaDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 1);
                 if (myXiaDanServiceTypeItem == null)
                 {
@@ -866,7 +870,7 @@ namespace Foresight.DataAccess
                 }
                 #endregion
                 #region 派单超时
-                myServiceAccpetMan = serviceAccpetList.OrderBy(p => p.AddTime).FirstOrDefault(p => p.ServiceID == item.ID && (p.AccpetStatus == 1 || p.AccpetStatus == 0) && p.AccpetUserType == 2);
+                myServiceAccpetMan = serviceAccpetList.OrderBy(p => p.AddTime).FirstOrDefault(p => p.ServiceID == item.ID && p.AccpetUserType == 2);
                 var myPaiDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 1);
                 if (myPaiDanServiceTypeItem == null)
                 {
