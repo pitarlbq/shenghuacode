@@ -320,7 +320,7 @@ namespace Foresight.DataAccess
                 return false;
             }
             var sServiceIDList = list.Select(p => p.ID).ToList();
-            //var callBackList = CustomerServiceHuifang.GetCustomerServiceHuifangListByServiceIDList(sServiceIDList);
+            var callBackList = CustomerServiceHuifang.GetCustomerServiceHuifangListByServiceIDList(sServiceIDList);
             int MinServiceID = list.Min(p => p.ID);
             int MaxServiceID = list.Max(p => p.ID);
             var recordList = PhoneRecord.GetPhoneRecordDetailByServiceIDList(MinServiceID, MaxServiceID);
@@ -343,18 +343,35 @@ namespace Foresight.DataAccess
                 if (item.CloseServiceType == 2)
                 {
                     var myRecordList = recordList.Where(p => p.ServiceID == item.ID && p.PhoneType == 2).ToArray();
-                    //var myItemList = callBackList.Where(p => p.ServiceID == item.ID).ToArray();
-                    if (myRecordList.Length == 0)
+                    var myCallBackList = callBackList.Where(p => p.ServiceID == item.ID).ToArray();
+                    if (myRecordList.FirstOrDefault(p => p.PickUpTime > DateTime.MinValue) != null)
                     {
-                        error = "投诉类工单未回访，不能关单";
-                        return false;
+                        return true;
                     }
-                    if (myRecordList.Length == 1 && myRecordList[0].PickUpTime == DateTime.MinValue)
+                    if (myCallBackList.FirstOrDefault(p => p.PhoneCallBackType == 1) != null)
+                    {
+                        return true;
+                    }
+                    if (myRecordList.Length >= 2)
+                    {
+                        return true;
+                    }
+                    if (myCallBackList.Where(p => p.PhoneCallBackType == 2).ToArray().Length >= 2)
+                    {
+                        return true;
+                    }
+                    if (myRecordList.Length == 1)
                     {
                         error = "投诉类工单仅回访一次且未接电话，不能关单";
                         return false;
                     }
-                    return true;
+                    if (myCallBackList.Where(p => p.PhoneCallBackType == 2).ToArray().Length == 1)
+                    {
+                        error = "投诉类工单仅回访一次且未接电话，不能关单";
+                        return false;
+                    }
+                    error = "投诉类工单未回访，不能关单";
+                    return false;
                 }
                 if (item.CloseServiceType == 3)
                 {

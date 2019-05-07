@@ -271,9 +271,9 @@ namespace Foresight.DataAccess
 
             return data;
         }
-        public static void SetServiceTypeData(ServiceType data, ServiceType oldData)
+        public static void SetServiceTypeData(ServiceType data, ServiceType oldData = null, ServiceType_ImportantService importantData = null)
         {
-            if (oldData == null)
+            if (oldData == null && importantData == null)
             {
                 return;
             }
@@ -281,16 +281,32 @@ namespace Foresight.DataAccess
             {
                 data = new ServiceType();
             }
-            data.PaiDanTime = oldData.PaiDanTime;
-            data.CheckTime = oldData.CheckTime;
-            data.ResponseTime = oldData.ResponseTime;
-            data.ChuliTime = oldData.ChuliTime;
-            data.BanJieTime = oldData.BanJieTime;
-            data.HuiFangTime = oldData.HuiFangTime;
-            data.GuanDanTime = oldData.GuanDanTime;
-            data.DisableHolidayTime = oldData.DisableHolidayTime;
-            data.StartHour = oldData.StartHour;
-            data.EndHour = oldData.EndHour;
+            if (importantData != null)
+            {
+                data.PaiDanTime = importantData.PaiDanTime;
+                data.CheckTime = importantData.CheckTime;
+                data.ResponseTime = importantData.ResponseTime;
+                data.ChuliTime = importantData.ChuliTime;
+                data.BanJieTime = importantData.BanJieTime;
+                data.HuiFangTime = importantData.HuiFangTime;
+                data.GuanDanTime = importantData.GuanDanTime;
+                data.DisableHolidayTime = importantData.DisableHolidayTime;
+                data.StartHour = importantData.StartHour;
+                data.EndHour = importantData.EndHour;
+            }
+            else if (oldData != null)
+            {
+                data.PaiDanTime = oldData.PaiDanTime;
+                data.CheckTime = oldData.CheckTime;
+                data.ResponseTime = oldData.ResponseTime;
+                data.ChuliTime = oldData.ChuliTime;
+                data.BanJieTime = oldData.BanJieTime;
+                data.HuiFangTime = oldData.HuiFangTime;
+                data.GuanDanTime = oldData.GuanDanTime;
+                data.DisableHolidayTime = oldData.DisableHolidayTime;
+                data.StartHour = oldData.StartHour;
+                data.EndHour = oldData.EndHour;
+            }
         }
         public static ServiceType[] GetServiceTypeListByParentIDList(int[] ParentIDList)
         {

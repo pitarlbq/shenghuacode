@@ -6,10 +6,17 @@
         $(function () {
             ServiceID = "<%=this.ServiceID%>";
         })
-         function do_close() {
-             parent.do_close_dialog(function () {
-             })
-         }
+        function do_close() {
+            try {
+                parent.do_close_dialog()
+            } catch (e) {
+
+            }
+            try {
+                parent.parent.do_close_dialog();
+            } catch (e) {
+            }
+        }
     </script>
     <script src="../js/Page/CustomerService/ServiceCallMgr.js?v=<%=base.getToken() %>"></script>
     <style>

@@ -61,7 +61,7 @@ function loadTT() {
     });
 }
 function onDblClickRow(index, row) {
-    var iframe = "../CustomerService/ServiceEdit.aspx?op=view&ID=" + row.ID;
+    var iframe = "../CustomerService/ServiceDetailTab.aspx?op=view&ID=" + row.ID;
     parent.do_open_dialog('任务详情', iframe);
 }
 function SearchTT() {

@@ -89,7 +89,7 @@ function loadTT() {
     });
 }
 function onDblClickRow(index, row) {
-    var iframe = "../CustomerService/ServiceEdit.aspx?op=view&ID=" + row.ID;
+    var iframe = "../CustomerService/ServiceDetailTab.aspx?op=view&ID=" + row.ID;
     parent.do_open_dialog('任务详情', iframe);
 }
 function SearchTT() {
@@ -556,30 +556,8 @@ function do_finish() {
         show_message(errormsg, "info");
         return;
     }
-    top.$.messager.confirm("提示", "确认关单?", function (r) {
-        if (r) {
-            var options = { visit: 'closecustomerservice', IDList: JSON.stringify(IDList) };
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: '../Handler/ServiceHandler.ashx',
-                data: options,
-                success: function (data) {
-                    if (data.status) {
-                        show_message("关单成功", "success", function () {
-                            $("#tt_table").datagrid("reload");
-                        });
-                        return;
-                    }
-                    if (data.error) {
-                        show_message(data.error, "warning");
-                        return;
-                    }
-                    show_message('系统错误', 'error');
-                }
-            });
-        }
-    })
+    var iframe = "../CustomerService/ServiceClose.aspx?ID=" + IDList[0];
+    do_open_dialog('关单', iframe);
 }
 function do_view() {
     var rows = $("#tt_table").datagrid("getSelections");
@@ -592,7 +570,7 @@ function do_view() {
         return;
     }
     var ID = rows[0].ID;
-    var iframe = "../CustomerService/ServiceEdit.aspx?op=view&ID=" + ID;
+    var iframe = "../CustomerService/ServiceDetailTab.aspx?op=view&ID=" + ID;
     parent.do_open_dialog('任务详情', iframe);
 }
 //列设置
@@ -749,26 +727,8 @@ function do_mark_important() {
     $.each(rows, function (index, row) {
         IDList.push(row.ID);
     })
-    top.$.messager.confirm("提示", "确认标注重要投诉？", function (r) {
-        if (r) {
-            var options = { visit: 'domarkimportant', IDList: JSON.stringify(IDList) };
-            $.ajax({
-                type: 'POST',
-                dataType: 'json',
-                url: '../Handler/ServiceHandler.ashx',
-                data: options,
-                success: function (message) {
-                    if (message.status) {
-                        show_message('操作成功', 'success', function () {
-                            $("#tt_table").datagrid("reload");
-                        });
-                        return;
-                    }
-                    show_message('系统错误', 'error');
-                }
-            });
-        }
-    })
+    var iframe = "../CustomerService/ServiceImportantTouSuApprove.aspx?ID=" + IDList[0];
+    do_open_dialog('重要投诉', iframe);
 }
 function do_mark_notcall(status) {
     var rows = $("#tt_table").datagrid("getSelections");

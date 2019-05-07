@@ -1315,6 +1315,30 @@ namespace Foresight.DataAccess
 			}
 		}
 		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private string _colseFilePath = String.Empty;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public string ColseFilePath
+		{
+			[DebuggerStepThrough()]
+			get { return this._colseFilePath; }
+			set 
+			{
+				if (this._colseFilePath != value) 
+				{
+					this._colseFilePath = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("ColseFilePath");
+				}
+			}
+		}
+		
 		
 		
 		#endregion
@@ -1384,7 +1408,8 @@ DECLARE @table TABLE(
 	[CloseTime] datetime,
 	[HuiFangRate] decimal(18, 2),
 	[IsImportantTouSu] bit,
-	[CanNotCallback] bit
+	[CanNotCallback] bit,
+	[ColseFilePath] nvarchar(500)
 );
 
 INSERT INTO [dbo].[CustomerService] (
@@ -1440,7 +1465,8 @@ INSERT INTO [dbo].[CustomerService] (
 	[CustomerService].[CloseTime],
 	[CustomerService].[HuiFangRate],
 	[CustomerService].[IsImportantTouSu],
-	[CustomerService].[CanNotCallback]
+	[CustomerService].[CanNotCallback],
+	[CustomerService].[ColseFilePath]
 ) 
 output 
 	INSERTED.[ID],
@@ -1496,7 +1522,8 @@ output
 	INSERTED.[CloseTime],
 	INSERTED.[HuiFangRate],
 	INSERTED.[IsImportantTouSu],
-	INSERTED.[CanNotCallback]
+	INSERTED.[CanNotCallback],
+	INSERTED.[ColseFilePath]
 into @table
 VALUES ( 
 	@ProjectID,
@@ -1551,7 +1578,8 @@ VALUES (
 	@CloseTime,
 	@HuiFangRate,
 	@IsImportantTouSu,
-	@CanNotCallback 
+	@CanNotCallback,
+	@ColseFilePath 
 ); 
 
 SELECT 
@@ -1608,7 +1636,8 @@ SELECT
 	[CloseTime],
 	[HuiFangRate],
 	[IsImportantTouSu],
-	[CanNotCallback] 
+	[CanNotCallback],
+	[ColseFilePath] 
 FROM @table;
 ";
 			}
@@ -1678,7 +1707,8 @@ DECLARE @table TABLE(
 	[CloseTime] datetime,
 	[HuiFangRate] decimal(18, 2),
 	[IsImportantTouSu] bit,
-	[CanNotCallback] bit
+	[CanNotCallback] bit,
+	[ColseFilePath] nvarchar(500)
 );
 
 UPDATE [dbo].[CustomerService] SET 
@@ -1734,7 +1764,8 @@ UPDATE [dbo].[CustomerService] SET
 	[CustomerService].[CloseTime] = @CloseTime,
 	[CustomerService].[HuiFangRate] = @HuiFangRate,
 	[CustomerService].[IsImportantTouSu] = @IsImportantTouSu,
-	[CustomerService].[CanNotCallback] = @CanNotCallback 
+	[CustomerService].[CanNotCallback] = @CanNotCallback,
+	[CustomerService].[ColseFilePath] = @ColseFilePath 
 output 
 	INSERTED.[ID],
 	INSERTED.[ProjectID],
@@ -1789,7 +1820,8 @@ output
 	INSERTED.[CloseTime],
 	INSERTED.[HuiFangRate],
 	INSERTED.[IsImportantTouSu],
-	INSERTED.[CanNotCallback]
+	INSERTED.[CanNotCallback],
+	INSERTED.[ColseFilePath]
 into @table
 WHERE 
 	[CustomerService].[ID] = @ID
@@ -1848,7 +1880,8 @@ SELECT
 	[CloseTime],
 	[HuiFangRate],
 	[IsImportantTouSu],
-	[CanNotCallback] 
+	[CanNotCallback],
+	[ColseFilePath] 
 FROM @table;
 ";
 			}
@@ -1965,7 +1998,8 @@ WHERE
 	[CustomerService].[CloseTime],
 	[CustomerService].[HuiFangRate],
 	[CustomerService].[IsImportantTouSu],
-	[CustomerService].[CanNotCallback]
+	[CustomerService].[CanNotCallback],
+	[CustomerService].[ColseFilePath]
 ";
 			}
 		}
@@ -2042,14 +2076,15 @@ WHERE
 		/// <param name="huiFangRate">huiFangRate</param>
 		/// <param name="isImportantTouSu">isImportantTouSu</param>
 		/// <param name="canNotCallback">canNotCallback</param>
-		public static void InsertCustomerService(int @projectID, string @serviceFullName, string @projectName, string @addUserName, DateTime @startTime, string @serviceArea, string @serviceNumber, string @addCustomerName, string @addCallPhone, string @serviceContent, DateTime @addTime, int @serviceStatus, DateTime @banJieTime, string @banJieNote, DateTime @serviceAppointTime, string @addMan, int @orderNumberID, string @handelFee, decimal @totalFee, string @balanceStatus, int @cKProductOutSumaryID, bool @isRequireCost, bool @isRequireProduct, bool @isAPPShow, bool @isAPPSend, DateTime @aPPSendTime, string @aPPSendResult, int @wechatServiceID, DateTime @acceptTime, int @taskType, string @serviceFrom, int @addUserID, int @sendUserID, string @sendUserName, int @banJieManUserID, string @banJieManName, bool @isUnRead, int @departmentID, bool @isSuggestion, int @publicProjectID, bool @isHighTouSu, bool @isInvalidCall, bool @isInWeiBao, bool @isClosed, int @confirmStatus, int @serviceType1ID, string @serviceType2ID, string @serviceType3ID, int @relatedServiceID, DateTime @closeTime, decimal @huiFangRate, bool @isImportantTouSu, bool @canNotCallback)
+		/// <param name="colseFilePath">colseFilePath</param>
+		public static void InsertCustomerService(int @projectID, string @serviceFullName, string @projectName, string @addUserName, DateTime @startTime, string @serviceArea, string @serviceNumber, string @addCustomerName, string @addCallPhone, string @serviceContent, DateTime @addTime, int @serviceStatus, DateTime @banJieTime, string @banJieNote, DateTime @serviceAppointTime, string @addMan, int @orderNumberID, string @handelFee, decimal @totalFee, string @balanceStatus, int @cKProductOutSumaryID, bool @isRequireCost, bool @isRequireProduct, bool @isAPPShow, bool @isAPPSend, DateTime @aPPSendTime, string @aPPSendResult, int @wechatServiceID, DateTime @acceptTime, int @taskType, string @serviceFrom, int @addUserID, int @sendUserID, string @sendUserName, int @banJieManUserID, string @banJieManName, bool @isUnRead, int @departmentID, bool @isSuggestion, int @publicProjectID, bool @isHighTouSu, bool @isInvalidCall, bool @isInWeiBao, bool @isClosed, int @confirmStatus, int @serviceType1ID, string @serviceType2ID, string @serviceType3ID, int @relatedServiceID, DateTime @closeTime, decimal @huiFangRate, bool @isImportantTouSu, bool @canNotCallback, string @colseFilePath)
 		{
             using (SqlHelper helper = new SqlHelper())
             {
                 try
                 {
                     helper.BeginTransaction();
-            		InsertCustomerService(@projectID, @serviceFullName, @projectName, @addUserName, @startTime, @serviceArea, @serviceNumber, @addCustomerName, @addCallPhone, @serviceContent, @addTime, @serviceStatus, @banJieTime, @banJieNote, @serviceAppointTime, @addMan, @orderNumberID, @handelFee, @totalFee, @balanceStatus, @cKProductOutSumaryID, @isRequireCost, @isRequireProduct, @isAPPShow, @isAPPSend, @aPPSendTime, @aPPSendResult, @wechatServiceID, @acceptTime, @taskType, @serviceFrom, @addUserID, @sendUserID, @sendUserName, @banJieManUserID, @banJieManName, @isUnRead, @departmentID, @isSuggestion, @publicProjectID, @isHighTouSu, @isInvalidCall, @isInWeiBao, @isClosed, @confirmStatus, @serviceType1ID, @serviceType2ID, @serviceType3ID, @relatedServiceID, @closeTime, @huiFangRate, @isImportantTouSu, @canNotCallback, helper);
+            		InsertCustomerService(@projectID, @serviceFullName, @projectName, @addUserName, @startTime, @serviceArea, @serviceNumber, @addCustomerName, @addCallPhone, @serviceContent, @addTime, @serviceStatus, @banJieTime, @banJieNote, @serviceAppointTime, @addMan, @orderNumberID, @handelFee, @totalFee, @balanceStatus, @cKProductOutSumaryID, @isRequireCost, @isRequireProduct, @isAPPShow, @isAPPSend, @aPPSendTime, @aPPSendResult, @wechatServiceID, @acceptTime, @taskType, @serviceFrom, @addUserID, @sendUserID, @sendUserName, @banJieManUserID, @banJieManName, @isUnRead, @departmentID, @isSuggestion, @publicProjectID, @isHighTouSu, @isInvalidCall, @isInWeiBao, @isClosed, @confirmStatus, @serviceType1ID, @serviceType2ID, @serviceType3ID, @relatedServiceID, @closeTime, @huiFangRate, @isImportantTouSu, @canNotCallback, @colseFilePath, helper);
                     helper.Commit();
                 }
                 catch
@@ -2117,8 +2152,9 @@ WHERE
 		/// <param name="huiFangRate">huiFangRate</param>
 		/// <param name="isImportantTouSu">isImportantTouSu</param>
 		/// <param name="canNotCallback">canNotCallback</param>
+		/// <param name="colseFilePath">colseFilePath</param>
 		/// <param name="helper">helper</param>
-		internal static void InsertCustomerService(int @projectID, string @serviceFullName, string @projectName, string @addUserName, DateTime @startTime, string @serviceArea, string @serviceNumber, string @addCustomerName, string @addCallPhone, string @serviceContent, DateTime @addTime, int @serviceStatus, DateTime @banJieTime, string @banJieNote, DateTime @serviceAppointTime, string @addMan, int @orderNumberID, string @handelFee, decimal @totalFee, string @balanceStatus, int @cKProductOutSumaryID, bool @isRequireCost, bool @isRequireProduct, bool @isAPPShow, bool @isAPPSend, DateTime @aPPSendTime, string @aPPSendResult, int @wechatServiceID, DateTime @acceptTime, int @taskType, string @serviceFrom, int @addUserID, int @sendUserID, string @sendUserName, int @banJieManUserID, string @banJieManName, bool @isUnRead, int @departmentID, bool @isSuggestion, int @publicProjectID, bool @isHighTouSu, bool @isInvalidCall, bool @isInWeiBao, bool @isClosed, int @confirmStatus, int @serviceType1ID, string @serviceType2ID, string @serviceType3ID, int @relatedServiceID, DateTime @closeTime, decimal @huiFangRate, bool @isImportantTouSu, bool @canNotCallback, SqlHelper @helper)
+		internal static void InsertCustomerService(int @projectID, string @serviceFullName, string @projectName, string @addUserName, DateTime @startTime, string @serviceArea, string @serviceNumber, string @addCustomerName, string @addCallPhone, string @serviceContent, DateTime @addTime, int @serviceStatus, DateTime @banJieTime, string @banJieNote, DateTime @serviceAppointTime, string @addMan, int @orderNumberID, string @handelFee, decimal @totalFee, string @balanceStatus, int @cKProductOutSumaryID, bool @isRequireCost, bool @isRequireProduct, bool @isAPPShow, bool @isAPPSend, DateTime @aPPSendTime, string @aPPSendResult, int @wechatServiceID, DateTime @acceptTime, int @taskType, string @serviceFrom, int @addUserID, int @sendUserID, string @sendUserName, int @banJieManUserID, string @banJieManName, bool @isUnRead, int @departmentID, bool @isSuggestion, int @publicProjectID, bool @isHighTouSu, bool @isInvalidCall, bool @isInWeiBao, bool @isClosed, int @confirmStatus, int @serviceType1ID, string @serviceType2ID, string @serviceType3ID, int @relatedServiceID, DateTime @closeTime, decimal @huiFangRate, bool @isImportantTouSu, bool @canNotCallback, string @colseFilePath, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
@@ -2175,7 +2211,8 @@ DECLARE @table TABLE(
 	[CloseTime] datetime,
 	[HuiFangRate] decimal(18, 2),
 	[IsImportantTouSu] bit,
-	[CanNotCallback] bit
+	[CanNotCallback] bit,
+	[ColseFilePath] nvarchar(500)
 );
 
 INSERT INTO [dbo].[CustomerService] (
@@ -2231,7 +2268,8 @@ INSERT INTO [dbo].[CustomerService] (
 	[CustomerService].[CloseTime],
 	[CustomerService].[HuiFangRate],
 	[CustomerService].[IsImportantTouSu],
-	[CustomerService].[CanNotCallback]
+	[CustomerService].[CanNotCallback],
+	[CustomerService].[ColseFilePath]
 ) 
 output 
 	INSERTED.[ID],
@@ -2287,7 +2325,8 @@ output
 	INSERTED.[CloseTime],
 	INSERTED.[HuiFangRate],
 	INSERTED.[IsImportantTouSu],
-	INSERTED.[CanNotCallback]
+	INSERTED.[CanNotCallback],
+	INSERTED.[ColseFilePath]
 into @table
 VALUES ( 
 	@ProjectID,
@@ -2342,7 +2381,8 @@ VALUES (
 	@CloseTime,
 	@HuiFangRate,
 	@IsImportantTouSu,
-	@CanNotCallback 
+	@CanNotCallback,
+	@ColseFilePath 
 ); 
 
 SELECT 
@@ -2399,7 +2439,8 @@ SELECT
 	[CloseTime],
 	[HuiFangRate],
 	[IsImportantTouSu],
-	[CanNotCallback] 
+	[CanNotCallback],
+	[ColseFilePath] 
 FROM @table;
 ";
 			
@@ -2457,6 +2498,7 @@ FROM @table;
 			parameters.Add(new SqlParameter("@HuiFangRate", EntityBase.GetDatabaseValue(@huiFangRate)));
 			parameters.Add(new SqlParameter("@IsImportantTouSu", @isImportantTouSu));
 			parameters.Add(new SqlParameter("@CanNotCallback", @canNotCallback));
+			parameters.Add(new SqlParameter("@ColseFilePath", EntityBase.GetDatabaseValue(@colseFilePath)));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -2519,14 +2561,15 @@ FROM @table;
 		/// <param name="huiFangRate">huiFangRate</param>
 		/// <param name="isImportantTouSu">isImportantTouSu</param>
 		/// <param name="canNotCallback">canNotCallback</param>
-		public static void UpdateCustomerService(int @iD, int @projectID, string @serviceFullName, string @projectName, string @addUserName, DateTime @startTime, string @serviceArea, string @serviceNumber, string @addCustomerName, string @addCallPhone, string @serviceContent, DateTime @addTime, int @serviceStatus, DateTime @banJieTime, string @banJieNote, DateTime @serviceAppointTime, string @addMan, int @orderNumberID, string @handelFee, decimal @totalFee, string @balanceStatus, int @cKProductOutSumaryID, bool @isRequireCost, bool @isRequireProduct, bool @isAPPShow, bool @isAPPSend, DateTime @aPPSendTime, string @aPPSendResult, int @wechatServiceID, DateTime @acceptTime, int @taskType, string @serviceFrom, int @addUserID, int @sendUserID, string @sendUserName, int @banJieManUserID, string @banJieManName, bool @isUnRead, int @departmentID, bool @isSuggestion, int @publicProjectID, bool @isHighTouSu, bool @isInvalidCall, bool @isInWeiBao, bool @isClosed, int @confirmStatus, int @serviceType1ID, string @serviceType2ID, string @serviceType3ID, int @relatedServiceID, DateTime @closeTime, decimal @huiFangRate, bool @isImportantTouSu, bool @canNotCallback)
+		/// <param name="colseFilePath">colseFilePath</param>
+		public static void UpdateCustomerService(int @iD, int @projectID, string @serviceFullName, string @projectName, string @addUserName, DateTime @startTime, string @serviceArea, string @serviceNumber, string @addCustomerName, string @addCallPhone, string @serviceContent, DateTime @addTime, int @serviceStatus, DateTime @banJieTime, string @banJieNote, DateTime @serviceAppointTime, string @addMan, int @orderNumberID, string @handelFee, decimal @totalFee, string @balanceStatus, int @cKProductOutSumaryID, bool @isRequireCost, bool @isRequireProduct, bool @isAPPShow, bool @isAPPSend, DateTime @aPPSendTime, string @aPPSendResult, int @wechatServiceID, DateTime @acceptTime, int @taskType, string @serviceFrom, int @addUserID, int @sendUserID, string @sendUserName, int @banJieManUserID, string @banJieManName, bool @isUnRead, int @departmentID, bool @isSuggestion, int @publicProjectID, bool @isHighTouSu, bool @isInvalidCall, bool @isInWeiBao, bool @isClosed, int @confirmStatus, int @serviceType1ID, string @serviceType2ID, string @serviceType3ID, int @relatedServiceID, DateTime @closeTime, decimal @huiFangRate, bool @isImportantTouSu, bool @canNotCallback, string @colseFilePath)
 		{
 			using (SqlHelper helper = new SqlHelper()) 
 			{
 				try
 				{
 					helper.BeginTransaction();
-					UpdateCustomerService(@iD, @projectID, @serviceFullName, @projectName, @addUserName, @startTime, @serviceArea, @serviceNumber, @addCustomerName, @addCallPhone, @serviceContent, @addTime, @serviceStatus, @banJieTime, @banJieNote, @serviceAppointTime, @addMan, @orderNumberID, @handelFee, @totalFee, @balanceStatus, @cKProductOutSumaryID, @isRequireCost, @isRequireProduct, @isAPPShow, @isAPPSend, @aPPSendTime, @aPPSendResult, @wechatServiceID, @acceptTime, @taskType, @serviceFrom, @addUserID, @sendUserID, @sendUserName, @banJieManUserID, @banJieManName, @isUnRead, @departmentID, @isSuggestion, @publicProjectID, @isHighTouSu, @isInvalidCall, @isInWeiBao, @isClosed, @confirmStatus, @serviceType1ID, @serviceType2ID, @serviceType3ID, @relatedServiceID, @closeTime, @huiFangRate, @isImportantTouSu, @canNotCallback, helper);
+					UpdateCustomerService(@iD, @projectID, @serviceFullName, @projectName, @addUserName, @startTime, @serviceArea, @serviceNumber, @addCustomerName, @addCallPhone, @serviceContent, @addTime, @serviceStatus, @banJieTime, @banJieNote, @serviceAppointTime, @addMan, @orderNumberID, @handelFee, @totalFee, @balanceStatus, @cKProductOutSumaryID, @isRequireCost, @isRequireProduct, @isAPPShow, @isAPPSend, @aPPSendTime, @aPPSendResult, @wechatServiceID, @acceptTime, @taskType, @serviceFrom, @addUserID, @sendUserID, @sendUserName, @banJieManUserID, @banJieManName, @isUnRead, @departmentID, @isSuggestion, @publicProjectID, @isHighTouSu, @isInvalidCall, @isInWeiBao, @isClosed, @confirmStatus, @serviceType1ID, @serviceType2ID, @serviceType3ID, @relatedServiceID, @closeTime, @huiFangRate, @isImportantTouSu, @canNotCallback, @colseFilePath, helper);
 					helper.Commit();
 				}
 				catch 
@@ -2595,8 +2638,9 @@ FROM @table;
 		/// <param name="huiFangRate">huiFangRate</param>
 		/// <param name="isImportantTouSu">isImportantTouSu</param>
 		/// <param name="canNotCallback">canNotCallback</param>
+		/// <param name="colseFilePath">colseFilePath</param>
 		/// <param name="helper">helper</param>
-		internal static void UpdateCustomerService(int @iD, int @projectID, string @serviceFullName, string @projectName, string @addUserName, DateTime @startTime, string @serviceArea, string @serviceNumber, string @addCustomerName, string @addCallPhone, string @serviceContent, DateTime @addTime, int @serviceStatus, DateTime @banJieTime, string @banJieNote, DateTime @serviceAppointTime, string @addMan, int @orderNumberID, string @handelFee, decimal @totalFee, string @balanceStatus, int @cKProductOutSumaryID, bool @isRequireCost, bool @isRequireProduct, bool @isAPPShow, bool @isAPPSend, DateTime @aPPSendTime, string @aPPSendResult, int @wechatServiceID, DateTime @acceptTime, int @taskType, string @serviceFrom, int @addUserID, int @sendUserID, string @sendUserName, int @banJieManUserID, string @banJieManName, bool @isUnRead, int @departmentID, bool @isSuggestion, int @publicProjectID, bool @isHighTouSu, bool @isInvalidCall, bool @isInWeiBao, bool @isClosed, int @confirmStatus, int @serviceType1ID, string @serviceType2ID, string @serviceType3ID, int @relatedServiceID, DateTime @closeTime, decimal @huiFangRate, bool @isImportantTouSu, bool @canNotCallback, SqlHelper @helper)
+		internal static void UpdateCustomerService(int @iD, int @projectID, string @serviceFullName, string @projectName, string @addUserName, DateTime @startTime, string @serviceArea, string @serviceNumber, string @addCustomerName, string @addCallPhone, string @serviceContent, DateTime @addTime, int @serviceStatus, DateTime @banJieTime, string @banJieNote, DateTime @serviceAppointTime, string @addMan, int @orderNumberID, string @handelFee, decimal @totalFee, string @balanceStatus, int @cKProductOutSumaryID, bool @isRequireCost, bool @isRequireProduct, bool @isAPPShow, bool @isAPPSend, DateTime @aPPSendTime, string @aPPSendResult, int @wechatServiceID, DateTime @acceptTime, int @taskType, string @serviceFrom, int @addUserID, int @sendUserID, string @sendUserName, int @banJieManUserID, string @banJieManName, bool @isUnRead, int @departmentID, bool @isSuggestion, int @publicProjectID, bool @isHighTouSu, bool @isInvalidCall, bool @isInWeiBao, bool @isClosed, int @confirmStatus, int @serviceType1ID, string @serviceType2ID, string @serviceType3ID, int @relatedServiceID, DateTime @closeTime, decimal @huiFangRate, bool @isImportantTouSu, bool @canNotCallback, string @colseFilePath, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
@@ -2653,7 +2697,8 @@ DECLARE @table TABLE(
 	[CloseTime] datetime,
 	[HuiFangRate] decimal(18, 2),
 	[IsImportantTouSu] bit,
-	[CanNotCallback] bit
+	[CanNotCallback] bit,
+	[ColseFilePath] nvarchar(500)
 );
 
 UPDATE [dbo].[CustomerService] SET 
@@ -2709,7 +2754,8 @@ UPDATE [dbo].[CustomerService] SET
 	[CustomerService].[CloseTime] = @CloseTime,
 	[CustomerService].[HuiFangRate] = @HuiFangRate,
 	[CustomerService].[IsImportantTouSu] = @IsImportantTouSu,
-	[CustomerService].[CanNotCallback] = @CanNotCallback 
+	[CustomerService].[CanNotCallback] = @CanNotCallback,
+	[CustomerService].[ColseFilePath] = @ColseFilePath 
 output 
 	INSERTED.[ID],
 	INSERTED.[ProjectID],
@@ -2764,7 +2810,8 @@ output
 	INSERTED.[CloseTime],
 	INSERTED.[HuiFangRate],
 	INSERTED.[IsImportantTouSu],
-	INSERTED.[CanNotCallback]
+	INSERTED.[CanNotCallback],
+	INSERTED.[ColseFilePath]
 into @table
 WHERE 
 	[CustomerService].[ID] = @ID
@@ -2823,7 +2870,8 @@ SELECT
 	[CloseTime],
 	[HuiFangRate],
 	[IsImportantTouSu],
-	[CanNotCallback] 
+	[CanNotCallback],
+	[ColseFilePath] 
 FROM @table;
 ";
 			
@@ -2882,6 +2930,7 @@ FROM @table;
 			parameters.Add(new SqlParameter("@HuiFangRate", EntityBase.GetDatabaseValue(@huiFangRate)));
 			parameters.Add(new SqlParameter("@IsImportantTouSu", @isImportantTouSu));
 			parameters.Add(new SqlParameter("@CanNotCallback", @canNotCallback));
+			parameters.Add(new SqlParameter("@ColseFilePath", EntityBase.GetDatabaseValue(@colseFilePath)));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -3213,6 +3262,7 @@ SELECT " + CustomerService.SelectFieldList + "FROM [dbo].[CustomerService] " + C
 			public const string HuiFangRate = "HuiFangRate";
 			public const string IsImportantTouSu = "IsImportantTouSu";
 			public const string CanNotCallback = "CanNotCallback";
+			public const string ColseFilePath = "ColseFilePath";
             
             public static Dictionary<string,string> AllPropertiesDescription=new Dictionary<string,string>(){
     			 {"ID" , "int:"},
@@ -3269,6 +3319,7 @@ SELECT " + CustomerService.SelectFieldList + "FROM [dbo].[CustomerService] " + C
     			 {"HuiFangRate" , "decimal:"},
     			 {"IsImportantTouSu" , "bool:"},
     			 {"CanNotCallback" , "bool:"},
+    			 {"ColseFilePath" , "string:"},
             };
 		}
 		#endregion

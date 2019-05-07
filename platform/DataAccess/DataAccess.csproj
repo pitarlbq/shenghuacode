@@ -66,8 +66,10 @@
     <Compile Include="CustomerService\Generated.CustomerService_Return.cs" />
     <Compile Include="CustomerService\Generated.PhoneRecord.cs" />
     <Compile Include="CustomerService\Generated.ServiceType.cs" />
+    <Compile Include="CustomerService\Generated.ServiceType_ImportantService.cs" />
     <Compile Include="CustomerService\Generated.UserServiceType.cs" />
     <Compile Include="CustomerService\PhoneRecord.cs" />
+    <Compile Include="CustomerService\ServiceType_ImportantService.cs" />
     <Compile Include="CustomerService\UserServiceType.cs" />
     <Compile Include="Generated.HolidayLog.cs" />
     <Compile Include="Generated.Seat.cs" />

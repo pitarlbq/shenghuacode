@@ -107,8 +107,11 @@
     <Content Include="callring.mp3" />
     <Content Include="CangKu\DepartmentMgr.aspx" />
     <Content Include="CangKu\EditDepartment.aspx" />
+    <Content Include="CustomerService\ServiceClose.aspx" />
+    <Content Include="CustomerService\ServiceImportantTouSuApprove.aspx" />
     <Content Include="CustomerService\CustomerServiceTypeEdit.aspx" />
     <Content Include="CustomerService\ServiceCallRateEdit.aspx" />
+    <Content Include="CustomerService\ServiceDetailTab.aspx" />
     <Content Include="CustomerService\ServiceProcessFileView.aspx" />
     <Content Include="CustomerService\ServiceSuggestionList.aspx" />
     <Content Include="CustomerService\ServicePhoneListen.aspx" />
@@ -1116,6 +1119,20 @@
     <Compile Include="CangKu\EditDepartment.aspx.designer.cs">
       <DependentUpon>EditDepartment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomerService\ServiceClose.aspx.cs">
+      <DependentUpon>ServiceClose.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceClose.aspx.designer.cs">
+      <DependentUpon>ServiceClose.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceImportantTouSuApprove.aspx.cs">
+      <DependentUpon>ServiceImportantTouSuApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceImportantTouSuApprove.aspx.designer.cs">
+      <DependentUpon>ServiceImportantTouSuApprove.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CustomerService\CustomerServiceTypeEdit.aspx.cs">
       <DependentUpon>CustomerServiceTypeEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1129,6 +1146,13 @@
     </Compile>
     <Compile Include="CustomerService\ServiceCallRateEdit.aspx.designer.cs">
       <DependentUpon>ServiceCallRateEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceDetailTab.aspx.cs">
+      <DependentUpon>ServiceDetailTab.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceDetailTab.aspx.designer.cs">
+      <DependentUpon>ServiceDetailTab.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomerService\ServiceProcessFileView.aspx.cs">
       <DependentUpon>ServiceProcessFileView.aspx</DependentUpon>

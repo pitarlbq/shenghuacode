@@ -257,7 +257,7 @@
                     <%} %>
                     <%if (base.CheckAuthByModuleCode("1101166"))
                         { %>
-                    <a href="javascript:void(0)" onclick="do_cancel()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-cancelorder'">销单</a>
+                    <%--<a href="javascript:void(0)" onclick="do_cancel()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-cancelorder'">销单</a>--%>
                     <%} %>
                     <%if (base.CheckAuthByModuleCode("1101169") && status != 4)
                         { %>

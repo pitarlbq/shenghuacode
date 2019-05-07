@@ -260,12 +260,46 @@ namespace Web.Handler
         {
             string IDs = context.Request.Params["IDList"];
             List<int> IDList = JsonConvert.DeserializeObject<List<int>>(IDs);
+            int MinID = IDList.Min();
+            int MaxID = IDList.Max();
+            var list = ServiceType_ImportantService.GetServiceType_ImportantServiceListByMinMaxServiceID(MinID, MaxID);
+            decimal PaiDanTime = WebUtil.getServerDecimalValue(context, "tdPaiDanTime");
+            decimal ResponseTime = WebUtil.getServerDecimalValue(context, "tdResponseTime");
+            decimal CheckTime = WebUtil.getServerDecimalValue(context, "tdCheckTime");
+            decimal ChuliTime = WebUtil.getServerDecimalValue(context, "tdChuliTime");
+            decimal BanJieTime = WebUtil.getServerDecimalValue(context, "tdBanJieTime");
+            decimal HuiFangTime = WebUtil.getServerDecimalValue(context, "tdHuiFangTime");
+            decimal GuanDanTime = WebUtil.getServerDecimalValue(context, "tdGuanDanTime");
+            bool DisableHolidayTime = WebUtil.getServerIntValue(context, "tdDisableHolidayTime") == 1;
+            string StartHour = WebUtil.getServerValue(context, "tdStartHour");
+            string EndHour = WebUtil.getServerValue(context, "tdEndHour");
             using (SqlHelper helper = new SqlHelper())
             {
                 try
                 {
                     helper.BeginTransaction();
                     string cmdtext = "update [CustomerService] set IsImportantTouSu=1 where ID in (" + string.Join(",", IDList.ToArray()) + ")";
+                    foreach (var ServiceID in IDList)
+                    {
+                        var data = list.FirstOrDefault(p => p.ServiceID == ServiceID);
+                        if (data == null)
+                        {
+                            data = new ServiceType_ImportantService();
+                            data.AddTime = DateTime.Now;
+                            data.ServiceID = ServiceID;
+                        }
+                        data.PaiDanTime = PaiDanTime;
+                        data.ResponseTime = ResponseTime;
+                        data.CheckTime = CheckTime;
+                        data.ChuliTime = ChuliTime;
+                        data.BanJieTime = BanJieTime;
+                        data.HuiFangTime = HuiFangTime;
+                        data.GuanDanTime = GuanDanTime;
+                        data.DisableHolidayTime = DisableHolidayTime;
+                        data.StartHour = StartHour;
+                        data.EndHour = EndHour;
+                        data.Save(helper);
+                    }
                     List<SqlParameter> parameters = new List<SqlParameter>();
                     helper.Execute(cmdtext, CommandType.Text, parameters);
                     helper.Commit();
@@ -612,12 +646,33 @@ namespace Web.Handler
                 WebUtil.WriteJson(context, new { status = false, error = error });
                 return;
             }
+            string FilePath = string.Empty;
+            HttpFileCollection uploadFiles = context.Request.Files;
+            for (int i = 0; i < uploadFiles.Count; i++)
+            {
+                HttpPostedFile postedFile = uploadFiles[i];
+                string fileOriName = postedFile.FileName;
+                if (fileOriName != "" && fileOriName != null)
+                {
+                    string extension = System.IO.Path.GetExtension(fileOriName).ToLower();
+                    string fileName = DateTime.Now.ToFileTime().ToString() + extension;
+                    string filepath = "/upload/CustomerService/";
+                    string rootPath = HttpContext.Current.Server.MapPath("~" + filepath);
+                    if (!System.IO.Directory.Exists(rootPath))
+                    {
+                        System.IO.Directory.CreateDirectory(rootPath);
+                    }
+                    string Path = rootPath + fileName;
+                    postedFile.SaveAs(Path);
+                    FilePath = filepath + fileName;
+                }
+            }
             using (SqlHelper helper = new SqlHelper())
             {
                 try
                 {
                     helper.BeginTransaction();
-                    string cmdtext = "update [CustomerService] set IsClosed=1,[CloseTime]=getdate() where ID in (" + string.Join(",", IDList.ToArray()) + ")";
+                    string cmdtext = "update [CustomerService] set IsClosed=1,[CloseTime]=getdate(),[ColseFilePath]='" + FilePath + "' where ID in (" + string.Join(",", IDList.ToArray()) + ")";
                     List<SqlParameter> parameters = new List<SqlParameter>();
                     helper.Execute(cmdtext, CommandType.Text, parameters);
                     helper.Commit();

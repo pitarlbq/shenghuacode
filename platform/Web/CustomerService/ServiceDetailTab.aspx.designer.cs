@@ -10,6 +10,6 @@
 namespace Web.CustomerService {
     
     
-    public partial class ServiceSuggestionList {
+    public partial class ServiceDetailTab {
     }
 }

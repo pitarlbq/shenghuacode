@@ -340,10 +340,19 @@ function deleteFile(id) {
     $("#tdFile_" + id).html("");
 }
 function closeWin() {
-    parent.do_close_dialog(function () {
-        top.isAddService = false;
-        parent.reloadTT();
-    }, true);
+    try {
+        parent.do_close_dialog(function () {
+            top.isAddService = false;
+            parent.reloadTT();
+        }, true);
+    } catch (e) {
+    }
+    try {
+        parent.parent.do_close_dialog(function () {
+            top.isAddService = false;
+        }, true);
+    } catch (e) {
+    }
 }
 var editIndex;
 var SelectedList = [];

@@ -789,6 +789,7 @@ namespace Foresight.DataAccess
             DateTime nowDate = DateTime.Now;
             int MinServiceID = list.Min(p => p.ID);
             int MaxServiceID = list.Max(p => p.ID);
+            var importantList = ServiceType_ImportantService.GetServiceType_ImportantServiceListByMinMaxServiceID(MinServiceID, MaxServiceID);
             if (serviceTypeList == null)
             {
                 serviceTypeList = ServiceType.GetServiceTypes().ToArray();
@@ -810,7 +811,8 @@ namespace Foresight.DataAccess
                 var myServiceType = serviceTypeList.FirstOrDefault(p => p.ID == item.ServiceType1ID);
                 if (item.IsImportantTouSu)
                 {
-                    ServiceType.SetServiceTypeData(myServiceType, importantServiceType);
+                    var myImportant = importantList.FirstOrDefault(p => p.ServiceID == item.ID);
+                    ServiceType.SetServiceTypeData(myServiceType, oldData: importantServiceType, importantData: myImportant);
                 }
                 if (myServiceType == null)
                 {
