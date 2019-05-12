@@ -22,12 +22,13 @@ function loadTT() {
         showFooter: true,
         columns: [[
             { title: '工作时间周一到周五（9:00-18.00）', width: 100, colspan: 3 },
-            { title: '非工作时间（含节假日）', width: 100, colspan: 3 },
+            { title: '非工作时间（含节假日）', width: 100, colspan: 4 },
             { title: '全部时间', width: 100, colspan: 2 },
         ], [
             { field: 'WorkCallTotalCount', title: '来电总数', width: 100 },
             { field: 'WorkCallNotOnCount', title: '未接来电总数', width: 100 },
             { field: 'WorkCallOnPercent', title: '接通率(%)', width: 100 },
+            { field: 'NotWorkCallTotalCount', title: '来电总数', width: 100 },
             { field: 'NotWorkCallNotOnCount', title: '未接来电总数', width: 100 },
             { field: 'NotWorkCallNotPickUpBackCount', title: '未接来电回复数', width: 100 },
             { field: 'NotWorkCallNotPickUpBackPercent', title: '未接来电回复率(%)', width: 100 },

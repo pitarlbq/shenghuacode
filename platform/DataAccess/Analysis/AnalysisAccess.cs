@@ -137,7 +137,7 @@ namespace Foresight.DataAccess
 
             var recordServicePickUpIDList = recordList.Where(p => p.FinalPickUpTime > DateTime.MinValue).Select(p => p.ServiceID).ToArray();
             var recordServicePickUpList = huiFangTimeList.Where(p => recordServicePickUpIDList.Contains(p.ID)).ToArray();
-            
+
             var tousuHuiFangTimeList = huiFangTimeList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).ToArray();
             int BaoXiuServiceID = new Utility.SiteConfig().BaoXiuServiceID;
             var baoXiuHuiFangTimeList = huiFangTimeList.Where(p => p.ServiceType1ID == BaoXiuServiceID).ToArray();
@@ -146,8 +146,8 @@ namespace Foresight.DataAccess
             int TouSuTotalCount_NotCallBack = addTimeHuiFangList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).Where(p => p.HuiFangAddUserIDList.Length == 0 && !p.CanNotCallback).ToArray().Length;
             int TouSuTotalCount = TouSuTotalCount_CallBack + TouSuTotalCount_NotCallBack;
             int TouSuTotalHuiFangCount = tousuHuiFangTimeList.Length;
-            int BaoXiuTotalCount_CallBack = baoXiuHuiFangTimeList.Where(p => p.HuiFangAddUserIDList.Length > 0).ToArray().Length;
-            int BaoXiuTotalCount_NotCallBack = addTimeHuiFangList.Where(p => p.ServiceType1ID == BaoXiuServiceID).Where(p => p.HuiFangAddUserIDList.Length == 0 && !p.CanNotCallback).ToArray().Length;
+            int BaoXiuTotalCount_CallBack = baoXiuHuiFangTimeList.Where(p => p.HuiFangAddUserIDList.Length > 0 && !p.ServiceFrom.Equals("app")).ToArray().Length;
+            int BaoXiuTotalCount_NotCallBack = addTimeHuiFangList.Where(p => p.ServiceType1ID == BaoXiuServiceID).Where(p => p.HuiFangAddUserIDList.Length == 0 && !p.CanNotCallback && !p.ServiceFrom.Equals("app")).ToArray().Length;
             int BaoXiuTotalCount = BaoXiuTotalCount_CallBack + BaoXiuTotalCount_NotCallBack;
             var footerData = new CallSummaryAnalysisModel();
             footerData.TouSuTotalCount = TouSuTotalCount;
@@ -190,7 +190,7 @@ namespace Foresight.DataAccess
 
                 //报事信息
                 data.BaoXiuTotalCount = BaoXiuTotalCount;//维修工单数量（报事信息）
-                data.BaoXiuCallBackCount = baoXiuHuiFangTimeList.Where(p => p.HuiFangAddUserIDList != null && p.HuiFangAddUserIDList.Contains(item.UserID)).ToArray().Length;//维修回访数（报事信息）
+                data.BaoXiuCallBackCount = baoXiuHuiFangTimeList.Where(p => p.HuiFangAddUserIDList != null && p.HuiFangAddUserIDList.Contains(item.UserID) && !p.ServiceFrom.Equals("app")).ToArray().Length;//维修回访数（报事信息）
                 footerData.BaoXiuCallBackCount += data.BaoXiuCallBackCount;
 
                 //400工单数
@@ -250,11 +250,20 @@ namespace Foresight.DataAccess
                     return false;
                 }
                 var myList = allList.Where(q => q.RelatedPhoneRecordID == p.ID).ToArray();
-                if (myList.Length >= 2)
+                if (myList.Length >= 1)
                 {
                     return true;
                 }
                 if (myList.Length == 1 && myList[0].PickUpTime > DateTime.MinValue)
+                {
+                    return true;
+                }
+                var myList2 = recordQuDianList.Where(q => q.PhoneNumber == p.PhoneNumber && q.CallTime.ToString("yyyyMMdd").Equals(p.CallTime.ToString("yyyyMMdd"))).ToArray();
+                if (myList2.Length >= 1)
+                {
+                    return true;
+                }
+                if (myList2.Length == 1 && myList2[0].PickUpTime > DateTime.MinValue)
                 {
                     return true;
                 }
@@ -734,12 +743,12 @@ namespace Foresight.DataAccess
             }
             if (StartTime > DateTime.MinValue)
             {
-                conditions.Add("exists(select 1 from [CustomerServiceHuifang] where [HuiFangTime]>=@StartTime)");
+                conditions.Add("exists(select 1 from [CustomerServiceHuifang] where [ServiceID]=[CustomerService].ID and  [HuiFangTime]>=@StartTime)");
                 parameters.Add(new SqlParameter("@StartTime", StartTime));
             }
             if (EndTime > DateTime.MinValue)
             {
-                conditions.Add("exists(select 1 from [CustomerServiceHuifang] where [HuiFangTime]<=@EndTime)");
+                conditions.Add("exists(select 1 from [CustomerServiceHuifang] where  [ServiceID]=[CustomerService].ID and [HuiFangTime]<=@EndTime)");
                 parameters.Add(new SqlParameter("@EndTime", EndTime));
             }
             var dataList = new List<YingXiaoManyiAnalysisModel>();

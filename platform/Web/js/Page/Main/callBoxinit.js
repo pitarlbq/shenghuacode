@@ -103,7 +103,7 @@ function T_GetEvent(uID, uEventType, uHandle, uResult, szdata) {
             break;
         case BriEvent_Busy:// 检测到忙音事件,表示PSTN线路已经被断开
             AppendStatusEx(uID, "检测到忙音事件,表示PSTN线路已经被断开" + vValue);
-            stopRecord();
+            stopRecord('BriEvent_Busy');
             TV_HangUpCtrl(uID);
             break;
         case BriEvent_DialTone:// 本地摘机后检测到拨号音
@@ -455,7 +455,7 @@ function utf8to16(str) {
 
 }
 var callList = [];
-var CallTime = '', PickUpTime = '', HangUpTime = '', ComingPhoneNumber = '', RelatedPhoneRecordID = 0, RecordPath, ServiceID = 0, RecordName = '', isPopUp = false, isStartRecording = false, RingOnCount = 0;
+var CallTime = '', PickUpTime = '', HangUpTime = '', ComingPhoneNumber = '', RelatedPhoneRecordID = 0, RecordPath, ServiceID = 0, RecordName = '', isPopUp = false, isStartRecording = false, RingOnCount = 0, RecordID = 0;
 var PhoneType = 0;//1-来电 2-去电
 function reSetData() {
     CallTime = '';
@@ -470,6 +470,7 @@ function reSetData() {
     isStartRecording = false;
     PhoneType = 0;
     RingOnCount = 0;
+    RecordID = 0;
 }
 function callListPush() {
     var canPush = true;
@@ -492,79 +493,86 @@ function callListPush() {
             ServiceID: ServiceID,
             RecordName: RecordName,
             PhoneType: PhoneType,
-            RecordPath: RecordPath
+            RecordPath: RecordPath,
+            RecordID: RecordID
         })
     }
     reSetData();
 }
 //检测到拨号动作
 function doDialNumberDone() {
-    startRecord();
     PhoneType = 2;
+    startRecord('doDialNumberDone');
 }
 //拨打电话
 function dialPhone(phoneNumber, serviceID, relatedPhoneRecordID) {
     reSetData();
+    ComingPhoneNumber = phoneNumber;
+    ServiceID = serviceID || 0;
+    RelatedPhoneRecordID = relatedPhoneRecordID || 0;
+    CallTime = getNowTimeStr();
+    PhoneType = 2;
+    savePhoneRecord('dialPhone');
     if (top.isDriverOn == 2) {
+        reSetData();
         var messages = '电话语音驱动未运行，请检查'
         alertNotify(messages, 2);
         return;
     }
     if (top.isPhoneDeviceWork == 2) {
+        reSetData();
         var messages = '设备未连接电脑，请检查'
         alertNotify(messages, 2);
         return;
     }
     var messages = '您正在拨打电话:' + phoneNumber + '。电话正在接通中...';
     alertNotify(messages, 0);
-    ComingPhoneNumber = phoneNumber;
-    ServiceID = serviceID || 0;
-    RelatedPhoneRecordID = relatedPhoneRecordID || 0;
     try {
+        startRecord('dialPhone');
         openMic();
         TV_HangUpCtrl(uID);
         TV_StartDial(uID, phoneNumber);
-        startRecord();
     } catch (e) {
         alert(e);
     }
-    PhoneType = 2;
 }
 //软接听电话
 function pickUpPhone() {
     RingOnCount = 0;
-    TV_OffHookCtrl(uID);
-    startRecord();
+
     PhoneType = 1;
     PickUpTime = getNowTimeStr();
+    startRecord('pickUpPhone');
+
+    TV_OffHookCtrl(uID);
     top.close_message();
 }
 //响铃事件
 function isRingOn() {
-    if (RingOnCount == 0) {
-        //reSetData();
-    }
     RingOnCount++;
-    startRecord();
     PhoneType = 1;
+    startRecord('isRingOn');
 }
-//本机电话接听
+//本机电话摘机
 function pickUpLinePhone() {
     RingOnCount = 0;
-    startRecord();
+    if (PhoneType == 0) {
+        return;
+    }
     if (PhoneType == 1) {
         PickUpTime = getNowTimeStr();
     } else {
         PhoneType = 2;
     }
+    startRecord('pickUpLinePhone');
     top.close_message();
 }
 //客户接听电话
 function doCustomerPickUpPhone() {
     RingOnCount = 0;
-    startRecord();
     PhoneType = 2;
     PickUpTime = getNowTimeStr();
+    startRecord('doCustomerPickUpPhone');
     top.close_message();
 }
 //挂机
@@ -572,7 +580,7 @@ function hangUpPhone() {
     RingOnCount = 0;
     uID = 0;
     try {
-        stopRecord();
+        stopRecord('hangUpPhone');
         closeMic();
         TV_HangUpCtrl(uID);
         top.close_message();
@@ -587,6 +595,8 @@ function hangUpPhone() {
 //拒接来电
 function rejectPickUpPhone() {
     RingOnCount = 0;
+    HangUpTime = getNowTimeStr();
+    savePhoneRecord('rejectPickUpPhone');
     TV_RefuseCallIn(uID);
     uID = 0;
     top.close_message();
@@ -601,12 +611,13 @@ function openDialCallPickUpBox() {
     top.alertNotify(messages, 1);
 }
 //开始录音
-function startRecord() {
+function startRecord(source) {
+    CallTime = getNowTimeStr();
+    savePhoneRecord(source);
     if (isStartRecording) {
         return;
     }
     isStartRecording = true;
-    CallTime = getNowTimeStr();
     if (RecordLocation) {
         if (!RecordLocation.endWith('\\')) {
             RecordLocation += '\\';
@@ -617,10 +628,13 @@ function startRecord() {
     }
 }
 //结束录音
-function stopRecord() {
+function stopRecord(source) {
+    if (RecordID > 0) {
+        HangUpTime = getNowTimeStr();
+        savePhoneRecord(source);
+    }
     callListPush();
     if (isStartRecording) {
-        HangUpTime = getNowTimeStr();
         try {
             TV_StopRecordFile(uID);
         } catch (e) {
@@ -635,8 +649,9 @@ function uploadFileRecord() {
     if (callList.length == 0) {
         return;
     }
+    savePhoneRecord('uploadFileRecord');
     var callItem = callList[callList.length - 1];
-    var params = '?visit=uploadvoicerecord&CallTime=' + callItem.CallTime + '&PickUpTime=' + callItem.PickUpTime + '&HangUpTime=' + callItem.HangUpTime + '&ComingPhone=' + callItem.ComingPhoneNumber + '&ServiceID=' + callItem.ServiceID + '&PhoneType=' + callItem.PhoneType + '&UserID=' + UserID + '&AddUserName=' + AddUserName + '&RelatedPhoneRecordID=' + callItem.RelatedPhoneRecordID + "&RecordName=" + callItem.RecordName;
+    var params = '?visit=uploadvoicerecord&RecordID=' + callItem.RecordID;
     TV_uploadFile(contextPath + '/Handler/ServiceHandler.ashx' + params, callItem.RecordPath);
     setTimeout(function () {
         var messages = '电话录音上传成功'
@@ -647,8 +662,8 @@ function uploadFileRecord() {
 }
 //得到来电号码
 function getPhoneNumber(data) {
-    startRecord();
     PhoneType = 1;
+    startRecord('getPhoneNumber');
     var dataArray = data.split(' ');
     var dataItem = null;
     if (dataArray.length > 0) {
@@ -657,8 +672,8 @@ function getPhoneNumber(data) {
     if (dataItem) {
         var dataItemArray = dataItem.split('=');
         if (dataItemArray.length > 0) {
-            var phoneNumber = dataItemArray[dataItemArray.length - 1];
-            getDataByPhoneNumber(phoneNumber);
+            ComingPhoneNumber = dataItemArray[dataItemArray.length - 1];
+            getDataByPhoneNumber(ComingPhoneNumber);
             setTimeout(function () {
                 openDialCallPickUpBox();
             }, 50);
@@ -689,4 +704,21 @@ function openMic() {
 function closeMic() {
     //TV_EnableMic(0, FALSE);
     TV_EnableLine2Spk(0, FALSE);
+}
+function savePhoneRecord(source) {
+    if (PhoneType == 0) {
+        return;
+    }
+    var options = { visit: "savephonerecord", RecordID: RecordID, UserID: UserID, ServiceID: ServiceID, AddUserName: AddUserName, ComingPhone: ComingPhoneNumber, PhoneType: PhoneType, RelatedPhoneRecordID: RelatedPhoneRecordID, CallTime: CallTime, PickUpTime: PickUpTime, HangUpTime: HangUpTime, source: source }
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: 'Handler/ServiceHandler.ashx',
+        data: options,
+        success: function (data) {
+            if (data.status) {
+                RecordID = data.RecordID;
+            }
+        }
+    });
 }

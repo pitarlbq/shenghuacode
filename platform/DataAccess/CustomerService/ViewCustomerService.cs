@@ -217,15 +217,34 @@ namespace Foresight.DataAccess
             {
                 conditions.Add("exists(select 1 from [Project] where A.ProjectID=Project.ID and [Project].CompanyID in (" + string.Join(",", CompanyIDList) + "))");
             }
-            if (StartTime > DateTime.MinValue)
+            if (ServiceStatus == 12)
             {
-                conditions.Add("[AddTime]>=@StartTime");
-                parameters.Add(new SqlParameter("@StartTime", StartTime));
+                conditions.Add("[ServiceFrom]!='app'");
+                if (StartTime > DateTime.MinValue)
+                {
+                    conditions.Add("exists(select 1 from [CustomerServiceHuifang] where [ServiceID]=A.ID and  [HuiFangTime]>=@StartTime)");
+                    parameters.Add(new SqlParameter("@StartTime", StartTime));
+                }
+                if (EndTime > DateTime.MinValue)
+                {
+                    EndTime = EndTime.AddDays(1);
+                    conditions.Add("exists(select 1 from [CustomerServiceHuifang] where  [ServiceID]=A.ID and [HuiFangTime]<=@EndTime)");
+                    parameters.Add(new SqlParameter("@EndTime", EndTime));
+                }
             }
-            if (EndTime > DateTime.MinValue)
+            else
             {
-                conditions.Add("[AddTime]<=@EndTime");
-                parameters.Add(new SqlParameter("@EndTime", EndTime));
+                if (StartTime > DateTime.MinValue)
+                {
+                    conditions.Add("[AddTime]>=@StartTime");
+                    parameters.Add(new SqlParameter("@StartTime", StartTime));
+                }
+                if (EndTime > DateTime.MinValue)
+                {
+                    EndTime = EndTime.AddDays(1);
+                    conditions.Add("[AddTime]<=@EndTime");
+                    parameters.Add(new SqlParameter("@EndTime", EndTime));
+                }
             }
             if (ServiceStatus > -1 && ServiceStatus != 101 && ServiceStatus != 13)
             {
@@ -381,6 +400,7 @@ namespace Foresight.DataAccess
             }
             if (EndTime > DateTime.MinValue)
             {
+                EndTime = EndTime.AddDays(1);
                 conditions.Add("[AddTime]<=@EndTime");
                 parameters.Add(new SqlParameter("@EndTime", EndTime));
             }
@@ -465,6 +485,7 @@ namespace Foresight.DataAccess
             }
             if (EndTime > DateTime.MinValue)
             {
+                EndTime = EndTime.AddDays(1);
                 conditions.Add("[AddTime]<=@EndTime");
                 parameters.Add(new SqlParameter("@EndTime", EndTime));
             }

@@ -180,6 +180,9 @@ namespace Web.Handler
                     case "getmytimeoutservice":
                         getmytimeoutservice(context);
                         break;
+                    case "savephonerecord":
+                        savephonerecord(context);
+                        break;
                     default:
                         break;
                 }
@@ -190,6 +193,7 @@ namespace Web.Handler
                 WebUtil.WriteJson(context, new { status = false });
             }
         }
+
         private void getmytimeoutservice(HttpContext context)
         {
             List<int> RoomIDList = new List<int>();
@@ -528,6 +532,53 @@ namespace Web.Handler
                 Utility.LogHelper.WriteError("ServiceHandler", "命令: loadservicerecordgrid", ex);
             }
         }
+        private void savephonerecord(HttpContext context)
+        {
+            int RecordID = WebUtil.GetIntValue(context, "RecordID");
+            PhoneRecord record = null;
+            if (RecordID > 0)
+            {
+                record = PhoneRecord.GetPhoneRecord(RecordID);
+            }
+            if (record == null)
+            {
+                record = new PhoneRecord();
+                record.AddTime = DateTime.Now;
+                record.UserID = WebUtil.GetIntValue(context, "UserID");
+                record.ServiceID = WebUtil.GetIntValue(context, "ServiceID");
+                record.AddUserName = context.Request["AddUserName"];
+                record.PhoneNumber = context.Request["ComingPhone"];
+                record.PhoneType = WebUtil.GetIntValue(context, "PhoneType");
+                record.RelatedPhoneRecordID = WebUtil.GetIntValue(context, "RelatedPhoneRecordID");
+            }
+            if (record.CallTime == DateTime.MinValue)
+            {
+                DateTime CallTime = WebUtil.GetDateValue(context, "CallTime");
+                record.CallTime = CallTime == DateTime.MinValue ? DateTime.Now : CallTime;
+            }
+            DateTime PickUpTime = WebUtil.GetDateValue(context, "PickUpTime");
+            if (PickUpTime > DateTime.MinValue)
+            {
+                record.PickUpTime = PickUpTime;
+            }
+            DateTime HangUpTime = WebUtil.GetDateValue(context, "HangUpTime");
+            if (HangUpTime > DateTime.MinValue)
+            {
+                record.HangUpTime = HangUpTime;
+            }
+            if (record.PhoneType <= 0)
+            {
+                Utility.LogHelper.WriteError("ServiceHandler.ashx", "savephonerecord", new Exception("error:PhoneType错误;source:" + context.Request["source"] + "data:" + Utility.JsonConvert.SerializeObject(record)));
+                return;
+            }
+            if (record.CallTime == DateTime.MinValue)
+            {
+                Utility.LogHelper.WriteError("ServiceHandler.ashx", "savephonerecord", new Exception("error:CallTime错误;source:" + context.Request["source"] + "data:" + Utility.JsonConvert.SerializeObject(record)));
+                return;
+            }
+            record.Save();
+            WebUtil.WriteJson(context, new { ID = record.ID });
+        }
         private void uploadvoicerecord(HttpContext context)
         {
             string RecordVoicePath = string.Empty;
@@ -562,32 +613,15 @@ namespace Web.Handler
                 WebUtil.WriteJson(context, "0");
                 return;
             }
-            var record = PhoneRecord.GetPhoneRecordByFileName(fileName);
-            if (record != null)
+            int RecordID = WebUtil.GetIntValue(context, "RecordID");
+            var record = PhoneRecord.GetPhoneRecord(RecordID);
+            if (record == null)
             {
                 WebUtil.WriteJson(context, "0");
                 return;
             }
-            record = new PhoneRecord();
-            record.UserID = WebUtil.GetIntValue(context, "UserID");
-            record.ServiceID = WebUtil.GetIntValue(context, "ServiceID");
-            record.AddTime = DateTime.Now;
-            record.AddUserName = context.Request["AddUserName"];
-            record.PhoneNumber = context.Request["ComingPhone"];
-            DateTime CallTime = WebUtil.GetDateValue(context, "CallTime");
-            record.CallTime = CallTime == DateTime.MinValue ? DateTime.Now : CallTime;
-            DateTime PickUpTime = WebUtil.GetDateValue(context, "PickUpTime");
-            record.PickUpTime = PickUpTime;
-            DateTime HangUpTime = WebUtil.GetDateValue(context, "HangUpTime");
-            record.HangUpTime = HangUpTime == DateTime.MinValue ? DateTime.Now : HangUpTime;
-            if (record.HangUpTime <= PickUpTime.AddSeconds(3))
-            {
-                record.PickUpTime = DateTime.MinValue;
-            }
             record.RecordVoicePath = RecordVoicePath;
-            record.PhoneType = WebUtil.GetIntValue(context, "PhoneType");
             record.FileOriName = fileName;
-            record.RelatedPhoneRecordID = WebUtil.GetIntValue(context, "RelatedPhoneRecordID");
             record.Save();
             WebUtil.WriteJson(context, "1");
         }

@@ -114,11 +114,8 @@ function get_options() {
     return options;
 }
 function formatTimeout(value, row) {
-    if (row.TimeOutStatus == 2) {
+    if (row.BanJieTimeOutStatus == 2) {
         return '<img style="height:20px;" src="../styles/images/buttons/statuschaoshi.png" />';
-    }
-    if (row.TimeOutStatus == 3) {
-        return '<img style="height:20px;" src="../styles/images/buttons/statusmorechashi.png" />';
     }
     return '<img style="height:20px;" src="../styles/images/buttons/statusnormal.png" />';
 }

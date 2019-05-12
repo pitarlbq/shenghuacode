@@ -42,7 +42,8 @@ namespace Foresight.DataAccess
             long totalRows = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
             List<string> conditions = new List<string>();
-            conditions.Add("isnull([FileOriName],'')!=''");
+            //conditions.Add("isnull([FileOriName],'')!=''");
+            conditions.Add("1=1");
             string cmd = string.Empty;
             if (PhoneType > 0)
             {
@@ -79,7 +80,7 @@ namespace Foresight.DataAccess
             dg.page = pageSize;
             return dg;
         }
-        public static PhoneRecord GetPhoneRecordByFileName(string FileName)
+        public static PhoneRecord GetPhoneRecordByFileName(string FileName, int RecordID = 0)
         {
             var parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@FileName", FileName));

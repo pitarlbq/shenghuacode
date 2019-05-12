@@ -185,11 +185,8 @@ function formatNumber(value, row) {
     return (Number(value) > 0 ? value : "");
 }
 function formatTimeout(value, row) {
-    if (row.TimeOutStatus == 2) {
+    if (row.BanJieTimeOutStatus == 2) {
         return '<img style="height:25px;" src="../styles/images/buttons/statuschaoshi.png" />';
-    }
-    if (row.TimeOutStatus == 3) {
-        return '<img style="height:25px;" src="../styles/images/buttons/statusmorechashi.png" />';
     }
     return '<img style="height:25px;" src="../styles/images/buttons/statusnormal.png" />';
 }
@@ -545,19 +542,50 @@ function do_finish() {
     }
     var IDList = [];
     var errormsg = '';
+    var isImportService = false;
     $.each(rows, function (index, row) {
         if (row.IsClosed) {
             errormsg = '选中的任务已关单';
             return false;
         }
+        isImportService = row.IsImportantTouSu;
         IDList.push(row.ID);
     })
     if (errormsg) {
         show_message(errormsg, "info");
         return;
     }
-    var iframe = "../CustomerService/ServiceClose.aspx?ID=" + IDList[0];
-    do_open_dialog('关单', iframe);
+    if (isImportService) {
+        var iframe = "../CustomerService/ServiceClose.aspx?ID=" + IDList[0];
+        do_open_dialog('关单', iframe);
+        return;
+    }
+    top.$.messager.confirm("提示", "确认关单？", function (r) {
+        if (r) {
+            MaskUtil.mask('body', '提交中');
+            var options = { visit: 'closecustomerservice', IDList: JSON.stringify(IDList) };
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '../Handler/ServiceHandler.ashx',
+                data: options,
+                success: function (message) {
+                    MaskUtil.unmask();
+                    if (message.status) {
+                        show_message('操作成功', 'success', function () {
+                            $("#tt_table").datagrid("reload");
+                        });
+                        return;
+                    }
+                    if (message.error) {
+                        show_message(message.error, 'warning');
+                        return;
+                    }
+                    show_message('系统错误', 'error');
+                }
+            });
+        }
+    })
 }
 function do_view() {
     var rows = $("#tt_table").datagrid("getSelections");
