@@ -535,6 +535,7 @@ namespace Web.Handler
         private void savephonerecord(HttpContext context)
         {
             int RecordID = WebUtil.GetIntValue(context, "RecordID");
+            string PhoneNumber = context.Request["ComingPhone"];
             PhoneRecord record = null;
             if (RecordID > 0)
             {
@@ -547,9 +548,12 @@ namespace Web.Handler
                 record.UserID = WebUtil.GetIntValue(context, "UserID");
                 record.ServiceID = WebUtil.GetIntValue(context, "ServiceID");
                 record.AddUserName = context.Request["AddUserName"];
-                record.PhoneNumber = context.Request["ComingPhone"];
                 record.PhoneType = WebUtil.GetIntValue(context, "PhoneType");
                 record.RelatedPhoneRecordID = WebUtil.GetIntValue(context, "RelatedPhoneRecordID");
+            }
+            if (!string.IsNullOrEmpty(PhoneNumber))
+            {
+                record.PhoneNumber = PhoneNumber;
             }
             if (record.CallTime == DateTime.MinValue)
             {
@@ -569,15 +573,23 @@ namespace Web.Handler
             if (record.PhoneType <= 0)
             {
                 Utility.LogHelper.WriteError("ServiceHandler.ashx", "savephonerecord", new Exception("error:PhoneType错误;source:" + context.Request["source"] + "data:" + Utility.JsonConvert.SerializeObject(record)));
+                WebUtil.WriteJson(context, new { status = false });
                 return;
             }
             if (record.CallTime == DateTime.MinValue)
             {
                 Utility.LogHelper.WriteError("ServiceHandler.ashx", "savephonerecord", new Exception("error:CallTime错误;source:" + context.Request["source"] + "data:" + Utility.JsonConvert.SerializeObject(record)));
+                WebUtil.WriteJson(context, new { status = false });
+                return;
+            }
+            if (string.IsNullOrEmpty(record.PhoneNumber))
+            {
+                Utility.LogHelper.WriteError("ServiceHandler.ashx", "savephonerecord", new Exception("error:PhoneNumber错误;source:" + context.Request["source"] + "data:" + Utility.JsonConvert.SerializeObject(record)));
+                WebUtil.WriteJson(context, new { status = false });
                 return;
             }
             record.Save();
-            WebUtil.WriteJson(context, new { ID = record.ID });
+            WebUtil.WriteJson(context, new { status = true, RecordID = record.ID });
         }
         private void uploadvoicerecord(HttpContext context)
         {
@@ -2316,6 +2328,8 @@ namespace Web.Handler
             service.DepartmentID = WebUtil.getServerIntValue(context, "tdBelongTeamName");
             service.ServiceFrom = WebUtil.getServerValue(context, "hdServiceFrom");
             service.IsInvalidCall = WebUtil.GetIntValue(context, "tdIsInvalidCall") == 1;
+            service.IsHighTouSu = WebUtil.getServerIntValue(context, "tdIsHighTouSu") == 1;
+            service.IsInWeiBao = WebUtil.getServerIntValue(context, "tdIsInWeiBao") == 1;
             if (service.IsRequireCost)
             {
                 service.HandelFee = getValue(context, "tdHandelFee");

@@ -184,6 +184,10 @@ namespace Foresight.DataAccess
         {
             get
             {
+                if (this.PickUpTime > DateTime.MinValue && this.HangUpTime == DateTime.MinValue)
+                {
+                    return this.PickUpTime;
+                }
                 if (this.TotalCallHour <= 0)
                 {
                     return DateTime.MinValue;

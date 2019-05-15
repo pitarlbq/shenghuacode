@@ -128,7 +128,7 @@ namespace Foresight.DataAccess
             decimal totalHours = 0;
             int MinDay = StartTime.Day;
             int MaxDay = EndTime.Day;
-            int dayCount = MaxDay - MinDay;
+            int dayCount = (int)Math.Ceiling((EndTime - StartTime).TotalDays);
             for (int i = 0; i <= dayCount; i++)
             {
                 DateTime iStartDate = GetDateByHourStr(StartTime.AddDays(i), StartHour, goNextDay: false);

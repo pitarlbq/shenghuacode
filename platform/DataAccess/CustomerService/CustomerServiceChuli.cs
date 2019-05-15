@@ -108,12 +108,17 @@ namespace Foresight.DataAccess
             dg.page = pageSize;
             return dg;
         }
-        public static CustomerServiceChuli[] GetCustomerServiceChuliListByMinMaxServiceID(int MinServiceID, int MaxServiceID)
+        public static CustomerServiceChuli[] GetCustomerServiceChuliListByMinMaxServiceID(int MinServiceID, int MaxServiceID, bool IsDataGridView = false)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
             List<string> conditions = new List<string>();
             conditions.Add("[ServiceID] between " + MinServiceID + " and " + MaxServiceID);
-            return GetList<CustomerServiceChuli>("select [ID],[ServiceID],[ChuliDate],[AddTime],[HandelType],[ResponseTime],[CheckTime],[HandelFee] from [CustomerServiceChuli] where " + string.Join(" and ", conditions.ToArray()), parameters).ToArray();
+            string cmdcolumns = "";
+            if (IsDataGridView)
+            {
+                cmdcolumns += ",[ChuliNote]";
+            }
+            return GetList<CustomerServiceChuli>("select [ID],[ServiceID],[ChuliDate],[AddTime],[HandelType],[ResponseTime],[CheckTime],[HandelFee] "+ cmdcolumns + " from [CustomerServiceChuli] where " + string.Join(" and ", conditions.ToArray()), parameters).ToArray();
         }
     }
     public partial class CustomerServiceChuliDetail : CustomerServiceChuli
@@ -121,4 +126,4 @@ namespace Foresight.DataAccess
         [DatabaseColumn("FileCount")]
         public int FileCount { get; set; }
     }
-    }
+}

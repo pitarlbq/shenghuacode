@@ -178,9 +178,6 @@ function formatOper(value, row) {
     $html += '</div>';
     return $html;
 }
-function formatRepairImg(value, row) {
-    return '';
-}
 function formatNumber(value, row) {
     return (Number(value) > 0 ? value : "");
 }
@@ -789,4 +786,10 @@ function do_mark_notcall(status) {
             });
         }
     })
+}
+function formatRepairImg(value, row) {
+    if (value) {
+        return '<a target="_blank" href="' + value + '">查看</a>'
+    }
+    return '';
 }

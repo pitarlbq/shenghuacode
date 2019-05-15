@@ -34,5 +34,12 @@ namespace Foresight.DataAccess
             parameters.Add(new SqlParameter("@ServiceID", ServiceID));
             return GetList<CustomerServiceChuli_Attach>("select * from [CustomerServiceChuli_Attach] where " + string.Join(" and ", conditions.ToArray()) + " order by AddTime desc", parameters).ToArray();
         }
+        public static CustomerServiceChuli_Attach[] GetCustomerServiceChuli_AttachListByMinMaxChuliID(int MinChuliID, int MaxChuliID)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<string> conditions = new List<string>();
+            conditions.Add("[ChuliID] between " + MinChuliID + " and " + MaxChuliID);
+            return GetList<CustomerServiceChuli_Attach>("select [ID],[ChuliID],[AttachedFilePath] from [CustomerServiceChuli_Attach] where " + string.Join(" and ", conditions.ToArray()), parameters).ToArray();
+        }
     }
 }

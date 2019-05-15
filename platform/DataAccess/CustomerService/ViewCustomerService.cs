@@ -335,7 +335,7 @@ namespace Foresight.DataAccess
                 dg.page = pageSize;
                 return dg;
             }
-            GetFinalViewCustomerDataGrid(list, IncludeTimeOutData: true);
+            GetFinalViewCustomerDataGrid(list, IncludeTimeOutData: true, IsDataGridView: true);
             if (TimeOutType > 0)//1-正常 2-超时
             {
                 list = list.Where(p => p.TimeOutStatus == TimeOutType).ToArray();
@@ -412,7 +412,7 @@ namespace Foresight.DataAccess
             {
                 list = list.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();
             }
-            GetFinalViewCustomerDataGrid(list, IncludeTimeOutData: true);
+            GetFinalViewCustomerDataGrid(list, IncludeTimeOutData: true, IsDataGridView: true);
             DataAccess.Ui.DataGrid dg = new Ui.DataGrid();
             if (list.Length == 0)
             {
@@ -662,7 +662,7 @@ namespace Foresight.DataAccess
             GetFinalViewCustomerDataGrid(list);
             return list;
         }
-        public static void GetFinalViewCustomerDataGrid(ViewCustomerService[] list, bool IncludeTimeOutData = false)
+        public static void GetFinalViewCustomerDataGrid(ViewCustomerService[] list, bool IncludeTimeOutData = false, bool IsDataGridView = false)
         {
             if (list.Length == 0)
             {
@@ -673,8 +673,15 @@ namespace Foresight.DataAccess
             var serviceTypeList = ServiceType.GetServiceTypes().ToArray();
             var userList = User.GetSysAPPUserList();
             var serviceAccpetList = CustomerService_Accpet.GetCustomerService_AccpetListByMinMaxServiceID(MinServiceID, MaxServiceID);
-            var serviceProcessList = CustomerServiceChuli.GetCustomerServiceChuliListByMinMaxServiceID(MinServiceID, MaxServiceID);
+            var serviceProcessList = CustomerServiceChuli.GetCustomerServiceChuliListByMinMaxServiceID(MinServiceID, MaxServiceID, IsDataGridView: IsDataGridView);
             var serviceHuifangList = CustomerServiceHuifang.GetCustomerServiceHuifangListByMinMaxServiceID(MinServiceID, MaxServiceID);
+            CustomerServiceChuli_Attach[] chuliAttachedList = new CustomerServiceChuli_Attach[] { };
+            if (IsDataGridView)
+            {
+                int MinChuliID = serviceProcessList.Min(p => p.ID);
+                int MaxChuliID = serviceProcessList.Max(p => p.ID);
+                chuliAttachedList = CustomerServiceChuli_Attach.GetCustomerServiceChuli_AttachListByMinMaxChuliID(MinChuliID, MaxChuliID);
+            }
             foreach (var item in list)
             {
                 var myServiceType1 = serviceTypeList.FirstOrDefault(q => q.ID == item.ServiceType1ID);
@@ -714,6 +721,11 @@ namespace Foresight.DataAccess
                     {
                         item.FinalServiceProcessMan = string.Join(",", users.Select(p => p.FinalRealName).ToArray());
                         item.FinalServiceProcessTime = myServiceProcessUserList[0].AddTime;
+                    }
+                    var myChuliAttachList = chuliAttachedList.Where(q => myServiceProcessUserList.Select(m => m.ID).Contains(q.ChuliID) && !string.IsNullOrEmpty(q.AttachedFilePath)).ToArray();
+                    if (myChuliAttachList.Length > 0)
+                    {
+                        item.RepareImg = Utility.Tools.GetContextPath() + myChuliAttachList[0].AttachedFilePath;
                     }
                 }
                 var myServiceHuiFangList = serviceHuifangList.Where(q => q.ServiceID == item.ID).ToArray();
@@ -1638,5 +1650,20 @@ namespace Foresight.DataAccess
         /// 1-电话接通 2-电话未接通 3-未拨打
         /// </summary>
         public int ManuallyPhoneCallBackType { get; set; }
+        public string RepareImg { get; set; }
+        public string IsInWeiBaoDesc
+        {
+            get
+            {
+                return this.IsInWeiBao ? "是" : "否";
+            }
+        }
+        public string IsHighTouSuDesc
+        {
+            get
+            {
+                return this.IsHighTouSu ? "是" : "否";
+            }
+        }
     }
 }
