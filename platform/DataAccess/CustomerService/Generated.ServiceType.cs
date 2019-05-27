@@ -286,9 +286,9 @@ namespace Foresight.DataAccess
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private int _gongDanType = int.MinValue;
 		/// <summary>
-		/// 1-任务工单 2-投诉建议
+		/// 
 		/// </summary>
-        [Description("1-任务工单 2-投诉建议")]
+        [Description("")]
 		[DatabaseColumn()]
 		[TypeConverter(typeof(MinToEmptyTypeConverter))]
 		[DataObjectField(false, false, true)]
@@ -430,9 +430,9 @@ namespace Foresight.DataAccess
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private int _closeServiceType = int.MinValue;
 		/// <summary>
-		/// 1-办结后关单 2-回访后关单 3-审计确认后关单
+		/// 
 		/// </summary>
-        [Description("1-办结后关单 2-回访后关单 3-审计确认后关单")]
+        [Description("")]
 		[DatabaseColumn()]
 		[TypeConverter(typeof(MinToEmptyTypeConverter))]
 		[DataObjectField(false, false, true)]
@@ -454,9 +454,9 @@ namespace Foresight.DataAccess
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private int _callBackServiceType = int.MinValue;
 		/// <summary>
-		/// 回访方式 1-关单后回访 2-办结后回访 3-任何时候都可回访
+		/// 
 		/// </summary>
-        [Description("回访方式 1-关单后回访 2-办结后回访 3-任何时候都可回访")]
+        [Description("")]
 		[DatabaseColumn()]
 		[TypeConverter(typeof(MinToEmptyTypeConverter))]
 		[DataObjectField(false, false, true)]
@@ -478,9 +478,9 @@ namespace Foresight.DataAccess
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private int _banJieServiceType = int.MinValue;
 		/// <summary>
-		/// 办结方式 1-处理后办结 2-任何时候都可办结
+		/// 
 		/// </summary>
-        [Description("办结方式 1-处理后办结 2-任何时候都可办结")]
+        [Description("")]
 		[DatabaseColumn()]
 		[TypeConverter(typeof(MinToEmptyTypeConverter))]
 		[DataObjectField(false, false, true)]
@@ -619,6 +619,30 @@ namespace Foresight.DataAccess
 			}
 		}
 		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private bool _isDisableTime = false;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public bool IsDisableTime
+		{
+			[DebuggerStepThrough()]
+			get { return this._isDisableTime; }
+			set 
+			{
+				if (this._isDisableTime != value) 
+				{
+					this._isDisableTime = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("IsDisableTime");
+				}
+			}
+		}
+		
 		
 		
 		#endregion
@@ -659,7 +683,8 @@ DECLARE @table TABLE(
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
 	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2)
+	[CheckTime] decimal(18, 2),
+	[IsDisableTime] bit
 );
 
 INSERT INTO [dbo].[ServiceType] (
@@ -686,7 +711,8 @@ INSERT INTO [dbo].[ServiceType] (
 	[ServiceType].[StartHour],
 	[ServiceType].[EndHour],
 	[ServiceType].[ResponseTime],
-	[ServiceType].[CheckTime]
+	[ServiceType].[CheckTime],
+	[ServiceType].[IsDisableTime]
 ) 
 output 
 	INSERTED.[ID],
@@ -713,7 +739,8 @@ output
 	INSERTED.[StartHour],
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
-	INSERTED.[CheckTime]
+	INSERTED.[CheckTime],
+	INSERTED.[IsDisableTime]
 into @table
 VALUES ( 
 	@ServiceTypeName,
@@ -739,7 +766,8 @@ VALUES (
 	@StartHour,
 	@EndHour,
 	@ResponseTime,
-	@CheckTime 
+	@CheckTime,
+	@IsDisableTime 
 ); 
 
 SELECT 
@@ -767,7 +795,8 @@ SELECT
 	[StartHour],
 	[EndHour],
 	[ResponseTime],
-	[CheckTime] 
+	[CheckTime],
+	[IsDisableTime] 
 FROM @table;
 ";
 			}
@@ -808,7 +837,8 @@ DECLARE @table TABLE(
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
 	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2)
+	[CheckTime] decimal(18, 2),
+	[IsDisableTime] bit
 );
 
 UPDATE [dbo].[ServiceType] SET 
@@ -835,7 +865,8 @@ UPDATE [dbo].[ServiceType] SET
 	[ServiceType].[StartHour] = @StartHour,
 	[ServiceType].[EndHour] = @EndHour,
 	[ServiceType].[ResponseTime] = @ResponseTime,
-	[ServiceType].[CheckTime] = @CheckTime 
+	[ServiceType].[CheckTime] = @CheckTime,
+	[ServiceType].[IsDisableTime] = @IsDisableTime 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceTypeName],
@@ -861,7 +892,8 @@ output
 	INSERTED.[StartHour],
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
-	INSERTED.[CheckTime]
+	INSERTED.[CheckTime],
+	INSERTED.[IsDisableTime]
 into @table
 WHERE 
 	[ServiceType].[ID] = @ID
@@ -891,7 +923,8 @@ SELECT
 	[StartHour],
 	[EndHour],
 	[ResponseTime],
-	[CheckTime] 
+	[CheckTime],
+	[IsDisableTime] 
 FROM @table;
 ";
 			}
@@ -979,7 +1012,8 @@ WHERE
 	[ServiceType].[StartHour],
 	[ServiceType].[EndHour],
 	[ServiceType].[ResponseTime],
-	[ServiceType].[CheckTime]
+	[ServiceType].[CheckTime],
+	[ServiceType].[IsDisableTime]
 ";
 			}
 		}
@@ -1027,14 +1061,15 @@ WHERE
 		/// <param name="endHour">endHour</param>
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
-		public static void InsertServiceType(string @serviceTypeName, int @sortOrder, int @parentID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, int @gongDanType, bool @disableSend, bool @disableProcee, bool @disableCompelte, bool @disableCallback, bool @disableShenJi, int @closeServiceType, int @callBackServiceType, int @banJieServiceType, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime)
+		/// <param name="isDisableTime">isDisableTime</param>
+		public static void InsertServiceType(string @serviceTypeName, int @sortOrder, int @parentID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, int @gongDanType, bool @disableSend, bool @disableProcee, bool @disableCompelte, bool @disableCallback, bool @disableShenJi, int @closeServiceType, int @callBackServiceType, int @banJieServiceType, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @isDisableTime)
 		{
             using (SqlHelper helper = new SqlHelper())
             {
                 try
                 {
                     helper.BeginTransaction();
-            		InsertServiceType(@serviceTypeName, @sortOrder, @parentID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @gongDanType, @disableSend, @disableProcee, @disableCompelte, @disableCallback, @disableShenJi, @closeServiceType, @callBackServiceType, @banJieServiceType, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, helper);
+            		InsertServiceType(@serviceTypeName, @sortOrder, @parentID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @gongDanType, @disableSend, @disableProcee, @disableCompelte, @disableCallback, @disableShenJi, @closeServiceType, @callBackServiceType, @banJieServiceType, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, @isDisableTime, helper);
                     helper.Commit();
                 }
                 catch
@@ -1073,8 +1108,9 @@ WHERE
 		/// <param name="endHour">endHour</param>
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
+		/// <param name="isDisableTime">isDisableTime</param>
 		/// <param name="helper">helper</param>
-		internal static void InsertServiceType(string @serviceTypeName, int @sortOrder, int @parentID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, int @gongDanType, bool @disableSend, bool @disableProcee, bool @disableCompelte, bool @disableCallback, bool @disableShenJi, int @closeServiceType, int @callBackServiceType, int @banJieServiceType, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, SqlHelper @helper)
+		internal static void InsertServiceType(string @serviceTypeName, int @sortOrder, int @parentID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, int @gongDanType, bool @disableSend, bool @disableProcee, bool @disableCompelte, bool @disableCallback, bool @disableShenJi, int @closeServiceType, int @callBackServiceType, int @banJieServiceType, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @isDisableTime, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
@@ -1102,7 +1138,8 @@ DECLARE @table TABLE(
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
 	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2)
+	[CheckTime] decimal(18, 2),
+	[IsDisableTime] bit
 );
 
 INSERT INTO [dbo].[ServiceType] (
@@ -1129,7 +1166,8 @@ INSERT INTO [dbo].[ServiceType] (
 	[ServiceType].[StartHour],
 	[ServiceType].[EndHour],
 	[ServiceType].[ResponseTime],
-	[ServiceType].[CheckTime]
+	[ServiceType].[CheckTime],
+	[ServiceType].[IsDisableTime]
 ) 
 output 
 	INSERTED.[ID],
@@ -1156,7 +1194,8 @@ output
 	INSERTED.[StartHour],
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
-	INSERTED.[CheckTime]
+	INSERTED.[CheckTime],
+	INSERTED.[IsDisableTime]
 into @table
 VALUES ( 
 	@ServiceTypeName,
@@ -1182,7 +1221,8 @@ VALUES (
 	@StartHour,
 	@EndHour,
 	@ResponseTime,
-	@CheckTime 
+	@CheckTime,
+	@IsDisableTime 
 ); 
 
 SELECT 
@@ -1210,7 +1250,8 @@ SELECT
 	[StartHour],
 	[EndHour],
 	[ResponseTime],
-	[CheckTime] 
+	[CheckTime],
+	[IsDisableTime] 
 FROM @table;
 ";
 			
@@ -1239,6 +1280,7 @@ FROM @table;
 			parameters.Add(new SqlParameter("@EndHour", EntityBase.GetDatabaseValue(@endHour)));
 			parameters.Add(new SqlParameter("@ResponseTime", EntityBase.GetDatabaseValue(@responseTime)));
 			parameters.Add(new SqlParameter("@CheckTime", EntityBase.GetDatabaseValue(@checkTime)));
+			parameters.Add(new SqlParameter("@IsDisableTime", @isDisableTime));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -1272,14 +1314,15 @@ FROM @table;
 		/// <param name="endHour">endHour</param>
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
-		public static void UpdateServiceType(int @iD, string @serviceTypeName, int @sortOrder, int @parentID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, int @gongDanType, bool @disableSend, bool @disableProcee, bool @disableCompelte, bool @disableCallback, bool @disableShenJi, int @closeServiceType, int @callBackServiceType, int @banJieServiceType, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime)
+		/// <param name="isDisableTime">isDisableTime</param>
+		public static void UpdateServiceType(int @iD, string @serviceTypeName, int @sortOrder, int @parentID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, int @gongDanType, bool @disableSend, bool @disableProcee, bool @disableCompelte, bool @disableCallback, bool @disableShenJi, int @closeServiceType, int @callBackServiceType, int @banJieServiceType, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @isDisableTime)
 		{
 			using (SqlHelper helper = new SqlHelper()) 
 			{
 				try
 				{
 					helper.BeginTransaction();
-					UpdateServiceType(@iD, @serviceTypeName, @sortOrder, @parentID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @gongDanType, @disableSend, @disableProcee, @disableCompelte, @disableCallback, @disableShenJi, @closeServiceType, @callBackServiceType, @banJieServiceType, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, helper);
+					UpdateServiceType(@iD, @serviceTypeName, @sortOrder, @parentID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @gongDanType, @disableSend, @disableProcee, @disableCompelte, @disableCallback, @disableShenJi, @closeServiceType, @callBackServiceType, @banJieServiceType, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, @isDisableTime, helper);
 					helper.Commit();
 				}
 				catch 
@@ -1319,8 +1362,9 @@ FROM @table;
 		/// <param name="endHour">endHour</param>
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
+		/// <param name="isDisableTime">isDisableTime</param>
 		/// <param name="helper">helper</param>
-		internal static void UpdateServiceType(int @iD, string @serviceTypeName, int @sortOrder, int @parentID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, int @gongDanType, bool @disableSend, bool @disableProcee, bool @disableCompelte, bool @disableCallback, bool @disableShenJi, int @closeServiceType, int @callBackServiceType, int @banJieServiceType, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, SqlHelper @helper)
+		internal static void UpdateServiceType(int @iD, string @serviceTypeName, int @sortOrder, int @parentID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, int @gongDanType, bool @disableSend, bool @disableProcee, bool @disableCompelte, bool @disableCallback, bool @disableShenJi, int @closeServiceType, int @callBackServiceType, int @banJieServiceType, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @isDisableTime, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
@@ -1348,7 +1392,8 @@ DECLARE @table TABLE(
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
 	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2)
+	[CheckTime] decimal(18, 2),
+	[IsDisableTime] bit
 );
 
 UPDATE [dbo].[ServiceType] SET 
@@ -1375,7 +1420,8 @@ UPDATE [dbo].[ServiceType] SET
 	[ServiceType].[StartHour] = @StartHour,
 	[ServiceType].[EndHour] = @EndHour,
 	[ServiceType].[ResponseTime] = @ResponseTime,
-	[ServiceType].[CheckTime] = @CheckTime 
+	[ServiceType].[CheckTime] = @CheckTime,
+	[ServiceType].[IsDisableTime] = @IsDisableTime 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceTypeName],
@@ -1401,7 +1447,8 @@ output
 	INSERTED.[StartHour],
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
-	INSERTED.[CheckTime]
+	INSERTED.[CheckTime],
+	INSERTED.[IsDisableTime]
 into @table
 WHERE 
 	[ServiceType].[ID] = @ID
@@ -1431,7 +1478,8 @@ SELECT
 	[StartHour],
 	[EndHour],
 	[ResponseTime],
-	[CheckTime] 
+	[CheckTime],
+	[IsDisableTime] 
 FROM @table;
 ";
 			
@@ -1461,6 +1509,7 @@ FROM @table;
 			parameters.Add(new SqlParameter("@EndHour", EntityBase.GetDatabaseValue(@endHour)));
 			parameters.Add(new SqlParameter("@ResponseTime", EntityBase.GetDatabaseValue(@responseTime)));
 			parameters.Add(new SqlParameter("@CheckTime", EntityBase.GetDatabaseValue(@checkTime)));
+			parameters.Add(new SqlParameter("@IsDisableTime", @isDisableTime));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -1763,6 +1812,7 @@ SELECT " + ServiceType.SelectFieldList + "FROM [dbo].[ServiceType] " + ServiceTy
 			public const string EndHour = "EndHour";
 			public const string ResponseTime = "ResponseTime";
 			public const string CheckTime = "CheckTime";
+			public const string IsDisableTime = "IsDisableTime";
             
             public static Dictionary<string,string> AllPropertiesDescription=new Dictionary<string,string>(){
     			 {"ID" , "int:"},
@@ -1776,20 +1826,21 @@ SELECT " + ServiceType.SelectFieldList + "FROM [dbo].[ServiceType] " + ServiceTy
     			 {"BanJieTime" , "decimal:"},
     			 {"HuiFangTime" , "decimal:"},
     			 {"GuanDanTime" , "decimal:"},
-    			 {"GongDanType" , "int:1-任务工单 2-投诉建议"},
+    			 {"GongDanType" , "int:"},
     			 {"DisableSend" , "bool:"},
     			 {"DisableProcee" , "bool:"},
     			 {"DisableCompelte" , "bool:"},
     			 {"DisableCallback" , "bool:"},
     			 {"DisableShenJi" , "bool:"},
-    			 {"CloseServiceType" , "int:1-办结后关单 2-回访后关单 3-审计确认后关单"},
-    			 {"CallBackServiceType" , "int:回访方式 1-关单后回访 2-办结后回访 3-任何时候都可回访"},
-    			 {"BanJieServiceType" , "int:办结方式 1-处理后办结 2-任何时候都可办结"},
+    			 {"CloseServiceType" , "int:"},
+    			 {"CallBackServiceType" , "int:"},
+    			 {"BanJieServiceType" , "int:"},
     			 {"DisableHolidayTime" , "bool:"},
     			 {"StartHour" , "string:"},
     			 {"EndHour" , "string:"},
     			 {"ResponseTime" , "decimal:"},
     			 {"CheckTime" , "decimal:"},
+    			 {"IsDisableTime" , "bool:"},
             };
 		}
 		#endregion

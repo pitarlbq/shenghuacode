@@ -277,12 +277,18 @@ namespace Web.Handler
             bool DisableHolidayTime = WebUtil.getServerIntValue(context, "tdDisableHolidayTime") == 1;
             string StartHour = WebUtil.getServerValue(context, "tdStartHour");
             string EndHour = WebUtil.getServerValue(context, "tdEndHour");
+            int isimport = WebUtil.GetIntValue(context, "isimport");
             using (SqlHelper helper = new SqlHelper())
             {
                 try
                 {
                     helper.BeginTransaction();
-                    string cmdtext = "update [CustomerService] set IsImportantTouSu=1 where ID in (" + string.Join(",", IDList.ToArray()) + ")";
+                    if (isimport == 1)
+                    {
+                        string cmdtext = "update [CustomerService] set IsImportantTouSu=1 where ID in (" + string.Join(",", IDList.ToArray()) + ")";
+                        List<SqlParameter> parameters = new List<SqlParameter>();
+                        helper.Execute(cmdtext, CommandType.Text, parameters);
+                    }
                     foreach (var ServiceID in IDList)
                     {
                         var data = list.FirstOrDefault(p => p.ServiceID == ServiceID);
@@ -302,10 +308,31 @@ namespace Web.Handler
                         data.DisableHolidayTime = DisableHolidayTime;
                         data.StartHour = StartHour;
                         data.EndHour = EndHour;
+                        if (isimport == 0)
+                        {
+                            var serviceData = Foresight.DataAccess.CustomerService.GetCustomerService(ServiceID, helper);
+                            if (serviceData != null)
+                            {
+                                DateTime BanJieDateTime = WebUtil.getServerTimeValue(context, "tdBanJieDateTime");
+                                decimal myBanJieTime = 0;
+                                if (BanJieDateTime > DateTime.MinValue && BanJieDateTime > serviceData.AddTime)
+                                {
+                                    myBanJieTime = (decimal)((BanJieDateTime - serviceData.AddTime).TotalSeconds) / 3600;
+                                }
+                                data.PaiDanTime = 0;
+                                data.ResponseTime = 0;
+                                data.CheckTime = 0;
+                                data.ChuliTime = 0;
+                                data.BanJieTime = myBanJieTime;
+                                data.HuiFangTime = 0;
+                                data.GuanDanTime = 0;
+                                data.DisableHolidayTime = false;
+                                data.StartHour = "";
+                                data.EndHour = "";
+                            }
+                        }
                         data.Save(helper);
                     }
-                    List<SqlParameter> parameters = new List<SqlParameter>();
-                    helper.Execute(cmdtext, CommandType.Text, parameters);
                     helper.Commit();
                 }
                 catch (Exception ex)
@@ -316,12 +343,15 @@ namespace Web.Handler
                     return;
                 }
             }
-            var user = WebUtil.GetUser(context);
-            string OperationTitle = "工单重大投诉";
-            string ServiceNumber = Foresight.DataAccess.CustomerService.GetCustomerServicNumbersByIDList(IDList);
-            string OperatoinContent = "员工" + user.FinalRealName + "在后台对工单" + ServiceNumber + "执行了重大投诉标注操作";
-            string key = EnumModel.OperationModule.ServiceMoreImportant.ToString();
-            APPCode.CommHelper.SaveOperationLog(OperatoinContent, key, OperationTitle, IDs, "Service", OperationMan: user.FinalRealName, IsHide: false);
+            if (isimport == 1)
+            {
+                var user = WebUtil.GetUser(context);
+                string OperationTitle = "工单重大投诉";
+                string ServiceNumber = Foresight.DataAccess.CustomerService.GetCustomerServicNumbersByIDList(IDList);
+                string OperatoinContent = "员工" + user.FinalRealName + "在后台对工单" + ServiceNumber + "执行了重大投诉标注操作";
+                string key = EnumModel.OperationModule.ServiceMoreImportant.ToString();
+                APPCode.CommHelper.SaveOperationLog(OperatoinContent, key, OperationTitle, IDs, "Service", OperationMan: user.FinalRealName, IsHide: false);
+            }
             context.Response.Write("{\"status\":true}");
         }
         private void saveservicecallrate(HttpContext context)

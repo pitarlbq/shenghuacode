@@ -2,8 +2,16 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
+        var isimport = 0;
         $(function () {
-
+            isimport = Number('<%=this.isimport%>');
+            if (isimport == 1) {
+                $('.notimportcss').hide();
+                $('.importcss').show();
+            } else {
+                $('.notimportcss').show();
+                $('.importcss').hide();
+            }
         })
         function do_save() {
             var isValid = $("#<%=this.ff.ClientID%>").form('enableValidation').form('validate');
@@ -25,6 +33,7 @@
                 onSubmit: function (param) {
                     param.visit = 'domarkimportant';
                     param.IDList = JSON.stringify(IDList);
+                    param.isimport = isimport;
                 },
                 success: function (data) {
                     MaskUtil.unmask();
@@ -62,7 +71,13 @@
             <a href="javascript:void(0)" onclick="do_close()" class="easyui-linkbutton btntoolbar" data-options="plain:true,iconCls:'icon-close'">关闭</a>
         </div>
         <div class="table_container">
-            <div class="tableContent">
+            <div class="tableContent notimportcss">
+                <div class="tableItem">
+                    <label class="title">处理截至时间</label>
+                    <input type="text" class="easyui-datetimebox" runat="server" id="tdBanJieDateTime" />
+                </div>
+            </div>
+            <div class="tableContent importcss">
                 <div class="tableItem">
                     <label class="title">派单时效</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdPaiDanTime" />（小时）

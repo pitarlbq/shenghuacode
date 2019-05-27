@@ -47,7 +47,6 @@ function addnewTab(subtitle, url, icon) {
     $('#tabs').tabs({
         onSelect: function (title, index) {
             top.TopTitle = title;
-            top.TopIndex = index;
             if (title == '客户管理') {
                 top.treeType = 1;
             } else if (title == '400客服' || top.isAddService || isNumber(title)) {
@@ -80,6 +79,13 @@ function createFrame(url, title) {
     var id = 'top_main_frame';
     if (title == '工单管理') {
         id = 'topServiceFrame';
+    } else if (title == '400客服') {
+        id = 'top_phonenumber_frame';
+    }
+    else if (title == '400客服') {
+        id = 'top_phonenumber_frame';
+    } else if (isNumber(title)) {
+        id = 'top_phonenumber_frame_' + title;
     }
     var s = '<iframe name="mainFrame" id="' + id + '" scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:99%;min-height:' + ($height - 45) + 'px;border:0;"></iframe>';
     return s;

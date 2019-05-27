@@ -106,8 +106,12 @@ namespace Foresight.DataAccess
         /// <param name="myServiceType"></param>
         /// <param name="type">1-派单 2-回复 3-核查 4-处理 5-办结 6-回访 7-关单 8-下单</param>
         /// <returns></returns>
-        public static ServiceType GetAvailableServiceType(ServiceType[] myServiceType2List, ServiceType[] myServiceType3List, ServiceType myServiceType, int typeid = 1)
+        public static ServiceType GetAvailableServiceType(ServiceType[] myServiceType2List, ServiceType[] myServiceType3List, ServiceType myServiceType, int typeid = 1, bool IsPinZhiShengJi = false)
         {
+            if (IsPinZhiShengJi)
+            {
+                return myServiceType;
+            }
             ServiceType myServiceTypeItem = null;
             ServiceType[] myServiceTypeList = new ServiceType[] { };
             if (myServiceTypeItem == null && myServiceType3List.Length > 0)
@@ -283,6 +287,7 @@ namespace Foresight.DataAccess
             }
             if (importantData != null)
             {
+                data.DealTime = importantData.DealTime;
                 data.PaiDanTime = importantData.PaiDanTime;
                 data.CheckTime = importantData.CheckTime;
                 data.ResponseTime = importantData.ResponseTime;

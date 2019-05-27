@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Web.Default" Async="true" %>
 
-<!DOCTYPE html>   
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -10,11 +10,10 @@
     <link href="js/easyui/icon.css" type="text/css" rel="stylesheet" />
     <script src="js/jquery-1.8.3.min.js"></script>
     <script>
-        var loginname, guid, DefaultURL, TopTitle, TopIndex, isAddService = false, isComingServiceSave = true;
+        var loginname, guid, DefaultURL, TopTitle, isAddService = false, isComingServiceSave = true;
         $(function () {
             DefaultURL = "<%=this.DefaultURL %>";
             TopTitle = '';
-            TopIndex = 0;
         })
     </script>
     <script src="js/socket/loginclient.js?t=<%=base.getToken() %>"></script>
@@ -46,6 +45,13 @@
             contextPath = "<%=Web.WebUtil.GetContextPath()%>";
             checkDriverStatus();
             is400User = "<%=this.is400User?1:0%>";
+            //var phone = 18108173680;
+            //for (var i = 1; i < 5; i++) {
+            //    setTimeout(function () {
+            //        phone++;
+            //        top.getDataByPhoneNumber(phone);
+            //    }, 2000 * i);
+            //}
         })
         function checkDriverStatus() {
             var iVer = 1;//第一个版本

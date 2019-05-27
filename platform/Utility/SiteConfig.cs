@@ -221,11 +221,19 @@ namespace Utility
                 int.TryParse(ConfigurationManager.AppSettings["LianJieTouSuServiceID"], out _LianJieTouSuServiceID);
             }
             LianJieTouSuServiceID = _LianJieTouSuServiceID;
+
+            int _PinZhiShengJiServiceID = 0;
+            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["PinZhiShengJiServiceID"]))
+            {
+                int.TryParse(ConfigurationManager.AppSettings["PinZhiShengJiServiceID"], out _PinZhiShengJiServiceID);
+            }
+            PinZhiShengJiServiceID = _PinZhiShengJiServiceID;
         }
         public int LianJieTouSuServiceID { get; set; }
         public int BaoXiuServiceID { get; set; }
         public int YingXiaoTouSuServiceID { get; set; }
         public int WuYeTouSuServiceID { get; set; }
+        public int PinZhiShengJiServiceID { get; set; }
         public decimal DelayTimeOutHour { get; set; }
         /// 发布系统一级URL
         /// </summary>

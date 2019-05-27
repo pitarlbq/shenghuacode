@@ -2,14 +2,20 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-        var ID = 0, ParentID = 0;
+        var ID = 0, ParentID = 0, IsDisableTime = 0;
         $(function () {
             ID = "<%=this.ID%>";
             ParentID = "<%=this.ParentID%>";
+            IsDisableTime = Number("<%=this.IsDisableTime%>");
             if (ParentID <= 1) {
                 $('.topCss').show();
             } else {
                 $('.topCss').hide();
+            }
+            if (IsDisableTime == 1) {
+                $('.hidetime').hide();
+            } else {
+                $('.hidetime').show();
             }
         })
         function do_save() {
@@ -74,46 +80,46 @@
                     <label class="title">排序序号</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdSortOrder" />
                 </div>
-                <div class="tableItem">
+                <div class="tableItem hidetime">
                     <label class="title">派单时效</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdPaiDanTime" />（小时）
                 </div>
-                <div class="tableItem">
+                <div class="tableItem hidetime">
                     <label class="title">回复时效</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdResponseTime" />（小时）
                 </div>
-                <div class="tableItem">
+                <div class="tableItem hidetime">
                     <label class="title">核查时效</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdCheckTime" />（小时）
                 </div>
-                <div class="tableItem">
+                <div class="tableItem hidetime">
                     <label class="title">处理时效</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdChuliTime" />（小时）
                 </div>
-                <div class="tableItem">
+                <div class="tableItem hidetime">
                     <label class="title">办结时效</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdBanJieTime" />（小时）
                 </div>
-                <div class="tableItem">
+                <div class="tableItem hidetime">
                     <label class="title">回访时效</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdHuiFangTime" />（小时）
                 </div>
-                <div class="tableItem">
+                <div class="tableItem hidetime">
                     <label class="title">关单时效</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdGuanDanTime" />（小时）
                 </div>
-                <div class="tableItem">
+                <div class="tableItem hidetime">
                     <label class="title">包括节假日</label>
                     <select class="easyui-combobox" runat="server" id="tdDisableHolidayTime">
                         <option value="0">是</option>
                         <option value="1">否</option>
                     </select>
                 </div>
-                <div class="tableItem">
+                <div class="tableItem hidetime">
                     <label class="title">上班时间</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdStartHour" />（00:00）
                 </div>
-                <div class="tableItem">
+                <div class="tableItem hidetime">
                     <label class="title">下班时间</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdEndHour" />（00:00）
                 </div>

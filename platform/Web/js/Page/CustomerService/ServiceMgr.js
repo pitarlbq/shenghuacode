@@ -752,7 +752,7 @@ function do_mark_important() {
     $.each(rows, function (index, row) {
         IDList.push(row.ID);
     })
-    var iframe = "../CustomerService/ServiceImportantTouSuApprove.aspx?ID=" + IDList[0];
+    var iframe = "../CustomerService/ServiceImportantTouSuApprove.aspx?ID=" + IDList[0] + '&isimport=1';
     do_open_dialog('重要投诉', iframe);
 }
 function do_mark_notcall(status) {
@@ -792,4 +792,26 @@ function formatRepairImg(value, row) {
         return '<a target="_blank" href="' + value + '">查看</a>'
     }
     return '';
+}
+function do_change_time() {
+    var rows = $("#tt_table").datagrid("getSelections");
+    if (rows.length == 0) {
+        show_message("请先选择一个任务", "info");
+        return;
+    }
+    var IDList = [];
+    var error = '';
+    $.each(rows, function (index, row) {
+        if (row.ServiceType2IDList != null && row.ServiceType2IDList.indexOf(PinZhiShengJiServiceID) == -1) {
+            error = '请选择品质升级类工单';
+            return false;
+        }
+        IDList.push(row.ID);
+    })
+    if (error) {
+        show_message(error, "info");
+        return;
+    }
+    var iframe = "../CustomerService/ServiceImportantTouSuApprove.aspx?ID=" + IDList[0] + '&isimport=0';
+    do_open_dialog('时效设置', iframe);
 }

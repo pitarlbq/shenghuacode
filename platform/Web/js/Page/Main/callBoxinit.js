@@ -681,16 +681,17 @@ function getPhoneNumber(data) {
     }
 }
 function getDataByPhoneNumber(phoneNumber) {
-    if (!top.ComingPhoneNumber) {
-        top.ComingPhoneNumber = phoneNumber;
+    if (!ComingPhoneNumber) {
+        ComingPhoneNumber = phoneNumber;
         try {
-            $("#top_main_frame")[0].contentWindow.getCustomerData(phoneNumber);
+            $("#top_phonenumber_frame")[0].contentWindow.getCustomerData(phoneNumber);
         } catch (e) {
         }
         top.addTab('400客服', '../Main/Default.aspx', '');
         top.openTreeContent();
     }
     else {
+        ComingPhoneNumber = phoneNumber;
         top.addTab(phoneNumber, '../Main/Default.aspx?phoneNumber=' + phoneNumber, '');
         top.openTreeContent();
     }

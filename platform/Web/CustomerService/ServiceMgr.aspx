@@ -3,11 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>任务看板</title>
     <script>
-        var Status = -1, ColumnServiceStatus = -1, ColumnServiceType = 1, ServiceType = 1, BeforeBanJieTimeOutHour = 0;
+        var Status = -1, ColumnServiceStatus = -1, ColumnServiceType = 1, ServiceType = 1, BeforeBanJieTimeOutHour = 0, PinZhiShengJiServiceID = 0;
         $(function () {
             Status = "<%=this.status%>";
             BeforeBanJieTimeOutHour = "<%=this.BeforeBanJieTimeOutHour%>";
             ColumnServiceStatus = Status;
+            PinZhiShengJiServiceID = Number('<%=new Utility.SiteConfig().PinZhiShengJiServiceID%>')
             var op = "<%=this.op%>";
             if (op == 'view') {
                 setTimeout(function () {
@@ -228,6 +229,10 @@
                     <%if (base.CheckAuthByModuleCode("1101172") && (status == 100 || status == 101 || status == 10 || status == 3 || status == 13))
                         { %>
                     <a href="javascript:void(0)" onclick="do_send()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-chuli'">派单</a>
+                    <%} %>
+                    <%if (base.CheckAuthByModuleCode("1101172"))
+                        { %>
+                    <a href="javascript:void(0)" onclick="do_change_time()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-chuli'">时效设置</a>
                     <%} %>
                     <%if (base.CheckAuthByModuleCode("1101160") && (status == 0 || status == 101 || status == 13))
                         { %>

@@ -174,7 +174,7 @@ namespace Foresight.DataAccess
             }
             var timeSpan = EndTime - StartTime;
             double totalHour = timeSpan.TotalSeconds / 3600;
-            return (decimal)Math.Round(totalHour, 2, MidpointRounding.AwayFromZero);
+            return (decimal)Math.Round(totalHour, 10, MidpointRounding.AwayFromZero);
         }
         public static DateTime GetDateByHourStr(DateTime nowDate, string HourStr, bool goNextDay = true)
         {

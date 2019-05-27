@@ -136,7 +136,7 @@ namespace Foresight.DataAccess
             var recordManuallyServiceList = huiFangTimeList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).Where(p => !recordServiceIDList.Contains(p.ID) && !p.CanNotCallback && (p.ManuallyPhoneCallBackType == 1 || p.ManuallyPhoneCallBackType == 2)).ToArray();
 
             var recordServicePickUpIDList = recordList.Where(p => p.FinalPickUpTime > DateTime.MinValue).Select(p => p.ServiceID).ToArray();
-            var recordServicePickUpList = huiFangTimeList.Where(p => recordServicePickUpIDList.Contains(p.ID)).ToArray();
+            var recordServicePickUpList = recordServiceList.Where(p => recordServicePickUpIDList.Contains(p.ID)).ToArray();
 
             var tousuHuiFangTimeList = huiFangTimeList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).ToArray();
             int BaoXiuServiceID = new Utility.SiteConfig().BaoXiuServiceID;
@@ -363,6 +363,7 @@ namespace Foresight.DataAccess
             }
             if (EndTime > DateTime.MinValue)
             {
+                EndTime = EndTime.AddDays(1);
                 conditions.Add("[AddTime]<=@EndTime");
                 parameters.Add(new SqlParameter("@EndTime", EndTime));
             }
@@ -513,6 +514,7 @@ namespace Foresight.DataAccess
             }
             if (EndTime > DateTime.MinValue)
             {
+                EndTime = EndTime.AddDays(1);
                 conditions.Add("[AddTime]<=@EndTime");
                 parameters.Add(new SqlParameter("@EndTime", EndTime));
             }
@@ -590,6 +592,7 @@ namespace Foresight.DataAccess
             }
             if (EndTime > DateTime.MinValue)
             {
+                EndTime = EndTime.AddDays(1);
                 conditions.Add("[AddTime]<=@EndTime");
                 parameters.Add(new SqlParameter("@EndTime", EndTime));
             }
@@ -748,6 +751,7 @@ namespace Foresight.DataAccess
             }
             if (EndTime > DateTime.MinValue)
             {
+                EndTime = EndTime.AddDays(1);
                 conditions.Add("exists(select 1 from [CustomerServiceHuifang] where  [ServiceID]=[CustomerService].ID and [HuiFangTime]<=@EndTime)");
                 parameters.Add(new SqlParameter("@EndTime", EndTime));
             }
@@ -926,6 +930,7 @@ namespace Foresight.DataAccess
             }
             if (EndTime > DateTime.MinValue)
             {
+                EndTime = EndTime.AddDays(1);
                 conditions.Add("[AddTime]<=@EndTime");
                 parameters.Add(new SqlParameter("@EndTime", EndTime));
             }
@@ -1096,6 +1101,7 @@ namespace Foresight.DataAccess
             }
             if (EndTime > DateTime.MinValue)
             {
+                EndTime = EndTime.AddDays(1);
                 conditions.Add("[AddTime]<=@EndTime");
                 parameters.Add(new SqlParameter("@EndTime", EndTime));
             }
@@ -1236,6 +1242,7 @@ namespace Foresight.DataAccess
             }
             if (EndTime > DateTime.MinValue)
             {
+                EndTime = EndTime.AddDays(1);
                 conditions.Add("[AddTime]<=@EndTime");
                 parameters.Add(new SqlParameter("@EndTime", EndTime));
             }

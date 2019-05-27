@@ -12,6 +12,7 @@ namespace Web.CustomerService
     {
         public int ID;
         public int ParentID;
+        public int IsDisableTime = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             ID = 0;
@@ -40,6 +41,7 @@ namespace Web.CustomerService
         }
         private void SetInfo(Foresight.DataAccess.ServiceType data)
         {
+            this.IsDisableTime = data.IsDisableTime ? 1 : 0;
             this.tdServiceTypeName.Value = data.ServiceTypeName;
             this.tdPaiDanTime.Value = data.PaiDanTime > 0 ? data.PaiDanTime.ToString() : "";
             this.tdResponseTime.Value = data.ResponseTime > 0 ? data.ResponseTime.ToString() : "";

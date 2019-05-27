@@ -676,7 +676,7 @@ namespace Foresight.DataAccess
             var serviceProcessList = CustomerServiceChuli.GetCustomerServiceChuliListByMinMaxServiceID(MinServiceID, MaxServiceID, IsDataGridView: IsDataGridView);
             var serviceHuifangList = CustomerServiceHuifang.GetCustomerServiceHuifangListByMinMaxServiceID(MinServiceID, MaxServiceID);
             CustomerServiceChuli_Attach[] chuliAttachedList = new CustomerServiceChuli_Attach[] { };
-            if (IsDataGridView)
+            if (IsDataGridView && serviceProcessList.Length > 0)
             {
                 int MinChuliID = serviceProcessList.Min(p => p.ID);
                 int MaxChuliID = serviceProcessList.Max(p => p.ID);
@@ -839,10 +839,12 @@ namespace Foresight.DataAccess
             {
                 serviceHuifangList = CustomerServiceHuifang.GetCustomerServiceHuifangListByMinMaxServiceID(MinServiceID, MaxServiceID);
             }
+            var PinZhiShengJiServiceID = new Utility.SiteConfig().PinZhiShengJiServiceID;
             foreach (var item in list)
             {
                 var myServiceType = serviceTypeList.FirstOrDefault(p => p.ID == item.ServiceType1ID);
-                if (item.IsImportantTouSu)
+                bool IsPinZhiShengJi = item.ServiceType2IDList.Contains(PinZhiShengJiServiceID);
+                if (item.IsImportantTouSu || IsPinZhiShengJi)
                 {
                     var myImportant = importantList.FirstOrDefault(p => p.ServiceID == item.ID);
                     ServiceType.SetServiceTypeData(myServiceType, oldData: importantServiceType, importantData: myImportant);
@@ -870,7 +872,7 @@ namespace Foresight.DataAccess
                 decimal nowHourRange = 0;
                 #region 下单超时
                 var myServiceAccpetMan = serviceAccpetList.OrderBy(p => p.AddTime).FirstOrDefault(p => p.ServiceID == item.ID && p.AccpetUserType == 1);
-                var myXiaDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 1);
+                var myXiaDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 1, IsPinZhiShengJi: IsPinZhiShengJi);
                 if (myXiaDanServiceTypeItem == null)
                 {
                     continue;
@@ -906,7 +908,7 @@ namespace Foresight.DataAccess
                 #endregion
                 #region 派单超时
                 myServiceAccpetMan = serviceAccpetList.OrderBy(p => p.AddTime).FirstOrDefault(p => p.ServiceID == item.ID && p.AccpetUserType == 2);
-                var myPaiDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 1);
+                var myPaiDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 1, IsPinZhiShengJi: IsPinZhiShengJi);
                 if (myPaiDanServiceTypeItem == null)
                 {
                     continue;
@@ -941,7 +943,7 @@ namespace Foresight.DataAccess
                 }
                 #endregion
                 #region 回复时效
-                var myResponseServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 2);
+                var myResponseServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 2, IsPinZhiShengJi: IsPinZhiShengJi);
                 if (myResponseServiceTypeItem == null)
                 {
                     continue;
@@ -977,7 +979,7 @@ namespace Foresight.DataAccess
                 }
                 #endregion
                 #region 核查时效
-                var myCheckServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 3);
+                var myCheckServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 3, IsPinZhiShengJi: IsPinZhiShengJi);
                 if (myCheckServiceTypeItem == null)
                 {
                     continue;
@@ -1013,7 +1015,7 @@ namespace Foresight.DataAccess
                 }
                 #endregion
                 #region 处理超时
-                var myProcessServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 4);
+                var myProcessServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 4, IsPinZhiShengJi: IsPinZhiShengJi);
                 if (myProcessServiceTypeItem == null)
                 {
                     continue;
@@ -1053,7 +1055,7 @@ namespace Foresight.DataAccess
                 }
                 #endregion
                 #region 办结超时
-                var myBanJieServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 5);
+                var myBanJieServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 5, IsPinZhiShengJi: IsPinZhiShengJi);
                 if (myBanJieServiceTypeItem == null)
                 {
                     continue;
@@ -1084,7 +1086,7 @@ namespace Foresight.DataAccess
                 }
                 #endregion
                 #region 回访超时
-                var myHuiFangServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 6);
+                var myHuiFangServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 6, IsPinZhiShengJi: IsPinZhiShengJi);
                 if (myHuiFangServiceTypeItem == null)
                 {
                     continue;
@@ -1120,7 +1122,7 @@ namespace Foresight.DataAccess
                 }
                 #endregion
                 #region 关单超时
-                var myGuanDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 7);
+                var myGuanDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 7, IsPinZhiShengJi: IsPinZhiShengJi);
                 if (myGuanDanServiceTypeItem == null)
                 {
                     continue;

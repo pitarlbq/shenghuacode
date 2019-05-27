@@ -396,10 +396,16 @@ function onClick(event, treeId, treeNode, clickFlag) {
 function onCheck(event, treeId, treeNode) {
     if (treeType == 6) {
         if (!treeNode.IsLocked) {
-            if (top.TopTitle == '400客服' || top.isNumber(top.TopTitle)) {
+            if (top.TopTitle == '400客服') {
                 try {
                     //var iframeElems = document.getElementsByName('mainFrame');
-                    $("iframe#top_main_frame")[top.TopIndex].contentWindow.getProjectData('', treeNode.ID, treeNode.isParent);
+                    $("iframe#top_phonenumber_frame")[0].contentWindow.getProjectData('', treeNode.ID, treeNode.isParent);
+                } catch (e) {
+                    //alert(e)
+                }
+            } else if (top.isNumber(top.TopTitle)) {
+                try {
+                    $("iframe#top_phonenumber_frame_" + top.TopTitle)[0].contentWindow.getProjectData('', treeNode.ID, treeNode.isParent);
                 } catch (e) {
                     //alert(e)
                 }
