@@ -141,19 +141,6 @@ namespace Foresight.DataAccess
             {
                 conditions.Add("ServiceType1ID in (" + LianJieTouSuServiceID + "," + WuYeTouSuServiceID + "," + YingXiaoTouSuServiceID + ")");
             }
-            //if (IsAdminUser || ServiceStatus == 12)
-            //{
-            //    conditions.Add("exists(select 1 from [UserServiceType] where [ServiceTypeID]=[ViewCustomerService].ServiceType1ID and ([UserID]=@UserID or exists(select 1 from [UserRoles] where [RoleID]=[UserServiceType].RoleID and [UserID]=@UserID)))");
-            //    parameters.Add(new SqlParameter("@UserID", UserID));
-            //}
-            //if (IsTouSuChaoShi)
-            //{
-            //    conditions.Add("ServiceType1ID in (" + LianJieTouSuServiceID + "," + WuYeTouSuServiceID + "," + YingXiaoTouSuServiceID + ")");
-            //}
-            //if (IsRepairChaoShi)
-            //{
-            //    conditions.Add("ServiceType1ID=" + BaoXiuServiceID);
-            //}
             if (CloseType == 1)
             {
                 conditions.Add("[IsClosed]=1");
@@ -335,29 +322,41 @@ namespace Foresight.DataAccess
                 dg.page = pageSize;
                 return dg;
             }
-            GetFinalViewCustomerDataGrid(list, IncludeTimeOutData: true, IsDataGridView: true);
-            if (TimeOutType > 0)//1-正常 2-超时
+            if (TimeOutType > 0 || ServiceStatus == 13)
             {
-                list = list.Where(p => p.TimeOutStatus == TimeOutType).ToArray();
-            }
-            else if (ServiceStatus == 13)//超时工单
-            {
-                if (BeforeBanJieTimeOutHour > 0)
+                GetFinalViewCustomerDataGrid(list, IncludeTimeOutData: true, IsDataGridView: true);
+                if (TimeOutType > 0)//1-正常 2-超时
                 {
-                    list = list.Where(p => (p.BanJieChaoShiTakeHour + BeforeBanJieTimeOutHour) > 0 && p.BanJieChaoShiTakeHour < 0 && p.BanJieTime == DateTime.MinValue).ToArray();
+                    list = list.Where(p => p.TimeOutStatus == TimeOutType).ToArray();
                 }
-                else
+                else if (ServiceStatus == 13)//超时工单
                 {
-                    list = list.Where(p => p.TimeOutStatus == 2).ToArray();
+                    if (BeforeBanJieTimeOutHour > 0)
+                    {
+                        list = list.Where(p => (p.BanJieChaoShiTakeHour + BeforeBanJieTimeOutHour) > 0 && p.BanJieChaoShiTakeHour < 0 && p.BanJieTime == DateTime.MinValue).ToArray();
+                    }
+                    else
+                    {
+                        list = list.Where(p => p.TimeOutStatus == 2).ToArray();
+                    }
                 }
-            }
-            if (TimeOutType > 0 || ServiceStatus == 13 || ServiceType2ID > 0 || ServiceType3ID > 0 || myProjectIDList.Length > 0)
-            {
                 if (!canexport)
                 {
                     totalRows = list.Length;
                     list = list.Skip((int)startRowIndex).Take(pageSize).ToArray();
                 }
+            }
+            else
+            {
+                if (ServiceType2ID > 0 || ServiceType3ID > 0 || myProjectIDList.Length > 0)
+                {
+                    if (!canexport)
+                    {
+                        totalRows = list.Length;
+                        list = list.Skip((int)startRowIndex).Take(pageSize).ToArray();
+                    }
+                }
+                GetFinalViewCustomerDataGrid(list, IncludeTimeOutData: true, IsDataGridView: true);
             }
             dg.rows = list;
             dg.total = totalRows;
@@ -1156,7 +1155,7 @@ namespace Foresight.DataAccess
         }
         public static decimal CheckDelayTimeStatus(ServiceType myServiceType, DateTime StartTime, DateTime EndTime, out decimal nowHourRange, decimal DefineTimeHour, HolidayLog[] holidayList = null)
         {
-            nowHourRange = HolidayLog.GetTimeHourRange(StartTime, EndTime, myServiceType.DisableHolidayTime, myServiceType.StartHour, myServiceType.EndHour, holidayList: holidayList);
+            nowHourRange = HolidayLog.GetTimeHourRange(StartTime, EndTime, myServiceType.DisableHolidayTime, myServiceType.DisableWorkOffTime, myServiceType.StartHour, myServiceType.EndHour, holidayList: holidayList);
             if (DefineTimeHour <= 0)
             {
                 return 0;

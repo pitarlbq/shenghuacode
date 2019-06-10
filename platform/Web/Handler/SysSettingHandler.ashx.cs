@@ -144,6 +144,10 @@ namespace Web.Handler
                     value = WebUtil.getServerValue(context, "tdDisableHolidayTime");
                     SysConfig.SaveSysConfigByType(list, name, value, helper, ConfigType: ConfigType);
 
+                    name = Foresight.DataAccess.SysConfigNameDefine.ServiceTypeDisableWorkOffTime;
+                    value = WebUtil.getServerValue(context, "tdDisableWorkOffTime");
+                    SysConfig.SaveSysConfigByType(list, name, value, helper, ConfigType: ConfigType);
+
                     name = Foresight.DataAccess.SysConfigNameDefine.ServiceTypeStartHour;
                     value = WebUtil.getServerValue(context, "tdStartHour");
                     SysConfig.SaveSysConfigByType(list, name, value, helper, ConfigType: ConfigType);

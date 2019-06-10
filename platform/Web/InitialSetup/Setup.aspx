@@ -193,7 +193,7 @@
                                 <tr>
                                     <td>业主姓名</td>
                                     <td>
-                                        <input type="checkbox" value="RelationName" checked="checked" name="searchcheck" /></td>
+                                        <input type="checkbox" value="RelationName" name="searchcheck" /></td>
                                     <td>业主身份证</td>
                                     <td>
                                         <input type="checkbox" value="OwnerIDCard" name="searchcheck" /></td>
@@ -220,7 +220,7 @@
                                         <input type="checkbox" value="RoomProperty" name="searchcheck" /></td>
                                     <td>房间状态</td>
                                     <td>
-                                        <input type="checkbox" value="RoomState" checked="checked" name="searchcheck" /></td>
+                                        <input type="checkbox" value="RoomState" name="searchcheck" /></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3">

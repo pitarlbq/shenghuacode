@@ -265,6 +265,15 @@ namespace Foresight.DataAccess
                 data.DisableHolidayTime = intValue == 1;
             }
 
+            name = Foresight.DataAccess.SysConfigNameDefine.ServiceTypeDisableWorkOffTime;
+            value = Foresight.DataAccess.SysConfig.GetSysConfigValueByName(list, name);
+            if (!string.IsNullOrEmpty(value))
+            {
+                int intValue = 0;
+                int.TryParse(value, out intValue);
+                data.DisableWorkOffTime = intValue == 1;
+            }
+
             name = Foresight.DataAccess.SysConfigNameDefine.ServiceTypeStartHour;
             value = Foresight.DataAccess.SysConfig.GetSysConfigValueByName(list, name);
             data.StartHour = value;

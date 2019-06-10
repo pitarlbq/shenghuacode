@@ -109,7 +109,7 @@ namespace Foresight.DataAccess
             }
             return GetList<HolidayLog>(cmdtext, parameters).ToArray();
         }
-        public static decimal GetTimeHourRange(DateTime StartTime, DateTime EndTime, bool DisableHolidayTime, string StartHour, string EndHour, HolidayLog[] holidayList = null)
+        public static decimal GetTimeHourRange(DateTime StartTime, DateTime EndTime, bool DisableHolidayTime, bool DisableWorkOffTime, string StartHour, string EndHour, HolidayLog[] holidayList = null)
         {
             if (StartTime == DateTime.MinValue || EndTime == DateTime.MinValue)
             {
@@ -119,11 +119,19 @@ namespace Foresight.DataAccess
             {
                 return 0;
             }
-            StartHour = string.IsNullOrEmpty(StartHour) ? "00:00" : StartHour;
-            EndHour = string.IsNullOrEmpty(EndHour) ? "00:00" : EndHour;
-            if (!DisableHolidayTime)
+            if (!DisableHolidayTime && !DisableWorkOffTime)
             {
                 return CalculateTotalHours(StartTime, EndTime);
+            }
+            if (DisableWorkOffTime)
+            {
+                StartHour = string.IsNullOrEmpty(StartHour) ? "00:00" : StartHour;
+                EndHour = string.IsNullOrEmpty(EndHour) ? "00:00" : EndHour;
+            }
+            else
+            {
+                StartHour = "00:00";
+                EndHour = "00:00";
             }
             decimal totalHours = 0;
             int MinDay = StartTime.Day;
@@ -145,15 +153,18 @@ namespace Foresight.DataAccess
                 {
                     continue;
                 }
-                HolidayLog holidayLog = null;
-                if (holidayList != null)
-                {
-                    holidayLog = holidayList.FirstOrDefault(p => p.Day.Equals(iStartDate.ToString("yyyyMMdd")));
-                }
                 int holidayType = 0;
-                if (holidayLog != null)
+                if (DisableHolidayTime)
                 {
-                    holidayType = holidayLog.Value;
+                    HolidayLog holidayLog = null;
+                    if (holidayList != null)
+                    {
+                        holidayLog = holidayList.FirstOrDefault(p => p.Day.Equals(iStartDate.ToString("yyyyMMdd")));
+                    }
+                    if (holidayLog != null)
+                    {
+                        holidayType = holidayLog.Value;
+                    }
                 }
                 if (holidayType == 0)
                 {

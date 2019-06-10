@@ -355,6 +355,30 @@ namespace Foresight.DataAccess
 			}
 		}
 		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private bool _disableWorkOffTime = false;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public bool DisableWorkOffTime
+		{
+			[DebuggerStepThrough()]
+			get { return this._disableWorkOffTime; }
+			set 
+			{
+				if (this._disableWorkOffTime != value) 
+				{
+					this._disableWorkOffTime = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("DisableWorkOffTime");
+				}
+			}
+		}
+		
 		
 		
 		#endregion
@@ -384,7 +408,8 @@ DECLARE @table TABLE(
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
 	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2)
+	[CheckTime] decimal(18, 2),
+	[DisableWorkOffTime] bit
 );
 
 INSERT INTO [dbo].[ServiceType_ImportantService] (
@@ -400,7 +425,8 @@ INSERT INTO [dbo].[ServiceType_ImportantService] (
 	[ServiceType_ImportantService].[StartHour],
 	[ServiceType_ImportantService].[EndHour],
 	[ServiceType_ImportantService].[ResponseTime],
-	[ServiceType_ImportantService].[CheckTime]
+	[ServiceType_ImportantService].[CheckTime],
+	[ServiceType_ImportantService].[DisableWorkOffTime]
 ) 
 output 
 	INSERTED.[ID],
@@ -416,7 +442,8 @@ output
 	INSERTED.[StartHour],
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
-	INSERTED.[CheckTime]
+	INSERTED.[CheckTime],
+	INSERTED.[DisableWorkOffTime]
 into @table
 VALUES ( 
 	@ServiceID,
@@ -431,7 +458,8 @@ VALUES (
 	@StartHour,
 	@EndHour,
 	@ResponseTime,
-	@CheckTime 
+	@CheckTime,
+	@DisableWorkOffTime 
 ); 
 
 SELECT 
@@ -448,7 +476,8 @@ SELECT
 	[StartHour],
 	[EndHour],
 	[ResponseTime],
-	[CheckTime] 
+	[CheckTime],
+	[DisableWorkOffTime] 
 FROM @table;
 ";
 			}
@@ -478,7 +507,8 @@ DECLARE @table TABLE(
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
 	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2)
+	[CheckTime] decimal(18, 2),
+	[DisableWorkOffTime] bit
 );
 
 UPDATE [dbo].[ServiceType_ImportantService] SET 
@@ -494,7 +524,8 @@ UPDATE [dbo].[ServiceType_ImportantService] SET
 	[ServiceType_ImportantService].[StartHour] = @StartHour,
 	[ServiceType_ImportantService].[EndHour] = @EndHour,
 	[ServiceType_ImportantService].[ResponseTime] = @ResponseTime,
-	[ServiceType_ImportantService].[CheckTime] = @CheckTime 
+	[ServiceType_ImportantService].[CheckTime] = @CheckTime,
+	[ServiceType_ImportantService].[DisableWorkOffTime] = @DisableWorkOffTime 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceID],
@@ -509,7 +540,8 @@ output
 	INSERTED.[StartHour],
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
-	INSERTED.[CheckTime]
+	INSERTED.[CheckTime],
+	INSERTED.[DisableWorkOffTime]
 into @table
 WHERE 
 	[ServiceType_ImportantService].[ID] = @ID
@@ -528,7 +560,8 @@ SELECT
 	[StartHour],
 	[EndHour],
 	[ResponseTime],
-	[CheckTime] 
+	[CheckTime],
+	[DisableWorkOffTime] 
 FROM @table;
 ";
 			}
@@ -605,7 +638,8 @@ WHERE
 	[ServiceType_ImportantService].[StartHour],
 	[ServiceType_ImportantService].[EndHour],
 	[ServiceType_ImportantService].[ResponseTime],
-	[ServiceType_ImportantService].[CheckTime]
+	[ServiceType_ImportantService].[CheckTime],
+	[ServiceType_ImportantService].[DisableWorkOffTime]
 ";
 			}
 		}
@@ -642,14 +676,15 @@ WHERE
 		/// <param name="endHour">endHour</param>
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
-		public static void InsertServiceType_ImportantService(int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime)
+		/// <param name="disableWorkOffTime">disableWorkOffTime</param>
+		public static void InsertServiceType_ImportantService(int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime)
 		{
             using (SqlHelper helper = new SqlHelper())
             {
                 try
                 {
                     helper.BeginTransaction();
-            		InsertServiceType_ImportantService(@serviceID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, helper);
+            		InsertServiceType_ImportantService(@serviceID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, @disableWorkOffTime, helper);
                     helper.Commit();
                 }
                 catch
@@ -677,8 +712,9 @@ WHERE
 		/// <param name="endHour">endHour</param>
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
+		/// <param name="disableWorkOffTime">disableWorkOffTime</param>
 		/// <param name="helper">helper</param>
-		internal static void InsertServiceType_ImportantService(int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, SqlHelper @helper)
+		internal static void InsertServiceType_ImportantService(int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
@@ -695,7 +731,8 @@ DECLARE @table TABLE(
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
 	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2)
+	[CheckTime] decimal(18, 2),
+	[DisableWorkOffTime] bit
 );
 
 INSERT INTO [dbo].[ServiceType_ImportantService] (
@@ -711,7 +748,8 @@ INSERT INTO [dbo].[ServiceType_ImportantService] (
 	[ServiceType_ImportantService].[StartHour],
 	[ServiceType_ImportantService].[EndHour],
 	[ServiceType_ImportantService].[ResponseTime],
-	[ServiceType_ImportantService].[CheckTime]
+	[ServiceType_ImportantService].[CheckTime],
+	[ServiceType_ImportantService].[DisableWorkOffTime]
 ) 
 output 
 	INSERTED.[ID],
@@ -727,7 +765,8 @@ output
 	INSERTED.[StartHour],
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
-	INSERTED.[CheckTime]
+	INSERTED.[CheckTime],
+	INSERTED.[DisableWorkOffTime]
 into @table
 VALUES ( 
 	@ServiceID,
@@ -742,7 +781,8 @@ VALUES (
 	@StartHour,
 	@EndHour,
 	@ResponseTime,
-	@CheckTime 
+	@CheckTime,
+	@DisableWorkOffTime 
 ); 
 
 SELECT 
@@ -759,7 +799,8 @@ SELECT
 	[StartHour],
 	[EndHour],
 	[ResponseTime],
-	[CheckTime] 
+	[CheckTime],
+	[DisableWorkOffTime] 
 FROM @table;
 ";
 			
@@ -777,6 +818,7 @@ FROM @table;
 			parameters.Add(new SqlParameter("@EndHour", EntityBase.GetDatabaseValue(@endHour)));
 			parameters.Add(new SqlParameter("@ResponseTime", EntityBase.GetDatabaseValue(@responseTime)));
 			parameters.Add(new SqlParameter("@CheckTime", EntityBase.GetDatabaseValue(@checkTime)));
+			parameters.Add(new SqlParameter("@DisableWorkOffTime", @disableWorkOffTime));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -799,14 +841,15 @@ FROM @table;
 		/// <param name="endHour">endHour</param>
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
-		public static void UpdateServiceType_ImportantService(int @iD, int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime)
+		/// <param name="disableWorkOffTime">disableWorkOffTime</param>
+		public static void UpdateServiceType_ImportantService(int @iD, int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime)
 		{
 			using (SqlHelper helper = new SqlHelper()) 
 			{
 				try
 				{
 					helper.BeginTransaction();
-					UpdateServiceType_ImportantService(@iD, @serviceID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, helper);
+					UpdateServiceType_ImportantService(@iD, @serviceID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, @disableWorkOffTime, helper);
 					helper.Commit();
 				}
 				catch 
@@ -835,8 +878,9 @@ FROM @table;
 		/// <param name="endHour">endHour</param>
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
+		/// <param name="disableWorkOffTime">disableWorkOffTime</param>
 		/// <param name="helper">helper</param>
-		internal static void UpdateServiceType_ImportantService(int @iD, int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, SqlHelper @helper)
+		internal static void UpdateServiceType_ImportantService(int @iD, int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
@@ -853,7 +897,8 @@ DECLARE @table TABLE(
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
 	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2)
+	[CheckTime] decimal(18, 2),
+	[DisableWorkOffTime] bit
 );
 
 UPDATE [dbo].[ServiceType_ImportantService] SET 
@@ -869,7 +914,8 @@ UPDATE [dbo].[ServiceType_ImportantService] SET
 	[ServiceType_ImportantService].[StartHour] = @StartHour,
 	[ServiceType_ImportantService].[EndHour] = @EndHour,
 	[ServiceType_ImportantService].[ResponseTime] = @ResponseTime,
-	[ServiceType_ImportantService].[CheckTime] = @CheckTime 
+	[ServiceType_ImportantService].[CheckTime] = @CheckTime,
+	[ServiceType_ImportantService].[DisableWorkOffTime] = @DisableWorkOffTime 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceID],
@@ -884,7 +930,8 @@ output
 	INSERTED.[StartHour],
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
-	INSERTED.[CheckTime]
+	INSERTED.[CheckTime],
+	INSERTED.[DisableWorkOffTime]
 into @table
 WHERE 
 	[ServiceType_ImportantService].[ID] = @ID
@@ -903,7 +950,8 @@ SELECT
 	[StartHour],
 	[EndHour],
 	[ResponseTime],
-	[CheckTime] 
+	[CheckTime],
+	[DisableWorkOffTime] 
 FROM @table;
 ";
 			
@@ -922,6 +970,7 @@ FROM @table;
 			parameters.Add(new SqlParameter("@EndHour", EntityBase.GetDatabaseValue(@endHour)));
 			parameters.Add(new SqlParameter("@ResponseTime", EntityBase.GetDatabaseValue(@responseTime)));
 			parameters.Add(new SqlParameter("@CheckTime", EntityBase.GetDatabaseValue(@checkTime)));
+			parameters.Add(new SqlParameter("@DisableWorkOffTime", @disableWorkOffTime));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -1213,6 +1262,7 @@ SELECT " + ServiceType_ImportantService.SelectFieldList + "FROM [dbo].[ServiceTy
 			public const string EndHour = "EndHour";
 			public const string ResponseTime = "ResponseTime";
 			public const string CheckTime = "CheckTime";
+			public const string DisableWorkOffTime = "DisableWorkOffTime";
             
             public static Dictionary<string,string> AllPropertiesDescription=new Dictionary<string,string>(){
     			 {"ID" , "int:"},
@@ -1229,6 +1279,7 @@ SELECT " + ServiceType_ImportantService.SelectFieldList + "FROM [dbo].[ServiceTy
     			 {"EndHour" , "string:"},
     			 {"ResponseTime" , "decimal:"},
     			 {"CheckTime" , "decimal:"},
+    			 {"DisableWorkOffTime" , "bool:"},
             };
 		}
 		#endregion

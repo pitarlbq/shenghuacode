@@ -85,5 +85,7 @@ namespace Foresight.DataAccess
         ServiceTypeStartHour,
         [Description("下班时间")]
         ServiceTypeEndHour,
+        [Description("包括下班时间")]
+        ServiceTypeDisableWorkOffTime,
     }
 }

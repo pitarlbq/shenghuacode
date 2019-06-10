@@ -72,9 +72,10 @@ function get_options() {
     var roomids = top.GetSelectedRooms();
     var projectid = top.GetSelectProjectID();
     var CompanyID = top.GetSelectCompanyID();
-    if (roomids.length == 0 && (projectid == null || projectid == "") && CompanyID == '') {
-        return null;
-    }
+    //if (roomids.length == 0 && (projectid == null || projectid == "") && CompanyID == '') {
+    //    show_message('系统异常', 'error');
+    //    return null;
+    //}
     var projectids = [];
     if (projectid != null && projectid != "") {
         projectids.push(projectid);

@@ -78,7 +78,7 @@ namespace Foresight.DataAccess
             var config = new Utility.SiteConfig();
             if (config.IsMallOn)
             {
-                cmd += " or [RoomID] in (select [RoomID] from [RoomPhoneRelation] where [RelatePhoneNumber] in (select [PhoneNumber] from [User] where [UserID] in (select [UserID] from [Mall_UserFamily] where [PhoneNumber] like '%" + keyword + "%')))";
+                cmd += " or [RoomID] in (select [RoomID] from [RoomPhoneRelation] where [RelatePhoneNumber] like '%" + keyword + "%' or RelationName like '%" + keyword + "%')";
             }
             return cmd;
         }

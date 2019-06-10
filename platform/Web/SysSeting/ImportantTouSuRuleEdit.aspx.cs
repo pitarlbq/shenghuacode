@@ -28,6 +28,7 @@ namespace Web.SysSeting
                 this.tdDisableHolidayTime.Value = data.DisableHolidayTime ? "1" : "0";
                 this.tdStartHour.Value = string.IsNullOrEmpty(data.StartHour) ? "08:00" : data.StartHour;
                 this.tdEndHour.Value = string.IsNullOrEmpty(data.EndHour) ? "18:00" : data.EndHour;
+                this.tdDisableWorkOffTime.Value = data.DisableWorkOffTime ? "1" : "0";
             }
         }
     }

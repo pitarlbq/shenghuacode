@@ -275,6 +275,7 @@ namespace Web.Handler
             decimal HuiFangTime = WebUtil.getServerDecimalValue(context, "tdHuiFangTime");
             decimal GuanDanTime = WebUtil.getServerDecimalValue(context, "tdGuanDanTime");
             bool DisableHolidayTime = WebUtil.getServerIntValue(context, "tdDisableHolidayTime") == 1;
+            bool DisableWorkOffTime = WebUtil.getServerIntValue(context, "tdDisableWorkOffTime") == 1;
             string StartHour = WebUtil.getServerValue(context, "tdStartHour");
             string EndHour = WebUtil.getServerValue(context, "tdEndHour");
             int isimport = WebUtil.GetIntValue(context, "isimport");
@@ -306,6 +307,7 @@ namespace Web.Handler
                         data.HuiFangTime = HuiFangTime;
                         data.GuanDanTime = GuanDanTime;
                         data.DisableHolidayTime = DisableHolidayTime;
+                        data.DisableWorkOffTime = DisableWorkOffTime;
                         data.StartHour = StartHour;
                         data.EndHour = EndHour;
                         if (isimport == 0)
@@ -1322,6 +1324,7 @@ namespace Web.Handler
             data.CallBackServiceType = WebUtil.getServerIntValue(context, "tdCallBackServiceType");
             data.BanJieServiceType = WebUtil.getServerIntValue(context, "tdBanJieServiceType");
             data.DisableHolidayTime = WebUtil.getServerIntValue(context, "tdDisableHolidayTime") == 1;
+            data.DisableWorkOffTime = WebUtil.getServerIntValue(context, "tdDisableWorkOffTime") == 1;
             data.StartHour = WebUtil.getServerValue(context, "tdStartHour");
             data.EndHour = WebUtil.getServerValue(context, "tdEndHour");
             data.Save();

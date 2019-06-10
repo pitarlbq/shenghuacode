@@ -81,6 +81,13 @@
                         <option value="1">否</option>
                     </select>
                 </div>
+                <div class="tableItem hidetime">
+                    <label class="title">包括下班时间</label>
+                    <select class="easyui-combobox" runat="server" id="tdDisableWorkOffTime">
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                    </select>
+                </div>
                 <div class="tableItem">
                     <label class="title">上班时间</label>
                     <input type="text" class="easyui-textbox" runat="server" id="tdStartHour" />（00:00）
