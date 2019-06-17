@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Content.Master" AutoEventWireup="true" CodeBehind="ServiceClose.aspx.cs" Inherits="Web.CustomerService.ServiceClose" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Content.Master" AutoEventWireup="true" CodeBehind="ServiceCancel.aspx.cs" Inherits="Web.CustomerService.ServiceCancel" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
@@ -21,7 +21,7 @@
             $('#ff').form('submit', {
                 url: '../Handler/ServiceHandler.ashx',
                 onSubmit: function (param) {
-                    param.visit = 'closecustomerservice';
+                    param.visit = 'cancelcustomerservice';
                     param.IDList = JSON.stringify(IDList);
                 },
                 success: function (data) {
@@ -71,7 +71,7 @@
         <div class="table_container">
             <div class="tableItem">
                 <label class="title">附件上传</label>
-                <input class="easyui-filebox" name="attachfile" data-options="prompt:'请选择文件',buttonText: '选择文件',required:true" style="width: 60%; height: 28px;" />
+                <input class="easyui-filebox" name="attachfile" data-options="prompt:'请选择文件',buttonText: '选择文件'" style="width: 60%; height: 28px;" />
             </div>
         </div>
     </form>

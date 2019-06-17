@@ -8,21 +8,14 @@ using System.Web.UI.WebControls;
 
 namespace Web.Main
 {
-    public partial class Default : BasePage
+    public partial class PhoneDefault : System.Web.UI.Page
     {
         public string phoneNumber = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                var user = WebUtil.GetUser(this.Context);
-                string ServiceFrom = string.Empty;
-                if (user != null)
-                {
-                    ServiceFrom = user.ServiceFrom;
-                    ServiceFrom = string.IsNullOrEmpty(ServiceFrom) ? Utility.EnumModel.WechatServiceFromDefine.four00call.ToString() : ServiceFrom;
-                    this.tdAddUserName.InnerHtml = user.FinalRealName;
-                }
+                string ServiceFrom = Utility.EnumModel.WechatServiceFromDefine.four00call.ToString();
                 string ServiceFromDesc = Utility.EnumHelper.GetDescription<Utility.EnumModel.WechatServiceFromDefine>(ServiceFrom);
                 this.tdServiceFrom.InnerHtml = ServiceFromDesc;
                 this.hdServiceFrom.Value = ServiceFrom;
@@ -32,6 +25,15 @@ namespace Web.Main
                     phoneNumber = Request.QueryString["phoneNumber"];
                 }
             }
+        }
+        public string getToken()
+        {
+            string RandJsToken = ConfigurationManager.AppSettings["RandJsToken"];
+            if (string.IsNullOrEmpty(RandJsToken))
+            {
+                RandJsToken = "yyyyMMdd";
+            }
+            return DateTime.Now.ToString(RandJsToken);
         }
     }
 }

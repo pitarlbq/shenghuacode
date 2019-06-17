@@ -506,13 +506,18 @@ function doDialNumberDone() {
 }
 //拨打电话
 function dialPhone(phoneNumber, serviceID, relatedPhoneRecordID) {
+    if (PhoneType != 0) {
+        var messages = '电话正在拨打中，请稍后重试'
+        alertNotify(messages, 2);
+        return;
+    }
     reSetData();
     ComingPhoneNumber = phoneNumber;
     ServiceID = serviceID || 0;
     RelatedPhoneRecordID = relatedPhoneRecordID || 0;
     CallTime = getNowTimeStr();
     PhoneType = 2;
-    savePhoneRecord('dialPhone');
+    //savePhoneRecord('dialPhone');
     if (top.isDriverOn == 2) {
         reSetData();
         var messages = '电话语音驱动未运行，请检查'
@@ -629,20 +634,20 @@ function startRecord(source) {
 }
 //结束录音
 function stopRecord(source) {
-    if (RecordID > 0) {
-        HangUpTime = getNowTimeStr();
-        savePhoneRecord(source);
-    }
-    callListPush();
     if (isStartRecording) {
         try {
             TV_StopRecordFile(uID);
         } catch (e) {
         }
-        setTimeout(function () {
-            uploadFileRecord();
-        }, 500);
     }
+    if (RecordID > 0) {
+        HangUpTime = getNowTimeStr();
+        savePhoneRecord(source);
+        callListPush();
+    }
+    setTimeout(function () {
+        uploadFileRecord();
+    }, 500);
 }
 var tryCount = 0;
 function uploadFileRecord() {
@@ -650,20 +655,19 @@ function uploadFileRecord() {
         return;
     }
     savePhoneRecord('uploadFileRecord');
-    var callItem = callList[callList.length - 1];
+    var callItem = callList[0];
     var params = '?visit=uploadvoicerecord&RecordID=' + callItem.RecordID;
     TV_uploadFile(contextPath + '/Handler/ServiceHandler.ashx' + params, callItem.RecordPath);
     setTimeout(function () {
         var messages = '电话录音上传成功'
         top.alertNotify(messages, 3);
-        callList.splice(callList.length - 1, 1);
+        callList.splice(0, 1);
         uploadFileRecord();
     }, 2000);
 }
 //得到来电号码
 function getPhoneNumber(data) {
     PhoneType = 1;
-    startRecord('getPhoneNumber');
     var dataArray = data.split(' ');
     var dataItem = null;
     if (dataArray.length > 0) {
@@ -679,6 +683,7 @@ function getPhoneNumber(data) {
             }, 50);
         }
     }
+    startRecord('getPhoneNumber');
 }
 function getDataByPhoneNumber(phoneNumber) {
     if (!ComingPhoneNumber) {
@@ -692,7 +697,7 @@ function getDataByPhoneNumber(phoneNumber) {
     }
     else {
         ComingPhoneNumber = phoneNumber;
-        top.addTab(phoneNumber, '../Main/Default.aspx?phoneNumber=' + phoneNumber, '');
+        top.addTab(phoneNumber, '../Main/PhoneDefault.aspx?phoneNumber=' + phoneNumber, '');
         top.openTreeContent();
     }
 }

@@ -175,6 +175,7 @@ function savedata() {
                 param.RecordName = top.RecordName;
             }
             param.ServiceType = ServiceType;
+            param.UserID = top.UserID
         },
         success: function (data) {
             MaskUtil.unmask();

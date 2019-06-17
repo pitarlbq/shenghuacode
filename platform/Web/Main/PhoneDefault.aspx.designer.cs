@@ -10,7 +10,7 @@
 namespace Web.Main {
     
     
-    public partial class Default {
+    public partial class PhoneDefault {
         
         /// <summary>
         /// ff 控件。

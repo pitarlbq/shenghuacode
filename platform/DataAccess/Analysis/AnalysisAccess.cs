@@ -83,6 +83,8 @@ namespace Foresight.DataAccess
                 list = list.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();
             }
             ViewCustomerService.GetFinalViewCustomerDataGrid(list, IncludeTimeOutData: true);
+            int PinZhiShengJiServiceID = new SiteConfig().PinZhiShengJiServiceID;
+            list = list.Where(p => !p.ServiceType2IDList.Contains(PinZhiShengJiServiceID)).ToArray();
             var huiFangTimeList = list.Where(p =>
             {
                 var myServiceType = serviceTypeList.FirstOrDefault(q => q.ID == p.ServiceType1ID);

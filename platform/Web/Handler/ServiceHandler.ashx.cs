@@ -429,7 +429,11 @@ namespace Web.Handler
         }
         private void gethomecountdata(HttpContext context)
         {
-            int UserID = WebUtil.GetUser(context).UserID;
+            int UserID = WebUtil.GetIntValue(context, "UserID");
+            if (UserID <= 0)
+            {
+                UserID = WebUtil.GetUser(context).UserID;
+            }
             int NormalSeatCount = 0;
             int InvalidSeatCount = 0;
             int ServiceCount = 0;
@@ -1164,12 +1168,33 @@ namespace Web.Handler
         {
             string IDs = context.Request.Params["IDList"];
             List<int> IDList = JsonConvert.DeserializeObject<List<int>>(IDs);
+            string FilePath = string.Empty;
+            HttpFileCollection uploadFiles = context.Request.Files;
+            if (uploadFiles.Count > 0)
+            {
+                HttpPostedFile postedFile = uploadFiles[0];
+                string fileOriName = postedFile.FileName;
+                if (fileOriName != "" && fileOriName != null)
+                {
+                    string extension = System.IO.Path.GetExtension(fileOriName).ToLower();
+                    string fileName = DateTime.Now.ToFileTime().ToString() + extension;
+                    string filepath = "/upload/CustomerService/";
+                    string rootPath = HttpContext.Current.Server.MapPath("~" + filepath);
+                    if (!System.IO.Directory.Exists(rootPath))
+                    {
+                        System.IO.Directory.CreateDirectory(rootPath);
+                    }
+                    string Path = rootPath + fileName;
+                    postedFile.SaveAs(Path);
+                    FilePath = filepath + fileName;
+                }
+            }
             using (SqlHelper helper = new SqlHelper())
             {
                 try
                 {
                     helper.BeginTransaction();
-                    string cmdtext = "update [CustomerService] set ServiceStatus=2 where ID in (" + string.Join(",", IDList.ToArray()) + ")";
+                    string cmdtext = "update [CustomerService] set ServiceStatus=2,CancelFilePath='" + FilePath + "' where ID in (" + string.Join(",", IDList.ToArray()) + ")";
                     List<SqlParameter> parameters = new List<SqlParameter>();
                     helper.Execute(cmdtext, CommandType.Text, parameters);
                     helper.Commit();
@@ -2142,6 +2167,7 @@ namespace Web.Handler
             int ProjectID = WebUtil.GetIntValue(context, "ProjectID");
             bool IsNotRoom = WebUtil.GetBoolValue(context, "IsNotRoom");
             string PhoneNumber = context.Request["phoneNumber"];
+            int UserID = WebUtil.GetIntValue(context, "UserID");
             Project project = null;
             RoomPhoneRelation relation = null;
             if (!string.IsNullOrEmpty(PhoneNumber) && ProjectID <= 0)
@@ -2264,7 +2290,16 @@ namespace Web.Handler
         }
         private void savecustomerservice(HttpContext context)
         {
-            var user = WebUtil.GetUser(context);
+            int UserID = WebUtil.GetIntValue(context, "UserID");
+            User user = null;
+            if (UserID > 0)
+            {
+                user = User.GetUser(UserID);
+            }
+            else
+            {
+                user = WebUtil.GetUser(context);
+            }
             Foresight.DataAccess.CustomerService service = null;
             int ID = WebUtil.GetIntValue(context, "ID");
             int ProjectID = WebUtil.GetIntValue(context, "ProjectID");

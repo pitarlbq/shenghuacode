@@ -107,6 +107,7 @@
     <Content Include="callring.mp3" />
     <Content Include="CangKu\DepartmentMgr.aspx" />
     <Content Include="CangKu\EditDepartment.aspx" />
+    <Content Include="CustomerService\ServiceCancel.aspx" />
     <Content Include="CustomerService\ServiceClose.aspx" />
     <Content Include="CustomerService\ServiceImportantTouSuApprove.aspx" />
     <Content Include="CustomerService\CustomerServiceTypeEdit.aspx" />
@@ -174,6 +175,7 @@
     <Content Include="js\Page\UserInfo\UserAuthMgr.js" />
     <Content Include="js\Page\UserInfo\UserServiceTypeMgr.js" />
     <Content Include="Main\Default.aspx" />
+    <Content Include="Main\PhoneDefault.aspx" />
     <Content Include="newmessage.mp3" />
     <Content Include="privacy.html" />
     <Content Include="styles\icons\回访管理.png" />
@@ -1119,6 +1121,13 @@
     <Compile Include="CangKu\EditDepartment.aspx.designer.cs">
       <DependentUpon>EditDepartment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomerService\ServiceCancel.aspx.cs">
+      <DependentUpon>ServiceCancel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceCancel.aspx.designer.cs">
+      <DependentUpon>ServiceCancel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CustomerService\ServiceClose.aspx.cs">
       <DependentUpon>ServiceClose.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1253,6 +1262,13 @@
     </Compile>
     <Compile Include="Main\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Main\PhoneDefault.aspx.cs">
+      <DependentUpon>PhoneDefault.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main\PhoneDefault.aspx.designer.cs">
+      <DependentUpon>PhoneDefault.aspx</DependentUpon>
     </Compile>
     <Compile Include="Master\NavContent8.Master.cs">
       <DependentUpon>NavContent8.Master</DependentUpon>

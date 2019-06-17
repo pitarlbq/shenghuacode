@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/NavContent6.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Web.Main.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/NavContent6.Master" AutoEventWireup="true" CodeBehind="PhoneDefault.aspx.cs" Inherits="Web.Main.PhoneDefault" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
@@ -162,7 +162,7 @@
             });
         }
     </script>
-    <script src="../js/Page/CustomerService/ServiceEdit.js?t=<%=base.getToken()%>"></script>
+    <script src="../js/Page/CustomerService/ServiceEdit.js?t=<%=getToken()%>"></script>
     <link href="../styles/page/default.css?v2" rel="stylesheet" />
     <style>
         .historyItem label {

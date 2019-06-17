@@ -139,6 +139,30 @@ namespace Foresight.DataAccess
 			}
 		}
 		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private int _fileType = int.MinValue;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public int FileType
+		{
+			[DebuggerStepThrough()]
+			get { return this._fileType; }
+			set 
+			{
+				if (this._fileType != value) 
+				{
+					this._fileType = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("FileType");
+				}
+			}
+		}
+		
 		
 		
 		#endregion
@@ -159,27 +183,31 @@ DECLARE @table TABLE(
 	[ServiceID] int,
 	[AttachedFilePath] nvarchar(500),
 	[AddTime] datetime,
-	[FileOriName] nvarchar(500)
+	[FileOriName] nvarchar(500),
+	[FileType] int
 );
 
 INSERT INTO [dbo].[CustomerServiceAttach] (
 	[CustomerServiceAttach].[ServiceID],
 	[CustomerServiceAttach].[AttachedFilePath],
 	[CustomerServiceAttach].[AddTime],
-	[CustomerServiceAttach].[FileOriName]
+	[CustomerServiceAttach].[FileOriName],
+	[CustomerServiceAttach].[FileType]
 ) 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceID],
 	INSERTED.[AttachedFilePath],
 	INSERTED.[AddTime],
-	INSERTED.[FileOriName]
+	INSERTED.[FileOriName],
+	INSERTED.[FileType]
 into @table
 VALUES ( 
 	@ServiceID,
 	@AttachedFilePath,
 	@AddTime,
-	@FileOriName 
+	@FileOriName,
+	@FileType 
 ); 
 
 SELECT 
@@ -187,7 +215,8 @@ SELECT
 	[ServiceID],
 	[AttachedFilePath],
 	[AddTime],
-	[FileOriName] 
+	[FileOriName],
+	[FileType] 
 FROM @table;
 ";
 			}
@@ -208,20 +237,23 @@ DECLARE @table TABLE(
 	[ServiceID] int,
 	[AttachedFilePath] nvarchar(500),
 	[AddTime] datetime,
-	[FileOriName] nvarchar(500)
+	[FileOriName] nvarchar(500),
+	[FileType] int
 );
 
 UPDATE [dbo].[CustomerServiceAttach] SET 
 	[CustomerServiceAttach].[ServiceID] = @ServiceID,
 	[CustomerServiceAttach].[AttachedFilePath] = @AttachedFilePath,
 	[CustomerServiceAttach].[AddTime] = @AddTime,
-	[CustomerServiceAttach].[FileOriName] = @FileOriName 
+	[CustomerServiceAttach].[FileOriName] = @FileOriName,
+	[CustomerServiceAttach].[FileType] = @FileType 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceID],
 	INSERTED.[AttachedFilePath],
 	INSERTED.[AddTime],
-	INSERTED.[FileOriName]
+	INSERTED.[FileOriName],
+	INSERTED.[FileType]
 into @table
 WHERE 
 	[CustomerServiceAttach].[ID] = @ID
@@ -231,7 +263,8 @@ SELECT
 	[ServiceID],
 	[AttachedFilePath],
 	[AddTime],
-	[FileOriName] 
+	[FileOriName],
+	[FileType] 
 FROM @table;
 ";
 			}
@@ -299,7 +332,8 @@ WHERE
 	[CustomerServiceAttach].[ServiceID],
 	[CustomerServiceAttach].[AttachedFilePath],
 	[CustomerServiceAttach].[AddTime],
-	[CustomerServiceAttach].[FileOriName]
+	[CustomerServiceAttach].[FileOriName],
+	[CustomerServiceAttach].[FileType]
 ";
 			}
 		}
@@ -327,14 +361,15 @@ WHERE
 		/// <param name="attachedFilePath">attachedFilePath</param>
 		/// <param name="addTime">addTime</param>
 		/// <param name="fileOriName">fileOriName</param>
-		public static void InsertCustomerServiceAttach(int @serviceID, string @attachedFilePath, DateTime @addTime, string @fileOriName)
+		/// <param name="fileType">fileType</param>
+		public static void InsertCustomerServiceAttach(int @serviceID, string @attachedFilePath, DateTime @addTime, string @fileOriName, int @fileType)
 		{
             using (SqlHelper helper = new SqlHelper())
             {
                 try
                 {
                     helper.BeginTransaction();
-            		InsertCustomerServiceAttach(@serviceID, @attachedFilePath, @addTime, @fileOriName, helper);
+            		InsertCustomerServiceAttach(@serviceID, @attachedFilePath, @addTime, @fileOriName, @fileType, helper);
                     helper.Commit();
                 }
                 catch
@@ -353,8 +388,9 @@ WHERE
 		/// <param name="attachedFilePath">attachedFilePath</param>
 		/// <param name="addTime">addTime</param>
 		/// <param name="fileOriName">fileOriName</param>
+		/// <param name="fileType">fileType</param>
 		/// <param name="helper">helper</param>
-		internal static void InsertCustomerServiceAttach(int @serviceID, string @attachedFilePath, DateTime @addTime, string @fileOriName, SqlHelper @helper)
+		internal static void InsertCustomerServiceAttach(int @serviceID, string @attachedFilePath, DateTime @addTime, string @fileOriName, int @fileType, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
@@ -362,27 +398,31 @@ DECLARE @table TABLE(
 	[ServiceID] int,
 	[AttachedFilePath] nvarchar(500),
 	[AddTime] datetime,
-	[FileOriName] nvarchar(500)
+	[FileOriName] nvarchar(500),
+	[FileType] int
 );
 
 INSERT INTO [dbo].[CustomerServiceAttach] (
 	[CustomerServiceAttach].[ServiceID],
 	[CustomerServiceAttach].[AttachedFilePath],
 	[CustomerServiceAttach].[AddTime],
-	[CustomerServiceAttach].[FileOriName]
+	[CustomerServiceAttach].[FileOriName],
+	[CustomerServiceAttach].[FileType]
 ) 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceID],
 	INSERTED.[AttachedFilePath],
 	INSERTED.[AddTime],
-	INSERTED.[FileOriName]
+	INSERTED.[FileOriName],
+	INSERTED.[FileType]
 into @table
 VALUES ( 
 	@ServiceID,
 	@AttachedFilePath,
 	@AddTime,
-	@FileOriName 
+	@FileOriName,
+	@FileType 
 ); 
 
 SELECT 
@@ -390,7 +430,8 @@ SELECT
 	[ServiceID],
 	[AttachedFilePath],
 	[AddTime],
-	[FileOriName] 
+	[FileOriName],
+	[FileType] 
 FROM @table;
 ";
 			
@@ -399,6 +440,7 @@ FROM @table;
 			parameters.Add(new SqlParameter("@AttachedFilePath", EntityBase.GetDatabaseValue(@attachedFilePath)));
 			parameters.Add(new SqlParameter("@AddTime", EntityBase.GetDatabaseValue(@addTime)));
 			parameters.Add(new SqlParameter("@FileOriName", EntityBase.GetDatabaseValue(@fileOriName)));
+			parameters.Add(new SqlParameter("@FileType", EntityBase.GetDatabaseValue(@fileType)));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -412,14 +454,15 @@ FROM @table;
 		/// <param name="attachedFilePath">attachedFilePath</param>
 		/// <param name="addTime">addTime</param>
 		/// <param name="fileOriName">fileOriName</param>
-		public static void UpdateCustomerServiceAttach(int @iD, int @serviceID, string @attachedFilePath, DateTime @addTime, string @fileOriName)
+		/// <param name="fileType">fileType</param>
+		public static void UpdateCustomerServiceAttach(int @iD, int @serviceID, string @attachedFilePath, DateTime @addTime, string @fileOriName, int @fileType)
 		{
 			using (SqlHelper helper = new SqlHelper()) 
 			{
 				try
 				{
 					helper.BeginTransaction();
-					UpdateCustomerServiceAttach(@iD, @serviceID, @attachedFilePath, @addTime, @fileOriName, helper);
+					UpdateCustomerServiceAttach(@iD, @serviceID, @attachedFilePath, @addTime, @fileOriName, @fileType, helper);
 					helper.Commit();
 				}
 				catch 
@@ -439,8 +482,9 @@ FROM @table;
 		/// <param name="attachedFilePath">attachedFilePath</param>
 		/// <param name="addTime">addTime</param>
 		/// <param name="fileOriName">fileOriName</param>
+		/// <param name="fileType">fileType</param>
 		/// <param name="helper">helper</param>
-		internal static void UpdateCustomerServiceAttach(int @iD, int @serviceID, string @attachedFilePath, DateTime @addTime, string @fileOriName, SqlHelper @helper)
+		internal static void UpdateCustomerServiceAttach(int @iD, int @serviceID, string @attachedFilePath, DateTime @addTime, string @fileOriName, int @fileType, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
@@ -448,20 +492,23 @@ DECLARE @table TABLE(
 	[ServiceID] int,
 	[AttachedFilePath] nvarchar(500),
 	[AddTime] datetime,
-	[FileOriName] nvarchar(500)
+	[FileOriName] nvarchar(500),
+	[FileType] int
 );
 
 UPDATE [dbo].[CustomerServiceAttach] SET 
 	[CustomerServiceAttach].[ServiceID] = @ServiceID,
 	[CustomerServiceAttach].[AttachedFilePath] = @AttachedFilePath,
 	[CustomerServiceAttach].[AddTime] = @AddTime,
-	[CustomerServiceAttach].[FileOriName] = @FileOriName 
+	[CustomerServiceAttach].[FileOriName] = @FileOriName,
+	[CustomerServiceAttach].[FileType] = @FileType 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceID],
 	INSERTED.[AttachedFilePath],
 	INSERTED.[AddTime],
-	INSERTED.[FileOriName]
+	INSERTED.[FileOriName],
+	INSERTED.[FileType]
 into @table
 WHERE 
 	[CustomerServiceAttach].[ID] = @ID
@@ -471,7 +518,8 @@ SELECT
 	[ServiceID],
 	[AttachedFilePath],
 	[AddTime],
-	[FileOriName] 
+	[FileOriName],
+	[FileType] 
 FROM @table;
 ";
 			
@@ -481,6 +529,7 @@ FROM @table;
 			parameters.Add(new SqlParameter("@AttachedFilePath", EntityBase.GetDatabaseValue(@attachedFilePath)));
 			parameters.Add(new SqlParameter("@AddTime", EntityBase.GetDatabaseValue(@addTime)));
 			parameters.Add(new SqlParameter("@FileOriName", EntityBase.GetDatabaseValue(@fileOriName)));
+			parameters.Add(new SqlParameter("@FileType", EntityBase.GetDatabaseValue(@fileType)));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -756,13 +805,14 @@ SELECT " + CustomerServiceAttach.SelectFieldList + "FROM [dbo].[CustomerServiceA
 		#endregion
 		
 		#region Subclasses
-		public static partial class CustomerServiceAttachProperties
+		public static partial class CustomerServiceAttach_Properties
 		{
 			public const string ID = "ID";
 			public const string ServiceID = "ServiceID";
 			public const string AttachedFilePath = "AttachedFilePath";
 			public const string AddTime = "AddTime";
 			public const string FileOriName = "FileOriName";
+			public const string FileType = "FileType";
             
             public static Dictionary<string,string> AllPropertiesDescription=new Dictionary<string,string>(){
     			 {"ID" , "int:"},
@@ -770,6 +820,7 @@ SELECT " + CustomerServiceAttach.SelectFieldList + "FROM [dbo].[CustomerServiceA
     			 {"AttachedFilePath" , "string:"},
     			 {"AddTime" , "DateTime:"},
     			 {"FileOriName" , "string:"},
+    			 {"FileType" , "int:"},
             };
 		}
 		#endregion

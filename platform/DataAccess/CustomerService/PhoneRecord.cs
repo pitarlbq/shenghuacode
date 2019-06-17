@@ -140,18 +140,32 @@ namespace Foresight.DataAccess
                 {
                     int.TryParse(result.ToString(), out InvalidSeatCount);
                 }
-                cmdtext = "select count(1) from [CustomerService] where [IsSuggestion]=0";
-                result = helper.ExecuteScalar(cmdtext, CommandType.Text, parameters);
-                if (result != null)
+
+                string cmdwhere = " and (exists(select 1 from [UserServiceType] where [ServiceTypeID]=CustomerService.ServiceType1ID and ([UserID]=@UserID or exists(select 1 from [UserRoles] where [RoleID]=[UserServiceType].RoleID and [UserID]=@UserID))) or CustomerService.ServiceType1ID=0)";
+                parameters.Add(new SqlParameter("@UserID", UserID));
+                int BaoXiuServiceID = new Utility.SiteConfig().BaoXiuServiceID;
+
+                cmdtext = "select ProjectID,ServiceType1ID from [CustomerService] where 1=1" + cmdwhere;
+                var serviceList = GetList<CustomerService>(cmdtext, parameters).ToArray();
+                //result = helper.ExecuteScalar(cmdtext, CommandType.Text, parameters);
+                //if (result != null)
+                //{
+                //    int.TryParse(result.ToString(), out SuggestionCount);
+                //}
+                var EqualProjectIDList = new List<int>();
+                var InProjectIDList = new List<int>();
+                Project.GetMyProjectListByUserID(UserID, out EqualProjectIDList, out InProjectIDList);
+                if (InProjectIDList.Count > 0 || EqualProjectIDList.Count > 0)
                 {
-                    int.TryParse(result.ToString(), out ServiceCount);
+                    var myProjectIDList = Project.GetProjectIDListbyIDList(InProjectIDList: InProjectIDList, EqualProjectIDList: EqualProjectIDList);
+                    if (myProjectIDList.Length > 0)
+                    {
+                        serviceList = serviceList.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();
+                    }
                 }
-                cmdtext = "select count(1) from [CustomerService] where [IsSuggestion]=1";
-                result = helper.ExecuteScalar(cmdtext, CommandType.Text, parameters);
-                if (result != null)
-                {
-                    int.TryParse(result.ToString(), out SuggestionCount);
-                }
+                SuggestionCount = serviceList.Where(p => p.ServiceType1ID != BaoXiuServiceID).ToArray().Length;
+                ServiceCount = serviceList.Where(p => p.ServiceType1ID == BaoXiuServiceID).ToArray().Length;
+
                 var totalInRecordList = recordList.Where(p => p.PhoneType == 1).ToArray();
                 TotalInCallCount = totalInRecordList.Length;
                 TotalInCallMin = totalInRecordList.Sum(p => p.TotalCallHour);

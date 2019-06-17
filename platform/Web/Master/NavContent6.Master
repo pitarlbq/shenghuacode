@@ -25,8 +25,13 @@
             return top.GetSelectedProjects();
         }
         $(function () {
-            top.treeType = 6;
-            top.openTreeContent(true);
+            try {
+                top.treeType = 6;
+                top.openTreeContent(true);
+
+            } catch (e) {
+
+            }
         })
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">

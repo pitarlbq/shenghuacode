@@ -326,6 +326,10 @@ namespace Foresight.DataAccess
             var recordList = PhoneRecord.GetPhoneRecordDetailByServiceIDList(MinServiceID, MaxServiceID);
             foreach (var item in list)
             {
+                if (item.IsImportantTouSu)
+                {
+                    continue;
+                }
                 if (item.IsClosed)
                 {
                     error = "工单已关单，不能重复关单";
@@ -338,7 +342,7 @@ namespace Foresight.DataAccess
                         error = "工单未办结，不能关单";
                         return false;
                     }
-                    return true;
+                    continue;
                 }
                 if (item.CloseServiceType == 2)
                 {
@@ -346,19 +350,19 @@ namespace Foresight.DataAccess
                     var myCallBackList = callBackList.Where(p => p.ServiceID == item.ID).ToArray();
                     if (myRecordList.FirstOrDefault(p => p.PickUpTime > DateTime.MinValue) != null)
                     {
-                        return true;
+                        continue;
                     }
                     if (myCallBackList.FirstOrDefault(p => p.PhoneCallBackType == 1) != null)
                     {
-                        return true;
+                        continue;
                     }
                     if (myRecordList.Length >= 2)
                     {
-                        return true;
+                        continue;
                     }
                     if (myCallBackList.Where(p => p.PhoneCallBackType == 2).ToArray().Length >= 2)
                     {
-                        return true;
+                        continue;
                     }
                     if (myRecordList.Length == 1)
                     {
@@ -380,11 +384,11 @@ namespace Foresight.DataAccess
                         error = "廉洁举报类工单未审计确认，不能关单";
                         return false;
                     }
-                    return true;
+                    continue;
                 }
                 if (item.CloseServiceType == 4)
                 {
-                    return true;
+                    continue;
                 }
             }
             return true;
@@ -415,11 +419,11 @@ namespace Foresight.DataAccess
                         error = "工单未处理，不能关单";
                         return false;
                     }
-                    return true;
+                    continue;
                 }
                 if (item.BanJieServiceType == 2)
                 {
-                    return true;
+                    continue;
                 }
             }
             return true;
@@ -442,7 +446,7 @@ namespace Foresight.DataAccess
                         error = "工单未关单，不能回访";
                         return false;
                     }
-                    return true;
+                    continue;
                 }
                 if (item.CallBackServiceType == 2)
                 {
@@ -451,11 +455,11 @@ namespace Foresight.DataAccess
                         error = "工单未办结，不能回访";
                         return false;
                     }
-                    return true;
+                    continue;
                 }
                 if (item.BanJieServiceType == 3)
                 {
-                    return true;
+                    continue;
                 }
             }
             return true;

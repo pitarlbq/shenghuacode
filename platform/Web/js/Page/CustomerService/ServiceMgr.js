@@ -510,6 +510,9 @@ function do_cancel() {
         show_message(errormsg, "info");
         return;
     }
+    var iframe = "../CustomerService/ServiceCancel.aspx";
+    do_open_dialog('销单', iframe);
+    return;
     top.$.messager.confirm("提示", "确认销单?", function (r) {
         if (r) {
             var options = { visit: 'cancelcustomerservice', IDList: JSON.stringify(IDList) };
