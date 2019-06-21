@@ -131,16 +131,31 @@
         <div data-options="region:'north',split:false,hideCollapsedContent:false," title="" style="height: 90px; padding: 5px;">
             <form runat="server">
                 <div class="search_item" style="margin-right: 10px;">
-                    <input type="text" class="easyui-searchbox" id="tdKeywords" style="width: 150px;" data-options="prompt:'关键字',searcher:SearchTT" />
+                    <input type="text" class="easyui-searchbox" id="tdKeywords" style="width: 150px;" data-options="prompt:'姓名、电话',searcher:SearchTT" />
                 </div>
                 <div class="search_item" style="margin-right: 10px;">
-                    <input class="easyui-datebox" id="tdStartTime" data-options="prompt:'开始日期'" style="height: 28px; width: 120px;" />
+                    <input class="easyui-datebox" id="tdStartTime" data-options="prompt:'登记开始日期'" style="height: 28px; width: 120px;" />
                 </div>
                 <div class="search_item" style="margin-right: 10px;">
                     -
                 </div>
                 <div class="search_item">
-                    <input class="easyui-datebox" id="tdEndTime" data-options="prompt:'结束日期'" style="height: 28px; width: 120px;" />
+                    <input class="easyui-datebox" id="tdEndTime" data-options="prompt:'登记结束日期'" style="height: 28px; width: 120px;" />
+                </div>
+                <div class="search_item" style="margin-right: 10px;">
+                    <input class="easyui-datebox" id="tdCompleteStartTime" data-options="prompt:'办结开始日期'" style="height: 28px; width: 120px;" />
+                </div>
+                <div class="search_item" style="margin-right: 10px;">
+                    -
+                </div>
+                <div class="search_item">
+                    <input class="easyui-datebox" id="tdCompleteEndTime" data-options="prompt:'办结结束日期'" style="height: 28px; width: 120px;" />
+                </div>
+                <div class="search_item" style="margin-right: 10px;">
+                    <input type="text" class="easyui-searchbox" id="tdProcessKewords" style="width: 150px;" data-options="prompt:'处理结果',searcher:SearchTT" />
+                </div>
+                <div class="search_item" style="margin-right: 10px;">
+                    <input type="text" class="easyui-searchbox" id="tdCallBackKeywords" style="width: 150px;" data-options="prompt:'回访结果',searcher:SearchTT" />
                 </div>
                 <div class="search_item">
                     <input class="easyui-combobox" id="tdCompanyID" data-options="prompt:'请选择公司',editable:false" style="height: 28px; width: 120px;" />

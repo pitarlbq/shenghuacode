@@ -108,7 +108,11 @@ function get_options() {
         "ServiceType1ID": $('#tdServiceTypeName1').combobox('getValue'),
         "ServiceType2ID": $('#tdServiceTypeName2').combobox('getValue'),
         "ServiceType3ID": $('#tdServiceTypeName3').combobox('getValue'),
-        "ServiceStatus": 250
+        "ServiceStatus": 250,
+        "CompleteStartTime": $("#tdCompleteStartTime").datebox("getValue"),
+        "CompleteEndTime": $("#tdCompleteEndTime").datebox("getValue"),
+        "ProcessKewords": $("#tdProcessKewords").searchbox("getValue"),
+        "CallBackKeywords": $("#tdCallBackKeywords").searchbox("getValue"),
     };
     options.url = '../Handler/ServiceHandler.ashx';
     return options;

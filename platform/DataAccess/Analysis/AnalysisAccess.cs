@@ -1222,6 +1222,7 @@ namespace Foresight.DataAccess
             List<string> conditions = new List<string>();
             List<string> cmdlist = new List<string>();
             conditions.Add("ServiceStatus not in (2,5)");
+            conditions.Add("(IsImportantTouSu is null or IsImportantTouSu=0)");
             if (ServiceTypeID == 1)
             {
                 int YingXiaoTouSuServiceID = new SiteConfig().YingXiaoTouSuServiceID;
