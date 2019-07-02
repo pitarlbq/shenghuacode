@@ -85,7 +85,6 @@
                 textField: 'Name'
             })
             $('#tdServiceTypeName3').combobox('setValue', 0);
-            $('#tdIsImportantTouSu').combobox('setValue', 1);
         }
     </script>
     <script src="../js/Lodop/LodopFuncs.js?t=<%=base.getToken() %>"></script>
@@ -116,8 +115,15 @@
     <script>
         $(function () {
             $('.easyui-combobox').combobox('clear');
-            $('#tdCallBackStatus').combobox('setValue', 2);
-            $('#tdCallServiceType').combobox('setValue', 2);
+            if (Status == 12) {
+                $('#tdCallBackStatus').combobox('setValue', 2);
+                $('#tdCallServiceType').combobox('setValue', 2);
+                $('#tdIsImportantTouSu').combobox('setValue', 1);
+            } else {
+                $('#tdCallBackStatus').combobox('setValue', '');
+                $('#tdCallServiceType').combobox('setValue', '');
+                $('#tdIsImportantTouSu').combobox('setValue', '');
+            }
         })
     </script>
 </asp:Content>

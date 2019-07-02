@@ -388,7 +388,7 @@
       <publishTime>09/12/2018 09:27:06</publishTime>
     </File>
     <File Include="bin/DataAccess.dll">
-      <publishTime>07/01/2019 22:36:14</publishTime>
+      <publishTime>07/02/2019 14:45:50</publishTime>
     </File>
     <File Include="bin/Encript.dll">
       <publishTime>07/01/2019 22:36:15</publishTime>
@@ -454,7 +454,7 @@
       <publishTime>07/01/2019 22:36:10</publishTime>
     </File>
     <File Include="bin/Web.dll">
-      <publishTime>07/01/2019 22:36:17</publishTime>
+      <publishTime>07/02/2019 14:45:51</publishTime>
     </File>
     <File Include="bin/WebSocket4Net.dll">
       <publishTime>09/27/2018 09:47:19</publishTime>
@@ -1003,7 +1003,7 @@
       <publishTime>05/11/2018 22:47:01</publishTime>
     </File>
     <File Include="CustomerService/ServiceMgr.aspx">
-      <publishTime>06/14/2019 15:45:43</publishTime>
+      <publishTime>07/02/2019 14:43:21</publishTime>
     </File>
     <File Include="CustomerService/ServicePhoneListen.aspx">
       <publishTime>03/01/2019 11:40:45</publishTime>
@@ -4435,7 +4435,7 @@
       <publishTime>11/14/2018 09:13:45</publishTime>
     </File>
     <File Include="js/Page/CustomerService/ServiceMgr.js">
-      <publishTime>06/14/2019 15:57:58</publishTime>
+      <publishTime>07/02/2019 14:45:17</publishTime>
     </File>
     <File Include="js/Page/CustomerService/ServiceProcess.js">
       <publishTime>11/01/2018 20:25:15</publishTime>

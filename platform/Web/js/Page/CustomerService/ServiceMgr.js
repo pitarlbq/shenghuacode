@@ -128,9 +128,11 @@ function get_options() {
     var ServiceRange = $('#tdServiceRange').combobox('getValue');
     var CallBackStatus = $('#tdCallBackStatus').combobox('getValue');
     var CallServiceType = $('#tdCallServiceType').combobox('getValue');
+    var IsImportantTouSu = $('#tdIsImportantTouSu').combobox('getValue');
     if (Status != 12) {
         CallBackStatus = 0;
         CallServiceType = 0;
+        IsImportantTouSu = 0;
     }
     var options = {
         "visit": "loadservicelist",
@@ -151,7 +153,7 @@ function get_options() {
         "ColumnServiceStatus": ColumnServiceStatus,
         "ColumnServiceType": ColumnServiceType,
         "BeforeBanJieTimeOutHour": BeforeBanJieTimeOutHour,
-        "IsImportantTouSu": $('#tdIsImportantTouSu').combobox('getValue')
+        "IsImportantTouSu": IsImportantTouSu
     };
     if (Status == 101) {
         options.ChooseStatus = $('#tdServiceStatus').combobox('getValue');
