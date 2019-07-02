@@ -87,6 +87,10 @@ namespace Foresight.DataAccess
             list = list.Where(p => !p.ServiceType2IDList.Contains(PinZhiShengJiServiceID)).ToArray();
             var huiFangTimeList = list.Where(p =>
             {
+                if (!string.IsNullOrEmpty(p.ServiceFrom) && p.ServiceFrom.Equals("app"))
+                {
+                    return false;
+                }
                 var myServiceType = serviceTypeList.FirstOrDefault(q => q.ID == p.ServiceType1ID);
                 if (myServiceType == null)
                 {
@@ -145,7 +149,8 @@ namespace Foresight.DataAccess
             var baoXiuHuiFangTimeList = huiFangTimeList.Where(p => p.ServiceType1ID == BaoXiuServiceID).ToArray();
             var dataList = new List<CallSummaryAnalysisModel>();
             int TouSuTotalCount_CallBack = tousuHuiFangTimeList.Where(p => p.HuiFangAddUserIDList.Length > 0).ToArray().Length;
-            int TouSuTotalCount_NotCallBack = addTimeHuiFangList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).Where(p => p.HuiFangAddUserIDList.Length == 0 && !p.CanNotCallback).ToArray().Length;
+            var TouSuTotalList_NotCallBack = addTimeHuiFangList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).Where(p => p.HuiFangAddUserIDList.Length == 0 && !p.CanNotCallback).ToArray();
+            int TouSuTotalCount_NotCallBack = TouSuTotalList_NotCallBack.Length;
             int TouSuTotalCount = TouSuTotalCount_CallBack + TouSuTotalCount_NotCallBack;
             int TouSuTotalHuiFangCount = tousuHuiFangTimeList.Length;
             int BaoXiuTotalCount_CallBack = baoXiuHuiFangTimeList.Where(p => p.HuiFangAddUserIDList.Length > 0 && !p.ServiceFrom.Equals("app")).ToArray().Length;

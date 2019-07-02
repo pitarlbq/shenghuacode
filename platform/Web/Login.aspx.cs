@@ -112,12 +112,12 @@ namespace Web
                 if (this.autoLogin.Checked)
                 {
                     authTicket = new FormsAuthenticationTicket(1, authName, DateTime.Now, DateTime.Now.AddYears(365), true, authName);
-                    Expiration = authTicket.Expiration;
                 }
                 else
                 {
-                    authTicket = new FormsAuthenticationTicket(1, authName, DateTime.Now, DateTime.Now.AddHours(12), true, authName);
+                    authTicket = new FormsAuthenticationTicket(1, authName, DateTime.Now, DateTime.Now.AddYears(365), true, authName);
                 }
+                Expiration = authTicket.Expiration;
                 //加密
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 //   存入Cookie

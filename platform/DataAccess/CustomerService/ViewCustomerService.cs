@@ -224,9 +224,9 @@ namespace Foresight.DataAccess
             {
                 conditions.Add("exists(select 1 from [Project] where A.ProjectID=Project.ID and [Project].CompanyID in (" + string.Join(",", CompanyIDList) + "))");
             }
-            if (ServiceStatus == 12)
+            if (ServiceStatus == 12 && CallBackStatus == 1)
             {
-                conditions.Add("[ServiceFrom]!='app'");
+                conditions.Add("isnull([ServiceFrom],'')!='app'");
                 if (StartTime > DateTime.MinValue)
                 {
                     conditions.Add("exists(select 1 from [CustomerServiceHuifang] where [ServiceID]=A.ID and  [HuiFangTime]>=@StartTime)");

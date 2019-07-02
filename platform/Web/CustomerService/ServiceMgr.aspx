@@ -117,7 +117,7 @@
         $(function () {
             $('.easyui-combobox').combobox('clear');
             $('#tdCallBackStatus').combobox('setValue', 2);
-            $('#tdCallServiceType').combobox('setValue', 1);
+            $('#tdCallServiceType').combobox('setValue', 2);
         })
     </script>
 </asp:Content>
@@ -176,17 +176,19 @@
                         <select class="easyui-combobox" id="tdCallBackStatus" style="width: 100px; height: 25px;" data-options="prompt:'回访状态',editable:false">
                             <option value="2">未回访</option>
                             <option value="1">已回访</option>
+                            <option value="">全部</option>
                         </select>
                     </div>
                     <div class="search_item tdCallBack">
                         <select class="easyui-combobox" id="tdCallServiceType" style="width: 100px; height: 28px;" data-options="prompt:'回访类别',editable:false">
-                            <option value="1">报修</option>
                             <option value="2">投诉</option>
+                            <option value="1">报修</option>
                         </select>
                     </div>
                     <div class="search_item tdCallBack">
                         <select class="easyui-combobox" id="tdIsImportantTouSu" style="width: 100px; height: 28px;" data-options="prompt:'重大投诉',editable:false">
                             <option value="1">不显示</option>
+                            <option value="0">全部</option>
                             <option value="2">显示</option>
                         </select>
                     </div>
