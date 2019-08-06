@@ -379,6 +379,222 @@ namespace Foresight.DataAccess
 			}
 		}
 		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private string _applicationUserName = String.Empty;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public string ApplicationUserName
+		{
+			[DebuggerStepThrough()]
+			get { return this._applicationUserName; }
+			set 
+			{
+				if (this._applicationUserName != value) 
+				{
+					this._applicationUserName = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("ApplicationUserName");
+				}
+			}
+		}
+		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private string _applicationFilePath = String.Empty;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public string ApplicationFilePath
+		{
+			[DebuggerStepThrough()]
+			get { return this._applicationFilePath; }
+			set 
+			{
+				if (this._applicationFilePath != value) 
+				{
+					this._applicationFilePath = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("ApplicationFilePath");
+				}
+			}
+		}
+		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private DateTime _applicationTime = DateTime.MinValue;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public DateTime ApplicationTime
+		{
+			[DebuggerStepThrough()]
+			get { return this._applicationTime; }
+			set 
+			{
+				if (this._applicationTime != value) 
+				{
+					this._applicationTime = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("ApplicationTime");
+				}
+			}
+		}
+		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private string _applicationRemark = String.Empty;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public string ApplicationRemark
+		{
+			[DebuggerStepThrough()]
+			get { return this._applicationRemark; }
+			set 
+			{
+				if (this._applicationRemark != value) 
+				{
+					this._applicationRemark = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("ApplicationRemark");
+				}
+			}
+		}
+		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private string _approveUserName = String.Empty;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public string ApproveUserName
+		{
+			[DebuggerStepThrough()]
+			get { return this._approveUserName; }
+			set 
+			{
+				if (this._approveUserName != value) 
+				{
+					this._approveUserName = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("ApproveUserName");
+				}
+			}
+		}
+		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private DateTime _approveTime = DateTime.MinValue;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public DateTime ApproveTime
+		{
+			[DebuggerStepThrough()]
+			get { return this._approveTime; }
+			set 
+			{
+				if (this._approveTime != value) 
+				{
+					this._approveTime = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("ApproveTime");
+				}
+			}
+		}
+		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private string _approveRemark = String.Empty;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public string ApproveRemark
+		{
+			[DebuggerStepThrough()]
+			get { return this._approveRemark; }
+			set 
+			{
+				if (this._approveRemark != value) 
+				{
+					this._approveRemark = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("ApproveRemark");
+				}
+			}
+		}
+		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private int _approveStatus = int.MinValue;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public int ApproveStatus
+		{
+			[DebuggerStepThrough()]
+			get { return this._approveStatus; }
+			set 
+			{
+				if (this._approveStatus != value) 
+				{
+					this._approveStatus = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("ApproveStatus");
+				}
+			}
+		}
+		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private int _applicationType = int.MinValue;
+		/// <summary>
+		/// 1-启用第三方 2-第三方二次维修 3-
+		/// </summary>
+        [Description("1-启用第三方 2-第三方二次维修 3-")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public int ApplicationType
+		{
+			[DebuggerStepThrough()]
+			get { return this._applicationType; }
+			set 
+			{
+				if (this._applicationType != value) 
+				{
+					this._applicationType = value;
+					this.IsDirty = true;	
+					OnPropertyChanged("ApplicationType");
+				}
+			}
+		}
+		
 		
 		
 		#endregion
@@ -397,19 +613,28 @@ namespace Foresight.DataAccess
 DECLARE @table TABLE(
 	[ID] int,
 	[ServiceID] int,
-	[DealTime] decimal(18, 2),
+	[DealTime] decimal(18, 10),
 	[AddTime] datetime,
-	[PaiDanTime] decimal(18, 2),
-	[ChuliTime] decimal(18, 2),
-	[BanJieTime] decimal(18, 2),
-	[HuiFangTime] decimal(18, 2),
-	[GuanDanTime] decimal(18, 2),
+	[PaiDanTime] decimal(18, 10),
+	[ChuliTime] decimal(18, 10),
+	[BanJieTime] decimal(18, 10),
+	[HuiFangTime] decimal(18, 10),
+	[GuanDanTime] decimal(18, 10),
 	[DisableHolidayTime] bit,
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
-	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2),
-	[DisableWorkOffTime] bit
+	[ResponseTime] decimal(18, 10),
+	[CheckTime] decimal(18, 10),
+	[DisableWorkOffTime] bit,
+	[ApplicationUserName] nvarchar(200),
+	[ApplicationFilePath] ntext,
+	[ApplicationTime] datetime,
+	[ApplicationRemark] ntext,
+	[ApproveUserName] nvarchar(200),
+	[ApproveTime] datetime,
+	[ApproveRemark] ntext,
+	[ApproveStatus] int,
+	[ApplicationType] int
 );
 
 INSERT INTO [dbo].[ServiceType_ImportantService] (
@@ -426,7 +651,16 @@ INSERT INTO [dbo].[ServiceType_ImportantService] (
 	[ServiceType_ImportantService].[EndHour],
 	[ServiceType_ImportantService].[ResponseTime],
 	[ServiceType_ImportantService].[CheckTime],
-	[ServiceType_ImportantService].[DisableWorkOffTime]
+	[ServiceType_ImportantService].[DisableWorkOffTime],
+	[ServiceType_ImportantService].[ApplicationUserName],
+	[ServiceType_ImportantService].[ApplicationFilePath],
+	[ServiceType_ImportantService].[ApplicationTime],
+	[ServiceType_ImportantService].[ApplicationRemark],
+	[ServiceType_ImportantService].[ApproveUserName],
+	[ServiceType_ImportantService].[ApproveTime],
+	[ServiceType_ImportantService].[ApproveRemark],
+	[ServiceType_ImportantService].[ApproveStatus],
+	[ServiceType_ImportantService].[ApplicationType]
 ) 
 output 
 	INSERTED.[ID],
@@ -443,7 +677,16 @@ output
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
 	INSERTED.[CheckTime],
-	INSERTED.[DisableWorkOffTime]
+	INSERTED.[DisableWorkOffTime],
+	INSERTED.[ApplicationUserName],
+	INSERTED.[ApplicationFilePath],
+	INSERTED.[ApplicationTime],
+	INSERTED.[ApplicationRemark],
+	INSERTED.[ApproveUserName],
+	INSERTED.[ApproveTime],
+	INSERTED.[ApproveRemark],
+	INSERTED.[ApproveStatus],
+	INSERTED.[ApplicationType]
 into @table
 VALUES ( 
 	@ServiceID,
@@ -459,7 +702,16 @@ VALUES (
 	@EndHour,
 	@ResponseTime,
 	@CheckTime,
-	@DisableWorkOffTime 
+	@DisableWorkOffTime,
+	@ApplicationUserName,
+	@ApplicationFilePath,
+	@ApplicationTime,
+	@ApplicationRemark,
+	@ApproveUserName,
+	@ApproveTime,
+	@ApproveRemark,
+	@ApproveStatus,
+	@ApplicationType 
 ); 
 
 SELECT 
@@ -477,7 +729,16 @@ SELECT
 	[EndHour],
 	[ResponseTime],
 	[CheckTime],
-	[DisableWorkOffTime] 
+	[DisableWorkOffTime],
+	[ApplicationUserName],
+	[ApplicationFilePath],
+	[ApplicationTime],
+	[ApplicationRemark],
+	[ApproveUserName],
+	[ApproveTime],
+	[ApproveRemark],
+	[ApproveStatus],
+	[ApplicationType] 
 FROM @table;
 ";
 			}
@@ -496,19 +757,28 @@ FROM @table;
 DECLARE @table TABLE(
 	[ID] int,
 	[ServiceID] int,
-	[DealTime] decimal(18, 2),
+	[DealTime] decimal(18, 10),
 	[AddTime] datetime,
-	[PaiDanTime] decimal(18, 2),
-	[ChuliTime] decimal(18, 2),
-	[BanJieTime] decimal(18, 2),
-	[HuiFangTime] decimal(18, 2),
-	[GuanDanTime] decimal(18, 2),
+	[PaiDanTime] decimal(18, 10),
+	[ChuliTime] decimal(18, 10),
+	[BanJieTime] decimal(18, 10),
+	[HuiFangTime] decimal(18, 10),
+	[GuanDanTime] decimal(18, 10),
 	[DisableHolidayTime] bit,
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
-	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2),
-	[DisableWorkOffTime] bit
+	[ResponseTime] decimal(18, 10),
+	[CheckTime] decimal(18, 10),
+	[DisableWorkOffTime] bit,
+	[ApplicationUserName] nvarchar(200),
+	[ApplicationFilePath] ntext,
+	[ApplicationTime] datetime,
+	[ApplicationRemark] ntext,
+	[ApproveUserName] nvarchar(200),
+	[ApproveTime] datetime,
+	[ApproveRemark] ntext,
+	[ApproveStatus] int,
+	[ApplicationType] int
 );
 
 UPDATE [dbo].[ServiceType_ImportantService] SET 
@@ -525,7 +795,16 @@ UPDATE [dbo].[ServiceType_ImportantService] SET
 	[ServiceType_ImportantService].[EndHour] = @EndHour,
 	[ServiceType_ImportantService].[ResponseTime] = @ResponseTime,
 	[ServiceType_ImportantService].[CheckTime] = @CheckTime,
-	[ServiceType_ImportantService].[DisableWorkOffTime] = @DisableWorkOffTime 
+	[ServiceType_ImportantService].[DisableWorkOffTime] = @DisableWorkOffTime,
+	[ServiceType_ImportantService].[ApplicationUserName] = @ApplicationUserName,
+	[ServiceType_ImportantService].[ApplicationFilePath] = @ApplicationFilePath,
+	[ServiceType_ImportantService].[ApplicationTime] = @ApplicationTime,
+	[ServiceType_ImportantService].[ApplicationRemark] = @ApplicationRemark,
+	[ServiceType_ImportantService].[ApproveUserName] = @ApproveUserName,
+	[ServiceType_ImportantService].[ApproveTime] = @ApproveTime,
+	[ServiceType_ImportantService].[ApproveRemark] = @ApproveRemark,
+	[ServiceType_ImportantService].[ApproveStatus] = @ApproveStatus,
+	[ServiceType_ImportantService].[ApplicationType] = @ApplicationType 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceID],
@@ -541,7 +820,16 @@ output
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
 	INSERTED.[CheckTime],
-	INSERTED.[DisableWorkOffTime]
+	INSERTED.[DisableWorkOffTime],
+	INSERTED.[ApplicationUserName],
+	INSERTED.[ApplicationFilePath],
+	INSERTED.[ApplicationTime],
+	INSERTED.[ApplicationRemark],
+	INSERTED.[ApproveUserName],
+	INSERTED.[ApproveTime],
+	INSERTED.[ApproveRemark],
+	INSERTED.[ApproveStatus],
+	INSERTED.[ApplicationType]
 into @table
 WHERE 
 	[ServiceType_ImportantService].[ID] = @ID
@@ -561,7 +849,16 @@ SELECT
 	[EndHour],
 	[ResponseTime],
 	[CheckTime],
-	[DisableWorkOffTime] 
+	[DisableWorkOffTime],
+	[ApplicationUserName],
+	[ApplicationFilePath],
+	[ApplicationTime],
+	[ApplicationRemark],
+	[ApproveUserName],
+	[ApproveTime],
+	[ApproveRemark],
+	[ApproveStatus],
+	[ApplicationType] 
 FROM @table;
 ";
 			}
@@ -639,7 +936,16 @@ WHERE
 	[ServiceType_ImportantService].[EndHour],
 	[ServiceType_ImportantService].[ResponseTime],
 	[ServiceType_ImportantService].[CheckTime],
-	[ServiceType_ImportantService].[DisableWorkOffTime]
+	[ServiceType_ImportantService].[DisableWorkOffTime],
+	[ServiceType_ImportantService].[ApplicationUserName],
+	[ServiceType_ImportantService].[ApplicationFilePath],
+	[ServiceType_ImportantService].[ApplicationTime],
+	[ServiceType_ImportantService].[ApplicationRemark],
+	[ServiceType_ImportantService].[ApproveUserName],
+	[ServiceType_ImportantService].[ApproveTime],
+	[ServiceType_ImportantService].[ApproveRemark],
+	[ServiceType_ImportantService].[ApproveStatus],
+	[ServiceType_ImportantService].[ApplicationType]
 ";
 			}
 		}
@@ -677,14 +983,23 @@ WHERE
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
 		/// <param name="disableWorkOffTime">disableWorkOffTime</param>
-		public static void InsertServiceType_ImportantService(int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime)
+		/// <param name="applicationUserName">applicationUserName</param>
+		/// <param name="applicationFilePath">applicationFilePath</param>
+		/// <param name="applicationTime">applicationTime</param>
+		/// <param name="applicationRemark">applicationRemark</param>
+		/// <param name="approveUserName">approveUserName</param>
+		/// <param name="approveTime">approveTime</param>
+		/// <param name="approveRemark">approveRemark</param>
+		/// <param name="approveStatus">approveStatus</param>
+		/// <param name="applicationType">applicationType</param>
+		public static void InsertServiceType_ImportantService(int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime, string @applicationUserName, string @applicationFilePath, DateTime @applicationTime, string @applicationRemark, string @approveUserName, DateTime @approveTime, string @approveRemark, int @approveStatus, int @applicationType)
 		{
             using (SqlHelper helper = new SqlHelper())
             {
                 try
                 {
                     helper.BeginTransaction();
-            		InsertServiceType_ImportantService(@serviceID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, @disableWorkOffTime, helper);
+            		InsertServiceType_ImportantService(@serviceID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, @disableWorkOffTime, @applicationUserName, @applicationFilePath, @applicationTime, @applicationRemark, @approveUserName, @approveTime, @approveRemark, @approveStatus, @applicationType, helper);
                     helper.Commit();
                 }
                 catch
@@ -713,26 +1028,44 @@ WHERE
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
 		/// <param name="disableWorkOffTime">disableWorkOffTime</param>
+		/// <param name="applicationUserName">applicationUserName</param>
+		/// <param name="applicationFilePath">applicationFilePath</param>
+		/// <param name="applicationTime">applicationTime</param>
+		/// <param name="applicationRemark">applicationRemark</param>
+		/// <param name="approveUserName">approveUserName</param>
+		/// <param name="approveTime">approveTime</param>
+		/// <param name="approveRemark">approveRemark</param>
+		/// <param name="approveStatus">approveStatus</param>
+		/// <param name="applicationType">applicationType</param>
 		/// <param name="helper">helper</param>
-		internal static void InsertServiceType_ImportantService(int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime, SqlHelper @helper)
+		internal static void InsertServiceType_ImportantService(int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime, string @applicationUserName, string @applicationFilePath, DateTime @applicationTime, string @applicationRemark, string @approveUserName, DateTime @approveTime, string @approveRemark, int @approveStatus, int @applicationType, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
 	[ID] int,
 	[ServiceID] int,
-	[DealTime] decimal(18, 2),
+	[DealTime] decimal(18, 10),
 	[AddTime] datetime,
-	[PaiDanTime] decimal(18, 2),
-	[ChuliTime] decimal(18, 2),
-	[BanJieTime] decimal(18, 2),
-	[HuiFangTime] decimal(18, 2),
-	[GuanDanTime] decimal(18, 2),
+	[PaiDanTime] decimal(18, 10),
+	[ChuliTime] decimal(18, 10),
+	[BanJieTime] decimal(18, 10),
+	[HuiFangTime] decimal(18, 10),
+	[GuanDanTime] decimal(18, 10),
 	[DisableHolidayTime] bit,
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
-	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2),
-	[DisableWorkOffTime] bit
+	[ResponseTime] decimal(18, 10),
+	[CheckTime] decimal(18, 10),
+	[DisableWorkOffTime] bit,
+	[ApplicationUserName] nvarchar(200),
+	[ApplicationFilePath] ntext,
+	[ApplicationTime] datetime,
+	[ApplicationRemark] ntext,
+	[ApproveUserName] nvarchar(200),
+	[ApproveTime] datetime,
+	[ApproveRemark] ntext,
+	[ApproveStatus] int,
+	[ApplicationType] int
 );
 
 INSERT INTO [dbo].[ServiceType_ImportantService] (
@@ -749,7 +1082,16 @@ INSERT INTO [dbo].[ServiceType_ImportantService] (
 	[ServiceType_ImportantService].[EndHour],
 	[ServiceType_ImportantService].[ResponseTime],
 	[ServiceType_ImportantService].[CheckTime],
-	[ServiceType_ImportantService].[DisableWorkOffTime]
+	[ServiceType_ImportantService].[DisableWorkOffTime],
+	[ServiceType_ImportantService].[ApplicationUserName],
+	[ServiceType_ImportantService].[ApplicationFilePath],
+	[ServiceType_ImportantService].[ApplicationTime],
+	[ServiceType_ImportantService].[ApplicationRemark],
+	[ServiceType_ImportantService].[ApproveUserName],
+	[ServiceType_ImportantService].[ApproveTime],
+	[ServiceType_ImportantService].[ApproveRemark],
+	[ServiceType_ImportantService].[ApproveStatus],
+	[ServiceType_ImportantService].[ApplicationType]
 ) 
 output 
 	INSERTED.[ID],
@@ -766,7 +1108,16 @@ output
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
 	INSERTED.[CheckTime],
-	INSERTED.[DisableWorkOffTime]
+	INSERTED.[DisableWorkOffTime],
+	INSERTED.[ApplicationUserName],
+	INSERTED.[ApplicationFilePath],
+	INSERTED.[ApplicationTime],
+	INSERTED.[ApplicationRemark],
+	INSERTED.[ApproveUserName],
+	INSERTED.[ApproveTime],
+	INSERTED.[ApproveRemark],
+	INSERTED.[ApproveStatus],
+	INSERTED.[ApplicationType]
 into @table
 VALUES ( 
 	@ServiceID,
@@ -782,7 +1133,16 @@ VALUES (
 	@EndHour,
 	@ResponseTime,
 	@CheckTime,
-	@DisableWorkOffTime 
+	@DisableWorkOffTime,
+	@ApplicationUserName,
+	@ApplicationFilePath,
+	@ApplicationTime,
+	@ApplicationRemark,
+	@ApproveUserName,
+	@ApproveTime,
+	@ApproveRemark,
+	@ApproveStatus,
+	@ApplicationType 
 ); 
 
 SELECT 
@@ -800,7 +1160,16 @@ SELECT
 	[EndHour],
 	[ResponseTime],
 	[CheckTime],
-	[DisableWorkOffTime] 
+	[DisableWorkOffTime],
+	[ApplicationUserName],
+	[ApplicationFilePath],
+	[ApplicationTime],
+	[ApplicationRemark],
+	[ApproveUserName],
+	[ApproveTime],
+	[ApproveRemark],
+	[ApproveStatus],
+	[ApplicationType] 
 FROM @table;
 ";
 			
@@ -819,6 +1188,15 @@ FROM @table;
 			parameters.Add(new SqlParameter("@ResponseTime", EntityBase.GetDatabaseValue(@responseTime)));
 			parameters.Add(new SqlParameter("@CheckTime", EntityBase.GetDatabaseValue(@checkTime)));
 			parameters.Add(new SqlParameter("@DisableWorkOffTime", @disableWorkOffTime));
+			parameters.Add(new SqlParameter("@ApplicationUserName", EntityBase.GetDatabaseValue(@applicationUserName)));
+			parameters.Add(new SqlParameter("@ApplicationFilePath", EntityBase.GetDatabaseValue(@applicationFilePath)));
+			parameters.Add(new SqlParameter("@ApplicationTime", EntityBase.GetDatabaseValue(@applicationTime)));
+			parameters.Add(new SqlParameter("@ApplicationRemark", EntityBase.GetDatabaseValue(@applicationRemark)));
+			parameters.Add(new SqlParameter("@ApproveUserName", EntityBase.GetDatabaseValue(@approveUserName)));
+			parameters.Add(new SqlParameter("@ApproveTime", EntityBase.GetDatabaseValue(@approveTime)));
+			parameters.Add(new SqlParameter("@ApproveRemark", EntityBase.GetDatabaseValue(@approveRemark)));
+			parameters.Add(new SqlParameter("@ApproveStatus", EntityBase.GetDatabaseValue(@approveStatus)));
+			parameters.Add(new SqlParameter("@ApplicationType", EntityBase.GetDatabaseValue(@applicationType)));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -842,14 +1220,23 @@ FROM @table;
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
 		/// <param name="disableWorkOffTime">disableWorkOffTime</param>
-		public static void UpdateServiceType_ImportantService(int @iD, int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime)
+		/// <param name="applicationUserName">applicationUserName</param>
+		/// <param name="applicationFilePath">applicationFilePath</param>
+		/// <param name="applicationTime">applicationTime</param>
+		/// <param name="applicationRemark">applicationRemark</param>
+		/// <param name="approveUserName">approveUserName</param>
+		/// <param name="approveTime">approveTime</param>
+		/// <param name="approveRemark">approveRemark</param>
+		/// <param name="approveStatus">approveStatus</param>
+		/// <param name="applicationType">applicationType</param>
+		public static void UpdateServiceType_ImportantService(int @iD, int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime, string @applicationUserName, string @applicationFilePath, DateTime @applicationTime, string @applicationRemark, string @approveUserName, DateTime @approveTime, string @approveRemark, int @approveStatus, int @applicationType)
 		{
 			using (SqlHelper helper = new SqlHelper()) 
 			{
 				try
 				{
 					helper.BeginTransaction();
-					UpdateServiceType_ImportantService(@iD, @serviceID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, @disableWorkOffTime, helper);
+					UpdateServiceType_ImportantService(@iD, @serviceID, @dealTime, @addTime, @paiDanTime, @chuliTime, @banJieTime, @huiFangTime, @guanDanTime, @disableHolidayTime, @startHour, @endHour, @responseTime, @checkTime, @disableWorkOffTime, @applicationUserName, @applicationFilePath, @applicationTime, @applicationRemark, @approveUserName, @approveTime, @approveRemark, @approveStatus, @applicationType, helper);
 					helper.Commit();
 				}
 				catch 
@@ -879,26 +1266,44 @@ FROM @table;
 		/// <param name="responseTime">responseTime</param>
 		/// <param name="checkTime">checkTime</param>
 		/// <param name="disableWorkOffTime">disableWorkOffTime</param>
+		/// <param name="applicationUserName">applicationUserName</param>
+		/// <param name="applicationFilePath">applicationFilePath</param>
+		/// <param name="applicationTime">applicationTime</param>
+		/// <param name="applicationRemark">applicationRemark</param>
+		/// <param name="approveUserName">approveUserName</param>
+		/// <param name="approveTime">approveTime</param>
+		/// <param name="approveRemark">approveRemark</param>
+		/// <param name="approveStatus">approveStatus</param>
+		/// <param name="applicationType">applicationType</param>
 		/// <param name="helper">helper</param>
-		internal static void UpdateServiceType_ImportantService(int @iD, int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime, SqlHelper @helper)
+		internal static void UpdateServiceType_ImportantService(int @iD, int @serviceID, decimal @dealTime, DateTime @addTime, decimal @paiDanTime, decimal @chuliTime, decimal @banJieTime, decimal @huiFangTime, decimal @guanDanTime, bool @disableHolidayTime, string @startHour, string @endHour, decimal @responseTime, decimal @checkTime, bool @disableWorkOffTime, string @applicationUserName, string @applicationFilePath, DateTime @applicationTime, string @applicationRemark, string @approveUserName, DateTime @approveTime, string @approveRemark, int @approveStatus, int @applicationType, SqlHelper @helper)
 		{
 			string commandText = @"
 DECLARE @table TABLE(
 	[ID] int,
 	[ServiceID] int,
-	[DealTime] decimal(18, 2),
+	[DealTime] decimal(18, 10),
 	[AddTime] datetime,
-	[PaiDanTime] decimal(18, 2),
-	[ChuliTime] decimal(18, 2),
-	[BanJieTime] decimal(18, 2),
-	[HuiFangTime] decimal(18, 2),
-	[GuanDanTime] decimal(18, 2),
+	[PaiDanTime] decimal(18, 10),
+	[ChuliTime] decimal(18, 10),
+	[BanJieTime] decimal(18, 10),
+	[HuiFangTime] decimal(18, 10),
+	[GuanDanTime] decimal(18, 10),
 	[DisableHolidayTime] bit,
 	[StartHour] nvarchar(20),
 	[EndHour] nvarchar(20),
-	[ResponseTime] decimal(18, 2),
-	[CheckTime] decimal(18, 2),
-	[DisableWorkOffTime] bit
+	[ResponseTime] decimal(18, 10),
+	[CheckTime] decimal(18, 10),
+	[DisableWorkOffTime] bit,
+	[ApplicationUserName] nvarchar(200),
+	[ApplicationFilePath] ntext,
+	[ApplicationTime] datetime,
+	[ApplicationRemark] ntext,
+	[ApproveUserName] nvarchar(200),
+	[ApproveTime] datetime,
+	[ApproveRemark] ntext,
+	[ApproveStatus] int,
+	[ApplicationType] int
 );
 
 UPDATE [dbo].[ServiceType_ImportantService] SET 
@@ -915,7 +1320,16 @@ UPDATE [dbo].[ServiceType_ImportantService] SET
 	[ServiceType_ImportantService].[EndHour] = @EndHour,
 	[ServiceType_ImportantService].[ResponseTime] = @ResponseTime,
 	[ServiceType_ImportantService].[CheckTime] = @CheckTime,
-	[ServiceType_ImportantService].[DisableWorkOffTime] = @DisableWorkOffTime 
+	[ServiceType_ImportantService].[DisableWorkOffTime] = @DisableWorkOffTime,
+	[ServiceType_ImportantService].[ApplicationUserName] = @ApplicationUserName,
+	[ServiceType_ImportantService].[ApplicationFilePath] = @ApplicationFilePath,
+	[ServiceType_ImportantService].[ApplicationTime] = @ApplicationTime,
+	[ServiceType_ImportantService].[ApplicationRemark] = @ApplicationRemark,
+	[ServiceType_ImportantService].[ApproveUserName] = @ApproveUserName,
+	[ServiceType_ImportantService].[ApproveTime] = @ApproveTime,
+	[ServiceType_ImportantService].[ApproveRemark] = @ApproveRemark,
+	[ServiceType_ImportantService].[ApproveStatus] = @ApproveStatus,
+	[ServiceType_ImportantService].[ApplicationType] = @ApplicationType 
 output 
 	INSERTED.[ID],
 	INSERTED.[ServiceID],
@@ -931,7 +1345,16 @@ output
 	INSERTED.[EndHour],
 	INSERTED.[ResponseTime],
 	INSERTED.[CheckTime],
-	INSERTED.[DisableWorkOffTime]
+	INSERTED.[DisableWorkOffTime],
+	INSERTED.[ApplicationUserName],
+	INSERTED.[ApplicationFilePath],
+	INSERTED.[ApplicationTime],
+	INSERTED.[ApplicationRemark],
+	INSERTED.[ApproveUserName],
+	INSERTED.[ApproveTime],
+	INSERTED.[ApproveRemark],
+	INSERTED.[ApproveStatus],
+	INSERTED.[ApplicationType]
 into @table
 WHERE 
 	[ServiceType_ImportantService].[ID] = @ID
@@ -951,7 +1374,16 @@ SELECT
 	[EndHour],
 	[ResponseTime],
 	[CheckTime],
-	[DisableWorkOffTime] 
+	[DisableWorkOffTime],
+	[ApplicationUserName],
+	[ApplicationFilePath],
+	[ApplicationTime],
+	[ApplicationRemark],
+	[ApproveUserName],
+	[ApproveTime],
+	[ApproveRemark],
+	[ApproveStatus],
+	[ApplicationType] 
 FROM @table;
 ";
 			
@@ -971,6 +1403,15 @@ FROM @table;
 			parameters.Add(new SqlParameter("@ResponseTime", EntityBase.GetDatabaseValue(@responseTime)));
 			parameters.Add(new SqlParameter("@CheckTime", EntityBase.GetDatabaseValue(@checkTime)));
 			parameters.Add(new SqlParameter("@DisableWorkOffTime", @disableWorkOffTime));
+			parameters.Add(new SqlParameter("@ApplicationUserName", EntityBase.GetDatabaseValue(@applicationUserName)));
+			parameters.Add(new SqlParameter("@ApplicationFilePath", EntityBase.GetDatabaseValue(@applicationFilePath)));
+			parameters.Add(new SqlParameter("@ApplicationTime", EntityBase.GetDatabaseValue(@applicationTime)));
+			parameters.Add(new SqlParameter("@ApplicationRemark", EntityBase.GetDatabaseValue(@applicationRemark)));
+			parameters.Add(new SqlParameter("@ApproveUserName", EntityBase.GetDatabaseValue(@approveUserName)));
+			parameters.Add(new SqlParameter("@ApproveTime", EntityBase.GetDatabaseValue(@approveTime)));
+			parameters.Add(new SqlParameter("@ApproveRemark", EntityBase.GetDatabaseValue(@approveRemark)));
+			parameters.Add(new SqlParameter("@ApproveStatus", EntityBase.GetDatabaseValue(@approveStatus)));
+			parameters.Add(new SqlParameter("@ApplicationType", EntityBase.GetDatabaseValue(@applicationType)));
 			
 			@helper.Execute(commandText, CommandType.Text, parameters);
 		}
@@ -1263,6 +1704,15 @@ SELECT " + ServiceType_ImportantService.SelectFieldList + "FROM [dbo].[ServiceTy
 			public const string ResponseTime = "ResponseTime";
 			public const string CheckTime = "CheckTime";
 			public const string DisableWorkOffTime = "DisableWorkOffTime";
+			public const string ApplicationUserName = "ApplicationUserName";
+			public const string ApplicationFilePath = "ApplicationFilePath";
+			public const string ApplicationTime = "ApplicationTime";
+			public const string ApplicationRemark = "ApplicationRemark";
+			public const string ApproveUserName = "ApproveUserName";
+			public const string ApproveTime = "ApproveTime";
+			public const string ApproveRemark = "ApproveRemark";
+			public const string ApproveStatus = "ApproveStatus";
+			public const string ApplicationType = "ApplicationType";
             
             public static Dictionary<string,string> AllPropertiesDescription=new Dictionary<string,string>(){
     			 {"ID" , "int:"},
@@ -1280,6 +1730,15 @@ SELECT " + ServiceType_ImportantService.SelectFieldList + "FROM [dbo].[ServiceTy
     			 {"ResponseTime" , "decimal:"},
     			 {"CheckTime" , "decimal:"},
     			 {"DisableWorkOffTime" , "bool:"},
+    			 {"ApplicationUserName" , "string:"},
+    			 {"ApplicationFilePath" , "string:"},
+    			 {"ApplicationTime" , "DateTime:"},
+    			 {"ApplicationRemark" , "string:"},
+    			 {"ApproveUserName" , "string:"},
+    			 {"ApproveTime" , "DateTime:"},
+    			 {"ApproveRemark" , "string:"},
+    			 {"ApproveStatus" , "int:"},
+    			 {"ApplicationType" , "int:1-启用第三方 2-第三方二次维修 3-"},
             };
 		}
 		#endregion

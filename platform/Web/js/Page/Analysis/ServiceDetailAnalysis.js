@@ -118,6 +118,7 @@ function get_options() {
         "TimeOutType": $('#tdTimeOutType').combobox('getValue'),
         "ColumnServiceStatus": ColumnServiceStatus,
         "ColumnServiceType": ColumnServiceType,
+        "IsImportantTouSu": $('#tdIsImportantTouSu').combobox('getValue')
     };
     options.url = '../Handler/ServiceHandler.ashx';
     return options;
@@ -130,7 +131,7 @@ function formatRepairImg(value, row) {
 }
 function formatTimeout(value, row) {
     if (row.TimeOutStatus == 2) {
-        return '<img style="height:20px;" src="../styles/images/buttons/statusmorechashi.png" />';
+        return '<img style="height:20px;" src="../styles/images/buttons/statuschaoshi.png" />';
     }
     return '<img style="height:20px;" src="../styles/images/buttons/statusnormal.png" />';
 }

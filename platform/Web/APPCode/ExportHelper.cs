@@ -68,7 +68,7 @@ namespace Web.APPCode
             downloadurl = DoExport(FileName, dt, heads: head_list);
             return true;
         }
-        public static bool DownLoadJieDianTimeoutAnalysis(Foresight.DataAccess.Ui.DataGrid dg, int TopCompanyID, List<int> TopProjectIDList, int ServiceTypeID, out string downloadurl, out string error)
+        public static bool DownLoadJieDianTimeoutAnalysis(Foresight.DataAccess.Ui.DataGrid dg, int TopCompanyID, List<int> TopProjectIDList, int ServiceTypeID2, int ServiceTypeID3, int ServiceTypeID, out string downloadurl, out string error)
         {
             downloadurl = string.Empty;
             error = string.Empty;
@@ -85,12 +85,21 @@ namespace Web.APPCode
             DataTable dt = new DataTable();
             List<NpoiHeadCfg> head_list = new List<NpoiHeadCfg>();
             var parent_head = new NpoiHeadCfg();
-            if (TopCompanyID < 0 && TopProjectIDList.Count <= 0)
+            if (TopCompanyID < 0 && TopProjectIDList.Count <= 0 && ServiceTypeID2 < 0 && ServiceTypeID3 < 0)
             {
                 SaveNpoiHead("公司", "CompanyName", head_list: head_list, HAlign: "center");
                 dt.Columns.Add("CompanyName");
                 SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
                 dt.Columns.Add("ProjectName");
+                if (ServiceTypeID == 3)
+                {
+                    SaveNpoiHead("维修类型（二级）", "ServiceTypeName2", head_list: head_list, HAlign: "center");
+                }
+                else
+                {
+                    SaveNpoiHead("投诉类型（二级）", "ServiceTypeName2", head_list: head_list, HAlign: "center");
+                }
+                dt.Columns.Add("ServiceTypeName2");
             }
             else
             {
@@ -103,6 +112,30 @@ namespace Web.APPCode
                 {
                     SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
                     dt.Columns.Add("ProjectName");
+                }
+                if (ServiceTypeID2 >= 0)
+                {
+                    if (ServiceTypeID == 3)
+                    {
+                        SaveNpoiHead("维修类型（二级）", "ServiceTypeName2", head_list: head_list, HAlign: "center");
+                    }
+                    else
+                    {
+                        SaveNpoiHead("投诉类型（二级）", "ServiceTypeName2", head_list: head_list, HAlign: "center");
+                    }
+                    dt.Columns.Add("ServiceTypeName2");
+                }
+                if (ServiceTypeID3 >= 0)
+                {
+                    if (ServiceTypeID == 3)
+                    {
+                        SaveNpoiHead("维修类型（三级）", "ServiceTypeName3", head_list: head_list, HAlign: "center");
+                    }
+                    else
+                    {
+                        SaveNpoiHead("投诉类型（三级）", "ServiceTypeName3", head_list: head_list, HAlign: "center");
+                    }
+                    dt.Columns.Add("ServiceTypeName3");
                 }
             }
             SaveNpoiHead("总工单数", "TotalCount", head_list: head_list, HAlign: "center");
@@ -187,7 +220,7 @@ namespace Web.APPCode
                 if (TopProjectIDList.Count > 0)
                 {
                     SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
-                    SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
+                    dt.Columns.Add("CompanyName");
                 }
                 if (ServiceTypeID2 >= 0)
                 {
@@ -293,7 +326,6 @@ namespace Web.APPCode
                 }
                 if (TopProjectIDList.Count > 0)
                 {
-                    //SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
                     SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
                     dt.Columns.Add("ProjectName");
                 }
@@ -412,7 +444,7 @@ namespace Web.APPCode
                 if (TopProjectIDList.Count > 0)
                 {
                     SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
-                    SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
+                    dt.Columns.Add("ProjectName");
                 }
             }
             SaveNpoiHead("平均满意度", "AverageRate", head_list: head_list, HAlign: "center");
@@ -484,7 +516,7 @@ namespace Web.APPCode
                 if (TopProjectIDList.Count > 0)
                 {
                     SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
-                    SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
+                    dt.Columns.Add("ProjectName");
                 }
                 if (ServiceTypeID2 >= 0)
                 {
@@ -584,7 +616,7 @@ namespace Web.APPCode
                 if (TopProjectIDList.Count > 0)
                 {
                     SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
-                    SaveNpoiHead("项目", "ProjectName", head_list: head_list, HAlign: "center");
+                    dt.Columns.Add("ProjectName");
                 }
                 if (ServiceTypeID2 >= 0)
                 {

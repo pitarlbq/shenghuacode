@@ -1,35 +1,28 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Content.Master" AutoEventWireup="true" CodeBehind="ServiceCancel.aspx.cs" Inherits="Web.CustomerService.ServiceCancel" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Content.Master" AutoEventWireup="true" CodeBehind="ServiceImportantApplication.aspx.cs" Inherits="Web.CustomerService.ServiceImportantApplication" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-        var ID, tdHuiFangTime, CanManualyAddPhoneState = 0;
         function do_save() {
             var isValid = $("#<%=this.ff.ClientID%>").form('enableValidation').form('validate');
             if (!isValid) {
                 return;
             }
-            var rows = parent.$("#tt_table").datagrid("getSelections");
-            if (rows.length == 0) {
-                show_message("请先选择一个任务", "info");
-                return;
-            }
-            var IDList = [];
-            $.each(rows, function (index, row) {
-                IDList.push(row.ID);
-            })
+
             MaskUtil.mask('body', '提交中');
             $('#ff').form('submit', {
                 url: '../Handler/ServiceHandler.ashx',
                 onSubmit: function (param) {
-                    param.visit = 'cancelcustomerservice';
-                    param.IDList = JSON.stringify(IDList);
+                    param.visit = 'serviceimportapplication';
+                    param.ID = "<%=this.ServiceID%>";
+                    param.Remark = $('#tdRemark').textbox('getValue');
+                    param.ApplicationType = $('#tdApplicationType').combobox('getValue');
                 },
                 success: function (data) {
                     MaskUtil.unmask();
                     var dataObj = eval("(" + data + ")");
                     if (dataObj.status) {
                         window.update = true;
-                        show_message('保存成功', 'success', function () {
+                        show_message('申请成功', 'success', function () {
                             do_close();
                         });
                         return;
@@ -72,9 +65,22 @@
             <a href="javascript:void(0)" onclick="do_close()" class="easyui-linkbutton btntoolbar" data-options="plain:true,iconCls:'icon-close'">关闭</a>
         </div>
         <div class="table_container">
-            <div class="tableItem">
+            <div class="tableItem" style="width: 100%;">
+                <label class="title">申请类型</label>
+                <select class="easyui-combobox" id="tdApplicationType" data-options="editable:false" style="width: 60%; height: 28px;">
+                    <option value="1">启用第三方</option>
+                    <option value="2">第三方二次维修</option>
+                    <option value="3">维修转赔偿意见未达成一致</option>
+                    <option value="4">业主不在家</option>
+                </select>
+            </div>
+            <div class="tableItem" style="width: 100%;">
                 <label class="title">附件上传</label>
-                <input class="easyui-filebox" name="attachfile" data-options="prompt:'请选择文件',buttonText: '选择文件'" style="width: 60%; height: 28px;" />
+                <input class="easyui-filebox" name="attachfile" data-options="prompt:'请选择文件',buttonText: '选择文件',required:true" style="width: 60%; height: 28px;" />
+            </div>
+            <div class="tableItem" style="width: 100%;">
+                <label class="title">申请说明</label>
+                <input class="easyui-textbox" id="tdRemark" data-options="multiline:true" style="width: 60%; height: 50px;" />
             </div>
         </div>
     </form>

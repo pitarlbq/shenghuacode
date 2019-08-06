@@ -100,6 +100,7 @@ function SearchTT() {
     tt_CanLoad = true;
     $("#tt_table").datagrid("load", options);
 }
+var ServiceStatus = 0;
 function get_options() {
     var StartTime = $("#tdStartTime").datebox("getValue");
     var EndTime = $("#tdEndTime").datebox("getValue");
@@ -128,11 +129,22 @@ function get_options() {
     var ServiceRange = $('#tdServiceRange').combobox('getValue');
     var CallBackStatus = $('#tdCallBackStatus').combobox('getValue');
     var CallServiceType = $('#tdCallServiceType').combobox('getValue');
-    var IsImportantTouSu = $('#tdIsImportantTouSu').combobox('getValue');
+    var IsImportantTouSu = -1;
     if (Status != 12) {
         CallBackStatus = 0;
         CallServiceType = 0;
-        IsImportantTouSu = 0;
+        //IsImportantTouSu = 0;
+    } else {
+        IsImportantTouSu = $('#tdIsImportantTouSu2').combobox('getValue');
+    }
+    if (Status == 200) {//重大投诉
+        $('.tdImportTousu').show();
+        IsImportantTouSu = $('#tdIsImportantTouSu').combobox('getValue');
+        if (IsImportantTouSu == '') {
+            IsImportantTouSu = 3;
+        }
+    } else {
+        $('.tdImportTousu').hide();
     }
     var options = {
         "visit": "loadservicelist",
@@ -155,6 +167,9 @@ function get_options() {
         "BeforeBanJieTimeOutHour": BeforeBanJieTimeOutHour,
         "IsImportantTouSu": IsImportantTouSu
     };
+    if (IsImportantTouSu > -1 && Status == 200) {
+        options.ServiceStatus = -1;
+    }
     if (Status == 101) {
         options.ChooseStatus = $('#tdServiceStatus').combobox('getValue');
     }
@@ -439,6 +454,7 @@ function do_complete() {
             } else {
                 iframe = "../CustomerService/ServiceProcess.aspx?ID=" + ID + '&op=complete';
             }
+            iframe = "../CustomerService/ServiceProcess.aspx?ID=" + ID + '&op=complete';
             parent.do_open_dialog('任务办结', iframe);
         }
     });
@@ -757,8 +773,25 @@ function do_mark_important() {
     $.each(rows, function (index, row) {
         IDList.push(row.ID);
     })
-    var iframe = "../CustomerService/ServiceImportantTouSuApprove.aspx?ID=" + IDList[0] + '&isimport=1';
-    do_open_dialog('重要投诉', iframe);
+    var options = { visit: 'checkimportstatus', IDs: JSON.stringify(IDList), type: 1 };
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '../Handler/ServiceHandler.ashx',
+        data: options,
+        success: function (data) {
+            if (data.status) {
+                var iframe = "../CustomerService/ServiceImportantTouSuApprove.aspx?ID=" + IDList[0] + '&isimport=1';
+                do_open_dialog('重要报修', iframe);
+                return;
+            }
+            if (data.error) {
+                show_message(data.error, "warning");
+                return;
+            }
+            show_message("系统异常", "warning");
+        }
+    });
 }
 function do_mark_notcall(status) {
     var rows = $("#tt_table").datagrid("getSelections");
@@ -819,4 +852,60 @@ function do_change_time() {
     }
     var iframe = "../CustomerService/ServiceImportantTouSuApprove.aspx?ID=" + IDList[0] + '&isimport=0';
     do_open_dialog('时效设置', iframe);
+}
+function do_application_important() {
+    var rows = $("#tt_table").datagrid("getSelections");
+    if (rows.length == 0) {
+        show_message("请先选择一个任务", "info");
+        return;
+    }
+    var IDList = [];
+    IDList.push(rows[0].ID)
+    var options = { visit: 'checkimportstatus', IDs: JSON.stringify(IDList), type: 2 };
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '../Handler/ServiceHandler.ashx',
+        data: options,
+        success: function (data) {
+            if (data.status) {
+                var iframe = "../CustomerService/ServiceImportantApplication.aspx?ID=" + rows[0].ID;
+                do_open_dialog('重要报修投诉申请', iframe);
+                return;
+            }
+            if (data.error) {
+                show_message(data.error, "warning");
+                return;
+            }
+            show_message("系统异常", "warning");
+        }
+    });
+}
+function do_approve_important() {
+    var rows = $("#tt_table").datagrid("getSelections");
+    if (rows.length == 0) {
+        show_message("请先选择一个任务", "info");
+        return;
+    }
+    var IDList = [];
+    IDList.push(rows[0].ID)
+    var options = { visit: 'checkimportstatus', IDs: JSON.stringify(IDList), type: 3 };
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '../Handler/ServiceHandler.ashx',
+        data: options,
+        success: function (data) {
+            if (data.status) {
+                var iframe = "../CustomerService/ServiceImportantApprove.aspx?ID=" + rows[0].ID;
+                do_open_dialog('重要报修投诉审核', iframe);
+                return;
+            }
+            if (data.error) {
+                show_message(data.error, "warning");
+                return;
+            }
+            show_message("系统异常", "warning");
+        }
+    });
 }

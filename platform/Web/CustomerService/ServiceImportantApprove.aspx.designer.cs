@@ -10,7 +10,7 @@
 namespace Web.CustomerService {
     
     
-    public partial class ServiceSend {
+    public partial class ServiceImportantApprove {
         
         /// <summary>
         /// ff 控件。
@@ -22,48 +22,75 @@ namespace Web.CustomerService {
         protected global::System.Web.UI.HtmlControls.HtmlForm ff;
         
         /// <summary>
-        /// tdProjectName 控件。
+        /// tdApplicationTime 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tdProjectName;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdApplicationTime;
         
         /// <summary>
-        /// hdProjectName 控件。
+        /// tdApplicationUsreName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdProjectName;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdApplicationUsreName;
         
         /// <summary>
-        /// tdAcceptManInput 控件。
+        /// tdApplicationType 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tdAcceptManInput;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdApplicationType;
         
         /// <summary>
-        /// tdIsSendAPP 控件。
+        /// tdRemark 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox tdIsSendAPP;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdRemark;
         
         /// <summary>
-        /// tdServiceProcessManID 控件。
+        /// tdApproveTime 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tdServiceProcessManID;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdApproveTime;
+        
+        /// <summary>
+        /// tdApproveUserName 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdApproveUserName;
+        
+        /// <summary>
+        /// tdApproveStatus 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdApproveStatus;
+        
+        /// <summary>
+        /// tdResponseRemark 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tdResponseRemark;
     }
 }

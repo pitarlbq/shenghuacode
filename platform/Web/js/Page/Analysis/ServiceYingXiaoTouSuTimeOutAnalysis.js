@@ -6,15 +6,24 @@ function getColumns() {
     var columns = [];
     var CompanyID = $('#tdCompanyID').combobox('getValue') || -1;
     var ProjectIDList = getTopProjectIDList();
-    if (CompanyID < 0 && ProjectIDList.length <= 0) {
+    var ServiceTypeID2 = $('#tdServiceTypeName2').combobox('getValue') || -1;
+    var ServiceTypeID3 = $('#tdServiceTypeName3').combobox('getValue') || -1;
+    if (CompanyID < 0 && ProjectIDList.length <= 0 && ServiceTypeID2 < 0 && ServiceTypeID3 < 0) {
         columns.push({ field: 'CompanyName', title: '公司', width: 100 });
         columns.push({ field: 'ProjectName', title: '项目', width: 100 });
+        columns.push({ field: 'ServiceTypeName2', title: '投诉类型（二级）', width: 150 });
     }
     if (CompanyID >= 0) {
         columns.push({ field: 'CompanyName', title: '公司', width: 100 });
     }
     if (ProjectIDList.length > 0) {
         columns.push({ field: 'ProjectName', title: '项目', width: 100 });
+    }
+    if (ServiceTypeID2 >= 0) {
+        columns.push({ field: 'ServiceTypeName2', title: '投诉类型（二级）', width: 150 });
+    }
+    if (ServiceTypeID3 >= 0) {
+        columns.push({ field: 'ServiceTypeName3', title: '投诉类型（三级）', width: 150 });
     }
     columns.push({ field: 'TotalCount', title: '总工单数', width: 100 });
     columns.push({ field: 'AverageResponseTotalTakeHour', formatter: formatXiaDan, title: '回复平均处理时效', width: 100 });
@@ -139,6 +148,8 @@ function get_options() {
             projectids.push(Number(ProjectID));
         }
     })
+    var ServiceTypeID2 = $('#tdServiceTypeName2').combobox('getValue') || -1;
+    var ServiceTypeID3 = $('#tdServiceTypeName3').combobox('getValue') || -1;
     var options = {
         "visit": "loadjiediantimeoutanalysis",
         "RoomIDs": JSON.stringify(roomids),
@@ -149,7 +160,9 @@ function get_options() {
         "EndTime": EndTime,
         "TopProjectIDs": JSON.stringify(ProjectIDList),
         "TopCompanyID": CompanyID,
-        "ServiceTypeID": 1
+        "ServiceTypeID": 1,
+        "ServiceTypeID2": ServiceTypeID2,
+        "ServiceTypeID3": ServiceTypeID3,
     };
     return options;
 }

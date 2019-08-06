@@ -107,7 +107,10 @@
     <Content Include="callring.mp3" />
     <Content Include="CangKu\DepartmentMgr.aspx" />
     <Content Include="CangKu\EditDepartment.aspx" />
+    <Content Include="CustomerService\ServiceTypeImportShiXiaoEdit.aspx" />
     <Content Include="CustomerService\ServiceCancel.aspx" />
+    <Content Include="CustomerService\ServiceImportantApprove.aspx" />
+    <Content Include="CustomerService\ServiceImportantApplication.aspx" />
     <Content Include="CustomerService\ServiceClose.aspx" />
     <Content Include="CustomerService\ServiceImportantTouSuApprove.aspx" />
     <Content Include="CustomerService\CustomerServiceTypeEdit.aspx" />
@@ -1121,12 +1124,33 @@
     <Compile Include="CangKu\EditDepartment.aspx.designer.cs">
       <DependentUpon>EditDepartment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomerService\ServiceTypeImportShiXiaoEdit.aspx.cs">
+      <DependentUpon>ServiceTypeImportShiXiaoEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceTypeImportShiXiaoEdit.aspx.designer.cs">
+      <DependentUpon>ServiceTypeImportShiXiaoEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CustomerService\ServiceCancel.aspx.cs">
       <DependentUpon>ServiceCancel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CustomerService\ServiceCancel.aspx.designer.cs">
       <DependentUpon>ServiceCancel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceImportantApprove.aspx.cs">
+      <DependentUpon>ServiceImportantApprove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceImportantApprove.aspx.designer.cs">
+      <DependentUpon>ServiceImportantApprove.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ServiceImportantApplication.aspx.cs">
+      <DependentUpon>ServiceImportantApplication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ServiceImportantApplication.aspx.designer.cs">
+      <DependentUpon>ServiceImportantApplication.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomerService\ServiceClose.aspx.cs">
       <DependentUpon>ServiceClose.aspx</DependentUpon>

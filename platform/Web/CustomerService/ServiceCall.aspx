@@ -41,6 +41,7 @@
                     MaskUtil.unmask();
                     var dataObj = eval("(" + data + ")");
                     if (dataObj.status) {
+                        window.updateWin = true;
                         show_message('保存成功', 'success', function () {
                             do_close();
                         });
@@ -53,7 +54,9 @@
         }
         function do_close() {
             parent.do_close_dialog(function () {
-                parent.reloadTT();
+                if (window.updateWin) {
+                    parent.reloadTT();
+                }
             }, true);
         }
     </script>

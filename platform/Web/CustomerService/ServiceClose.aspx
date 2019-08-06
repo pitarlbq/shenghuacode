@@ -28,6 +28,7 @@
                     MaskUtil.unmask();
                     var dataObj = eval("(" + data + ")");
                     if (dataObj.status) {
+                        window.update = true;
                         show_message('保存成功', 'success', function () {
                             do_close();
                         });
@@ -44,7 +45,9 @@
         }
         function do_close() {
             parent.do_close_dialog(function () {
-                parent.$("#tt_table").datagrid("reload");
+                if (window.update) {
+                    parent.$("#tt_table").datagrid("reload");
+                }
             }, true);
         }
     </script>

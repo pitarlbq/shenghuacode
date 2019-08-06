@@ -411,16 +411,16 @@ namespace Foresight.DataAccess
                     error = "工单已办结，不能重复办结";
                     return false;
                 }
-                if (item.BanJieServiceType == 1)
-                {
-                    var myItemList = chuliList.Where(p => p.ServiceID == item.ID).ToArray();
-                    if (myItemList.Length == 0)
-                    {
-                        error = "工单未处理，不能关单";
-                        return false;
-                    }
-                    continue;
-                }
+                //if (item.BanJieServiceType == 1)
+                //{
+                //    var myItemList = chuliList.Where(p => p.ServiceID == item.ID).ToArray();
+                //    if (myItemList.Length == 0)
+                //    {
+                //        error = "工单未处理，不能办结";
+                //        return false;
+                //    }
+                //    continue;
+                //}
                 if (item.BanJieServiceType == 2)
                 {
                     continue;

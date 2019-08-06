@@ -180,10 +180,11 @@
                             <option value="2">投诉</option>
                         </select>
                     </div>
-                    <div class="search_item tdCallBack">
-                        <select class="easyui-combobox" id="tdIsImportantTouSu" style="width: 100px; height: 28px;" data-options="prompt:'选择重大投诉',editable:false">
-                            <option value="1">隐藏</option>
-                            <option value="2">显示</option>
+                    <div class="search_item tdImportTousu">
+                        <select class="easyui-combobox" id="tdIsImportantTouSu" style="width: 150px; height: 28px;" data-options="prompt:'重大报修投诉',editable:false">
+                            <option value="3" selected="selected">审核通过</option>
+                            <option value="2">待审核</option>
+                            <option value="4">审核未通过</option>
                             <option value="0">全部</option>
                         </select>
                     </div>
@@ -287,6 +288,14 @@
                     <%if (base.CheckAuthByModuleCode("1191178"))
                         { %>
                     <a href="javascript:void(0)" onclick="do_complete_remove()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-remove'">彻底删除</a>
+                    <%} %>
+                    <%if (base.CheckAuthByModuleCode("1191513") && (status != 12 && status != 13))
+                        { %>
+                    <a href="javascript:void(0)" onclick="do_application_important()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-remove'">重大投诉申请</a>
+                    <%} %>
+                    <%if (base.CheckAuthByModuleCode("1191514") && (status != 12 && status != 13))
+                        { %>
+                    <a href="javascript:void(0)" onclick="do_approve_important()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-remove'">重大投诉审核</a>
                     <%} %>
                     <%if (base.CheckAuthByModuleCode("1191199"))
                         { %>

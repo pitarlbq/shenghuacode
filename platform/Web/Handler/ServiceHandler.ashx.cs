@@ -183,6 +183,18 @@ namespace Web.Handler
                     case "savephonerecord":
                         savephonerecord(context);
                         break;
+                    case "serviceimportapplication":
+                        serviceimportapplication(context);
+                        break;
+                    case "serviceimportapprove":
+                        serviceimportapprove(context);
+                        break;
+                    case "checkimportstatus":
+                        checkimportstatus(context);
+                        break;
+                    case "saveservicetypeimportshixiao":
+                        saveservicetypeimportshixiao(context);
+                        break;
                     default:
                         break;
                 }
@@ -192,6 +204,166 @@ namespace Web.Handler
                 Utility.LogHelper.WriteError("ServiceHandler", "命令:" + visit, ex);
                 WebUtil.WriteJson(context, new { status = false });
             }
+        }
+        private void saveservicetypeimportshixiao(HttpContext context)
+        {
+            int ID = WebUtil.GetIntValue(context, "ID");
+            Foresight.DataAccess.ServiceType_ImportShiXiao data = null;
+            if (ID > 0)
+            {
+                data = Foresight.DataAccess.ServiceType_ImportShiXiao.GetServiceType_ImportShiXiao(ID);
+            }
+            if (data == null)
+            {
+                data = new Foresight.DataAccess.ServiceType_ImportShiXiao();
+                data.AddTime = DateTime.Now;
+                data.ServiceTypeID = ID;
+            }
+            data.PaiDanTime = WebUtil.getServerDecimalValue(context, "tdPaiDanTime");
+            data.ResponseTime = WebUtil.getServerDecimalValue(context, "tdResponseTime");
+            data.CheckTime = WebUtil.getServerDecimalValue(context, "tdCheckTime");
+            data.ChuliTime = WebUtil.getServerDecimalValue(context, "tdChuliTime");
+            data.BanJieTime = WebUtil.getServerDecimalValue(context, "tdBanJieTime");
+            data.HuiFangTime = WebUtil.getServerDecimalValue(context, "tdHuiFangTime");
+            data.GuanDanTime = WebUtil.getServerDecimalValue(context, "tdGuanDanTime");
+            data.Save();
+            WebUtil.WriteJson(context, new { status = true });
+        }
+        private void checkimportstatus(HttpContext context)
+        {
+            string IDs = context.Request["IDs"];
+            var IDList = new List<int>();
+            if (!string.IsNullOrEmpty(IDs))
+            {
+                IDList = Utility.JsonConvert.DeserializeObject<List<int>>(IDs);
+            }
+            if (IDList.Count == 0)
+            {
+                WebUtil.WriteJson(context, new { status = false, error = "请选择一条任务工单" });
+                return;
+            }
+            int type = WebUtil.GetIntValue(context, "type");
+            var importantList = ServiceType_ImportantService.GetServiceType_ImportantServiceListByMinMaxServiceID(IDList.Min(), IDList.Max());
+            var myImportantList = importantList.Where(p => IDList.Contains(p.ServiceID)).ToArray();
+            if (type == 1)//重大报修标记
+            {
+                if (myImportantList.Length == 0)
+                {
+                    WebUtil.WriteJson(context, new { status = false, error = "选中的任务没有申请记录，操作取消" });
+                    return;
+                }
+                if (myImportantList.FirstOrDefault(p => p.ApproveStatus == 0) != null)
+                {
+                    WebUtil.WriteJson(context, new { status = false, error = "选中的任务未审核，操作取消" });
+                    return;
+                }
+                if (myImportantList.FirstOrDefault(p => p.ApproveStatus == 2) != null)
+                {
+                    WebUtil.WriteJson(context, new { status = false, error = "选中的任务审核未通过，操作取消" });
+                    return;
+                }
+            }
+            else if (type == 2)//重大报修申请
+            {
+                if (myImportantList.FirstOrDefault(p => p.ApproveStatus == 0) != null)
+                {
+                    WebUtil.WriteJson(context, new { status = false, error = "选中的任务未审核，操作取消" });
+                    return;
+                }
+                if (myImportantList.FirstOrDefault(p => p.ApproveStatus == 1) != null)
+                {
+                    WebUtil.WriteJson(context, new { status = false, error = "选中的任务已审核，操作取消" });
+                    return;
+                }
+            }
+            else if (type == 3)//重大报修审核
+            {
+                if (myImportantList.Length == 0)
+                {
+                    WebUtil.WriteJson(context, new { status = false, error = "选中的任务没有申请记录，操作取消" });
+                    return;
+                }
+                //if (myImportantList.FirstOrDefault(p => p.ApproveStatus == 1) != null)
+                //{
+                //    WebUtil.WriteJson(context, new { status = false, error = "选中的任务已审核，操作取消" });
+                //    return;
+                //}
+                //if (myImportantList.FirstOrDefault(p => p.ApproveStatus == 0) == null)
+                //{
+                //    WebUtil.WriteJson(context, new { status = false, error = "选中的任务没有申请记录，操作取消" });
+                //    return;
+                //}
+            }
+            WebUtil.WriteJson(context, new { status = true });
+        }
+        /// <summary>
+        /// 重大任务审核
+        /// </summary>
+        private void serviceimportapprove(HttpContext context)
+        {
+            int ID = WebUtil.GetIntValue(context, "ID");
+            var important = ServiceType_ImportantService.GetServiceType_ImportantServiceByServiceID(ID);
+            if (important == null)
+            {
+                WebUtil.WriteJson(context, new { status = false, error = "申请记录不存在" });
+                return;
+            }
+            int status = WebUtil.GetIntValue(context, "status");
+            important.ApproveStatus = status == 1 ? 1 : 2;
+            important.ApproveTime = DateTime.Now;
+            important.ApproveUserName = WebUtil.GetUser(context).LoginName;
+            important.ApproveRemark = context.Request["Remark"];
+            ServiceType_ImportantService.ApproveImportantService(important);
+            WebUtil.WriteJson(context, new { status = true });
+        }
+        /// <summary>
+        /// 重大任务申请
+        /// </summary>
+        private void serviceimportapplication(HttpContext context)
+        {
+            int ID = WebUtil.GetIntValue(context, "ID");
+            var service = Foresight.DataAccess.CustomerService.GetCustomerService(ID);
+            if (service == null)
+            {
+                WebUtil.WriteJson(context, new { status = false, error = "ID无效" });
+                return;
+            }
+            string FilePath = string.Empty;
+            HttpFileCollection uploadFiles = context.Request.Files;
+            for (int i = 0; i < uploadFiles.Count; i++)
+            {
+                HttpPostedFile postedFile = uploadFiles[i];
+                string fileOriName = postedFile.FileName;
+                if (fileOriName != "" && fileOriName != null)
+                {
+                    string extension = System.IO.Path.GetExtension(fileOriName).ToLower();
+                    string fileName = DateTime.Now.ToFileTime().ToString() + extension;
+                    string filepath = "/upload/CustomerService/";
+                    string rootPath = HttpContext.Current.Server.MapPath("~" + filepath);
+                    if (!System.IO.Directory.Exists(rootPath))
+                    {
+                        System.IO.Directory.CreateDirectory(rootPath);
+                    }
+                    string Path = rootPath + fileName;
+                    postedFile.SaveAs(Path);
+                    FilePath = filepath + fileName;
+                }
+            }
+            var important = ServiceType_ImportantService.GetServiceType_ImportantServiceByServiceID(service.ID);
+            if (important == null)
+            {
+                important = new ServiceType_ImportantService();
+                important.AddTime = DateTime.Now;
+                important.ServiceID = service.ID;
+            }
+            important.ApplicationType = WebUtil.GetIntValue(context, "ApplicationType");
+            important.ApproveStatus = 0;
+            important.ApplicationTime = DateTime.Now;
+            important.ApplicationUserName = WebUtil.GetUser(context).LoginName;
+            important.ApplicationFilePath = FilePath;
+            important.ApplicationRemark = context.Request["Remark"];
+            important.Save();
+            WebUtil.WriteJson(context, new { status = true });
         }
 
         private void getmytimeoutservice(HttpContext context)
@@ -298,6 +470,7 @@ namespace Web.Handler
                             data = new ServiceType_ImportantService();
                             data.AddTime = DateTime.Now;
                             data.ServiceID = ServiceID;
+                            data.ApproveStatus = 1;
                         }
                         data.PaiDanTime = PaiDanTime;
                         data.ResponseTime = ResponseTime;
@@ -2141,7 +2314,7 @@ namespace Web.Handler
                 int ServiceType2ID = WebUtil.GetIntValue(context, "ServiceType2ID");
                 int ServiceType3ID = WebUtil.GetIntValue(context, "ServiceType3ID");
                 int PayStatus = WebUtil.GetIntValue(context, "PayStatus");
-                int IsImportantTouSu = WebUtil.GetIntValue(context, "IsImportantTouSu");
+                int IsImportantTouSu = WebUtil.GetIntValue(context, "IsImportantTouSu", -1);
                 decimal BeforeBanJieTimeOutHour = WebUtil.GetDecimalValue(context, "BeforeBanJieTimeOutHour");
                 DateTime CompleteStartTime = WebUtil.GetDateValue(context, "CompleteStartTime");
                 DateTime CompleteEndTime = WebUtil.GetDateValue(context, "CompleteEndTime");

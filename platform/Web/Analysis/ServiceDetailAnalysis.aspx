@@ -250,6 +250,13 @@
                     <input class="easyui-searchbox" id="tdKeywords" style="height: 28px; width: 150px;" data-options="prompt:'请输入关键字',searcher:SearchTT" />
                 </div>
                 <div class="search_item">
+                    <select class="easyui-combobox" id="tdIsImportantTouSu" style="width: 100px; height: 28px;" data-options="prompt:'重大投诉',editable:false">
+                        <option value="0">全部</option>
+                        <option value="1">不显示</option>
+                        <option value="2">显示</option>
+                    </select>
+                </div>
+                <div class="search_item">
                     <a href="javascript:void(0)" onclick="SearchTT()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-search'">查询</a>
                 </div>
             </form>

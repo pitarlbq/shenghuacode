@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-        var ID, tdHandelType, ffObj, filecount = 0, tdServiceType1, tdServiceType2, tdServiceType3, isComplete = 0;
+        var ID, tdHandelType, ffObj, filecount = 0, tdServiceType1, tdServiceType2, tdServiceType3, isComplete = 0, tdResponseRemark, tdChuLiNote;
         $(function () {
             ID = "<%=this.ID%>";
             isComplete = Number("<%=this.isComplete%>");
@@ -11,6 +11,8 @@
             tdServiceType2 = $("#<%=this.tdServiceType2.ClientID%>");
             tdServiceType3 = $("#<%=this.tdServiceType3.ClientID%>");
             tdHandelType = $("#<%=this.tdHandelType.ClientID%>");
+            tdResponseRemark = $("#<%=this.tdResponseRemark.ClientID%>");
+            tdChuLiNote = $("#<%=this.tdChuLiNote.ClientID%>");
             addFile();
             loadComboboxParams();
             doChangeType();
@@ -130,6 +132,21 @@
             if (!isValid) {
                 return;
             }
+            if (type == 1) {//办结
+                if (tdChuLiNote.textbox('getValue') == '') {
+                    show_message("处理情况不能为空", "warning");
+                    return;
+                }
+            }
+            var handleType = tdHandelType.combobox('getValue');
+            if (handleType == 1 && tdResponseRemark.textbox('getValue') == '') {
+                show_message("回复情况不能为空", "warning");
+                return;
+            }
+            if (handleType == 3 && tdChuLiNote.textbox('getValue') == '') {
+                show_message("处理情况不能为空", "warning");
+                return;
+            }
             MaskUtil.mask('body', '提交中');
             $('#ff').form('submit', {
                 url: '../Handler/ServiceHandler.ashx',
@@ -150,6 +167,7 @@
                     MaskUtil.unmask();
                     var dataObj = eval("(" + data + ")");
                     if (dataObj.status) {
+                        window.updateWin = true;
                         show_message('保存成功', 'success', function () {
                             do_close();
                         });
@@ -165,7 +183,9 @@
         }
         function do_close() {
             parent.do_close_dialog(function () {
-                parent.reloadTT();
+                if (window.updateWin) {
+                    parent.reloadTT();
+                }
             }, true);
         }
     </script>
@@ -179,10 +199,10 @@
     <form id="ff" runat="server" method="post" enctype="multipart/form-data">
         <div class="operation_box">
             <%if (service.CanDeal)
-              { %>
+                { %>
             <a href="javascript:void(0)" onclick="do_save(1)" class="easyui-linkbutton btntoolbar" data-options="plain:true,iconCls:'icon-save'">办结并保存</a>
             <%if (this.isComplete == 0)
-              { %>
+                { %>
             <a href="javascript:void(0)" onclick="do_save(0)" class="easyui-linkbutton btntoolbar" data-options="plain:true,iconCls:'icon-save'">处理并保存</a>
             <%} %>
             <%} %>
@@ -205,9 +225,9 @@
                 <div class="tableItem">
                     <label class="title">处理类型</label>
                     <select runat="server" type="text" data-options="required:false,editable:false" class="easyui-combobox" id="tdHandelType" style="height: 28px;">
+                        <option value="3">处理</option>
                         <option value="1">回复</option>
                         <option value="2">核查</option>
-                        <option value="3">处理</option>
                     </select>
                 </div>
                 <div class="tableItem responseCss">
@@ -247,7 +267,7 @@
                     <label style="display: inline-block; width: 70%;" class="content" id="tdFile"></label>
                 </div>
                 <%if (this.isComplete == 1)
-                  { %>
+                    { %>
                 <div class="tableItem">
                     <label class="title">办结时间</label>
                     <input type="text" runat="server" data-options="required:false,readonly:true" class="easyui-datetimebox" id="tdBanJieTime" />

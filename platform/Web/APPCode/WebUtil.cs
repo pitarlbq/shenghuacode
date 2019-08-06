@@ -250,10 +250,13 @@ namespace Web
             decimal.TryParse(context.Request.Params[name], out value);
             return value;
         }
-        public static int GetIntValue(HttpContext context, string name)
+        public static int GetIntValue(HttpContext context, string name, int defaultValue = 0)
         {
-            int value = int.MinValue;
-            int.TryParse(context.Request.Params[name], out value);
+            int value = defaultValue;
+            if (!string.IsNullOrEmpty(context.Request[name]))
+            {
+                int.TryParse(context.Request[name], out value);
+            }
             return value;
         }
         public static DateTime GetDateValue(HttpContext context, string name)

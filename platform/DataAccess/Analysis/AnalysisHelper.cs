@@ -122,7 +122,7 @@ namespace DataAccess.Analysis
                     data.ProjectID = projectItem!=null?projectItem.ID:0;
                     data.ProjectName = projectItem != null ? projectItem.Name : "";
                     data.TotalCount = myServiceList2.Length;
-                    data.ChaoShiCount = myServiceList2.Where(p => p.TimeOutStatus == 2).ToArray().Length;
+                    data.ChaoShiCount = myServiceList2.Where(p => p.BanJieTimeOutStatus == 2).ToArray().Length;
                     data.ResponseTimeOutHour = myServiceList2.Sum(p => p.ResponseTakeHour);
                     data.ProcessTimeOut = myServiceList2.Sum(p => p.ProcessTakeHour);
                     data.CheckTimeOut = myServiceList2.Sum(p => p.CheckTakeHour);
@@ -146,7 +146,7 @@ namespace DataAccess.Analysis
                     data.ProjectID = projectItem != null ? projectItem.ID : 0;
                     data.ProjectName = projectItem != null ? projectItem.Name : "";
                     data.TotalCount = myServiceList3.Length;
-                    data.ChaoShiCount = myServiceList3.Where(p => p.TimeOutStatus == 2).ToArray().Length;
+                    data.ChaoShiCount = myServiceList3.Where(p => p.BanJieTimeOutStatus == 2).ToArray().Length;
                     data.ProcessTimeOut = myServiceList3.Sum(p => p.ProcessTakeHour);
                     data.CheckTimeOut = myServiceList3.Sum(p => p.CheckTakeHour);
                     data.ServiceTypeName2 = myServiceType2.ServiceTypeName;
@@ -198,6 +198,61 @@ namespace DataAccess.Analysis
                     data.ServiceTypeName2 = myServiceType2.ServiceTypeName;
                     data.ServiceTypeName3 = myServiceType3.ServiceTypeName;
                     dataList.Add(data);
+                }
+            }
+            return dataList;
+        }
+
+        public static List<ChuLiJieDianAnalysisModel> GetChuLiJieDianAnalysisModelList(ServiceType[] serviceType2List, ServiceType[] serviceType3List, ViewCustomerService[] serviceList, int ServiceTypeID2, int ServiceTypeID3, Company companyItem = null, Project projectItem = null)
+        {
+            var dataList = new List<ChuLiJieDianAnalysisModel>();
+            foreach (var myServiceType2 in serviceType2List)
+            {
+                var myServiceList2 = serviceList.Where(p => p.ServiceType2IDList.Contains(myServiceType2.ID)).ToArray();
+                if (myServiceList2.Length == 0)
+                {
+                    continue;
+                }
+                if (ServiceTypeID3 < 0)
+                {
+                    var data = new ChuLiJieDianAnalysisModel();
+                    data.CompanyID = companyItem != null ? companyItem.CompanyID : 0;
+                    data.CompanyName = companyItem != null ? companyItem.CompanyName : "";
+                    data.ProjectID = projectItem != null ? projectItem.ID : 0;
+                    data.ProjectName = projectItem != null ? projectItem.Name : "";
+                    data.ServiceTypeName2 = myServiceType2.ServiceTypeName;
+                    data.ServiceTypeName3 = "";
+                    data.TotalCount = myServiceList2.Length;
+                    data.ResponseTotalTakeHour = myServiceList2.Sum(p => p.ResponseTakeHour);
+                    data.PaiDanTotalTakeHour = myServiceList2.Sum(p => p.PaiDanTakeHour);
+                    data.ChuLiTotalTakeHour = myServiceList2.Sum(p => p.ProcessTakeHour);
+                    data.BanJieTotalTakeHour = myServiceList2.Sum(p => p.BanJieTakeHour);
+                    data.HuiFangTotalTakeHour = myServiceList2.Sum(p => p.CallBackTakeHour);
+                    dataList.Add(data);
+
+                    continue;
+                }
+                var myServiceType3List = serviceType3List.Where(p => p.ParentID == myServiceType2.ID).ToArray();
+                foreach (var myServiceType3 in myServiceType3List)
+                {
+                    var myServiceList3 = serviceList.Where(p => p.ServiceType3IDList.Contains(myServiceType3.ID)).ToArray();
+                    if (myServiceList3.Length == 0)
+                    {
+                        continue;
+                    }
+                    var data = new ChuLiJieDianAnalysisModel();
+                    data.CompanyID = companyItem != null ? companyItem.CompanyID : 0;
+                    data.CompanyName = companyItem != null ? companyItem.CompanyName : "";
+                    data.ProjectID = projectItem != null ? projectItem.ID : 0;
+                    data.ProjectName = projectItem != null ? projectItem.Name : "";
+                    data.ServiceTypeName2 = myServiceType2.ServiceTypeName;
+                    data.ServiceTypeName3 = myServiceType3.ServiceTypeName;
+                    data.TotalCount = myServiceList2.Length;
+                    data.ResponseTotalTakeHour = myServiceList3.Sum(p => p.ResponseTakeHour);
+                    data.PaiDanTotalTakeHour = myServiceList3.Sum(p => p.PaiDanTakeHour);
+                    data.ChuLiTotalTakeHour = myServiceList3.Sum(p => p.ProcessTakeHour);
+                    data.BanJieTotalTakeHour = myServiceList3.Sum(p => p.BanJieTakeHour);
+                    data.HuiFangTotalTakeHour = myServiceList3.Sum(p => p.CallBackTakeHour);
                 }
             }
             return dataList;

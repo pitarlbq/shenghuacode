@@ -118,11 +118,11 @@
             if (Status == 12) {
                 $('#tdCallBackStatus').combobox('setValue', 2);
                 $('#tdCallServiceType').combobox('setValue', 2);
-                $('#tdIsImportantTouSu').combobox('setValue', 1);
+                //$('#tdIsImportantTouSu').combobox('setValue', 1);
             } else {
                 $('#tdCallBackStatus').combobox('setValue', '');
                 $('#tdCallServiceType').combobox('setValue', '');
-                $('#tdIsImportantTouSu').combobox('setValue', '');
+                //$('#tdIsImportantTouSu').combobox('setValue', '');
             }
         })
     </script>
@@ -192,10 +192,18 @@
                         </select>
                     </div>
                     <div class="search_item tdCallBack">
-                        <select class="easyui-combobox" id="tdIsImportantTouSu" style="width: 100px; height: 28px;" data-options="prompt:'重大投诉',editable:false">
-                            <option value="1">不显示</option>
+                        <select class="easyui-combobox" id="tdIsImportantTouSu2" style="width: 100px; height: 28px;" data-options="prompt:'重大投诉',editable:false">
+                            <option value="-2">全部</option>
+                            <option value="-1">不显示</option>
+                            <option value="0">显示</option>
+                        </select>
+                    </div>
+                    <div class="search_item tdImportTousu">
+                        <select class="easyui-combobox" id="tdIsImportantTouSu" style="width: 150px; height: 28px;" data-options="prompt:'重大报修投诉',editable:false">
+                            <option value="3" selected="selected">审核通过</option>
+                            <option value="2">待审核</option>
+                            <option value="4">审核未通过</option>
                             <option value="0">全部</option>
-                            <option value="2">显示</option>
                         </select>
                     </div>
                     <%if (this.status != 12)
@@ -308,6 +316,19 @@
                         { %>
                     <a href="javascript:void(0)" onclick="do_complete_remove()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-remove'">彻底删除</a>
                     <%} %>
+                    <%if (base.CheckAuthByModuleCode("1191511") && (status != 12 && status != 13))
+                        { %>
+                    <a href="javascript:void(0)" onclick="do_application_important()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-remove'">重大报修申请</a>
+                    <%} %>
+                    <%if (base.CheckAuthByModuleCode("1191512") && (status != 12 && status != 13))
+                        { %>
+                    <a href="javascript:void(0)" onclick="do_approve_important()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-remove'">重大报修审核</a>
+                    <%} %>
+                    <%if (base.CheckAuthByModuleCode("1191510") && (status != 12 && status != 13))
+                        { %>
+                    <a href="javascript:void(0)" onclick="do_mark_important()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-remove'">重大报修</a>
+                    <%} %>
+
                     <asp:HiddenField ID="hdOrderBy" runat="server" />
                     <asp:HiddenField ID="hdIDs" runat="server" />
                 </div>

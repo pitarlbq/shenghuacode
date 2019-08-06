@@ -4,9 +4,7 @@
     <title>任务登记</title>
     <script>
         function do_close() {
-            parent.do_close_dialog(function () {
-                parent.$("#tt_table").datagrid("reload");
-            });
+            parent.do_close_dialog();
         }
     </script>
     <style>

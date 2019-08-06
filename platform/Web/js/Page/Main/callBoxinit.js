@@ -12,11 +12,12 @@ $(window).bind('beforeunload', function () {
     TV_Disable();
 });
 
+var u_ID = 0;
 function AppendStatus(szStatus) {
     console.log(szStatus);
 }
 function AppendStatusEx(uID, szStatus) {
-    uID = uID + 1;
+    //u_ID = uID + 1;
     AppendStatus("通道" + uID + ":" + szStatus);
 }
 function showDlg(flag) {
@@ -31,12 +32,10 @@ function showDlg(flag) {
         alert('上传url不能为空!');
     }
 }
-var uID = 0;
 function T_GetEvent(uID, uEventType, uHandle, uResult, szdata) {
     //var vValueArray=qnviccub.QNV_Event(0,2,0,"","",1024);
     if (uEventType == -1)
         return;
-    uID = uID;
     var vValue = " type=" + uEventType + " Handle=" + uHandle + " Result=" + uResult + " szdata=" + szdata;
     switch (uEventType) {
         case BriEvent_PhoneHook:// 本地电话机摘机事件
@@ -506,11 +505,11 @@ function doDialNumberDone() {
 }
 //拨打电话
 function dialPhone(phoneNumber, serviceID, relatedPhoneRecordID) {
-    if (PhoneType != 0) {
-        var messages = '电话正在拨打中，请稍后重试'
-        alertNotify(messages, 2);
-        return;
-    }
+    //if (PhoneType != 0) {
+    //    var messages = '电话正在拨打中，请稍后重试'
+    //    alertNotify(messages, 2);
+    //    return;
+    //}
     reSetData();
     ComingPhoneNumber = phoneNumber;
     ServiceID = serviceID || 0;
@@ -534,22 +533,20 @@ function dialPhone(phoneNumber, serviceID, relatedPhoneRecordID) {
     alertNotify(messages, 0);
     try {
         startRecord('dialPhone');
+        //TV_HangUpCtrl(u_ID);
         openMic();
-        TV_HangUpCtrl(uID);
-        TV_StartDial(uID, phoneNumber);
+        TV_StartDial(u_ID, phoneNumber);
     } catch (e) {
-        alert(e);
+        //alert(e);
     }
 }
 //软接听电话
 function pickUpPhone() {
     RingOnCount = 0;
-
     PhoneType = 1;
     PickUpTime = getNowTimeStr();
     startRecord('pickUpPhone');
-
-    TV_OffHookCtrl(uID);
+    TV_OffHookCtrl(u_ID);
     top.close_message();
 }
 //响铃事件
@@ -583,11 +580,11 @@ function doCustomerPickUpPhone() {
 //挂机
 function hangUpPhone() {
     RingOnCount = 0;
-    uID = 0;
+    u_ID = 0;
     try {
         stopRecord('hangUpPhone');
         closeMic();
-        TV_HangUpCtrl(uID);
+        TV_HangUpCtrl(u_ID);
         top.close_message();
     } catch (e) {
     }
@@ -599,11 +596,11 @@ function hangUpPhone() {
 }
 //拒接来电
 function rejectPickUpPhone() {
+    u_ID = 0;
     RingOnCount = 0;
     HangUpTime = getNowTimeStr();
     savePhoneRecord('rejectPickUpPhone');
-    TV_RefuseCallIn(uID);
-    uID = 0;
+    TV_RefuseCallIn(u_ID);
     top.close_message();
 }
 //来电弹屏
@@ -629,22 +626,22 @@ function startRecord(source) {
         }
         RecordName = getTimeName() + '.wav';
         RecordPath = RecordLocation + RecordName;
-        TV_StartRecordFile(uID, RecordPath);
+        TV_StartRecordFile(u_ID, RecordPath);
     }
 }
 //结束录音
 function stopRecord(source) {
     if (isStartRecording) {
         try {
-            TV_StopRecordFile(uID);
+            TV_StopRecordFile(u_ID);
         } catch (e) {
         }
     }
     if (RecordID > 0) {
         HangUpTime = getNowTimeStr();
         savePhoneRecord(source);
-        callListPush();
     }
+    callListPush();
     setTimeout(function () {
         uploadFileRecord();
     }, 500);
@@ -704,12 +701,12 @@ function getDataByPhoneNumber(phoneNumber) {
 //打开耳机麦克风
 function openMic() {
     //TV_EnableMic(0, TRUE);
-    TV_EnableLine2Spk(0, TRUE);
+    TV_EnableLine2Spk(u_ID, TRUE);
 }
 //关闭耳机麦克风
 function closeMic() {
     //TV_EnableMic(0, FALSE);
-    TV_EnableLine2Spk(0, FALSE);
+    TV_EnableLine2Spk(u_ID, FALSE);
 }
 function savePhoneRecord(source) {
     if (PhoneType == 0) {

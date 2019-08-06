@@ -22,6 +22,7 @@
                     MaskUtil.unmask();
                     var dataObj = eval("(" + data + ")");
                     if (dataObj.status) {
+                        window.update = true;
                         show_message('保存成功', 'success', function () {
                             do_close();
                         });
@@ -34,7 +35,9 @@
         }
         function do_close() {
             parent.do_close_dialog(function () {
-                parent.reloadTT();
+                if (window.update) {
+                    parent.reloadTT();
+                }
             }, true);
         }
     </script>
@@ -48,7 +51,7 @@
     <form id="ff" runat="server">
         <div class="operation_box">
             <%if (service.CanComplete)
-              { %>
+                { %>
             <a href="javascript:void(0)" onclick="do_save()" class="easyui-linkbutton btntoolbar" data-options="plain:true,iconCls:'icon-save'">保存</a>
             <%} %>
             <a href="javascript:void(0)" onclick="do_close()" class="easyui-linkbutton btntoolbar" data-options="plain:true,iconCls:'icon-close'">关闭</a>

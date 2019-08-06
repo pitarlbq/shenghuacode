@@ -718,7 +718,13 @@ namespace Web.Mobile
             var chuli = new Foresight.DataAccess.CustomerServiceChuli();
             chuli.AddTime = DateTime.Now;
             chuli.ServiceID = data.ID;
+            int HandelType = WebUtil.GetIntValue(context, "HandelType");
             string ResponseContent = context.Request["ResponseContent"];
+            if (HandelType == 1 && string.IsNullOrEmpty(ResponseContent))
+            {
+                WebUtil.WriteJsonError(context, ErrorCode.InvalideRequest, "回复情况不能为空");
+                return;
+            }
             if (!string.IsNullOrEmpty(ResponseContent))
             {
                 chuli.ResponseRemark = ResponseContent;
@@ -731,6 +737,11 @@ namespace Web.Mobile
                 chuli.CheckTime = DateTime.Now;
             }
             string CompleteContent = context.Request["CompleteContent"];
+            if (HandelType == 3 && string.IsNullOrEmpty(ResponseContent))
+            {
+                WebUtil.WriteJsonError(context, ErrorCode.InvalideRequest, "处理情况不能为空");
+                return;
+            }
             decimal HandleFee = WebUtil.GetDecimalValue(context, "HandleFee");
             chuli.ChuliDate = DateTime.Now;
             chuli.ChuliNote = CompleteContent;

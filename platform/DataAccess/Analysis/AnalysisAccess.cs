@@ -1009,7 +1009,7 @@ namespace Foresight.DataAccess
                         data.ProjectID = 0;
                         data.ProjectName = "";
                         data.TotalCount = myServiceList.Length;
-                        data.ChaoShiCount = myServiceList.Where(p => p.TimeOutStatus == 2).ToArray().Length;
+                        data.ChaoShiCount = myServiceList.Where(p => p.BanJieTimeOutStatus == 2).ToArray().Length;
                         data.ResponseTimeOutHour = myServiceList.Sum(p => p.ResponseTakeHour);
                         data.ProcessTimeOut = myServiceList.Sum(p => p.ProcessTakeHour);
                         data.CheckTimeOut = myServiceList.Sum(p => p.CheckTakeHour);
@@ -1034,7 +1034,7 @@ namespace Foresight.DataAccess
                             data.ProjectID = item.ID;
                             data.ProjectName = item.Name;
                             data.TotalCount = myList.Length;
-                            data.ChaoShiCount = myList.Where(p => p.TimeOutStatus == 2).ToArray().Length;
+                            data.ChaoShiCount = myList.Where(p => p.BanJieTimeOutStatus == 2).ToArray().Length;
                             data.CheckTimeOut = myList.Sum(p => p.CheckTakeHour);
                             data.ResponseTimeOutHour = myList.Sum(p => p.ResponseTakeHour);
                             data.ProcessTimeOut = myList.Sum(p => p.ProcessTakeHour);
@@ -1217,12 +1217,15 @@ namespace Foresight.DataAccess
     }
     public partial class ChuLiJieDianAnalysis : AnalysisAccess
     {
-        public static Ui.DataGrid GetChuLiJieDianAnalysisGrid(List<int> RoomIDList, List<int> EqualProjectIDList, List<int> InProjectIDList, List<int> TopProjectIDList, int TopCompanyID, int UserID, DateTime StartTime, DateTime EndTime, int[] CompanyIDList, int ServiceTypeID = 1)
+        public static Ui.DataGrid GetChuLiJieDianAnalysisGrid(List<int> RoomIDList, List<int> EqualProjectIDList, List<int> InProjectIDList, List<int> TopProjectIDList, int TopCompanyID, int UserID, DateTime StartTime, DateTime EndTime, int[] CompanyIDList, int ServiceTypeID2, int ServiceTypeID3, int ServiceTypeID = 1)
         {
             var dg = new Ui.DataGrid();
             dg.page = 1;
             dg.total = 0;
             dg.rows = new int[] { };
+            var serviceTypeList = ServiceType.GetServiceTypes().ToArray();
+            var serviceType2List = new ServiceType[] { };
+            var serviceType3List = new ServiceType[] { };
             List<SqlParameter> parameters = new List<SqlParameter>();
             List<string> conditions = new List<string>();
             List<string> cmdlist = new List<string>();
@@ -1232,17 +1235,21 @@ namespace Foresight.DataAccess
             {
                 int YingXiaoTouSuServiceID = new SiteConfig().YingXiaoTouSuServiceID;
                 conditions.Add("ServiceType1ID=" + YingXiaoTouSuServiceID);
+                serviceType2List = serviceTypeList.Where(p => p.ParentID == YingXiaoTouSuServiceID).ToArray();
             }
             if (ServiceTypeID == 2)
             {
                 int WuYeTouSuServiceID = new SiteConfig().WuYeTouSuServiceID;
                 conditions.Add("ServiceType1ID=" + WuYeTouSuServiceID);
+                serviceType2List = serviceTypeList.Where(p => p.ParentID == WuYeTouSuServiceID).ToArray();
             }
             if (ServiceTypeID == 3)
             {
                 int BaoXiuServiceID = new SiteConfig().BaoXiuServiceID;
                 conditions.Add("ServiceType1ID=" + BaoXiuServiceID);
+                serviceType2List = serviceTypeList.Where(p => p.ParentID == BaoXiuServiceID).ToArray();
             }
+            serviceType3List = serviceTypeList.Where(p => serviceType2List.Select(q => q.ID).ToArray().Contains(p.ParentID)).ToArray();
             if (StartTime > DateTime.MinValue)
             {
                 conditions.Add("[AddTime]>=@StartTime");
@@ -1272,6 +1279,16 @@ namespace Foresight.DataAccess
             {
                 serviceList = serviceList.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();
             }
+            if (ServiceTypeID2 > 0)
+            {
+                serviceList = serviceList.Where(p => p.ServiceType2IDList.Contains(ServiceTypeID2)).ToArray();
+                serviceType2List = serviceType2List.Where(p => p.ID == ServiceTypeID2).ToArray();
+            }
+            if (ServiceTypeID3 > 0)
+            {
+                serviceList = serviceList.Where(p => p.ServiceType3IDList.Contains(ServiceTypeID3)).ToArray();
+                serviceType3List = serviceType3List.Where(p => p.ID == ServiceTypeID3).ToArray();
+            }
             ViewCustomerService.GetFinalViewCustomerDataGrid(serviceList, IncludeTimeOutData: true);
             var companyList = Company.GetCompanies().ToArray();
             string cmdwhere = "";
@@ -1283,24 +1300,13 @@ namespace Foresight.DataAccess
             }
             var topProjectList = GetList<Project>("select * from [Project] where ParentID=1 " + cmdwhere, parameters2);
             var dataList = new List<ChuLiJieDianAnalysisModel>();
-            if (TopCompanyID <= -1 && topProjectList.Count == 0)
+            if (TopCompanyID <= -1 && TopProjectIDList.Count == 0 && ServiceTypeID2 > -1)
             {
-                var data = new ChuLiJieDianAnalysisModel();
-                data.CompanyID = 0;
-                data.CompanyName = "";
-                data.ProjectID = 0;
-                data.ProjectName = "";
-                data.TotalCount = serviceList.Length;
-                data.ResponseTotalTakeHour = serviceList.Sum(p => p.ResponseTakeHour);
-                data.PaiDanTotalTakeHour = serviceList.Sum(p => p.PaiDanTakeHour);
-                data.ChuLiTotalTakeHour = serviceList.Sum(p => p.ProcessTakeHour);
-                data.BanJieTotalTakeHour = serviceList.Sum(p => p.BanJieTakeHour);
-                data.HuiFangTotalTakeHour = serviceList.Sum(p => p.CallBackTakeHour);
-                dataList.Add(data);
+                var dataList1 = AnalysisHelper.GetChuLiJieDianAnalysisModelList(serviceType2List, serviceType3List, serviceList, ServiceTypeID2, ServiceTypeID3);
+                dataList.AddRange(dataList1);
             }
             else
             {
-
                 foreach (var companyItem in companyList)
                 {
                     var myServiceList = serviceList.Where(p => p.CompanyID == companyItem.CompanyID).ToArray();
@@ -1310,11 +1316,19 @@ namespace Foresight.DataAccess
                     }
                     if (TopCompanyID > -1 && TopProjectIDList.Count == 0)
                     {
+                        if (ServiceTypeID2 > -1)
+                        {
+                            var dataList1 = AnalysisHelper.GetChuLiJieDianAnalysisModelList(serviceType2List, serviceType3List, myServiceList, ServiceTypeID2, ServiceTypeID3, companyItem: companyItem);
+                            dataList.AddRange(dataList1);
+                            continue;
+                        }
                         var data = new ChuLiJieDianAnalysisModel();
-                        data.CompanyID = companyItem.CompanyID;
-                        data.CompanyName = companyItem.CompanyName;
+                        data.CompanyID = companyItem != null ? companyItem.CompanyID : 0;
+                        data.CompanyName = companyItem != null ? companyItem.CompanyName : "";
                         data.ProjectID = 0;
                         data.ProjectName = "";
+                        data.ServiceTypeName2 = "";
+                        data.ServiceTypeName3 = "";
                         data.TotalCount = myServiceList.Length;
                         data.ResponseTotalTakeHour = myServiceList.Sum(p => p.ResponseTakeHour);
                         data.PaiDanTotalTakeHour = myServiceList.Sum(p => p.PaiDanTakeHour);
@@ -1324,25 +1338,33 @@ namespace Foresight.DataAccess
                         dataList.Add(data);
                         continue;
                     }
-                    foreach (var item in topProjectList)
+                    foreach (var projectItem in topProjectList)
                     {
-                        var myList = myServiceList.Where(p => (!string.IsNullOrEmpty(p.AllParentID) && p.AllParentID.Contains("," + item.ID.ToString() + ",")) || p.ProjectID == item.ID).ToArray();
+                        var myList = myServiceList.Where(p => (!string.IsNullOrEmpty(p.AllParentID) && p.AllParentID.Contains("," + projectItem.ID.ToString() + ",")) || p.ProjectID == projectItem.ID).ToArray();
                         if (myList.Length == 0)
                         {
                             continue;
                         }
-                        var data = new ChuLiJieDianAnalysisModel();
-                        data.CompanyID = companyItem.CompanyID;
-                        data.CompanyName = companyItem.CompanyName;
-                        data.ProjectID = item.ID;
-                        data.ProjectName = item.Name;
-                        data.TotalCount = myList.Length;
-                        data.ResponseTotalTakeHour = myList.Sum(p => p.ResponseTakeHour);
-                        data.PaiDanTotalTakeHour = myList.Sum(p => p.PaiDanTakeHour);
-                        data.ChuLiTotalTakeHour = myList.Sum(p => p.ProcessTakeHour);
-                        data.BanJieTotalTakeHour = myList.Sum(p => p.BanJieTakeHour);
-                        data.HuiFangTotalTakeHour = myList.Sum(p => p.CallBackTakeHour);
-                        dataList.Add(data);
+                        if (TopProjectIDList.Count > 0 && ServiceTypeID2 < 0)
+                        {
+                            var data = new ChuLiJieDianAnalysisModel();
+                            data.CompanyID = companyItem != null ? companyItem.CompanyID : 0;
+                            data.CompanyName = companyItem != null ? companyItem.CompanyName : "";
+                            data.ProjectID = projectItem != null ? projectItem.ID : 0;
+                            data.ProjectName = projectItem != null ? projectItem.Name : "";
+                            data.ServiceTypeName2 = "";
+                            data.ServiceTypeName3 = "";
+                            data.TotalCount = myList.Length;
+                            data.ResponseTotalTakeHour = myList.Sum(p => p.ResponseTakeHour);
+                            data.PaiDanTotalTakeHour = myList.Sum(p => p.PaiDanTakeHour);
+                            data.ChuLiTotalTakeHour = myList.Sum(p => p.ProcessTakeHour);
+                            data.BanJieTotalTakeHour = myList.Sum(p => p.BanJieTakeHour);
+                            data.HuiFangTotalTakeHour = myList.Sum(p => p.CallBackTakeHour);
+                            dataList.Add(data);
+                            continue;
+                        }
+                        var dataList1 = AnalysisHelper.GetChuLiJieDianAnalysisModelList(serviceType2List, serviceType3List, myList, ServiceTypeID2, ServiceTypeID3, companyItem: companyItem, projectItem: projectItem);
+                        dataList.AddRange(dataList1);
                     }
                 }
             }

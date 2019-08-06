@@ -110,6 +110,7 @@
                     MaskUtil.unmask();
                     var dataObj = eval("(" + data + ")");
                     if (dataObj.status) {
+                        window.updateWin = true;
                         show_message('保存成功', 'success', function () {
                             closeWin();
                         });
@@ -125,7 +126,9 @@
         }
         function closeWin() {
             parent.do_close_dialog(function () {
-                parent.reloadTT();
+                if (window.updateWin) {
+                    parent.reloadTT();
+                }
             }, true);
         }
     </script>
@@ -144,7 +147,7 @@
         <div class="table_container">
             <div class="tableContent">
                 <%if (this.ProjectID <= 0)
-                  { %>
+                    { %>
                 <div class="tableItem" style="width: 100%;">
                     <label class="title">所属项目</label>
                     <input runat="server" type="text" class="easyui-combobox" id="tdProjectName" style="height: 28px;" />
@@ -152,7 +155,7 @@
                 </div>
                 <%} %>
                 <%if (this.status == 10 || this.status == 100)
-                  { %>
+                    { %>
                 <div class="tableItem" style="width: 100%;">
                     <label class="title">接单人</label>
                     <input runat="server" type="text" class="easyui-combobox" id="tdAcceptManInput" style="height: 28px;" />
@@ -162,7 +165,7 @@
                 </div>
                 <%} %>
                 <%if (this.status == 3 || this.status == 100)
-                  { %>
+                    { %>
                 <div class="tableItem" style="width: 100%;">
                     <label class="title">处理人</label>
                     <input runat="server" type="text" class="easyui-combobox" id="tdServiceProcessManID" style="height: 28px;" />

@@ -3,10 +3,46 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>营销投诉节点时效统计表</title>
     <script>
-        var projectList = [];
+        var hdServiceTypeName2, hdServiceTypeName3, typeList2 = [], typeList3 = [];
         $(function () {
+            hdServiceTypeName2 = $('#<%=this.hdServiceTypeName2.ClientID%>');
+            hdServiceTypeName3 = $('#<%=this.hdServiceTypeName3.ClientID%>');
+            if (hdServiceTypeName2.val() != '') {
+                typeList2 = eval('(' + hdServiceTypeName2.val() + ')');
+            }
+            if (hdServiceTypeName3.val() != '') {
+                typeList3 = eval('(' + hdServiceTypeName3.val() + ')');
+            }
+            $('#tdServiceTypeName2').combobox({
+                editable: false,
+                data: typeList2,
+                valueField: 'ID',
+                textField: 'Name',
+                onSelect: function (ret) {
+                    getTypeList3Combobox(ret.ID)
+                }
+            })
             getProjectParams();
+            $('.easyui-combobox').combobox('clear');
         })
+        function getTypeList3Combobox(ParentID) {
+            var list = [];
+            list.push({ ID: -1, Name: '不限' });
+            list.push({ ID: 0, Name: '全部' });
+            $.each(typeList3, function (index, item) {
+                if (item.ParentID == ParentID) {
+                    list.push(item);
+                }
+            })
+            $('#tdServiceTypeName3').combobox({
+                editable: false,
+                data: list,
+                valueField: 'ID',
+                textField: 'Name'
+            })
+            $('#tdServiceTypeName3').combobox('setValue', -1);
+        }
+        var projectList = [];
         function getProjectParams() {
             var options = { visit: "getprojectparams" }
             $.ajax({
@@ -100,6 +136,14 @@
                 </div>
                 <div class="search_item">
                     <input class="easyui-combobox" id="tdProjectID" data-options="prompt:'请选择项目',editable:false,multiple:true" style="height: 28px; width: 120px;" />
+                </div>
+                <div class="search_item">
+                    <input class="easyui-combobox" id="tdServiceTypeName2" style="height: 28px; width: 150px;" data-options="prompt:'请选择二级分类',editable:false" />
+                    <asp:HiddenField runat="server" ID="hdServiceTypeName2" />
+                </div>
+                <div class="search_item">
+                    <input class="easyui-combobox" id="tdServiceTypeName3" style="height: 28px; width: 150px;" data-options="prompt:'请选择三级分类',editable:false" />
+                    <asp:HiddenField runat="server" ID="hdServiceTypeName3" />
                 </div>
                 <div class="search_item">
                     <a href="javascript:void(0)" onclick="loadTT()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-search'">查询</a>

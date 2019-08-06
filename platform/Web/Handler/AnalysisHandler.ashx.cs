@@ -104,13 +104,15 @@ namespace Web.Handler
             DateTime EndTime = WebUtil.GetDateValue(context, "EndTime");
             int ServiceTypeID = WebUtil.GetIntValue(context, "ServiceTypeID");
             int TopCompanyID = WebUtil.GetIntValue(context, "TopCompanyID");
-            var dg = ChuLiJieDianAnalysis.GetChuLiJieDianAnalysisGrid(RoomIDList, EqualProjectIDList, InProjectIDList, TopProjectIDList, TopCompanyID, user.UserID, StartTime, EndTime, CompanyIDList, ServiceTypeID: ServiceTypeID);
+            int ServiceTypeID2 = WebUtil.GetIntValue(context, "ServiceTypeID2");
+            int ServiceTypeID3 = WebUtil.GetIntValue(context, "ServiceTypeID3");
+            var dg = ChuLiJieDianAnalysis.GetChuLiJieDianAnalysisGrid(RoomIDList, EqualProjectIDList, InProjectIDList, TopProjectIDList, TopCompanyID, user.UserID, StartTime, EndTime, CompanyIDList, ServiceTypeID2, ServiceTypeID3, ServiceTypeID: ServiceTypeID);
             bool canexport = WebUtil.GetBoolValue(context, "canexport");
             if (canexport)
             {
                 string downloadurl = string.Empty;
                 string error = string.Empty;
-                bool status = APPCode.ExportHelper.DownLoadJieDianTimeoutAnalysis(dg, TopCompanyID, TopProjectIDList, ServiceTypeID, out downloadurl, out error);
+                bool status = APPCode.ExportHelper.DownLoadJieDianTimeoutAnalysis(dg, TopCompanyID, TopProjectIDList, ServiceTypeID2, ServiceTypeID3, ServiceTypeID, out downloadurl, out error);
                 WebUtil.WriteJson(context, new { status = status, downloadurl = downloadurl, error = error });
                 return;
             }

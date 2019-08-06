@@ -18,7 +18,25 @@ namespace Web.Analysis
         {
             if (!IsPostBack)
             {
-               
+                int BaoXiuServiceID = new Utility.SiteConfig().BaoXiuServiceID;
+                var typeList = Foresight.DataAccess.ServiceType.GetServiceTypes().ToArray();
+                var typeList2 = typeList.Where(p => p.ParentID == BaoXiuServiceID).ToArray();
+                var typeItems2 = typeList2.Select(p =>
+                {
+                    var item = new { ID = p.ID, Name = p.ServiceTypeName };
+                    return item;
+                }).ToList();
+                typeItems2.Insert(0, new { ID = 0, Name = "全部" });
+                typeItems2.Insert(0, new { ID = -1, Name = "不限" });
+                this.hdServiceTypeName2.Value = Utility.JsonConvert.SerializeObject(typeItems2);
+                var typeList2IDList = typeList2.Select(p => p.ID).ToArray();
+                var typeList3 = typeList.Where(p => typeList2IDList.Contains(p.ParentID)).ToArray();
+                var typeItems3 = typeList3.Select(p =>
+                {
+                    var item = new { ID = p.ID, Name = p.ServiceTypeName, ParentID = p.ParentID };
+                    return item;
+                }).ToList();
+                this.hdServiceTypeName3.Value = Utility.JsonConvert.SerializeObject(typeItems3);
             }
         }
     }

@@ -66,5 +66,9 @@
             <input type="hidden" value="ServiceSuggestionMgr.aspx?status=4" />
             <iframe src="" style="width: 100%; height: 99%; border: 0"></iframe>
         </div>
+        <div title="重大投诉" style="padding: 10px">
+            <input type="hidden" value="ServiceSuggestionMgr.aspx?status=200" />
+            <iframe src="" style="width: 100%; height: 99%; border: 0"></iframe>
+        </div>
     </div>
 </asp:Content>

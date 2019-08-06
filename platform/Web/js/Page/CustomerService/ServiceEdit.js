@@ -189,6 +189,7 @@ function savedata() {
                             printData(dataObj.ID);
                             return;
                         }
+                        window.update = true;
                         show_message('保存成功', 'success', function () {
                             closeWin();
                         });
@@ -341,16 +342,17 @@ function deleteFile(id) {
     $("#tdFile_" + id).html("");
 }
 function closeWin() {
+    top.isAddService = false;
     try {
         parent.do_close_dialog(function () {
-            top.isAddService = false;
-            parent.reloadTT();
+            if (window.update) {
+                parent.reloadTT();
+            }
         }, true);
     } catch (e) {
     }
     try {
         parent.parent.do_close_dialog(function () {
-            top.isAddService = false;
         }, true);
     } catch (e) {
     }

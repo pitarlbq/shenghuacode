@@ -29,10 +29,9 @@ namespace Web.CustomerService
             this.tdEndHour.Value = "18:00";
             if (ServiceID > 0)
             {
-                var list = Foresight.DataAccess.ServiceType_ImportantService.GetServiceType_ImportantServiceListByMinMaxServiceID(ServiceID, ServiceID);
-                if (list.Length > 0)
+                var data = Foresight.DataAccess.ServiceType_ImportantService.GetServiceType_ImportantServiceByServiceID(ServiceID);
+                if (data != null)
                 {
-                    var data = list[0];
                     if (this.isimport == 1)
                     {
                         this.tdPaiDanTime.Value = data.PaiDanTime > 0 ? data.PaiDanTime.ToString() : "";

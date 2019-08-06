@@ -68,6 +68,7 @@ function SearchTT() {
 }
 function formatOperation(index, row) {
     if (row.id > 1) {
+        //return '<a href="#" onclick="editRow(' + row.id + ')" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:\'icon-edit\'">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="do_import_edit(' + row.id + ')" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:\'icon-edit\'">重大时效设置</a>';
         return '<a href="#" onclick="editRow(' + row.id + ')" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:\'icon-edit\'">编辑</a>';
     }
 }
@@ -86,6 +87,10 @@ function addRow() {
 function editRow(ID) {
     var iframe = "../CustomerService/CustomerServiceTypeEdit.aspx?ID=" + ID;
     do_open_dialog('修改类别', iframe);
+}
+function do_import_edit(ID) {
+    var iframe = "../CustomerService/ServiceTypeImportShiXiaoEdit.aspx?ID=" + ID;
+    do_open_dialog('修改重大时效', iframe);
 }
 function removeRows() {
     var rows = $("#tt_tree").treegrid("getSelections");

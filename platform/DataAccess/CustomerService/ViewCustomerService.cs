@@ -49,7 +49,7 @@ namespace Foresight.DataAccess
         {
             return GetCustomerServiceGridByKeywords(Keywords, RoomIDList, DateTime.MinValue, DateTime.MinValue, 13, orderBy, startRowIndex, pageSize, UserID, canViewAll, EqualProjectIDList: EqualProjectIDList, InProjectIDList: InProjectIDList, canexport: canexport, canViewWechatAPPService: canViewWechatAPPService, canViewWechatAPPSuggestoin: canViewWechatAPPSuggestoin, BeforeBanJieTimeOutHour: BeforeBanJieTimeOutHour);
         }
-        public static Ui.DataGrid GetCustomerServiceGridByKeywords(string Keywords, List<int> RoomIDList, DateTime StartTime, DateTime EndTime, int ServiceStatus, string orderBy, long startRowIndex, int pageSize, int UserID, bool canViewAll, List<int> EqualProjectIDList = null, List<int> InProjectIDList = null, int[] CompanyIDList = null, int ServiceType = 0, bool canexport = false, bool canViewWechatAPPService = false, bool canViewWechatAPPSuggestoin = false, bool isServiceAnalysis = false, int CloseType = 0, int TimeOutType = 0, bool IsTouSuChaoShi = false, bool IsRepairChaoShi = false, int CallBackStatus = 0, int CallServiceType = 0, int ServiceType1ID = 0, int ServiceType2ID = 0, int ServiceType3ID = 0, int PayStatus = 0, decimal BeforeBanJieTimeOutHour = 0, int IsImportantTouSu = 0, DateTime? CompleteStartTime = null, DateTime? CompleteEndTime = null, string ProcessKewords = "", string CallBackKeywords = "")
+        public static Ui.DataGrid GetCustomerServiceGridByKeywords(string Keywords, List<int> RoomIDList, DateTime StartTime, DateTime EndTime, int ServiceStatus, string orderBy, long startRowIndex, int pageSize, int UserID, bool canViewAll, List<int> EqualProjectIDList = null, List<int> InProjectIDList = null, int[] CompanyIDList = null, int ServiceType = 0, bool canexport = false, bool canViewWechatAPPService = false, bool canViewWechatAPPSuggestoin = false, bool isServiceAnalysis = false, int CloseType = 0, int TimeOutType = 0, bool IsTouSuChaoShi = false, bool IsRepairChaoShi = false, int CallBackStatus = 0, int CallServiceType = 0, int ServiceType1ID = 0, int ServiceType2ID = 0, int ServiceType3ID = 0, int PayStatus = 0, decimal BeforeBanJieTimeOutHour = 0, int IsImportantTouSu = -1, DateTime? CompleteStartTime = null, DateTime? CompleteEndTime = null, string ProcessKewords = "", string CallBackKeywords = "")
         {
             ResetCache();
             long totalRows = 0;
@@ -79,13 +79,25 @@ namespace Foresight.DataAccess
                 conditions.Add("exists(select 1 from [CustomerServiceHuifang] where [ServiceID]=A.ID and HuiFangNote like @CallBackKeywords)");
                 parameters.Add(new SqlParameter("@CallBackKeywords", "%" + CallBackKeywords + "%"));
             }
-            if (IsImportantTouSu == 1)
+            if (IsImportantTouSu == -1)//不显示重大报修投诉
             {
-                conditions.Add("([IsImportantTouSu] is null or [IsImportantTouSu]=0)");
+                conditions.Add("([IsImportantTouSu]=0 or [IsImportantTouSu] is null)");
             }
-            if (IsImportantTouSu == 2)
+            if (IsImportantTouSu == 0)//显示重大报修投诉
             {
                 conditions.Add("[IsImportantTouSu]=1");
+            }
+            if (IsImportantTouSu == 2)//待审核
+            {
+                conditions.Add("exists(select 1 from [ServiceType_ImportantService] where ServiceID=A.ID and ApproveStatus=0)");
+            }
+            if (IsImportantTouSu == 3)//审核通过
+            {
+                conditions.Add("[IsImportantTouSu]=1 and exists(select 1 from [ServiceType_ImportantService] where ServiceID=A.ID and ApproveStatus=1)");
+            }
+            if (IsImportantTouSu == 4)//审核未通过
+            {
+                conditions.Add("exists(select 1 from [ServiceType_ImportantService] where ServiceID=A.ID and ApproveStatus=2)");
             }
             if (PayStatus == 1)
             {
@@ -748,6 +760,14 @@ namespace Foresight.DataAccess
                         item.RepareImg = Utility.Tools.GetContextPath() + myChuliAttachList[0].AttachedFilePath;
                     }
                 }
+                if (string.IsNullOrEmpty(item.FinalServiceProcessMan) && !string.IsNullOrWhiteSpace(item.BanJieManName))
+                {
+                    item.FinalServiceProcessMan = item.BanJieManName;
+                }
+                if (item.FinalServiceProcessTime == DateTime.MinValue && item.BanJieTime > DateTime.MinValue)
+                {
+                    item.FinalServiceProcessTime = item.BanJieTime;
+                }
                 var myServiceHuiFangList = serviceHuifangList.Where(q => q.ServiceID == item.ID).ToArray();
                 item.ServiceHuiFangCount = myServiceHuiFangList.Length;
                 if (myServiceHuiFangList.FirstOrDefault(p => p.PhoneCallBackType == 1) != null)
@@ -835,14 +855,25 @@ namespace Foresight.DataAccess
             {
                 return;
             }
+            int MinServiceID = 0;
+            int MaxServiceID = 0;
+            var list1 = list.Where(p => p.ServiceStatus == 1 && p.IsClosed).ToArray();
+            var timeShiXiaoList = new CustomerService_TimeShiXiao[] { };
+            var list2 = list;
+            if (list1.Length > 0)
+            {
+                MinServiceID = list1.Min(p => p.ID);
+                MaxServiceID = list1.Max(p => p.ID);
+                timeShiXiaoList = CustomerService_TimeShiXiao.GetCustomerService_TimeShiXiaoByMinMaxID(MinServiceID, MaxServiceID);
+            }
             var importantServiceType = ServiceType.GetImportServiceType();
             DateTime MinStartTime = list.Min(p => p.AddTime);
             DateTime MaxStartTime = list.Max(p => p.AddTime);
             var holidayList = HolidayLog.GetHolidayTypeList(MinStartTime, MaxStartTime);
             DateTime nowDate = DateTime.Now;
-            int MinServiceID = list.Min(p => p.ID);
-            int MaxServiceID = list.Max(p => p.ID);
-            var importantList = ServiceType_ImportantService.GetServiceType_ImportantServiceListByMinMaxServiceID(MinServiceID, MaxServiceID);
+            MinServiceID = list.Min(p => p.ID);
+            MaxServiceID = list.Max(p => p.ID);
+            var importantList = ServiceType_ImportantService.GetServiceType_ImportantServiceListByMinMaxServiceID(MinServiceID, MaxServiceID).Where(p => p.ApproveStatus == 1).ToArray();
             if (serviceTypeList == null)
             {
                 serviceTypeList = ServiceType.GetServiceTypes().ToArray();
@@ -860,251 +891,291 @@ namespace Foresight.DataAccess
                 serviceHuifangList = CustomerServiceHuifang.GetCustomerServiceHuifangListByMinMaxServiceID(MinServiceID, MaxServiceID);
             }
             var PinZhiShengJiServiceID = new Utility.SiteConfig().PinZhiShengJiServiceID;
+            var sqlList = new List<string>();
             foreach (var item in list)
             {
                 var myServiceType = serviceTypeList.FirstOrDefault(p => p.ID == item.ServiceType1ID);
                 bool IsPinZhiShengJi = item.ServiceType2IDList.Contains(PinZhiShengJiServiceID);
+                bool isImportant = false;
                 if (item.IsImportantTouSu || IsPinZhiShengJi)
                 {
                     var myImportant = importantList.FirstOrDefault(p => p.ServiceID == item.ID);
                     ServiceType.SetServiceTypeData(myServiceType, oldData: importantServiceType, importantData: myImportant);
-                }
-                if (myServiceType == null)
-                {
-                    continue;
+                    isImportant = true;
                 }
                 var myServiceType2List = serviceTypeList.Where(p => item.ServiceType2IDList.Contains(p.ID)).ToArray();
                 var myServiceType3List = serviceTypeList.Where(p => item.ServiceType3IDList.Contains(p.ID)).ToArray();
-                if (myServiceType == null)
-                {
-                    continue;
-                }
-                decimal DelayTimeOutHour = new Utility.SiteConfig().DelayTimeOutHour;
-                DateTime addTime = item.AddTime;
-                item.XiaDanDate = DateTime.MinValue;
-                item.PaiDanDate = DateTime.MinValue;
-                item.ResponseTime = DateTime.MinValue;
-                item.CheckTime = DateTime.MinValue;
-                item.ChuliDate = DateTime.MinValue;
-                //DateTime banJieTime = DateTime.MinValue;
-                item.HuiFangTime = DateTime.MinValue;
-                //DateTime closeTime = DateTime.MinValue;
                 decimal nowHourRange = 0;
-                #region 下单超时
-                var myServiceAccpetMan = serviceAccpetList.OrderBy(p => p.AddTime).FirstOrDefault(p => p.ServiceID == item.ID && p.AccpetUserType == 1);
-                var myXiaDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 1, IsPinZhiShengJi: IsPinZhiShengJi);
-                if (myXiaDanServiceTypeItem == null)
+                var myTimeItem = timeShiXiaoList.FirstOrDefault(p => p.ServiceID == item.ID);
+                if (item.ServiceStatus == 1 && item.IsClosed && myTimeItem != null)
                 {
-                    continue;
-                }
-                if (myServiceAccpetMan != null)
-                {
-                    item.XiaDanDate = myServiceAccpetMan.AddTime;
-                }
-                if (addTime == DateTime.MinValue)
-                {
-                    item.XiaDanTakeHour = 0;
-                    item.XiaDanTimeOutStatus = 1;
+                    CustomerService_TimeShiXiao.SetViewCustomerServiceData(item, myTimeItem);
                 }
                 else
                 {
-                    DateTime StartTime = addTime;
-                    DateTime EndTime = item.XiaDanDate > DateTime.MinValue ? item.XiaDanDate : nowDate;
-                    item.XiaDanChaoShiTakeHour = CheckDelayTimeStatus(myXiaDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myXiaDanServiceTypeItem.PaiDanTime, holidayList: holidayList);
-                    item.XiaDanTimeOutStatus = item.XiaDanChaoShiTakeHour <= 0 ? 1 : 2;
-                    if (item.XiaDanDate == DateTime.MinValue)
+                    if (myServiceType == null)
+                    {
+                        continue;
+                    }
+                    decimal DelayTimeOutHour = new Utility.SiteConfig().DelayTimeOutHour;
+                    DateTime addTime = item.AddTime;
+                    item.XiaDanDate = DateTime.MinValue;
+                    item.PaiDanDate = DateTime.MinValue;
+                    item.ResponseTime = DateTime.MinValue;
+                    item.CheckTime = DateTime.MinValue;
+                    item.ChuliDate = DateTime.MinValue;
+                    //DateTime banJieTime = DateTime.MinValue;
+                    item.HuiFangTime = DateTime.MinValue;
+                    //DateTime closeTime = DateTime.MinValue;
+                    nowHourRange = 0;
+                    #region 下单超时
+                    var myServiceAccpetMan = serviceAccpetList.OrderBy(p => p.AddTime).FirstOrDefault(p => p.ServiceID == item.ID && p.AccpetUserType == 1);
+                    var myXiaDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 1, IsPinZhiShengJi: isImportant);
+                    if (myXiaDanServiceTypeItem == null)
+                    {
+                        continue;
+                    }
+                    if (myServiceAccpetMan != null)
+                    {
+                        item.XiaDanDate = myServiceAccpetMan.AddTime;
+                    }
+                    if (addTime == DateTime.MinValue)
                     {
                         item.XiaDanTakeHour = 0;
-                    }
-                    else
-                    {
-                        item.XiaDanTakeHour = nowHourRange;
-                    }
-                    if (myXiaDanServiceTypeItem.PaiDanTime <= 0)
-                    {
                         item.XiaDanTimeOutStatus = 1;
                     }
-                }
-                #endregion
-                #region 派单超时
-                myServiceAccpetMan = serviceAccpetList.OrderBy(p => p.AddTime).FirstOrDefault(p => p.ServiceID == item.ID && p.AccpetUserType == 2);
-                var myPaiDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 1, IsPinZhiShengJi: IsPinZhiShengJi);
-                if (myPaiDanServiceTypeItem == null)
-                {
-                    continue;
-                }
-                if (myServiceAccpetMan != null)
-                {
-                    item.PaiDanDate = myServiceAccpetMan.AddTime;
-                }
-                if (addTime == DateTime.MinValue)
-                {
-                    item.PaiDanTakeHour = 0;
-                    item.PaiDanTimeOutStatus = 1;
-                }
-                else
-                {
-                    DateTime StartTime = addTime;
-                    DateTime EndTime = item.PaiDanDate > DateTime.MinValue ? item.PaiDanDate : nowDate;
-                    item.PaiDanChaoShiTakeHour = CheckDelayTimeStatus(myPaiDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myPaiDanServiceTypeItem.PaiDanTime, holidayList: holidayList);
-                    item.PaiDanTimeOutStatus = item.PaiDanChaoShiTakeHour <= 0 ? 1 : 2;
-                    if (item.PaiDanDate == DateTime.MinValue)
+                    else
+                    {
+                        DateTime StartTime = addTime;
+                        DateTime EndTime = item.XiaDanDate > DateTime.MinValue ? item.XiaDanDate : nowDate;
+                        item.XiaDanChaoShiTakeHour = CheckDelayTimeStatus(myXiaDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myXiaDanServiceTypeItem.PaiDanTime, holidayList: holidayList);
+                        item.XiaDanTimeOutStatus = item.XiaDanChaoShiTakeHour <= 0 ? 1 : 2;
+                        if (item.XiaDanDate == DateTime.MinValue)
+                        {
+                            item.XiaDanTakeHour = 0;
+                        }
+                        else
+                        {
+                            item.XiaDanTakeHour = nowHourRange;
+                        }
+                        if (myXiaDanServiceTypeItem.PaiDanTime <= 0)
+                        {
+                            item.XiaDanTimeOutStatus = 1;
+                        }
+                    }
+                    #endregion
+                    #region 派单超时
+                    myServiceAccpetMan = serviceAccpetList.OrderBy(p => p.AddTime).FirstOrDefault(p => p.ServiceID == item.ID && p.AccpetUserType == 2);
+                    var myPaiDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 1, IsPinZhiShengJi: IsPinZhiShengJi);
+                    if (myPaiDanServiceTypeItem == null)
+                    {
+                        continue;
+                    }
+                    if (myServiceAccpetMan != null)
+                    {
+                        item.PaiDanDate = myServiceAccpetMan.AddTime;
+                    }
+                    if (addTime == DateTime.MinValue)
                     {
                         item.PaiDanTakeHour = 0;
-                    }
-                    else
-                    {
-                        item.PaiDanTakeHour = nowHourRange;
-                    }
-                    if (myPaiDanServiceTypeItem.PaiDanTime <= 0)
-                    {
                         item.PaiDanTimeOutStatus = 1;
                     }
-                }
-                #endregion
-                #region 回复时效
-                var myResponseServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 2, IsPinZhiShengJi: IsPinZhiShengJi);
-                if (myResponseServiceTypeItem == null)
-                {
-                    continue;
-                }
-                var myServiceResponse = serviceProcessList.Where(p => p.ServiceID == item.ID && p.ResponseTime > DateTime.MinValue).OrderBy(p => p.ResponseTime).FirstOrDefault();
-                if (myServiceResponse != null)
-                {
-                    item.ResponseTime = myServiceResponse.ResponseTime;
-                }
-                if (item.PaiDanDate == DateTime.MinValue)
-                {
-                    item.ResponseTakeHour = 0;
-                    item.ResponseTimeOutStatus = 1;
-                }
-                else
-                {
-                    DateTime StartTime = item.PaiDanDate;
-                    DateTime EndTime = item.ResponseTime > DateTime.MinValue ? item.ResponseTime : nowDate;
-                    item.ResponseChaoShiTakeHour = CheckDelayTimeStatus(myResponseServiceTypeItem, StartTime, EndTime, out nowHourRange, myResponseServiceTypeItem.ResponseTime, holidayList: holidayList);
-                    item.ResponseTimeOutStatus = item.ResponseChaoShiTakeHour <= 0 ? 1 : 2;
-                    if (item.ResponseTime == DateTime.MinValue)
+                    else
+                    {
+                        DateTime StartTime = addTime;
+                        DateTime EndTime = item.PaiDanDate > DateTime.MinValue ? item.PaiDanDate : nowDate;
+                        item.PaiDanChaoShiTakeHour = CheckDelayTimeStatus(myPaiDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myPaiDanServiceTypeItem.PaiDanTime, holidayList: holidayList);
+                        item.PaiDanTimeOutStatus = item.PaiDanChaoShiTakeHour <= 0 ? 1 : 2;
+                        if (item.PaiDanDate == DateTime.MinValue)
+                        {
+                            item.PaiDanTakeHour = 0;
+                        }
+                        else
+                        {
+                            item.PaiDanTakeHour = nowHourRange;
+                        }
+                        if (myPaiDanServiceTypeItem.PaiDanTime <= 0)
+                        {
+                            item.PaiDanTimeOutStatus = 1;
+                        }
+                    }
+                    #endregion
+                    #region 回复时效
+                    var myResponseServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 2, IsPinZhiShengJi: IsPinZhiShengJi);
+                    if (myResponseServiceTypeItem == null)
+                    {
+                        continue;
+                    }
+                    var myServiceResponse = serviceProcessList.Where(p => p.ServiceID == item.ID && p.ResponseTime > DateTime.MinValue).OrderBy(p => p.ResponseTime).FirstOrDefault();
+                    if (myServiceResponse != null)
+                    {
+                        item.ResponseTime = myServiceResponse.ResponseTime;
+                    }
+                    if (item.PaiDanDate == DateTime.MinValue)
                     {
                         item.ResponseTakeHour = 0;
-                    }
-                    else
-                    {
-                        item.ResponseTakeHour = nowHourRange;
-                    }
-                    if (myResponseServiceTypeItem.ResponseTime <= 0)
-                    {
                         item.ResponseTimeOutStatus = 1;
                     }
-                }
-                #endregion
-                #region 核查时效
-                var myCheckServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 3, IsPinZhiShengJi: IsPinZhiShengJi);
-                if (myCheckServiceTypeItem == null)
-                {
-                    continue;
-                }
-                var myServiceCheck = serviceProcessList.Where(p => p.ServiceID == item.ID && p.CheckTime > DateTime.MinValue).OrderBy(p => p.AddTime).FirstOrDefault();
-                if (myServiceCheck != null)
-                {
-                    item.CheckTime = myServiceCheck.CheckTime;
-                }
-                if (item.PaiDanDate == DateTime.MinValue)
-                {
-                    item.CheckTakeHour = 0;
-                    item.CheckTimeOutStatus = 1;
-                }
-                else
-                {
-                    DateTime StartTime = item.PaiDanDate;
-                    DateTime EndTime = item.CheckTime > DateTime.MinValue ? item.CheckTime : nowDate;
-                    item.CheckChaoShiTakeHour = CheckDelayTimeStatus(myCheckServiceTypeItem, StartTime, EndTime, out nowHourRange, myCheckServiceTypeItem.CheckTime, holidayList: holidayList);
-                    item.CheckTimeOutStatus = item.CheckChaoShiTakeHour <= 0 ? 1 : 2;
-                    if (item.CheckTime == DateTime.MinValue)
+                    else
+                    {
+                        DateTime StartTime = item.PaiDanDate;
+                        DateTime EndTime = item.ResponseTime > DateTime.MinValue ? item.ResponseTime : nowDate;
+                        item.ResponseChaoShiTakeHour = CheckDelayTimeStatus(myResponseServiceTypeItem, StartTime, EndTime, out nowHourRange, myResponseServiceTypeItem.ResponseTime, holidayList: holidayList);
+                        item.ResponseTimeOutStatus = item.ResponseChaoShiTakeHour <= 0 ? 1 : 2;
+                        if (item.ResponseTime == DateTime.MinValue)
+                        {
+                            item.ResponseTakeHour = 0;
+                        }
+                        else
+                        {
+                            item.ResponseTakeHour = nowHourRange;
+                        }
+                        if (myResponseServiceTypeItem.ResponseTime <= 0)
+                        {
+                            item.ResponseTimeOutStatus = 1;
+                        }
+                    }
+                    #endregion
+                    #region 核查时效
+                    var myCheckServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 3, IsPinZhiShengJi: IsPinZhiShengJi);
+                    if (myCheckServiceTypeItem == null)
+                    {
+                        continue;
+                    }
+                    var myServiceCheck = serviceProcessList.Where(p => p.ServiceID == item.ID && p.CheckTime > DateTime.MinValue).OrderBy(p => p.AddTime).FirstOrDefault();
+                    if (myServiceCheck != null)
+                    {
+                        item.CheckTime = myServiceCheck.CheckTime;
+                    }
+                    if (item.PaiDanDate == DateTime.MinValue)
                     {
                         item.CheckTakeHour = 0;
-                    }
-                    else
-                    {
-                        item.CheckTakeHour = nowHourRange;
-                    }
-                    if (myCheckServiceTypeItem.CheckTime <= 0)
-                    {
                         item.CheckTimeOutStatus = 1;
                     }
-                }
-                #endregion
-                #region 处理超时
-                var myProcessServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 4, IsPinZhiShengJi: IsPinZhiShengJi);
-                if (myProcessServiceTypeItem == null)
-                {
-                    continue;
-                }
-                var myServiceProcess = serviceProcessList.Where(p => p.ServiceID == item.ID && p.ChuliDate > DateTime.MinValue).OrderBy(p => p.AddTime).FirstOrDefault();
-                if (myServiceProcess != null)
-                {
-                    item.ChuliDate = myServiceProcess.ChuliDate;
-                }
-                else if (item.BanJieTime > DateTime.MinValue)
-                {
-                    item.ChuliDate = item.BanJieTime;
-                }
-                if (item.PaiDanDate == DateTime.MinValue)
-                {
-                    item.ProcessTakeHour = 0;
-                    item.ProcessTimeOutStatus = 1;
-                }
-                else
-                {
-                    DateTime StartTime = item.PaiDanDate;
-                    DateTime EndTime = item.ChuliDate > DateTime.MinValue ? item.ChuliDate : nowDate;
-                    item.ProcessChaoShiTakeHour = CheckDelayTimeStatus(myProcessServiceTypeItem, StartTime, EndTime, out nowHourRange, myProcessServiceTypeItem.ChuliTime, holidayList: holidayList);
-                    item.ProcessTimeOutStatus = item.ProcessChaoShiTakeHour <= 0 ? 1 : 2;
-                    if (item.ChuliDate == DateTime.MinValue)
+                    else
+                    {
+                        DateTime StartTime = item.PaiDanDate;
+                        DateTime EndTime = item.CheckTime > DateTime.MinValue ? item.CheckTime : nowDate;
+                        item.CheckChaoShiTakeHour = CheckDelayTimeStatus(myCheckServiceTypeItem, StartTime, EndTime, out nowHourRange, myCheckServiceTypeItem.CheckTime, holidayList: holidayList);
+                        item.CheckTimeOutStatus = item.CheckChaoShiTakeHour <= 0 ? 1 : 2;
+                        if (item.CheckTime == DateTime.MinValue)
+                        {
+                            item.CheckTakeHour = 0;
+                        }
+                        else
+                        {
+                            item.CheckTakeHour = nowHourRange;
+                        }
+                        if (myCheckServiceTypeItem.CheckTime <= 0)
+                        {
+                            item.CheckTimeOutStatus = 1;
+                        }
+                    }
+                    #endregion
+                    #region 处理超时
+                    var myProcessServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 4, IsPinZhiShengJi: IsPinZhiShengJi);
+                    if (myProcessServiceTypeItem == null)
+                    {
+                        continue;
+                    }
+                    var myServiceProcess = serviceProcessList.Where(p => p.ServiceID == item.ID && p.ChuliDate > DateTime.MinValue).OrderBy(p => p.AddTime).FirstOrDefault();
+                    if (myServiceProcess != null)
+                    {
+                        item.ChuliDate = myServiceProcess.ChuliDate;
+                    }
+                    else if (item.BanJieTime > DateTime.MinValue)
+                    {
+                        item.ChuliDate = item.BanJieTime;
+                    }
+                    if (item.PaiDanDate == DateTime.MinValue)
                     {
                         item.ProcessTakeHour = 0;
-                    }
-                    else
-                    {
-                        item.ProcessTakeHour = nowHourRange;
-                    }
-                    if (myProcessServiceTypeItem.ChuliTime <= 0)
-                    {
                         item.ProcessTimeOutStatus = 1;
                     }
-                }
-                #endregion
-                #region 办结超时
-                var myBanJieServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 5, IsPinZhiShengJi: IsPinZhiShengJi);
-                if (myBanJieServiceTypeItem == null)
-                {
-                    continue;
-                }
-                if (item.AddTime == DateTime.MinValue)
-                {
-                    item.BanJieTakeHour = 0;
-                    item.BanJieTimeOutStatus = 1;
-                }
-                else
-                {
-                    DateTime StartTime = item.AddTime;
-                    DateTime EndTime = item.BanJieTime > DateTime.MinValue ? item.BanJieTime : nowDate;
-                    item.BanJieChaoShiTakeHour = CheckDelayTimeStatus(myBanJieServiceTypeItem, StartTime, EndTime, out nowHourRange, myBanJieServiceTypeItem.BanJieTime, holidayList: holidayList);
-                    item.BanJieTimeOutStatus = item.BanJieChaoShiTakeHour <= 0 ? 1 : 2;
-                    if (item.BanJieTime == DateTime.MinValue)
+                    else
+                    {
+                        DateTime StartTime = item.PaiDanDate;
+                        DateTime EndTime = item.ChuliDate > DateTime.MinValue ? item.ChuliDate : nowDate;
+                        item.ProcessChaoShiTakeHour = CheckDelayTimeStatus(myProcessServiceTypeItem, StartTime, EndTime, out nowHourRange, myProcessServiceTypeItem.ChuliTime, holidayList: holidayList);
+                        item.ProcessTimeOutStatus = item.ProcessChaoShiTakeHour <= 0 ? 1 : 2;
+                        if (item.ChuliDate == DateTime.MinValue)
+                        {
+                            item.ProcessTakeHour = 0;
+                        }
+                        else
+                        {
+                            item.ProcessTakeHour = nowHourRange;
+                        }
+                        if (myProcessServiceTypeItem.ChuliTime <= 0)
+                        {
+                            item.ProcessTimeOutStatus = 1;
+                        }
+                    }
+                    #endregion
+                    #region 办结超时
+                    var myBanJieServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 5, IsPinZhiShengJi: IsPinZhiShengJi);
+                    if (myBanJieServiceTypeItem == null)
+                    {
+                        continue;
+                    }
+                    if (item.AddTime == DateTime.MinValue)
                     {
                         item.BanJieTakeHour = 0;
+                        item.BanJieTimeOutStatus = 1;
                     }
                     else
                     {
-                        item.BanJieTakeHour = nowHourRange;
+                        DateTime StartTime = item.AddTime;
+                        DateTime EndTime = item.BanJieTime > DateTime.MinValue ? item.BanJieTime : nowDate;
+                        item.BanJieChaoShiTakeHour = CheckDelayTimeStatus(myBanJieServiceTypeItem, StartTime, EndTime, out nowHourRange, myBanJieServiceTypeItem.BanJieTime, holidayList: holidayList);
+                        item.BanJieTimeOutStatus = item.BanJieChaoShiTakeHour <= 0 ? 1 : 2;
+                        if (item.BanJieTime == DateTime.MinValue)
+                        {
+                            item.BanJieTakeHour = 0;
+                        }
+                        else
+                        {
+                            item.BanJieTakeHour = nowHourRange;
+                        }
+                        if (myBanJieServiceTypeItem.BanJieTime <= 0)
+                        {
+                            item.BanJieTimeOutStatus = 1;
+                        }
                     }
-                    if (myBanJieServiceTypeItem.BanJieTime <= 0)
+                    #endregion
+                    #region 关单超时
+                    var myGuanDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 7, IsPinZhiShengJi: IsPinZhiShengJi);
+                    if (myGuanDanServiceTypeItem == null)
                     {
-                        item.BanJieTimeOutStatus = 1;
+                        continue;
                     }
+                    if (item.BanJieTime == DateTime.MinValue)
+                    {
+                        item.CloseTakeHour = 0;
+                        item.CloseTimeOutStatus = 1;
+                    }
+                    else
+                    {
+                        DateTime StartTime = item.BanJieTime;
+                        DateTime EndTime = item.CloseTime > DateTime.MinValue ? item.CloseTime : nowDate;
+                        item.CloseChaoShiTakeHour = CheckDelayTimeStatus(myGuanDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myGuanDanServiceTypeItem.GuanDanTime, holidayList: holidayList);
+                        item.CloseTimeOutStatus = item.CloseChaoShiTakeHour <= 0 ? 1 : 2;
+                        if (item.CloseTime == DateTime.MinValue)
+                        {
+                            item.CloseTakeHour = 0;
+                        }
+                        else
+                        {
+                            item.CloseTakeHour = nowHourRange;
+                        }
+                        if (myGuanDanServiceTypeItem.GuanDanTime <= 0)
+                        {
+                            item.CloseTimeOutStatus = 1;
+                        }
+                    }
+                    CustomerService_TimeShiXiao.SetTimeShiXiaoData(item, myTimeItem, sqlList);
+                    #endregion
                 }
-                #endregion
                 #region 回访超时
                 var myHuiFangServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 6, IsPinZhiShengJi: IsPinZhiShengJi);
                 if (myHuiFangServiceTypeItem == null)
@@ -1141,38 +1212,8 @@ namespace Foresight.DataAccess
                     }
                 }
                 #endregion
-                #region 关单超时
-                var myGuanDanServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 7, IsPinZhiShengJi: IsPinZhiShengJi);
-                if (myGuanDanServiceTypeItem == null)
-                {
-                    continue;
-                }
-                if (item.BanJieTime == DateTime.MinValue)
-                {
-                    item.CloseTakeHour = 0;
-                    item.CloseTimeOutStatus = 1;
-                }
-                else
-                {
-                    DateTime StartTime = item.BanJieTime;
-                    DateTime EndTime = item.CloseTime > DateTime.MinValue ? item.CloseTime : nowDate;
-                    item.CloseChaoShiTakeHour = CheckDelayTimeStatus(myGuanDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myGuanDanServiceTypeItem.GuanDanTime, holidayList: holidayList);
-                    item.CloseTimeOutStatus = item.CloseChaoShiTakeHour <= 0 ? 1 : 2;
-                    if (item.CloseTime == DateTime.MinValue)
-                    {
-                        item.CloseTakeHour = 0;
-                    }
-                    else
-                    {
-                        item.CloseTakeHour = nowHourRange;
-                    }
-                    if (myGuanDanServiceTypeItem.GuanDanTime <= 0)
-                    {
-                        item.CloseTimeOutStatus = 1;
-                    }
-                }
-                #endregion
             }
+            CustomerService_TimeShiXiao.UpdateTimeShiXiaoData(sqlList);
         }
         public static decimal CheckDelayTimeStatus(ServiceType myServiceType, DateTime StartTime, DateTime EndTime, out decimal nowHourRange, decimal DefineTimeHour, HolidayLog[] holidayList = null)
         {
