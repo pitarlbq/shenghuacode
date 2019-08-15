@@ -501,7 +501,7 @@ namespace Foresight.DataAccess
                 conditions.Add("exists(select 1 from [UserServiceType] where [ServiceTypeID]=@ServiceTypeID and (UserID=[User].[UserID] or exists(select 1 from [UserRoles] where [RoleID]=[UserServiceType].RoleID and [UserID]=[User].UserID)))");
                 parameters.Add(new SqlParameter("@ServiceTypeID", ServerTypeID));
             }
-            conditions.Add("[PositionName]!='400专员'");
+            conditions.Add("([PositionName]!='400专员' or PositionName is null)");
             string sqlText = "select * from [User] where " + string.Join(" and ", conditions.ToArray());
             //Utility.LogHelper.WriteDebug("GetAccpetUserListByServiceProjectID.sqlText", sqlText);
             return GetList<User>(sqlText, parameters).ToArray();

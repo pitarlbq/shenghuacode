@@ -242,7 +242,7 @@
                         { %>
                     <%--<a href="javascript:void(0)" onclick="do_remove()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-remove'">删除</a>--%>
                     <%} %>
-                    <%if (base.CheckAuthByModuleCode("1101172") && (status == 100 || status == 101 || status == 10 || status == 3 || status == 13))
+                    <%if (base.CheckAuthByModuleCode("1101172") && (status == 100 || status == 101 || status == 10 || status == 3 || status == 13 || status == 200))
                         { %>
                     <a href="javascript:void(0)" onclick="do_send()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-chuli'">派单</a>
                     <%} %>
@@ -250,11 +250,11 @@
                         { %>
                     <a href="javascript:void(0)" onclick="do_change_time()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-chuli'">时效设置</a>
                     <%} %>
-                    <%if (base.CheckAuthByModuleCode("1101160") && (status == 0 || status == 101 || status == 13))
+                    <%if (base.CheckAuthByModuleCode("1101160") && (status == 0 || status == 101 || status == 13 || status == 200))
                         { %>
                     <a href="javascript:void(0)" onclick="do_process()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-chuli'">处理</a>
                     <%} %>
-                    <%if (base.CheckAuthByModuleCode("1101161") && (status == 0 || status == 101 || status == 13))
+                    <%if (base.CheckAuthByModuleCode("1101161") && (status == 0 || status == 101 || status == 13 || status == 200))
                         { %>
                     <a href="javascript:void(0)" onclick="do_complete()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-banjie'">办结</a>
                     <%} %>
