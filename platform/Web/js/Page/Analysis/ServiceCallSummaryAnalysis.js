@@ -61,7 +61,7 @@ function loadTT() {
         toolbar: '#tb'
     });
     setTimeout(function () {
-        SearchTT()
+        //SearchTT()
     }, 100);
 }
 function SearchTT() {

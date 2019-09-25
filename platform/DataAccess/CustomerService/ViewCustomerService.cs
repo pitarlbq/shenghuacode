@@ -821,7 +821,7 @@ namespace Foresight.DataAccess
                 }
                 if (myServiceHuiFangList.Length > 0)
                 {
-                    var myHuiFangTimeData = myServiceHuiFangList.FirstOrDefault(p => p.HuiFangTime > DateTime.MinValue);
+                    var myHuiFangTimeData = myServiceHuiFangList.OrderBy(p => p.HuiFangTime).FirstOrDefault(p => p.HuiFangTime > DateTime.MinValue);
                     if (myHuiFangTimeData != null)
                     {
                         item.HuiFangTime = myHuiFangTimeData.HuiFangTime;

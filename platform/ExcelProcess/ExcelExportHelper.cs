@@ -64,7 +64,7 @@ namespace ExcelProcess
                 DataRow dataRow = table.NewRow();
                 for (int j = row.FirstCellNum; j < cellCount; j++)
                 {
-                    if (j <= 0)
+                    if (j < 0)
                     {
                         continue;
                     }

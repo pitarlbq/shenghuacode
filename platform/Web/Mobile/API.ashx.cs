@@ -692,6 +692,7 @@ namespace Web.Mobile
             {
                 ServiceType2IDList = Utility.JsonConvert.DeserializeObject<List<int>>(ServiceType2IDs);
             }
+            ServiceType2IDList = ServiceType2IDList.Where(p => p > 0).ToList();
             if (ServiceType2IDList.Count == 0)
             {
                 WebUtil.WriteJsonError(context, ErrorCode.InvalideRequest, "二级类型不能为空");
@@ -703,6 +704,7 @@ namespace Web.Mobile
             {
                 ServiceType3IDList = Utility.JsonConvert.DeserializeObject<List<int>>(ServiceType3IDs);
             }
+            ServiceType3IDList = ServiceType3IDList.Where(p => p > 0).ToList();
             if (ServiceType3IDList.Count == 0)
             {
                 var typeList3 = ServiceType.GetServiceTypeListByParentIDList(ServiceType2IDList.ToArray());

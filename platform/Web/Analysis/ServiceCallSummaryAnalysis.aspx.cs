@@ -26,6 +26,8 @@ namespace Web.Analysis
                 }).ToList();
                 userItems.Insert(0, new { ID = 0, Name = "全部" });
                 this.hdAddUserName.Value = Utility.JsonConvert.SerializeObject(userItems);
+                this.hdStartTime.Value = DateTime.Today.AddDays(1 - DateTime.Today.Day).ToString("yyyy-MM-dd");
+                this.hdEndTime.Value = DateTime.Today.AddDays(1 - DateTime.Today.Day).AddMonths(1).AddDays(-1).ToString("yyyy-MM-dd");
             }
         }
     }

@@ -5,6 +5,10 @@
     <script>
         var hdAddUserName;
         $(function () {
+            setTimeout(function () {
+                $('#tdStartTime').datebox('setValue', $('#<%=this.hdStartTime.ClientID%>').val());
+                $('#tdEndTime').datebox('setValue', $('#<%=this.hdEndTime.ClientID%>').val());
+            }, 1000);
             hdAddUserName = $('#<%=this.hdAddUserName.ClientID%>');
             var userList = [];
             if (hdAddUserName.val() != '') {
@@ -45,6 +49,8 @@
             <form runat="server">
                 <div class="search_item" style="margin-right: 10px;">
                     <input class="easyui-datebox" id="tdStartTime" data-options="prompt:'开始日期'" style="height: 28px; width: 120px;" />
+                    <asp:HiddenField runat="server" ID="hdStartTime" />
+                    <asp:HiddenField runat="server" ID="hdEndTime" />
                 </div>
                 <div class="search_item" style="margin-right: 10px;">
                     -

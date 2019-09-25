@@ -40,32 +40,22 @@ namespace Foresight.DataAccess
             dg.page = 1;
             dg.total = 0;
             dg.rows = new int[] { };
-            string cmdtext = "select [UserID],[RealName] from [User] where [PositionName]='400专员'";
-            var userList = GetList<User>(cmdtext, new List<SqlParameter>()).ToArray();
-            if (AddUserID > 0)
-            {
-                userList = userList.Where(p => p.UserID == AddUserID).ToArray();
-            }
-            if (userList.Length == 0)
-            {
-                return dg;
-            }
-            var userIDList = userList.Select(p => p.UserID).ToList();
+
             List<string> conditions = new List<string>();
             List<string> cmdlist = new List<string>();
             conditions.Add("ServiceStatus not in (2,5)");
             conditions.Add("(IsImportantTouSu is null or IsImportantTouSu=0)");
             //conditions.Add("(CanNotCallback is null or CanNotCallback=0)");
-            //if (StartTime > DateTime.MinValue)
-            //{
-            //    conditions.Add("[AddTime]>=@StartTime");
-            //    parameters.Add(new SqlParameter("@StartTime", StartTime));
-            //}
-            //if (EndTime > DateTime.MinValue)
-            //{
-            //    conditions.Add("[AddTime]<=@EndTime");
-            //    parameters.Add(new SqlParameter("@EndTime", EndTime));
-            //}
+            if (StartTime > DateTime.MinValue)
+            {
+                conditions.Add("([AddTime]>=@StartTime or [BanJieTime]>=@StartTime or exists(select 1 from [CustomerServiceHuifang] where ServiceID=ViewCustomerService.ID and HuiFangTime>=@StartTime))");
+                parameters.Add(new SqlParameter("@StartTime", StartTime));
+            }
+            if (EndTime > DateTime.MinValue)
+            {
+                conditions.Add("([AddTime]<=@EndTime or [BanJieTime]<=@EndTime or exists(select 1 from [CustomerServiceHuifang] where ServiceID=ViewCustomerService.ID and HuiFangTime<=@EndTime))");
+                parameters.Add(new SqlParameter("@EndTime", EndTime.AddDays(1)));
+            }
             var myProjectIDList = new int[] { };
             if (RoomIDList.Count > 0)
             {
@@ -161,6 +151,35 @@ namespace Foresight.DataAccess
             footerData.TouSuTotalCallbackCount = TouSuTotalCount;
             footerData.TotalCallBackNotHuiFangCount = TouSuTotalCount_NotCallBack;
             footerData.BaoXiuTotalCount = BaoXiuTotalCount;
+            var allHuifangUserIDList = new List<int>();
+            foreach (var item in tousuHuiFangTimeList)
+            {
+                if (item.HuiFangAddUserIDList.Length == 0)
+                {
+                    continue;
+                }
+                foreach (var huifangUserID in item.HuiFangAddUserIDList)
+                {
+                    if (!allHuifangUserIDList.Contains(huifangUserID))
+                        allHuifangUserIDList.Add(huifangUserID);
+                }
+            }
+            string cmdwhere = string.Empty;
+            if (allHuifangUserIDList.Count > 0)
+            {
+                cmdwhere += " or UserID in (" + string.Join(",", allHuifangUserIDList.ToArray()) + ")";
+            }
+            string cmdtext = "select [UserID],[RealName] from [User] where [PositionName]='400专员'" + cmdwhere;
+            var userList = GetList<User>(cmdtext, new List<SqlParameter>()).ToArray();
+            if (AddUserID > 0)
+            {
+                userList = userList.Where(p => p.UserID == AddUserID).ToArray();
+            }
+            if (userList.Length == 0)
+            {
+                return dg;
+            }
+            var userIDList = userList.Select(p => p.UserID).ToList();
             foreach (var item in userList)
             {
                 var data = new CallSummaryAnalysisModel();
