@@ -32,8 +32,12 @@
             <input type="hidden" value="ServiceWuYeTouSuTimeOutAnalysis.aspx" />
             <iframe src="" style="width: 100%; height: 99%; border: 0"></iframe>
         </div>
-        <div title="报事报修工单时效" style="padding: 10px">
-            <input type="hidden" value="ServiceRepairTimeOutAnalysis.aspx" />
+        <div title="报修工单时效" style="padding: 10px">
+            <input type="hidden" value="ServiceRepairTimeOutAnalysis.aspx?typeid=3" />
+            <iframe src="" style="width: 100%; height: 99%; border: 0"></iframe>
+        </div>
+        <div title="报事工单时效" style="padding: 10px">
+            <input type="hidden" value="ServiceRepairTimeOutAnalysis.aspx?typeid=4" />
             <iframe src="" style="width: 100%; height: 99%; border: 0"></iframe>
         </div>
     </div>

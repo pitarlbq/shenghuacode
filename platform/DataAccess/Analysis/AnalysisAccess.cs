@@ -1248,25 +1248,37 @@ namespace Foresight.DataAccess
             List<SqlParameter> parameters = new List<SqlParameter>();
             List<string> conditions = new List<string>();
             List<string> cmdlist = new List<string>();
-            conditions.Add("ServiceStatus not in (2,5)");
+            conditions.Add("(ServiceStatus=1 or isnull(IsClosed,0)=1)");
             conditions.Add("(IsImportantTouSu is null or IsImportantTouSu=0)");
-            if (ServiceTypeID == 1)
+            if (ServiceTypeID == 1)//营销投诉
             {
                 int YingXiaoTouSuServiceID = new SiteConfig().YingXiaoTouSuServiceID;
                 conditions.Add("ServiceType1ID=" + YingXiaoTouSuServiceID);
                 serviceType2List = serviceTypeList.Where(p => p.ParentID == YingXiaoTouSuServiceID).ToArray();
             }
-            if (ServiceTypeID == 2)
+            if (ServiceTypeID == 2)//物业投诉
             {
                 int WuYeTouSuServiceID = new SiteConfig().WuYeTouSuServiceID;
                 conditions.Add("ServiceType1ID=" + WuYeTouSuServiceID);
                 serviceType2List = serviceTypeList.Where(p => p.ParentID == WuYeTouSuServiceID).ToArray();
             }
-            if (ServiceTypeID == 3)
+            if (ServiceTypeID == 3 || ServiceTypeID == 4)//报事报修
             {
                 int BaoXiuServiceID = new SiteConfig().BaoXiuServiceID;
                 conditions.Add("ServiceType1ID=" + BaoXiuServiceID);
                 serviceType2List = serviceTypeList.Where(p => p.ParentID == BaoXiuServiceID).ToArray();
+                var BaoShiServiceIDList = new SiteConfig().BaoShiServiceIDList;
+                if (BaoShiServiceIDList != null && BaoShiServiceIDList.Length > 0)
+                {
+                    if (ServiceTypeID == 3)//报修
+                    {
+                        serviceType2List = serviceType2List.Where(p => !BaoShiServiceIDList.Contains(p.ID)).ToArray();
+                    }
+                    if (ServiceTypeID == 4)//报事
+                    {
+                        serviceType2List = serviceType2List.Where(p => BaoShiServiceIDList.Contains(p.ID)).ToArray();
+                    }
+                }
             }
             serviceType3List = serviceTypeList.Where(p => serviceType2List.Select(q => q.ID).ToArray().Contains(p.ParentID)).ToArray();
             if (StartTime > DateTime.MinValue)
@@ -1294,6 +1306,39 @@ namespace Foresight.DataAccess
                 conditions.Add("exists(select 1 from [Project] where [ViewCustomerService].ProjectID=Project.ID and [Project].CompanyID in (" + string.Join(",", CompanyIDList) + "))");
             }
             var serviceList = GetList<ViewCustomerService>("select *,(select AllParentID from [Project] where ID=[ViewCustomerService].ProjectID) as AllParentID from [ViewCustomerService] where " + string.Join(" and ", conditions.ToArray()), parameters).ToArray();
+            if (ServiceTypeID == 3 || ServiceTypeID == 4)
+            {
+                var BaoShiServiceIDList = new SiteConfig().BaoShiServiceIDList;
+                if (BaoShiServiceIDList != null && BaoShiServiceIDList.Length > 0)
+                {
+                    if (ServiceTypeID == 3)//报修
+                    {
+                        serviceList = serviceList.Where(p =>
+                        {
+                            if (p.ServiceType2IDList == null || p.ServiceType2IDList.Length == 0)
+                            {
+                                return true;
+                            }
+                            var finalServiceType2IDList = p.ServiceType2IDList.Distinct().ToArray();
+                            var resultList = finalServiceType2IDList.Except(BaoShiServiceIDList).ToArray();
+                            return resultList.Length == p.ServiceType2IDList.Length;
+                        }).ToArray();
+                    }
+                    if (ServiceTypeID == 4)//报事
+                    {
+                        serviceList = serviceList.Where(p =>
+                        {
+                            if (p.ServiceType2IDList == null || p.ServiceType2IDList.Length == 0)
+                            {
+                                return false;
+                            }
+                            var finalServiceType2IDList = p.ServiceType2IDList.Distinct().ToArray();
+                            var resultList = finalServiceType2IDList.Except(BaoShiServiceIDList).ToArray();
+                            return resultList.Length < finalServiceType2IDList.Length;
+                        }).ToArray();
+                    }
+                }
+            }
             if (myProjectIDList.Length > 0)
             {
                 serviceList = serviceList.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();

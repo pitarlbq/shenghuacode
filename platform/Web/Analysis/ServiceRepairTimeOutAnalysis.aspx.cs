@@ -14,13 +14,30 @@ namespace Web.Analysis
 {
     public partial class ServiceRepairTimeOutAnalysis : BasePage
     {
+        public int ServiceTypeID = 3;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                if (!string.IsNullOrEmpty(Request.QueryString["typeid"]))
+                {
+                    int.TryParse(Request.QueryString["typeid"], out ServiceTypeID);
+                }
                 int BaoXiuServiceID = new Utility.SiteConfig().BaoXiuServiceID;
                 var typeList = Foresight.DataAccess.ServiceType.GetServiceTypes().ToArray();
                 var typeList2 = typeList.Where(p => p.ParentID == BaoXiuServiceID).ToArray();
+                var BaoShiServiceIDList = new SiteConfig().BaoShiServiceIDList;
+                if (BaoShiServiceIDList != null && BaoShiServiceIDList.Length > 0)
+                {
+                    if (ServiceTypeID == 3)//报修
+                    {
+                        typeList2 = typeList2.Where(p => !BaoShiServiceIDList.Contains(p.ID)).ToArray();
+                    }
+                    if (ServiceTypeID == 4)//报事
+                    {
+                        typeList2 = typeList2.Where(p => BaoShiServiceIDList.Contains(p.ID)).ToArray();
+                    }
+                }
                 var typeItems2 = typeList2.Select(p =>
                 {
                     var item = new { ID = p.ID, Name = p.ServiceTypeName };

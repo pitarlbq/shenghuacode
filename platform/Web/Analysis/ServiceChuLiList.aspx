@@ -9,6 +9,8 @@
         var CompanyID = 0;
         var StartTime = '';
         var EndTime = '';
+        var ServiceType2ID = 0;
+        var ServiceType3ID = 0;
         $(function () {
             typeid = "<%=this.typeid%>";
             status = "<%=this.status%>";
@@ -16,6 +18,8 @@
             EndTime = "<%=this.EndTime%>";
             ProjectID = Number("<%=this.ProjectID%>");
             CompanyID = Number("<%=this.CompanyID%>");
+            ServiceType2ID = Number("<%=this.ServiceType2ID%>");
+            ServiceType3ID = Number("<%=this.ServiceType3ID%>");
             if (StartTime != '') {
                 $('#tdStartTime').datebox('setValue', StartTime);
             }

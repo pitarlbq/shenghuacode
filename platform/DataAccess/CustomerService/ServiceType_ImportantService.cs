@@ -15,6 +15,19 @@ namespace Foresight.DataAccess
     /// </summary>
     public partial class ServiceType_ImportantService : EntityBase
     {
+        public static ServiceType_ImportantService GetSimpleDataByServiceID(int ServiceID, SqlHelper helper)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<string> conditions = new List<string>();
+            if (ServiceID <= 0)
+            {
+                return null;
+            }
+            conditions.Add("[ServiceID]=@ServiceID");
+            parameters.Add(new SqlParameter("@ServiceID", ServiceID));
+            string sqlText = "select ID from [ServiceType_ImportantService] where " + string.Join(" or ", conditions.ToArray());
+            return GetOne<ServiceType_ImportantService>(sqlText, parameters, helper);
+        }
         public static ServiceType_ImportantService[] GetServiceType_ImportantServiceListByMinMaxServiceID(int MinServiceID, int MaxServiceID)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -40,9 +53,21 @@ namespace Foresight.DataAccess
             string sqlText = "select * from [ServiceType_ImportantService] where " + string.Join(" or ", conditions.ToArray());
             return GetOne<ServiceType_ImportantService>(sqlText, parameters);
         }
-        public static void ApproveImportantService(ServiceType_ImportantService data)
+        public static ServiceType_ImportantService[] GetServiceType_ImportantServiceByServiceIDList(int[] ServiceIDList)
         {
-            var service = CustomerService.GetCustomerService(data.ServiceID);
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<string> conditions = new List<string>();
+            if (ServiceIDList.Length == 0)
+            {
+                return null;
+            }
+            conditions.Add("[ServiceID] in (" + string.Join(",", ServiceIDList) + ")");
+            string sqlText = "select * from [ServiceType_ImportantService] where " + string.Join(" or ", conditions.ToArray());
+            return GetList<ServiceType_ImportantService>(sqlText, parameters).ToArray();
+        }
+        public static void ApproveImportantService(ServiceType[] serviceTypeList, ServiceType_ImportantService data, SqlHelper helper)
+        {
+            var service = CustomerService.GetCustomerService(data.ServiceID, helper);
             if (service == null)
             {
                 return;
@@ -55,12 +80,11 @@ namespace Foresight.DataAccess
             {
                 service.IsImportantTouSu = false;
             }
-            service.Save();
-            var serviceTypeList = ServiceType.GetServiceTypes().ToArray();
+            service.Save(helper);
             var myServiceType = serviceTypeList.FirstOrDefault(p => p.ID == service.ServiceType1ID);
             if (myServiceType == null || data.ApplicationType == 4)
             {
-                data.Save();
+                data.Save(helper);
                 return;
             }
             var myServiceType2List = serviceTypeList.Where(p => service.ServiceType2IDList.Contains(p.ID)).ToArray();
@@ -122,7 +146,7 @@ namespace Foresight.DataAccess
                 data.GuanDanTime = data.GuanDanTime > 0 ? data.GuanDanTime + addHour : 0;
                 data.HuiFangTime = data.HuiFangTime > 0 ? data.HuiFangTime + addHour : 0;
             }
-            data.Save();
+            data.Save(helper);
         }
         public string ApproveStatusDesc
         {

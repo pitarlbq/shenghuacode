@@ -278,21 +278,19 @@ namespace Web.Handler
             }
             else if (type == 3)//重大报修审核
             {
-                if (myImportantList.Length == 0)
+                if (myImportantList.Length < IDList.Count)
                 {
                     WebUtil.WriteJson(context, new { status = false, error = "选中的任务没有申请记录，操作取消" });
                     return;
                 }
-                //if (myImportantList.FirstOrDefault(p => p.ApproveStatus == 1) != null)
-                //{
-                //    WebUtil.WriteJson(context, new { status = false, error = "选中的任务已审核，操作取消" });
-                //    return;
-                //}
-                //if (myImportantList.FirstOrDefault(p => p.ApproveStatus == 0) == null)
-                //{
-                //    WebUtil.WriteJson(context, new { status = false, error = "选中的任务没有申请记录，操作取消" });
-                //    return;
-                //}
+                if (IDList.Count > 1)
+                {
+                    if (myImportantList.FirstOrDefault(p => p.ApproveStatus == 1) != null)
+                    {
+                        WebUtil.WriteJson(context, new { status = false, error = "选中的任务已审核，操作取消" });
+                        return;
+                    }
+                }
             }
             WebUtil.WriteJson(context, new { status = true });
         }
@@ -301,19 +299,47 @@ namespace Web.Handler
         /// </summary>
         private void serviceimportapprove(HttpContext context)
         {
-            int ID = WebUtil.GetIntValue(context, "ID");
-            var important = ServiceType_ImportantService.GetServiceType_ImportantServiceByServiceID(ID);
-            if (important == null)
+            int status = WebUtil.GetIntValue(context, "status");
+            string ApproveRemark = context.Request["Remark"];
+            string ApproveUserName = WebUtil.GetUser(context).LoginName;
+            string IDs = context.Request.Params["IDList"];
+            List<int> IDList = JsonConvert.DeserializeObject<List<int>>(IDs);
+            var importList = ServiceType_ImportantService.GetServiceType_ImportantServiceByServiceIDList(IDList.ToArray());
+            if (importList.Length == 0)
             {
-                WebUtil.WriteJson(context, new { status = false, error = "申请记录不存在" });
+                WebUtil.WriteJson(context, new { status = false });
                 return;
             }
-            int status = WebUtil.GetIntValue(context, "status");
-            important.ApproveStatus = status == 1 ? 1 : 2;
-            important.ApproveTime = DateTime.Now;
-            important.ApproveUserName = WebUtil.GetUser(context).LoginName;
-            important.ApproveRemark = context.Request["Remark"];
-            ServiceType_ImportantService.ApproveImportantService(important);
+            var typeList = ServiceType.GetServiceTypes().ToArray();
+            using (SqlHelper helper = new SqlHelper())
+            {
+                try
+                {
+                    helper.BeginTransaction();
+                    foreach (var ServiceID in IDList)
+                    {
+                        var important = importList.FirstOrDefault(p => p.ServiceID == ServiceID);
+                        if (important == null)
+                        {
+                            WebUtil.WriteJson(context, new { status = false, error = "申请记录不存在" });
+                            return;
+                        }
+                        important.ApproveStatus = status == 1 ? 1 : 2;
+                        important.ApproveTime = DateTime.Now;
+                        important.ApproveUserName = ApproveUserName;
+                        important.ApproveRemark = ApproveRemark;
+                        ServiceType_ImportantService.ApproveImportantService(typeList, important, helper);
+                    }
+                    helper.Commit();
+                }
+                catch (Exception ex)
+                {
+                    Utility.LogHelper.WriteError("ServiceHandler", "命令: serviceimportapprove", ex);
+                    helper.Rollback();
+                    WebUtil.WriteJson(context, new { status = false });
+                    return;
+                }
+            }
             WebUtil.WriteJson(context, new { status = true });
         }
         /// <summary>
@@ -321,13 +347,6 @@ namespace Web.Handler
         /// </summary>
         private void serviceimportapplication(HttpContext context)
         {
-            int ID = WebUtil.GetIntValue(context, "ID");
-            var service = Foresight.DataAccess.CustomerService.GetCustomerService(ID);
-            if (service == null)
-            {
-                WebUtil.WriteJson(context, new { status = false, error = "ID无效" });
-                return;
-            }
             string FilePath = string.Empty;
             HttpFileCollection uploadFiles = context.Request.Files;
             for (int i = 0; i < uploadFiles.Count; i++)
@@ -349,20 +368,46 @@ namespace Web.Handler
                     FilePath = filepath + fileName;
                 }
             }
-            var important = ServiceType_ImportantService.GetServiceType_ImportantServiceByServiceID(service.ID);
-            if (important == null)
+            int ApplicationType = WebUtil.GetIntValue(context, "ApplicationType");
+            DateTime ReturnHomeDate = WebUtil.GetDateValue(context, "ReturnHomeDate");
+            string ApplicationRemark = context.Request["Remark"];
+            string ApplicationUserName = WebUtil.GetUser(context).LoginName;
+            string IDs = context.Request.Params["IDList"];
+            List<int> IDList = JsonConvert.DeserializeObject<List<int>>(IDs);
+            var importList = ServiceType_ImportantService.GetServiceType_ImportantServiceByServiceIDList(IDList.ToArray());
+            using (SqlHelper helper = new SqlHelper())
             {
-                important = new ServiceType_ImportantService();
-                important.AddTime = DateTime.Now;
-                important.ServiceID = service.ID;
+                try
+                {
+                    helper.BeginTransaction();
+                    foreach (var ServiceID in IDList)
+                    {
+                        var important = importList.FirstOrDefault(p => p.ServiceID == ServiceID);
+                        if (important == null)
+                        {
+                            important = new ServiceType_ImportantService();
+                            important.ServiceID = ServiceID;
+                            important.AddTime = DateTime.Now;
+                        }
+                        important.ApplicationType = ApplicationType;
+                        important.ApproveStatus = 0;
+                        important.ReturnHomeDate = ReturnHomeDate;
+                        important.ApplicationTime = DateTime.Now;
+                        important.ApplicationUserName = ApplicationUserName;
+                        important.ApplicationFilePath = FilePath;
+                        important.ApplicationRemark = ApplicationRemark;
+                        important.Save(helper);
+                    }
+                    helper.Commit();
+                }
+                catch (Exception ex)
+                {
+                    Utility.LogHelper.WriteError("ServiceHandler", "命令: serviceimportapplication", ex);
+                    helper.Rollback();
+                    WebUtil.WriteJson(context, new { status = false });
+                    return;
+                }
             }
-            important.ApplicationType = WebUtil.GetIntValue(context, "ApplicationType");
-            important.ApproveStatus = 0;
-            important.ApplicationTime = DateTime.Now;
-            important.ApplicationUserName = WebUtil.GetUser(context).LoginName;
-            important.ApplicationFilePath = FilePath;
-            important.ApplicationRemark = context.Request["Remark"];
-            important.Save();
             WebUtil.WriteJson(context, new { status = true });
         }
 
@@ -2237,6 +2282,8 @@ namespace Web.Handler
             try
             {
                 int ServiceTypeID = WebUtil.GetIntValue(context, "ServiceTypeID");
+                int ServiceType2ID = WebUtil.GetIntValue(context, "ServiceType2ID");
+                int ServiceType3ID = WebUtil.GetIntValue(context, "ServiceType3ID");
                 DateTime StartTime = DateTime.MinValue;
                 DateTime.TryParse(context.Request.Params["StartTime"], out StartTime);
                 DateTime EndTime = DateTime.MinValue;
@@ -2253,7 +2300,7 @@ namespace Web.Handler
                 int[] CompanyIDList = new int[] { };
                 List<int> TopProjectIDList = new List<int>();
                 WebUtil.GetRoomProjectIDList(out RoomIDList, out EqualProjectIDList, out InProjectIDList, out CompanyIDList, out TopProjectIDList);
-                DataGrid dg = Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByServiceTypeID(StartTime, EndTime, SortOrder, startRowIndex, pageSize, ServiceTypeID, CompanyIDList, EqualProjectIDList, InProjectIDList, user.UserID);
+                DataGrid dg = Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByServiceTypeID(StartTime, EndTime, SortOrder, startRowIndex, pageSize, ServiceTypeID, CompanyIDList, EqualProjectIDList, InProjectIDList, user.UserID, ServiceType2ID, ServiceType3ID);
                 WebUtil.WriteJson(context, dg);
             }
             catch (Exception ex)

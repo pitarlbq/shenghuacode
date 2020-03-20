@@ -493,6 +493,8 @@ namespace Foresight.DataAccess
         public string CompanyName { get; set; }
         public int ProjectID { get; set; }
         public string ProjectName { get; set; }
+        public int ServiceType2ID { get; set; }
+        public int ServiceType3ID { get; set; }
         public string ServiceTypeName2 { get; set; }
         public string ServiceTypeName3 { get; set; }
         public decimal TotalCount { get; set; }

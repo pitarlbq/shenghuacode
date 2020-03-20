@@ -395,16 +395,16 @@ namespace Foresight.DataAccess
             dg.page = pageSize;
             return dg;
         }
-        public static Ui.DataGrid GetCustomerServiceGridByServiceTypeID(DateTime StartTime, DateTime EndTime, string orderBy, long startRowIndex, int pageSize, int ServiceTypeID, int[] CompanyIDList, List<int> EqualProjectIDList, List<int> InProjectIDList, int UserID)
+        public static Ui.DataGrid GetCustomerServiceGridByServiceTypeID(DateTime StartTime, DateTime EndTime, string orderBy, long startRowIndex, int pageSize, int ServiceTypeID, int[] CompanyIDList, List<int> EqualProjectIDList, List<int> InProjectIDList, int UserID, int ServiceType2ID, int ServiceType3ID)
         {
             ResetCache();
             long totalRows = 0;
             List<SqlParameter> parameters = new List<SqlParameter>();
             List<string> conditions = new List<string>();
             List<string> cmdlist = new List<string>();
-            conditions.Add("ServiceStatus not in (2,5)");
+            conditions.Add("(ServiceStatus=1 or isnull(IsClosed,0)=1)");
             conditions.Add("(IsImportantTouSu is null or IsImportantTouSu=0)");
-            var myProjectIDList = Project.GetProjectIDListbyIDList(InProjectIDList: InProjectIDList, EqualProjectIDList: EqualProjectIDList);
+
             if (CompanyIDList.Length > 0)
             {
                 conditions.Add("exists(select 1 from [Project] where A.ProjectID=Project.ID and [Project].CompanyID in (" + string.Join(",", CompanyIDList) + "))");
@@ -440,6 +440,52 @@ namespace Foresight.DataAccess
             string Statement = " from (select *,(select count(1) from [CustomerService_Accpet] where [ServiceID]=ViewCustomerService.ID and AccpetUserType=1 and AccpetStatus in (0,1)) as AccpetUserCount,(select count(1) from [CustomerService_Accpet] where [ServiceID]=ViewCustomerService.ID and AccpetUserType=2 and AccpetStatus in (0,1)) as ProcessUserCount from [ViewCustomerService])A where  " + string.Join(" and ", conditions.ToArray());
             ViewCustomerService[] list = new ViewCustomerService[] { };
             list = GetList<ViewCustomerService>("select " + fieldList + Statement + orderBy, parameters).ToArray();
+            if (list.Length == 0)
+            {
+                return new Ui.DataGrid();
+            }
+            if (ServiceType2ID > 0)
+            {
+                list = list.Where(p => p.ServiceType2IDList.Contains(ServiceType2ID)).ToArray();
+            }
+            if (ServiceType3ID > 0)
+            {
+                list = list.Where(p => p.ServiceType3IDList.Contains(ServiceType3ID)).ToArray();
+            }
+            if (ServiceTypeID == 3 || ServiceTypeID == 4)
+            {
+                var BaoShiServiceIDList = new Utility.SiteConfig().BaoShiServiceIDList;
+                if (BaoShiServiceIDList != null && BaoShiServiceIDList.Length > 0)
+                {
+                    if (ServiceTypeID == 3)//报修
+                    {
+                        list = list.Where(p =>
+                        {
+                            if (p.ServiceType2IDList == null || p.ServiceType2IDList.Length == 0)
+                            {
+                                return true;
+                            }
+                            var finalServiceType2IDList = p.ServiceType2IDList.Distinct().ToArray();
+                            var resultList = finalServiceType2IDList.Except(BaoShiServiceIDList).ToArray();
+                            return resultList.Length == p.ServiceType2IDList.Length;
+                        }).ToArray();
+                    }
+                    if (ServiceTypeID == 4)//报事
+                    {
+                        list = list.Where(p =>
+                        {
+                            if (p.ServiceType2IDList == null || p.ServiceType2IDList.Length == 0)
+                            {
+                                return false;
+                            }
+                            var finalServiceType2IDList = p.ServiceType2IDList.Distinct().ToArray();
+                            var resultList = finalServiceType2IDList.Except(BaoShiServiceIDList).ToArray();
+                            return resultList.Length < finalServiceType2IDList.Length;
+                        }).ToArray();
+                    }
+                }
+            }
+            var myProjectIDList = Project.GetProjectIDListbyIDList(InProjectIDList: InProjectIDList, EqualProjectIDList: EqualProjectIDList);
             if (myProjectIDList.Length > 0)
             {
                 list = list.Where(p => myProjectIDList.Contains(p.ProjectID)).ToArray();

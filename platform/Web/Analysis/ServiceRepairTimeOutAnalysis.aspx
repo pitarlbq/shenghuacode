@@ -3,8 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>维修处理节点时效统计表</title>
     <script>
-        var hdServiceTypeName2, hdServiceTypeName3, typeList2 = [], typeList3 = [];
+        var hdServiceTypeName2, hdServiceTypeName3, typeList2 = [], typeList3 = [], ServiceTypeID;
         $(function () {
+            ServiceTypeID = "<%=this.ServiceTypeID%>";
             hdServiceTypeName2 = $('#<%=this.hdServiceTypeName2.ClientID%>');
             hdServiceTypeName3 = $('#<%=this.hdServiceTypeName3.ClientID%>');
             if (hdServiceTypeName2.val() != '') {

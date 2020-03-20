@@ -228,7 +228,13 @@ namespace Utility
                 int.TryParse(ConfigurationManager.AppSettings["PinZhiShengJiServiceID"], out _PinZhiShengJiServiceID);
             }
             PinZhiShengJiServiceID = _PinZhiShengJiServiceID;
+
+            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["BaoShiServiceIDs"]))
+            {
+                BaoShiServiceIDList = JsonConvert.DeserializeObject<int[]>(ConfigurationManager.AppSettings["BaoShiServiceIDs"]);
+            }
         }
+        public int[] BaoShiServiceIDList { get; set; }
         public int LianJieTouSuServiceID { get; set; }
         public int BaoXiuServiceID { get; set; }
         public int YingXiaoTouSuServiceID { get; set; }

@@ -311,7 +311,7 @@ select * from [Project] where ID in (select [ID] from temp where [isParent]=0)";
             }
             string IDs = string.Join(",", list.Select(p => p.AllParentID).ToArray());
             List<string> IDStrList = IDs.Split(',').ToList();
-            List<int> IDList = new List<int>();
+            List<int> IDList = list.Select(p => p.ID).ToList();
             foreach (var IDStr in IDStrList)
             {
                 if (string.IsNullOrEmpty(IDStr))

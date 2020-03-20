@@ -34,24 +34,24 @@ function getColumns() {
     finalColumns.push(columns);
 }
 function formatXiaDan(value, row) {
-    return '<a href="javascript:doViewList(1,' + row.CompanyID + ',' + row.ProjectID + ')">' + value + '</a>';
+    return '<a href="javascript:doViewList(1,' + row.CompanyID + ',' + row.ProjectID + ',' + row.ServiceType2ID + ',' + row.ServiceType3ID + ')">' + value + '</a>';
 }
 function formatPaiDan(value, row) {
-    return '<a href="javascript:doViewList(2,' + row.CompanyID + ',' + row.ProjectID + ')">' + value + '</a>';
+    return '<a href="javascript:doViewList(2,' + row.CompanyID + ',' + row.ProjectID + ',' + row.ServiceType2ID + ',' + row.ServiceType3ID + ')">' + value + '</a>';
 }
 function formatChuLi(value, row) {
-    return '<a href="javascript:doViewList(3,' + row.CompanyID + ',' + row.ProjectID + ')">' + value + '</a>';
+    return '<a href="javascript:doViewList(3,' + row.CompanyID + ',' + row.ProjectID + ',' + row.ServiceType2ID + ',' + row.ServiceType3ID + ')">' + value + '</a>';
 }
 function formatBanJie(value, row) {
-    return '<a href="javascript:doViewList(4,' + row.CompanyID + ',' + row.ProjectID + ')">' + value + '</a>';
+    return '<a href="javascript:doViewList(4,' + row.CompanyID + ',' + row.ProjectID + ',' + row.ServiceType2ID + ',' + row.ServiceType3ID + ')">' + value + '</a>';
 }
 function formatHuiFang(value, row) {
-    return '<a href="javascript:doViewList(5,' + row.CompanyID + ',' + row.ProjectID + ')">' + value + '</a>';
+    return '<a href="javascript:doViewList(5,' + row.CompanyID + ',' + row.ProjectID + ',' + row.ServiceType2ID + ',' + row.ServiceType3ID + ')">' + value + '</a>';
 }
-function doViewList(typeid, CompanyID, ProjectID) {
+function doViewList(typeid, CompanyID, ProjectID, ServiceType2ID, ServiceType3ID) {
     var StartTime = $("#tdStartTime").datebox("getValue");
     var EndTime = $("#tdEndTime").datebox("getValue");
-    var iframe = "../Analysis/ServiceChuLiList.aspx?typeid=" + typeid + "&status=3&CompanyID=" + CompanyID + "&ProjectID=" + ProjectID + "&start=" + StartTime + "&end=" + EndTime;
+    var iframe = "../Analysis/ServiceChuLiList.aspx?typeid=" + typeid + "&CompanyID=" + CompanyID + "&ProjectID=" + ProjectID + "&start=" + StartTime + "&end=" + EndTime + "&status=" + ServiceTypeID + "&ServiceType2ID=" + ServiceType2ID + "&ServiceType3ID=" + ServiceType3ID;
     do_open_dialog('处理时效列表', iframe);
 }
 function getTopProjectIDList() {
@@ -160,7 +160,7 @@ function get_options() {
         "EndTime": EndTime,
         "TopProjectIDs": JSON.stringify(ProjectIDList),
         "TopCompanyID": CompanyID,
-        "ServiceTypeID": 3,
+        "ServiceTypeID": ServiceTypeID,
         "ServiceTypeID2": ServiceTypeID2,
         "ServiceTypeID3": ServiceTypeID3,
     };

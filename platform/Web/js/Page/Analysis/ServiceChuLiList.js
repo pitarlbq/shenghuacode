@@ -110,7 +110,9 @@ function get_options() {
         "EndTime": EndTime,
         "ServiceTypeID": status,
         "ProjectIDs": JSON.stringify(projectids),
-        "CompanyIDs": JSON.stringify(companyids)
+        "CompanyIDs": JSON.stringify(companyids),
+        "ServiceType2ID": ServiceType2ID,
+        "ServiceType3ID": ServiceType3ID,
     };
     return options;
 }

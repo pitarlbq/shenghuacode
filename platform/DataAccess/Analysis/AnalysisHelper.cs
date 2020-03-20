@@ -220,6 +220,7 @@ namespace DataAccess.Analysis
                     data.CompanyName = companyItem != null ? companyItem.CompanyName : "";
                     data.ProjectID = projectItem != null ? projectItem.ID : 0;
                     data.ProjectName = projectItem != null ? projectItem.Name : "";
+                    data.ServiceType2ID = myServiceType2.ID;
                     data.ServiceTypeName2 = myServiceType2.ServiceTypeName;
                     data.ServiceTypeName3 = "";
                     data.TotalCount = myServiceList2.Length;
@@ -245,7 +246,9 @@ namespace DataAccess.Analysis
                     data.CompanyName = companyItem != null ? companyItem.CompanyName : "";
                     data.ProjectID = projectItem != null ? projectItem.ID : 0;
                     data.ProjectName = projectItem != null ? projectItem.Name : "";
+                    data.ServiceType2ID = myServiceType2.ID;
                     data.ServiceTypeName2 = myServiceType2.ServiceTypeName;
+                    data.ServiceType3ID = myServiceType3.ID;
                     data.ServiceTypeName3 = myServiceType3.ServiceTypeName;
                     data.TotalCount = myServiceList2.Length;
                     data.ResponseTotalTakeHour = myServiceList3.Sum(p => p.ResponseTakeHour);

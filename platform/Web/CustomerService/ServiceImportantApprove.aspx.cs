@@ -13,6 +13,8 @@ namespace Web.CustomerService
         public int ServiceID = 0;
         public string FilePath = string.Empty;
         public int ApproveStatus = 1;
+        public int ApplicationType = 0;
+        public int IsSuggestion = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -21,6 +23,11 @@ namespace Web.CustomerService
                 {
                     int.TryParse(Request.QueryString["ID"], out ServiceID);
                 }
+                var service = Foresight.DataAccess.CustomerService.GetCustomerService(ServiceID);
+                if (service != null)
+                {
+                    IsSuggestion = service.ServiceType1ID == new Utility.SiteConfig().BaoXiuServiceID ? 0 : 1;
+                }
                 var data = Foresight.DataAccess.ServiceType_ImportantService.GetServiceType_ImportantServiceByServiceID(ServiceID);
                 if (data != null)
                 {
@@ -28,6 +35,7 @@ namespace Web.CustomerService
                     this.FilePath = WebUtil.GetContextPath() + data.ApplicationFilePath;
                     this.tdResponseRemark.Value = data.ApproveRemark;
                     this.ApproveStatus = data.ApproveStatus;
+                    this.ApplicationType = data.ApplicationType;
                     if (data.ApplicationType == 1)
                     {
                         this.tdApplicationType.InnerText = "启用第三方";
@@ -49,6 +57,7 @@ namespace Web.CustomerService
                     this.tdApproveTime.InnerText = data.ApproveTime > DateTime.MinValue ? data.ApproveTime.ToString("yyyy-MM-dd HH:mm:ss") : "";
                     this.tdApproveUserName.InnerText = data.ApproveUserName;
                     this.tdApproveStatus.InnerText = data.ApproveStatusDesc;
+                    this.tdReturnHomeDate.InnerText = WebUtil.GetStrDate(data.ReturnHomeDate);
                 }
             }
         }

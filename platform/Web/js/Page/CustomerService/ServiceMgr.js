@@ -860,7 +860,9 @@ function do_application_important() {
         return;
     }
     var IDList = [];
-    IDList.push(rows[0].ID)
+    $.each(rows, function (index, row) {
+        IDList.push(row.ID);
+    })
     var options = { visit: 'checkimportstatus', IDs: JSON.stringify(IDList), type: 2 };
     $.ajax({
         type: 'POST',
@@ -888,7 +890,9 @@ function do_approve_important() {
         return;
     }
     var IDList = [];
-    IDList.push(rows[0].ID)
+    $.each(rows, function (index, row) {
+        IDList.push(row.ID);
+    })
     var options = { visit: 'checkimportstatus', IDs: JSON.stringify(IDList), type: 3 };
     $.ajax({
         type: 'POST',

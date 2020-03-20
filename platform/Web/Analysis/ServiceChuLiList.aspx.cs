@@ -18,6 +18,8 @@ namespace Web.Analysis
         public int status = 0;
         public int CompanyID = 0;
         public int ProjectID = 0;
+        public int ServiceType2ID = 0;
+        public int ServiceType3ID = 0;
         public string StartTime = string.Empty;
         public string EndTime = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
@@ -39,6 +41,14 @@ namespace Web.Analysis
                 if (!string.IsNullOrEmpty(Request.QueryString["ProjectID"]))
                 {
                     int.TryParse(Request.QueryString["ProjectID"], out ProjectID);
+                }
+                if (!string.IsNullOrEmpty(Request.QueryString["ServiceType2ID"]))
+                {
+                    int.TryParse(Request.QueryString["ServiceType2ID"], out ServiceType2ID);
+                }
+                if (!string.IsNullOrEmpty(Request.QueryString["ServiceType3ID"]))
+                {
+                    int.TryParse(Request.QueryString["ServiceType3ID"], out ServiceType3ID);
                 }
                 if (!string.IsNullOrEmpty(Request.QueryString["start"]))
                 {
