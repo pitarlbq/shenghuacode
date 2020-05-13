@@ -19,7 +19,6 @@ namespace Web.Handler
     /// </summary>
     public class RoomResourceHandler : IHttpHandler, IRequiresSessionState
     {
-
         public void ProcessRequest(HttpContext context)
         {
 
@@ -93,6 +92,18 @@ namespace Web.Handler
                     case "deletecomboboxroomproperty":
                         deletecomboboxroomproperty(context);
                         break;
+                    case "getthridcustomergrid":
+                        getthridcustomergrid(context);
+                        break;
+                    case "savethirdcustomer":
+                        savethirdcustomer(context);
+                        break;
+                    case "doremovethridcustomer":
+                        doremovethridcustomer(context);
+                        break;
+                    case "getthirdprojectlist":
+                        getthirdprojectlist(context);
+                        break;
                     default:
                         WebUtil.WriteJsonError(context, ErrorCode.InvalideRequest, "Unkown Visit: " + visit);
                         break;
@@ -102,6 +113,72 @@ namespace Web.Handler
             {
                 Utility.LogHelper.WriteError("RoomResourceHandler", "命令:" + visit, ex);
                 context.Response.Write("{\"status\":false}");
+            }
+        }
+        private void getthirdprojectlist(HttpContext context)
+        {
+            var list = ThirdCustomer.GetThirdProjectList();
+            WebUtil.WriteJson(context, new { list = list });
+        }
+        private void doremovethridcustomer(HttpContext context)
+        {
+            int ID = WebUtil.GetIntValue(context, "ID");
+            ThirdCustomer.DeleteThirdCustomer(ID);
+            WebUtil.WriteJson(context, new { status = true });
+        }
+        private void savethirdcustomer(HttpContext context)
+        {
+            int ID = WebUtil.GetIntValue(context, "ID");
+            ThirdCustomer data = null;
+            if (ID > 0)
+            {
+                data = ThirdCustomer.GetThirdCustomer(ID);
+            }
+            if (data == null)
+            {
+                data = new ThirdCustomer();
+                data.AddTime = DateTime.Now;
+                data.AddUserID = WebUtil.GetUser(context).UserID;
+            }
+            data.ProjectName = context.Request["ProjectName"];
+            data.RoomName = context.Request["RoomName"];
+            data.CustomerName = context.Request["CustomerName"];
+            data.PhoneNumber = context.Request["PhoneNumber"];
+            data.SignDate = WebUtil.GetDateValue(context, "SignDate");
+            var existData = ThirdCustomer.GetThirdCustomerByPhone(data.PhoneNumber);
+            if (existData.ID != data.ID)
+            {
+                WebUtil.WriteJson(context, new { status = false, error = "手机号码重复，请检查" });
+                return;
+            }
+            data.Save();
+            WebUtil.WriteJson(context, new { status = true });
+        }
+        private void getthridcustomergrid(HttpContext context)
+        {
+            string page = context.Request.Form["page"];
+            string rows = context.Request.Form["rows"];
+            long startRowIndex = (long.Parse(page) - 1) * long.Parse(rows);
+            int pageSize = int.Parse(rows);
+            string Keywords = context.Request["Keywords"];
+            DateTime StartTime = WebUtil.GetDateValue(context, "StartTime");
+            DateTime EndTime = WebUtil.GetDateValue(context, "EndTime");
+            int SendStatus = WebUtil.GetIntValue(context, "SendStatus");
+            string ProjectName = context.Request["ProjectName"];
+
+            bool canexport = WebUtil.GetBoolValue(context, "canexport");
+            DataGrid dg = ThirdCustomer.GetThirdCustomerListByKeywords(Keywords, StartTime, EndTime, SendStatus, ProjectName, "order by LastSendTime desc,ID desc", startRowIndex, pageSize, canexport: canexport);
+            if (canexport)
+            {
+                bool isTemplate = WebUtil.GetIntValue(context, "istemplate") == 1;
+                string downloadurl = string.Empty;
+                string error = string.Empty;
+                bool status = APPCode.ExportHelper.DownLoadThirdCustomerData(dg, isTemplate, out downloadurl, out error);
+                WebUtil.WriteJson(context, new { status = status, downloadurl = downloadurl, error = error });
+            }
+            else
+            {
+                WebUtil.WriteJson(context, dg);
             }
         }
         private void deletecomboboxroomproperty(HttpContext context)

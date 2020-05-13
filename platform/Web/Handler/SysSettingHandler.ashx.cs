@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Data;
 using Utility;
 using System.Web.SessionState;
+using Encript;
 
 namespace Web.Handler
 {
@@ -91,6 +92,12 @@ namespace Web.Handler
                     case "saveimporttousudata":
                         saveimporttousudata(context);
                         break;
+                    case "getsmssendmsgparam":
+                        getsmssendmsgparam(context);
+                        break;
+                    case "sendsmsbytemplate":
+                        sendsmsbytemplate(context);
+                        break;
                     default:
                         WebUtil.WriteJsonError(context, ErrorCode.InvalideRequest, "Unkown Visit: " + visit);
                         break;
@@ -101,6 +108,43 @@ namespace Web.Handler
                 Utility.LogHelper.WriteError("SysSettingHandler", "命令:" + visit, ex);
                 context.Response.Write("{\"status\":false}");
             }
+        }
+        /// <summary>
+        /// 选择发送短信模板
+        /// </summary>
+        /// <param name="context"></param>
+        private void getsmssendmsgparam(HttpContext context)
+        {
+            var list = Sms_Tencent_Template.GetSms_Tencent_Templates().ToArray();
+            var items = list.Select(p =>
+            {
+                var item = new { ID = p.ID, Name = p.TemplteTitle, content = p.TemplateContent };
+                return item;
+            }).ToArray();
+            WebUtil.WriteJson(context, new { list = items });
+        }
+        /// <summary>
+        /// 发送物业费通知短信
+        /// </summary>
+        private void sendsmsbytemplate(HttpContext context)
+        {
+            var IDList = Utility.JsonConvert.DeserializeObject<List<int>>(context.Request["IDList"]);
+            bool IsSelectAll = WebUtil.GetBoolValue(context, "IsSelectAll");
+            string Keyword = context.Request["Keyword"];
+            int SendStatus = WebUtil.GetIntValue(context, "SendStatus");
+            string ProjectName = context.Request["ProjectName"];
+            DateTime StartTime = WebUtil.GetDateValue(context, "StartTime");
+            DateTime EndTime = WebUtil.GetDateValue(context, "EndTime");
+            int TemplateID = WebUtil.GetIntValue(context, "TemplateID");
+            string errormsg = string.Empty;
+            int RestCount = EncriptHelper.GetMySmsRestCount();
+            if (RestCount <= 0)
+            {
+                WebUtil.WriteJson(context, new { status = false, error = "短信余额不足，请先充值" });
+                return;
+            }
+            bool status = Sms_SendResult.Send_SmsTemplteMsg(IDList, StartTime, EndTime, TemplateID, WebUtil.GetUser(context).UserID, Keyword, ProjectName, SendStatus, IsSelectAll, ref errormsg, RestCount);
+            WebUtil.WriteJson(context, new { status = status, error = errormsg });
         }
         private void saveimporttousudata(HttpContext context)
         {

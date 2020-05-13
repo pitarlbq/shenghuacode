@@ -2,15 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
-        var IsAdminSite = 0, IsFuShunJu = 0, CanViewCoupon = 0, hdDepartment;
+        var hdDepartment;
         $(function () {
             hdDepartment = $('#<%=this.hdDepartment.ClientID%>');
-            CanViewCoupon = Number("<%=this.CanViewCoupon%>");
-            IsAdminSite = "<%=this.IsAdminSite?1:0%>";
-            IsFuShunJu = "<%=this.IsFuShunJu ? 1 : 0%>";
-            if (IsAdminSite == 0) {
-                $('#page_easyui_layout').layout('remove', 'west');
-            }
             var departmentList = [];
             if (hdDepartment.val() != '') {
                 departmentList = eval('(' + hdDepartment.val() + ')');
@@ -28,10 +22,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="server">
     <form id="ff" runat="server">
         <div class="easyui-layout" data-options="fit:true,border:false" id="page_easyui_layout">
-            <div data-options="region:'west',border:false" style="width: 300px;">
-                <ul class="easyui-tree" id="userTree" style="height: 100%;">
-                </ul>
-            </div>
             <div data-options="region:'center',border:false">
                 <div class="easyui-layout" data-options="fit:true,border:false">
                     <div data-options="region:'north',border:false" style="height: 50px; font-size: 12px; padding: 10px;">

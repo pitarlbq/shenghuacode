@@ -12,6 +12,49 @@ namespace Web.APPCode
 {
     public class ExportHelper
     {
+        public static bool DownLoadThirdCustomerData(Foresight.DataAccess.Ui.DataGrid dg, bool isTemplate, out string downloadurl, out string error)
+        {
+            error = string.Empty;
+            downloadurl = string.Empty;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID");
+            dt.Columns.Add("项目名称");
+            dt.Columns.Add("资源编号");
+            dt.Columns.Add("姓名");
+            dt.Columns.Add("手机号码");
+            dt.Columns.Add("签约日期");
+            dt.Columns.Add("最近发送时间");
+            dt.Columns.Add("发送状态");
+            if (!isTemplate)
+            {
+                var list = new ThirdCustomer[] { };
+                if (dg != null)
+                {
+                    list = dg.rows as ThirdCustomer[];
+                }
+                if (list == null || list.Length == 0)
+                {
+                    error = "没有可导出的数据";
+                    return false;
+                }
+                for (int i = 0; i < list.Length; i++)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["ID"] = list[i].ID;
+                    dr["项目名称"] = list[i].ProjectName;
+                    dr["资源编号"] = list[i].RoomName;
+                    dr["姓名"] = list[i].CustomerName;
+                    dr["手机号码"] = list[i].PhoneNumber;
+                    dr["签约日期"] = WebUtil.GetStrDate(list[i].SignDate, "yyyy-MM-dd HH:mm:ss");
+                    dr["最近发送时间"] = WebUtil.GetStrDate(list[i].LastSendTime, "yyyy-MM-dd HH:mm:ss");
+                    dr["发送状态"] = list[i].SendStatusDesc;
+                    dt.Rows.Add(dr);
+                }
+            }
+            string FileName = "客户信息_" + DateTime.Now.ToString("yyyyMMddHHmmss") + "_导出.xlsx";
+            downloadurl = DoExport(FileName, dt);
+            return true;
+        }
         public static bool DownLoadCallTotalAnalysis(Foresight.DataAccess.Ui.DataGrid dg, out string downloadurl, out string error)
         {
             downloadurl = string.Empty;

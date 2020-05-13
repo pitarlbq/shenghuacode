@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-        var op, hdOpenID, UserID, tdOpenID, hdCustomerName, type, tdUserType, tdIsAllowSysLogin, hdIsAllowSysLogin, IsFuShunJu, tdDepartment, hdDepartment;
+        var op, hdOpenID, UserID, tdOpenID, hdCustomerName, type, tdUserType, tdIsAllowSysLogin, hdIsAllowSysLogin, tdDepartment, hdDepartment;
         $(function () {
             hdOpenID = $('#<%=this.hdOpenID.ClientID%>');
             tdOpenID = $('#<%=this.tdOpenID.ClientID%>');
@@ -15,7 +15,6 @@
             tdDepartment = $('#<%=this.tdDepartment.ClientID%>');
             hdDepartment = $('#<%=this.hdDepartment.ClientID%>');
             UserID = "<%=this.UserID%>";
-            IsFuShunJu = "<%=this.IsFuShunJu?1:0%>";
             loadCompany();
             tdOpenID.textbox({
                 buttonText: '绑定',
@@ -64,9 +63,6 @@
                 tdIsAllowAPPUserLogin.prop('checked', true).prop('disabled', true);
                 $('.sysuser_box').hide();
                 $('.appuser_box').show();
-            }
-            if (IsFuShunJu == 0) {
-                $('.appuser_box.fushunju_box').hide();
             }
         }
         function doChooseWechatUser() {
@@ -127,10 +123,7 @@
             var Education = $("#<%=this.tdEducation.ClientID%>").combobox("getValue");
             var PositionName = $("#<%=this.tdPositionName.ClientID%>").textbox("getValue");
             var DepartmentIDList = tdDepartment.combobox("getValues");
-            var FixedPoint = $("#<%=this.tdFixedPoint.ClientID%>").textbox("getValue");
-            var FixedPointUpdateDate = $('#<%=this.tdFixedPointUpdateDate.ClientID%>').datebox('getValue');
-            var IsAllowPhrase = $('#<%=this.tdIsAllowPhrase.ClientID%>').combobox('getValue');
-            var options = { visit: 'saveuserinfo', UserID: UserID, RealName: RealName, NickName: RealName, PhoneNumber: PhoneNumber, Gender: Gender, IsLocked: IsLocked, CompanyID: CompanyID, LoginName: LoginName, Password: Password, HotPhoneLine: HotPhoneLine, BelongServiceName: BelongServiceName, QQNumber: QQNumber, UserType: UserType, OpenID: hdOpenID.val(), IsAllowAPPUserLogin: IsAllowAPPUserLogin, IsAllowSysLogin: IsAllowSysLogin, PositionName: PositionName, DepartmentIDList: JSON.stringify(DepartmentIDList), Education: Education, FixedPoint: FixedPoint, FixedPointUpdateDate: FixedPointUpdateDate, IsAllowPhrase: IsAllowPhrase };
+            var options = { visit: 'saveuserinfo', UserID: UserID, RealName: RealName, NickName: RealName, PhoneNumber: PhoneNumber, Gender: Gender, IsLocked: IsLocked, CompanyID: CompanyID, LoginName: LoginName, Password: Password, HotPhoneLine: HotPhoneLine, BelongServiceName: BelongServiceName, QQNumber: QQNumber, UserType: UserType, OpenID: hdOpenID.val(), IsAllowAPPUserLogin: IsAllowAPPUserLogin, IsAllowSysLogin: IsAllowSysLogin, PositionName: PositionName, DepartmentIDList: JSON.stringify(DepartmentIDList), Education: Education };
             MaskUtil.mask('body', '提交中');
             $.ajax({
                 type: 'POST',
@@ -310,25 +303,6 @@
                             <option value="高中">高中</option>
                             <option value="其他">其他</option>
                         </select>
-                    </td>
-                    <td class="appuser_box fushunju_box">允许被点赞
-                    </td>
-                    <td class="appuser_box fushunju_box">
-                        <select id="tdIsAllowPhrase" runat="server" data-options="editable:false" class="easyui-combobox">
-                            <option value="1">允许</option>
-                            <option value="0">不允许</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr class="appuser_box fushunju_box">
-                    <td>固定积分
-                    </td>
-                    <td>
-                        <input type="text" class="easyui-textbox" runat="server" id="tdFixedPoint" />
-                    </td>
-                    <td>上次固定积分发放时间</td>
-                    <td>
-                        <input type="text" class="easyui-datebox" runat="server" id="tdFixedPointUpdateDate" />
                     </td>
                 </tr>
             </table>

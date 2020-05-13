@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.SessionState;
 using Utility;
+using Encript;
+using Foresight.DataAccess.Ui;
 
 namespace Web.Handler
 {
@@ -56,6 +58,9 @@ namespace Web.Handler
                     case "loadcalltotalanalysis":
                         loadcalltotalanalysis(context);
                         break;
+                    case "getsmssendstatusanalysis":
+                        getsmssendstatusanalysis(context);
+                        break;
                     default:
                         break;
                 }
@@ -65,6 +70,34 @@ namespace Web.Handler
                 LogHelper.WriteError("AnalysisHandler", "visit: " + visit, ex);
                 context.Response.Write("{\"status\":false}");
             }
+        }
+        private void getsmssendstatusanalysis(HttpContext context)
+        {
+            DateTime StartTime = WebUtil.GetDateValue(context, "StartTime");
+            DateTime EndTime = WebUtil.GetDateValue(context, "EndTime");
+            long startRowIndex = WebUtil.GetDataGridStartRowIndex();
+            int pageSize = WebUtil.GetDataGridPageSize();
+            string errormsg = string.Empty;
+            var list = new Utility.ResponseDataGrid();
+            int BillNumber = 0;
+            int RequestNumber = 0;
+            int SuccessNumber = 0;
+            int TotalSmsCount = 0;
+            decimal TotalSmsAmount = 0;
+            int RestNumber = 0;
+            bool status = Encript.EncriptHelper.GetMySmsPullStatusList(StartTime, EndTime, startRowIndex, pageSize, out errormsg, ref list, ref BillNumber, ref RequestNumber, ref SuccessNumber, ref TotalSmsCount, ref TotalSmsAmount);
+            RestNumber = TotalSmsCount - BillNumber;
+            if (!status)
+            {
+                WebUtil.WriteJson(context, new DataGrid());
+                return;
+            }
+            var result = new Dictionary<string, object>();
+            result["rows"] = list.rows;
+            result["page"] = list.page;
+            result["total"] = list.total;
+            result["countitem"] = new { BillNumber = BillNumber, RequestNumber = RequestNumber, SuccessNumber = SuccessNumber, TotalSmsCount = TotalSmsCount, TotalSmsAmount = TotalSmsAmount, RestNumber = RestNumber };
+            WebUtil.WriteJson(context, result);
         }
         private void loadcalltotalanalysis(HttpContext context)
         {

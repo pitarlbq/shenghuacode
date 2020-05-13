@@ -103,6 +103,36 @@ namespace Foresight.DataAccess
             conditions.Add("exists (select 1 from [UserCompany] where [CompanyID]=[Company].CompanyID and ([UserID]=@UserID or exists(select 1 from [UserRoles] where [RoleID]=[UserCompany].RoleID and [UserID]=@UserID)))");
             return GetList<Company>("select * from [Company] where " + string.Join(" and ", conditions.ToArray()), parameters).ToArray();
         }
+        public static Dictionary<string, string> doGetCompanyParam(ref string error)
+        {
+            var config = new Utility.SiteConfig();
+            var data = new Dictionary<string, string>();
+            data["JPushKey_Customer"] = config.JPushKey_Customer;
+            data["JPushMasterSecret_Customer"] = config.JPushMasterSecret_Customer;
+            data["JPushKey_User"] = config.JPushKey_User;
+            data["JPushMasterSecret_User"] = config.JPushMasterSecret_User;
+
+            data["tencentSecretId"] = config.tencentSecretId;
+            data["tencentSecretKey"] = config.tencentSecretKey;
+            data["tencentAppID"] = config.tencentAppID;
+            data["SmsServerSendType"] = "1";
+
+            data["RandJsToken"] = System.Configuration.ConfigurationManager.AppSettings["RandJsToken"];
+            return data;
+        }
+        public static bool doChangeCompanyParam(Dictionary<string, object> data, string SiteFullPath, ref string error)
+        {
+            string ConfigPath = SiteFullPath + @"\Web.config";
+            if (System.IO.File.Exists(ConfigPath))
+            {
+                return Utility.IISManager.UpdateConfigValue(ConfigPath, data);
+            }
+            else
+            {
+                error = "路径错误";
+                return false;
+            }
+        }
         public string SystemNumber
         {
             get

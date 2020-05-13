@@ -77,22 +77,6 @@ namespace Web
         {
             return Web.APPCode.CacheHelper.GetCompanyID(context);
         }
-        public static int GetFromCompanyID(HttpContext context)
-        {
-            var config = new Utility.SiteConfig();
-            int CompanyID = 0;
-            if (!string.IsNullOrEmpty(config.ServerSiteID))
-            {
-                CompanyID = int.Parse(config.ServerSiteID);
-                return CompanyID;
-            }
-            var defaultcompany = Company.GetCompanies().FirstOrDefault();
-            if (defaultcompany != null)
-            {
-                return defaultcompany.FromCompanyID;
-            }
-            return 0;
-        }
         public static Company GetCompany(HttpContext context, bool readCache = true)
         {
             return Web.APPCode.CacheHelper.GetCompany(context, readCache: readCache);
@@ -405,6 +389,29 @@ namespace Web
                     }
                 }
             }
+
+        }
+        public static long GetDataGridStartRowIndex()
+        {
+            long startRowIndex = 0;
+            var context = HttpContext.Current;
+            string page = context.Request["page"];
+            string rows = context.Request.Form["rows"];
+            if (!string.IsNullOrEmpty(page))
+            {
+                startRowIndex = (long.Parse(page) - 1) * long.Parse(rows);
+            }
+            return startRowIndex;
+        }
+        public static int GetDataGridPageSize()
+        {
+            var context = HttpContext.Current;
+            string rows = context.Request["rows"];
+            if (!string.IsNullOrEmpty(rows))
+            {
+                return int.Parse(rows);
+            }
+            return 10;
         }
     }
     public class JsonResponse

@@ -1,0 +1,253 @@
+﻿.clear {
+    clear: both;
+}
+
+.myui-row {
+    overflow: hidden;
+    margin: 0;
+    width: 95%;
+    margin-right: 5%;
+}
+
+    .myui-row.mtop20 {
+        margin-top: 20px;
+    }
+
+    .myui-row.mbottom20 {
+        margin-bottom: 20px;
+    }
+
+.myui-row-table [class*=myui-col-] {
+    padding: 15px 0 0 0;
+    text-align: left;
+    min-height: 52px;
+}
+
+
+.myui-row span.spanblock {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.myui-row .textbox-label {
+    text-align: right;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    padding-right: 8px;
+    min-height: 30px;
+    color: #555;
+}
+
+.myui-row label.textbox-label.label-manual {
+    width: 147px;
+    padding-right: 3px;
+}
+
+.myui-row .rightcontent {
+    display: inline-block;
+    width: 70%;
+}
+
+    .myui-row .rightcontent p {
+        display: inline-block;
+        margin-top: 0px;
+    }
+
+        .myui-row .rightcontent p img {
+            width: 100%;
+        }
+
+.myui-row .col-star label.textbox-label:before {
+    content: ' ';
+    background: url('./icons/redstar2.png') no-repeat center right; /*兼容没测*/
+    background-size: 8px 8px;
+    padding: 0 5px;
+    margin-right: 3px;
+}
+
+.myui-row-table .myui-col-12 {
+    text-align: left;
+}
+
+.myui-row.myui-row-search {
+    padding: 0px 0px 10px 0px;
+    width: 100%;
+    margin-right: 0px;
+}
+
+.layout-panel-north .myui-row.myui-row-search {
+    background-size: 100% 2px;
+    background-repeat: no-repeat;
+    background-position: 0 99%;
+    background-image: linear-gradient(0,#eee,#eee 50%,transparent 50%);
+}
+
+.myui-row-search [class*=myui-col-] {
+    padding: 10px 0 0 0;
+    text-align: left;
+}
+
+.myui-row-search .textbox-label {
+    width: auto;
+    padding-right: 5px;
+    color: #555;
+}
+
+.myui-row [class*=myui-col-].labelcheck {
+    padding-left: 150px;
+}
+
+    .myui-row [class*=myui-col-].labelcheck.col-check {
+        padding-left: 0px;
+    }
+
+        .myui-row [class*=myui-col-].labelcheck.col-check label.textbox-label {
+            margin-right: 0px;
+        }
+
+        .myui-row [class*=myui-col-].labelcheck.col-check label {
+            margin-right: 10px;
+        }
+
+            .myui-row [class*=myui-col-].labelcheck.col-check label span {
+                display: inline-block;
+            }
+
+                .myui-row [class*=myui-col-].labelcheck.col-check label span.l-btn-left {
+                    padding-right: 0px;
+                }
+
+    .myui-row [class*=myui-col-].labelcheck label input[type=checkbox], .myui-row [class*=myui-col-].labelcheck label input[type=radio] {
+        width: 18px;
+        height: 18px;
+        vertical-align: middle;
+        margin: 0;
+    }
+
+.myui-row.myui-row-search [class*=myui-col-].labelcheck {
+    padding-left: 0px;
+}
+
+.myui-row [class*=myui-col-].labelcheck label span {
+    vertical-align: middle;
+}
+
+.myui-row [class*=myui-col-].labelcheck label {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.myui-row [class*=myui-col-] input, .myui-row [class*=myui-col-] select {
+    width: 90%;
+}
+
+.myui-row .myui-col-6 input, .myui-row .myui-col-6 select {
+    width: 70%;
+}
+
+.myui-row .myui-col-12 input, .myui-row .myui-col-12 select {
+    width: 80%;
+}
+
+.myui-row.myui-row-search [class*=myui-col-].col35 {
+    width: auto;
+}
+
+    .myui-row.myui-row-search [class*=myui-col-].col35 input, .myui-row.myui-row-search [class*=myui-col-].col35 select {
+        width: 120px;
+    }
+
+.myui-row [class*=myui-col-].col35 input, .myui-row [class*=myui-col-].col35 select {
+    width: 120px;
+}
+
+.myui-row [class*=myui-col-].col100 input, .myui-row [class*=myui-col-].col100 select {
+    width: 100%;
+}
+
+.myui-row.myui-row-search [class*=myui-col-] input, .myui-row.myui-row-search [class*=myui-col-] select {
+    width: 95%;
+}
+
+.myui-row.myui-row-search .textbox {
+    min-width: 80px;
+}
+
+.myui-col-1, .myui-col-2, .myui-col-3, .myui-col-4, .myui-col-5, .myui-col-6, .myui-col-7, .myui-col-8, .myui-col-9, .myui-col-10, .myui-col-11, .myui-col-12 {
+    position: relative;
+    float: left;
+}
+
+.myui-col-12 {
+    width: 100%;
+    position: relative;
+}
+
+.myui-col-11 {
+    width: 91.66666667%;
+}
+
+.myui-col-10 {
+    width: 83.33333333%;
+}
+
+.myui-col-9 {
+    width: 75%;
+}
+
+.myui-col-8 {
+    width: 66.66666667%;
+}
+
+.myui-col-7 {
+    width: 58.33333333%;
+}
+
+.myui-col-6 {
+    width: 50%;
+}
+
+.myui-col-5 {
+    width: 41.66666667%;
+}
+
+.myui-col-4 {
+    width: 33.33333333%;
+}
+
+.myui-col-3 {
+    width: 25%;
+}
+
+.myui-col-2 {
+    width: 16.66666667%;
+}
+
+.myui-col-1 {
+    width: 8.33333333%;
+}
+
+.myui-row .btntoolbar .l-btn-text, .myui-row .btnlinkbar .l-btn-text {
+    font-size: 14px;
+    line-height: 20px;
+    color: #005b93;
+}
+
+
+.myui-row .btntoolbar.l-btn, .myui-row .btnlinkbar.l-btn {
+    padding: 3px;
+    line-height: 20px;
+    border: #eee solid 1px;
+    border-radius: 5px;
+    margin-top: 2px;
+}
+
+    .myui-row .btntoolbar.l-btn:hover, .myui-row .btnlinkbar.l-btn:hover {
+        border-radius: 0;
+        border: 0px;
+        padding: 3px;
+        background-color: #fff;
+        border: #eee solid 1px;
+        border-radius: 5px;
+    }

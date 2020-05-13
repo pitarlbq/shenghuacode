@@ -36,7 +36,22 @@ namespace Foresight.DataAccess
                 string name = string.Empty;
                 if (!string.IsNullOrEmpty(this.FullName))
                 {
-                    name = this.FullName.Split('-')[0];
+                    var nameArray = this.FullName.Split('-');
+                    if (nameArray.Length > 1)
+                    {
+                        if (nameArray[1].Contains("圣桦") || nameArray[1].Contains("锦江") || nameArray[1].Contains("半岛"))
+                        {
+                            name = nameArray[0] + "-" + nameArray[1];
+                        }
+                        else
+                        {
+                            name = nameArray[0];
+                        }
+                    }
+                    else
+                    {
+                        name = nameArray[0];
+                    }
                 }
                 else
                 {
@@ -181,16 +196,21 @@ namespace Foresight.DataAccess
             {
                 conditions.Add("isnull([IsClosed],0)=0");
             }
-            if (UserID > 0 && ServiceStatus != 12 && !isServiceAnalysis)
+            if (UserID > 0 && ServiceStatus != 12 && !isServiceAnalysis && !canViewAll)
             {
-                cmdlist = new List<string>();
-                if (!canViewAll || !canViewWechatAPPService || !canViewWechatAPPSuggestoin)
+                if (ServiceStatus != 3)//非派单
                 {
+                    cmdlist = new List<string>();
                     cmdlist.Add("[AddUserID]=@UserID");
                     cmdlist.Add("exists(select 1 from [CustomerService_Accpet] where [ServiceID]=A.ID and AccpetManID=@UserID and AccpetStatus!=3)");
+                    conditions.Add("(" + string.Join(" or ", cmdlist.ToArray()) + ")");
+                }
+                else//派单
+                {
+                    cmdlist = new List<string>();
                     if (canViewWechatAPPService)
                     {
-                        cmdlist.Add("(([ServiceFrom]=@ServiceFrom1 or [ServiceFrom]=@ServiceFrom2) and ((isnull(IsSuggestion,0)=0 and ServiceType1ID=0) or ServiceType1ID = " + BaoXiuServiceID + "))");
+                        cmdlist.Add("((isnull(IsSuggestion,0)=0 and ServiceType1ID=0) or ServiceType1ID = " + BaoXiuServiceID + ")");
                     }
                     else
                     {
@@ -198,15 +218,11 @@ namespace Foresight.DataAccess
                     }
                     if (canViewWechatAPPSuggestoin)
                     {
-                        cmdlist.Add("(([ServiceFrom]=@ServiceFrom1 or [ServiceFrom]=@ServiceFrom2) and ((isnull(IsSuggestion,0)=1 and ServiceType1ID=0) or ServiceType1ID in (" + LianJieTouSuServiceID + "," + WuYeTouSuServiceID + "," + YingXiaoTouSuServiceID + ")))");
+                        cmdlist.Add("((isnull(IsSuggestion,0)=1 and ServiceType1ID=0) or ServiceType1ID in (" + LianJieTouSuServiceID + "," + WuYeTouSuServiceID + "," + YingXiaoTouSuServiceID + "))");
                     }
                     else
                     {
                         cmdlist.Add("([ServiceFrom]!=@ServiceFrom1 and [ServiceFrom]!=@ServiceFrom2 and (isnull(IsSuggestion,0)=1 or ServiceType1ID in (" + LianJieTouSuServiceID + "," + WuYeTouSuServiceID + "," + YingXiaoTouSuServiceID + ")))");
-                    }
-                    if (canViewAll)
-                    {
-                        cmdlist.Add("([ServiceFrom]!=@ServiceFrom1 and [ServiceFrom]!=@ServiceFrom2)");
                     }
                 }
                 parameters.Add(new SqlParameter("@ServiceFrom1", Utility.EnumModel.WechatServiceFromDefine.weixin.ToString()));

@@ -75,11 +75,6 @@ namespace Foresight.DataAccess
                 }
             }
             cmd += " or [RoomID] in (select [RoomID] from [RoomPhoneRelation] where [RelatePhoneNumber] like '%" + keyword + "%')";
-            var config = new Utility.SiteConfig();
-            if (config.IsMallOn)
-            {
-                cmd += " or [RoomID] in (select [RoomID] from [RoomPhoneRelation] where [RelatePhoneNumber] like '%" + keyword + "%' or RelationName like '%" + keyword + "%')";
-            }
             return cmd;
         }
         public static Ui.DataGrid GetRoomBasicListByKeywords(List<int> RoomIDList, List<int> ProjectIDList, string RoomOwner, string OwnerPhone, string Keywords, List<string> SearchAreas, string orderBy, long startRowIndex, int pageSize, bool canexport = false, int CompanyID = 0)

@@ -400,16 +400,7 @@ namespace Web.Mobile
             {
                 list = SysMenu.GetAPPUserMenuList(user.UserID);
             }
-            if (!new Utility.SiteConfig().IsMallOn)
-            {
-                WebUtil.WriteJsonResult(context, new { list = list });
-                return;
-            }
-            var imageItem = new Dictionary<string, object>();
-            imageItem["imageurl"] = WebUtil.GetContextPath() + "/styles/images/banner_1.png";
-            var imagelist = new List<Dictionary<string, object>>();
-            imagelist.Add(imageItem);
-            WebUtil.WriteJsonResult(context, new { list = list, imagelist = imagelist });
+            WebUtil.WriteJsonResult(context, new { list = list });
         }
         private void getservicelistgroupbyuser(HttpContext context)
         {

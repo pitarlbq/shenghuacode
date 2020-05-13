@@ -416,4 +416,21 @@ namespace Utility
             }
         }
     }
+    public class ResponseDataGrid
+    {
+        /// <summary>
+        /// 数据
+        /// </summary>
+        public List<Dictionary<string, object>> rows { get; set; } = new List<Dictionary<string, object>>();
+
+        /// <summary>
+        /// 总数据量
+        /// </summary>
+        public long total { get; set; }
+
+        /// <summary>
+        /// 当前页数
+        /// </summary>
+        public int page { get; set; }
+    }
 }

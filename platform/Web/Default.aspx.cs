@@ -25,6 +25,7 @@ namespace Web
         public int CanViewAnalysis = 0;
         public int CanViewServiceDetail = 0;
         public int CanViewSetting = 0;
+        public int CanViewSMS = 0;
         public string DefaultTitle = string.Empty;
         public string DefaultURL = string.Empty;
         public bool is400User = false;
@@ -62,6 +63,7 @@ namespace Web
             CanViewAnalysis = base.CheckAuthByModuleCode("110119005") ? 1 : 0;
             CanViewSetting = base.CheckAuthByModuleCode("110119006") ? 1 : 0;
             CanViewServiceDetail = base.CheckAuthByModuleCode("110119100") ? 1 : 0;
+            CanViewSMS = base.CheckAuthByModuleCode("110119600") ? 1 : 0;
             if (CanViewHomeCall == 1)
             {
                 this.DefaultTitle = "400客服";

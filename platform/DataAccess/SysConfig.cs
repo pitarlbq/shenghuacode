@@ -62,6 +62,48 @@ namespace Foresight.DataAccess
             var data = list.FirstOrDefault(p => p.Name.Equals(Name.ToString()));
             return data == null ? string.Empty : data.Value;
         }
+        public static string GetSignature(SqlHelper helper = null)
+        {
+            var Name = SysConfigNameDefine.auth_signature.ToString();
+            var data = GetSysConfigByName(Name, helper: helper);
+            if (data == null)
+            {
+                data = new SysConfig();
+                data.Value = Utility.Tools.GetRandomString(32, true, false, true);
+                data.Name = Name;
+                data.AddTime = DateTime.Now;
+                if (helper == null)
+                {
+                    data.Save();
+                }
+                else
+                {
+                    data.Save(helper);
+                }
+            }
+            return data.Value;
+        }
+        public static string GetToken(SqlHelper helper = null)
+        {
+            var Name = SysConfigNameDefine.auth_token.ToString();
+            var data = GetSysConfigByName(Name, helper: helper);
+            if (data == null)
+            {
+                data = new SysConfig();
+                data.Value = Utility.Tools.GetByteString(4);
+                data.Name = Name;
+                data.AddTime = DateTime.Now;
+                if (helper == null)
+                {
+                    data.Save();
+                }
+                else
+                {
+                    data.Save(helper);
+                }
+            }
+            return data.Value;
+        }
     }
     public enum SysConfigNameDefine
     {
@@ -87,5 +129,9 @@ namespace Foresight.DataAccess
         ServiceTypeEndHour,
         [Description("包括下班时间")]
         ServiceTypeDisableWorkOffTime,
+        [Description("签名")]
+        auth_signature,
+        [Description("令牌")]
+        auth_token,
     }
 }

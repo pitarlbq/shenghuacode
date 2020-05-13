@@ -12,12 +12,10 @@ namespace Web.UserInfo
     public partial class EditUser : BasePage
     {
         public int UserID = 0;
-        public bool IsFuShunJu = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                IsFuShunJu = new Utility.SiteConfig().IsFuShunJu;
                 var list = Foresight.DataAccess.Company.GetCompanies();
                 if (list.Count > 0)
                 {

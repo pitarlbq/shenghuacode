@@ -10,16 +10,10 @@ namespace Web.UserInfo
 {
     public partial class UserMgr : BasePage
     {
-        public bool IsAdminSite = false;
-        public bool IsFuShunJu = false;
-        public int CanViewCoupon = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                IsAdminSite = new Utility.SiteConfig().IsAdminSite;
-                IsFuShunJu = new Utility.SiteConfig().IsFuShunJu;
-                CanViewCoupon = base.CheckAuthByModuleCode("1101383") ? 1 : 0;
                 var departmentList = CKDepartment.GetCKDepartments().ToArray();
                 var departmentItems = departmentList.Select(p =>
                 {

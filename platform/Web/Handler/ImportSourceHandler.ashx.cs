@@ -37,6 +37,9 @@ namespace Web.Handler
                     case "importroomsource":
                         importroomsource(context);
                         break;
+                    case "importthirdcustomer":
+                        importthirdcustomer(context);
+                        break;
                     default:
                         WebUtil.WriteJsonError(context, ErrorCode.InvalideRequest, "Unkown Visit: " + visit);
                         break;
@@ -47,6 +50,88 @@ namespace Web.Handler
                 LogHelper.WriteError("ImportSourceHandler", "visit: " + visit, ex);
                 context.Response.Write("{\"status\":false}");
             }
+        }
+        private void importthirdcustomer(HttpContext context)
+        {
+            HttpFileCollection uploadFiles = context.Request.Files;
+            if (uploadFiles.Count == 0)
+            {
+                context.Response.Write("请选择一个文件");
+                return;
+            }
+            if (string.IsNullOrEmpty(uploadFiles[0].FileName))
+            {
+                context.Response.Write("请选择一个文件");
+                return;
+            }
+            HttpPostedFile postedFile = uploadFiles[0];
+            string filepath = HttpContext.Current.Server.MapPath("~/upload/ImportRoomSource/" + DateTime.Now.ToString("yyyyMMdd"));
+            if (!System.IO.Directory.Exists(filepath))
+            {
+                System.IO.Directory.CreateDirectory(filepath);
+            }
+            string filename = DateTime.Now.ToLocalTime().ToString("yyyyMMddHHmmss") + "_" + postedFile.FileName;
+            string fullpath = Path.Combine(filepath, filename);
+            postedFile.SaveAs(fullpath);
+            DataTable table = ExcelExportHelper.NPOIReadExcel(fullpath);
+            string msg = string.Empty;
+            int count = 0;
+            var user = WebUtil.GetUser(context);
+            using (SqlHelper helper = new SqlHelper())
+            {
+                try
+                {
+                    helper.BeginTransaction();
+                    #region 导入处理
+                    for (int i = 0; i < table.Rows.Count; i++)
+                    {
+                        count = i;
+                        ThirdCustomer data = null;
+                        string PhoneNumber = table.Rows[i]["手机号码"].ToString();
+                        if (string.IsNullOrEmpty(PhoneNumber))
+                        {
+                            msg += "<p>第" + (i + 2) + "行上传失败。原因：手机号码为空</p>";
+                            continue;
+                        }
+                        object Value = table.Rows[i]["ID"];
+                        int ID = 0;
+                        if (Value != null)
+                        {
+                            int.TryParse(Value.ToString(), out ID);
+                        }
+                        if (ID > 0)
+                        {
+                            data = Foresight.DataAccess.ThirdCustomer.GetThirdCustomer(ID, helper);
+                        }
+                        if (data == null)
+                        {
+                            data = ThirdCustomer.GetThirdCustomerByPhone(PhoneNumber, helper);
+                        }
+                        if (data == null)
+                        {
+                            data = new ThirdCustomer();
+                            data.AddTime = DateTime.Now;
+                            data.AddUserID = user.UserID;
+                        }
+                        data.PhoneNumber = PhoneNumber;
+                        data.CustomerName = table.Rows[i]["项目名称"].ToString();
+                        data.ProjectName = table.Rows[i]["姓名"].ToString();
+                        data.RoomName = table.Rows[i]["资源编号"].ToString();
+                        data.SignDate = WebUtil.GetDateTimeByStr(table.Rows[i]["签约日期"].ToString());
+                        data.Save(helper);
+                    }
+                    #endregion
+                    helper.Commit();
+                    msg += "<p>导入完成</p>";
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.WriteError("ImportSourceHandler", "visit: importroomsource", ex);
+                    msg = "导入失败，第" + (count + 2) + "行数据有问题，导入取消";
+                    helper.Rollback();
+                }
+            }
+            context.Response.Write(msg);
         }
         private decimal GetDecimalValue(object value)
         {

@@ -550,6 +550,14 @@
                     </div>
                 </div>
                 <%} %>
+                <%if (this.CanViewSMS == 1)
+                    { %>
+                <div class="menuItemBox" data-title="短信管理" data-id="600">
+                    <div class="menuItem setting_css">
+                        <label>短信管理</label>
+                    </div>
+                </div>
+                <%} %>
             </div>
             <div class="treeLeft" style="display: none;">
                 <div class="easyui-panel" style="height: 50px; width: 200px; padding-top: 10px; border: 0px;">

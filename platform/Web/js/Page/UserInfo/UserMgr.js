@@ -26,9 +26,6 @@ function getColumns() {
     var columns1 = [];
     columns1.push({ field: 'ck', checkbox: true });
     columns1.push({ field: 'FinalHeadImg', formatter: formatHeadImg, title: '头像', width: 100 });
-    if (IsFuShunJu == 0) {
-        columns1.push({ field: 'SystemNo', title: '系统编号', width: 100 });
-    }
     columns1.push({ field: 'RealName', title: '用户名', width: 100 });
     columns1.push({ field: 'PhoneNumber', title: '电话', width: 100 });
     columns1.push({ field: 'Gender', title: '性别', width: 100 });
@@ -40,10 +37,6 @@ function getColumns() {
     columns1.push({ field: 'PositionName', title: '岗位', width: 100 });
     columns1.push({ field: 'DepartmentName', title: '部门', width: 100 });
     columns1.push({ field: 'Education', title: '学历', width: 100 });
-    if (IsFuShunJu == 1) {
-        columns1.push({ field: 'FixedPoint', formatter: formatFixedPoint, title: '固定积分', width: 100 });
-        columns1.push({ field: 'MyCoupons', formatter: formatMyCoupons, title: '我的福顺券', width: 100 });
-    }
     columns1.push();
     columns.push(columns1);
 }

@@ -46,9 +46,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NPOI, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -104,6 +104,7 @@
     <Content Include="Analysis\ServiceTimeOutDetailAnalysis.aspx" />
     <Content Include="Analysis\ServiceDetailAnalysis.aspx" />
     <Content Include="Analysis\ServiceCallSummaryAnalysis.aspx" />
+    <Content Include="Analysis\SmsSendAnalysis.aspx" />
     <Content Include="callring.mp3" />
     <Content Include="CangKu\DepartmentMgr.aspx" />
     <Content Include="CangKu\EditDepartment.aspx" />
@@ -127,8 +128,12 @@
     <Content Include="CustomerService\ServiceSuggestionMgr.aspx" />
     <Content Include="ErrorPage.html" />
     <Content Include="InitialSetup\AddProjectProperty.aspx" />
+    <Content Include="InitialSetup\SmsSendMessage.aspx" />
+    <Content Include="InitialSetup\ThridCustomerEdit.aspx" />
+    <Content Include="InitialSetup\ThirdCustomerImport.aspx" />
     <Content Include="InitialSetup\PublicProjectEdit.aspx" />
     <Content Include="InitialSetup\PublicProjectMgr.aspx" />
+    <Content Include="InitialSetup\ThirdCustomerMgr.aspx" />
     <Content Include="js\call\deviceapi.js" />
     <Content Include="js\call\jquery-1.8.3.min.js" />
     <Content Include="js\call\json2.js" />
@@ -160,12 +165,15 @@
     <Content Include="js\Page\Analysis\ServiceTimeOutDetailAnalysis.js" />
     <Content Include="js\Page\Analysis\ServiceDetailAnalysis.js" />
     <Content Include="js\Page\Analysis\ServiceCallSummaryAnalysis.js" />
+    <Content Include="js\Page\Analysis\SmsSendAnalysis.js" />
     <Content Include="js\Page\CangKu\CKDepartmentMgr.js" />
+    <Content Include="js\Page\Comm\dateRangeUtil.js" />
     <Content Include="js\Page\CustomerService\ServiceRecordMgr.js" />
     <Content Include="js\Page\CustomerService\ServiceCallMgr.js" />
     <Content Include="js\Page\CustomerService\ServiceProcessMgr.js" />
     <Content Include="js\Page\Comm\EditRow.js" />
     <Content Include="js\Page\InitialSetup\AddProjectProperty.js" />
+    <Content Include="js\Page\InitialSetup\ThirdCustomerMgr.js" />
     <Content Include="js\Page\InitialSetup\PublicProjectMgr.js" />
     <Content Include="js\Page\Main\callBoxinit.js" />
     <Content Include="js\Page\Main\zTreeLoad.js" />
@@ -768,6 +776,7 @@
     <Content Include="styles\images\zukongimg.jpg" />
     <Content Include="styles\jquery.bigcolorpicker.css" />
     <Content Include="styles\page\default.css" />
+    <Content Include="styles\table-ui.css" />
     <Content Include="SysSeting\AssignProjectNumber.aspx" />
     <Content Include="SysSeting\EditCustomerServiceTaskCombobox.aspx" />
     <Content Include="SysSeting\OperationMgr.aspx" />
@@ -798,6 +807,8 @@
     <Content Include="Wechat\SuggesitonRedirect.aspx" />
     <Content Include="Wechat\ServiceRedirect.aspx" />
     <Content Include="Handler\AnalysisHandler.ashx" />
+    <Content Include="Handler\Api.ashx" />
+    <Content Include="Handler\Base\NonAuthBaseHandler.ashx" />
     <None Include="Properties\PublishProfiles\customerpro.pubxml" />
     <None Include="Properties\PublishProfiles\pro.pubxml" />
     <Content Include="RoomResource\AddRelateResource.aspx" />
@@ -1102,6 +1113,13 @@
     <Compile Include="Analysis\ServiceCallSummaryAnalysis.aspx.designer.cs">
       <DependentUpon>ServiceCallSummaryAnalysis.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Analysis\SmsSendAnalysis.aspx.cs">
+      <DependentUpon>SmsSendAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analysis\SmsSendAnalysis.aspx.designer.cs">
+      <DependentUpon>SmsSendAnalysis.aspx</DependentUpon>
+    </Compile>
     <Compile Include="APPCode\AppCacheHelper.cs" />
     <Compile Include="APPCode\CacheHelper.cs" />
     <Compile Include="APPCode\ExportHelper.cs" />
@@ -1253,6 +1271,12 @@
     <Compile Include="Handler\AnalysisHandler.ashx.cs">
       <DependentUpon>AnalysisHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Handler\Api.ashx.cs">
+      <DependentUpon>Api.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\Base\NonAuthBaseHandler.ashx.cs">
+      <DependentUpon>NonAuthBaseHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Handler\CKHandler.ashx.cs">
       <DependentUpon>CKHandler.ashx</DependentUpon>
     </Compile>
@@ -1265,6 +1289,27 @@
     </Compile>
     <Compile Include="InitialSetup\AddProjectProperty.aspx.designer.cs">
       <DependentUpon>AddProjectProperty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\SmsSendMessage.aspx.cs">
+      <DependentUpon>SmsSendMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\SmsSendMessage.aspx.designer.cs">
+      <DependentUpon>SmsSendMessage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\ThridCustomerEdit.aspx.cs">
+      <DependentUpon>ThridCustomerEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\ThridCustomerEdit.aspx.designer.cs">
+      <DependentUpon>ThridCustomerEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\ThirdCustomerImport.aspx.cs">
+      <DependentUpon>ThirdCustomerImport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\ThirdCustomerImport.aspx.designer.cs">
+      <DependentUpon>ThirdCustomerImport.aspx</DependentUpon>
     </Compile>
     <Compile Include="InitialSetup\PublicProjectEdit.aspx.cs">
       <DependentUpon>PublicProjectEdit.aspx</DependentUpon>
@@ -1279,6 +1324,13 @@
     </Compile>
     <Compile Include="InitialSetup\PublicProjectMgr.aspx.designer.cs">
       <DependentUpon>PublicProjectMgr.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InitialSetup\ThirdCustomerMgr.aspx.cs">
+      <DependentUpon>ThirdCustomerMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InitialSetup\ThirdCustomerMgr.aspx.designer.cs">
+      <DependentUpon>ThirdCustomerMgr.aspx</DependentUpon>
     </Compile>
     <Compile Include="Main\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -1318,7 +1370,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="APPCode\CommHelper.cs" />
-    <Compile Include="APPCode\HttpRequest.cs" />
     <Compile Include="APPCode\WebUtil.cs" />
     <Compile Include="CustomerService\EditServiceMaterial.aspx.cs">
       <DependentUpon>EditServiceMaterial.aspx</DependentUpon>

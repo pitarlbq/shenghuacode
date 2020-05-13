@@ -344,5 +344,11 @@ namespace Utility
         {
             return Regex.IsMatch(value, @"^[+-]?\d*[.]?\d*$");
         }
+        public static string GetVerifyCode()
+        {
+            Random rnd = new Random();
+            string VerifyCode = rnd.Next(1000, 9999).ToString();
+            return VerifyCode;
+        }
     }
 }
