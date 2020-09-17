@@ -77,7 +77,10 @@
     <Compile Include="CustomerService\ServiceType_ImportantService.cs" />
     <Compile Include="CustomerService\ServiceType_ImportShiXiao.cs" />
     <Compile Include="CustomerService\UserServiceType.cs" />
+    <Compile Include="CustomerService_ManualTimeout.cs" />
+    <Compile Include="Generated.CustomerService_ManualTimeout.cs" />
     <Compile Include="Generated.HolidayLog.cs" />
+    <Compile Include="Generated.Project_ServiceTypeDelay.cs" />
     <Compile Include="Generated.Seat.cs" />
     <Compile Include="Generated.SiteVersion.cs" />
     <Compile Include="Generated.Sms_SendResult.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="Generated.ViewRoomFeeHistory.cs" />
     <Compile Include="Mall\Generated.Mall_Coupon.cs" />
     <Compile Include="Mall\Mall_Coupon.cs" />
+    <Compile Include="Project_ServiceTypeDelay.cs" />
     <Compile Include="RoomSource\Generated.RoomProperty.cs" />
     <Compile Include="RoomSource\Generated.RoomState.cs" />
     <Compile Include="Generated.Sys_OrderNumber.cs" />

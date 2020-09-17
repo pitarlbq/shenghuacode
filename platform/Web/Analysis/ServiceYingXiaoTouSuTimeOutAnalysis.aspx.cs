@@ -18,9 +18,9 @@ namespace Web.Analysis
         {
             if (!IsPostBack)
             {
-                int BaoXiuServiceID = new Utility.SiteConfig().BaoXiuServiceID;
+                int YingXiaoTouSuServiceID = new Utility.SiteConfig().YingXiaoTouSuServiceID;
                 var typeList = Foresight.DataAccess.ServiceType.GetServiceTypes().ToArray();
-                var typeList2 = typeList.Where(p => p.ParentID == BaoXiuServiceID).ToArray();
+                var typeList2 = typeList.Where(p => p.ParentID == YingXiaoTouSuServiceID).ToArray();
                 var typeItems2 = typeList2.Select(p =>
                 {
                     var item = new { ID = p.ID, Name = p.ServiceTypeName };

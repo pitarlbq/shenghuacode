@@ -967,6 +967,7 @@ namespace Foresight.DataAccess
                 }
                 var myServiceType2List = serviceTypeList.Where(p => item.ServiceType2IDList.Contains(p.ID)).ToArray();
                 var myServiceType3List = serviceTypeList.Where(p => item.ServiceType3IDList.Contains(p.ID)).ToArray();
+                int ProjectDelayHour = item.ProjectDelayHour > 0 ? item.ProjectDelayHour : 0;
                 decimal nowHourRange = 0;
                 var myTimeItem = timeShiXiaoList.FirstOrDefault(p => p.ServiceID == item.ID);
                 if (item.ServiceStatus == 1 && item.IsClosed && myTimeItem != null)
@@ -1010,7 +1011,7 @@ namespace Foresight.DataAccess
                     {
                         DateTime StartTime = addTime;
                         DateTime EndTime = item.XiaDanDate > DateTime.MinValue ? item.XiaDanDate : nowDate;
-                        item.XiaDanChaoShiTakeHour = CheckDelayTimeStatus(myXiaDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myXiaDanServiceTypeItem.PaiDanTime, holidayList: holidayList);
+                        item.XiaDanChaoShiTakeHour = CheckDelayTimeStatus(myXiaDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myXiaDanServiceTypeItem.PaiDanTime, holidayList: holidayList, ProjectDelayHour: ProjectDelayHour);
                         item.XiaDanTimeOutStatus = item.XiaDanChaoShiTakeHour <= 0 ? 1 : 2;
                         if (item.XiaDanDate == DateTime.MinValue)
                         {
@@ -1046,7 +1047,7 @@ namespace Foresight.DataAccess
                     {
                         DateTime StartTime = addTime;
                         DateTime EndTime = item.PaiDanDate > DateTime.MinValue ? item.PaiDanDate : nowDate;
-                        item.PaiDanChaoShiTakeHour = CheckDelayTimeStatus(myPaiDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myPaiDanServiceTypeItem.PaiDanTime, holidayList: holidayList);
+                        item.PaiDanChaoShiTakeHour = CheckDelayTimeStatus(myPaiDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myPaiDanServiceTypeItem.PaiDanTime, holidayList: holidayList, ProjectDelayHour: ProjectDelayHour);
                         item.PaiDanTimeOutStatus = item.PaiDanChaoShiTakeHour <= 0 ? 1 : 2;
                         if (item.PaiDanDate == DateTime.MinValue)
                         {
@@ -1082,7 +1083,7 @@ namespace Foresight.DataAccess
                     {
                         DateTime StartTime = item.PaiDanDate;
                         DateTime EndTime = item.ResponseTime > DateTime.MinValue ? item.ResponseTime : nowDate;
-                        item.ResponseChaoShiTakeHour = CheckDelayTimeStatus(myResponseServiceTypeItem, StartTime, EndTime, out nowHourRange, myResponseServiceTypeItem.ResponseTime, holidayList: holidayList);
+                        item.ResponseChaoShiTakeHour = CheckDelayTimeStatus(myResponseServiceTypeItem, StartTime, EndTime, out nowHourRange, myResponseServiceTypeItem.ResponseTime, holidayList: holidayList, ProjectDelayHour: ProjectDelayHour);
                         item.ResponseTimeOutStatus = item.ResponseChaoShiTakeHour <= 0 ? 1 : 2;
                         if (item.ResponseTime == DateTime.MinValue)
                         {
@@ -1118,7 +1119,7 @@ namespace Foresight.DataAccess
                     {
                         DateTime StartTime = item.PaiDanDate;
                         DateTime EndTime = item.CheckTime > DateTime.MinValue ? item.CheckTime : nowDate;
-                        item.CheckChaoShiTakeHour = CheckDelayTimeStatus(myCheckServiceTypeItem, StartTime, EndTime, out nowHourRange, myCheckServiceTypeItem.CheckTime, holidayList: holidayList);
+                        item.CheckChaoShiTakeHour = CheckDelayTimeStatus(myCheckServiceTypeItem, StartTime, EndTime, out nowHourRange, myCheckServiceTypeItem.CheckTime, holidayList: holidayList, ProjectDelayHour: ProjectDelayHour);
                         item.CheckTimeOutStatus = item.CheckChaoShiTakeHour <= 0 ? 1 : 2;
                         if (item.CheckTime == DateTime.MinValue)
                         {
@@ -1158,7 +1159,7 @@ namespace Foresight.DataAccess
                     {
                         DateTime StartTime = item.PaiDanDate;
                         DateTime EndTime = item.ChuliDate > DateTime.MinValue ? item.ChuliDate : nowDate;
-                        item.ProcessChaoShiTakeHour = CheckDelayTimeStatus(myProcessServiceTypeItem, StartTime, EndTime, out nowHourRange, myProcessServiceTypeItem.ChuliTime, holidayList: holidayList);
+                        item.ProcessChaoShiTakeHour = CheckDelayTimeStatus(myProcessServiceTypeItem, StartTime, EndTime, out nowHourRange, myProcessServiceTypeItem.ChuliTime, holidayList: holidayList, ProjectDelayHour: ProjectDelayHour);
                         item.ProcessTimeOutStatus = item.ProcessChaoShiTakeHour <= 0 ? 1 : 2;
                         if (item.ChuliDate == DateTime.MinValue)
                         {
@@ -1189,7 +1190,7 @@ namespace Foresight.DataAccess
                     {
                         DateTime StartTime = item.AddTime;
                         DateTime EndTime = item.BanJieTime > DateTime.MinValue ? item.BanJieTime : nowDate;
-                        item.BanJieChaoShiTakeHour = CheckDelayTimeStatus(myBanJieServiceTypeItem, StartTime, EndTime, out nowHourRange, myBanJieServiceTypeItem.BanJieTime, holidayList: holidayList);
+                        item.BanJieChaoShiTakeHour = CheckDelayTimeStatus(myBanJieServiceTypeItem, StartTime, EndTime, out nowHourRange, myBanJieServiceTypeItem.BanJieTime, holidayList: holidayList, ProjectDelayHour: ProjectDelayHour);
                         item.BanJieTimeOutStatus = item.BanJieChaoShiTakeHour <= 0 ? 1 : 2;
                         if (item.BanJieTime == DateTime.MinValue)
                         {
@@ -1220,7 +1221,7 @@ namespace Foresight.DataAccess
                     {
                         DateTime StartTime = item.BanJieTime;
                         DateTime EndTime = item.CloseTime > DateTime.MinValue ? item.CloseTime : nowDate;
-                        item.CloseChaoShiTakeHour = CheckDelayTimeStatus(myGuanDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myGuanDanServiceTypeItem.GuanDanTime, holidayList: holidayList);
+                        item.CloseChaoShiTakeHour = CheckDelayTimeStatus(myGuanDanServiceTypeItem, StartTime, EndTime, out nowHourRange, myGuanDanServiceTypeItem.GuanDanTime, holidayList: holidayList, ProjectDelayHour: ProjectDelayHour);
                         item.CloseTimeOutStatus = item.CloseChaoShiTakeHour <= 0 ? 1 : 2;
                         if (item.CloseTime == DateTime.MinValue)
                         {
@@ -1235,8 +1236,34 @@ namespace Foresight.DataAccess
                             item.CloseTimeOutStatus = 1;
                         }
                     }
-                    CustomerService_TimeShiXiao.SetTimeShiXiaoData(item, myTimeItem, sqlList);
                     #endregion
+                    if (item.IsTimeOutInvalid)
+                    {
+                        item.XiaDanTimeOutStatus = 1;
+                        item.XiaDanChaoShiTakeHour = 0;
+
+                        item.PaiDanTimeOutStatus = 1;
+                        item.PaiDanChaoShiTakeHour = 0;
+
+                        item.ResponseTimeOutStatus = 1;
+                        item.ResponseChaoShiTakeHour = 0;
+
+                        item.ResponseTimeOutStatus = 1;
+                        item.ResponseChaoShiTakeHour = 0;
+
+                        item.CheckTimeOutStatus = 1;
+                        item.CheckChaoShiTakeHour = 0;
+
+                        item.ProcessTimeOutStatus = 1;
+                        item.ProcessChaoShiTakeHour = 0;
+
+                        item.BanJieTimeOutStatus = 1;
+                        item.BanJieChaoShiTakeHour = 0;
+
+                        item.CloseTimeOutStatus = 1;
+                        item.CloseChaoShiTakeHour = 0;
+                    }
+                    CustomerService_TimeShiXiao.SetTimeShiXiaoData(item, myTimeItem, sqlList);
                 }
                 #region 回访超时
                 var myHuiFangServiceTypeItem = ServiceType.GetAvailableServiceType(myServiceType2List, myServiceType3List, myServiceType, typeid: 6, IsPinZhiShengJi: IsPinZhiShengJi);
@@ -1258,7 +1285,7 @@ namespace Foresight.DataAccess
                 {
                     DateTime StartTime = item.BanJieTime;
                     DateTime EndTime = item.HuiFangTime > DateTime.MinValue ? item.HuiFangTime : nowDate;
-                    item.CallBackChaoShiTakeHour = CheckDelayTimeStatus(myHuiFangServiceTypeItem, StartTime, EndTime, out nowHourRange, myHuiFangServiceTypeItem.HuiFangTime, holidayList: holidayList);
+                    item.CallBackChaoShiTakeHour = CheckDelayTimeStatus(myHuiFangServiceTypeItem, StartTime, EndTime, out nowHourRange, myHuiFangServiceTypeItem.HuiFangTime, holidayList: holidayList, ProjectDelayHour: ProjectDelayHour);
                     item.CallBackTimeOutStatus = item.CallBackChaoShiTakeHour <= 0 ? 1 : 2;
                     if (item.HuiFangTime == DateTime.MinValue)
                     {
@@ -1277,14 +1304,14 @@ namespace Foresight.DataAccess
             }
             CustomerService_TimeShiXiao.UpdateTimeShiXiaoData(sqlList);
         }
-        public static decimal CheckDelayTimeStatus(ServiceType myServiceType, DateTime StartTime, DateTime EndTime, out decimal nowHourRange, decimal DefineTimeHour, HolidayLog[] holidayList = null)
+        public static decimal CheckDelayTimeStatus(ServiceType myServiceType, DateTime StartTime, DateTime EndTime, out decimal nowHourRange, decimal DefineTimeHour, HolidayLog[] holidayList = null, int ProjectDelayHour = 0)
         {
             nowHourRange = HolidayLog.GetTimeHourRange(StartTime, EndTime, myServiceType.DisableHolidayTime, myServiceType.DisableWorkOffTime, myServiceType.StartHour, myServiceType.EndHour, holidayList: holidayList);
             if (DefineTimeHour <= 0)
             {
                 return 0;
             }
-            return nowHourRange - DefineTimeHour;
+            return nowHourRange - ProjectDelayHour - DefineTimeHour;
         }
         public string HuiFangAddUserNames { get; set; }
         public int[] HuiFangAddUserIDList { get; set; } = new int[] { };

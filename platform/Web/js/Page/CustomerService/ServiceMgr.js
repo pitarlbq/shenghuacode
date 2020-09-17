@@ -913,3 +913,40 @@ function do_approve_important() {
         }
     });
 }
+function do_cancel_timeout() {
+    var rows = $("#tt_table").datagrid("getSelections");
+    if (rows.length == 0) {
+        show_message("请先选择一个任务", "info");
+        return;
+    }
+    var IDList = [];
+    $.each(rows, function (index, row) {
+        IDList.push(row.ID);
+    })
+    top.$.messager.confirm("提示", "此操作不可逆,请谨慎操作,确认取消选中工单的超时状态?", function (r) {
+        if (r) {
+            MaskUtil.mask('body', '提交中');
+            var options = { visit: 'cancelcustomerservicetimeout', IDs: JSON.stringify(IDList) };
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '../Handler/ServiceHandler.ashx',
+                data: options,
+                success: function (message) {
+                    MaskUtil.unmask();
+                    if (message.status) {
+                        show_message('操作成功', 'success', function () {
+                            $("#tt_table").datagrid("reload");
+                        });
+                        return;
+                    }
+                    if (message.error) {
+                        show_message(message.error, 'warning');
+                        return;
+                    }
+                    show_message('系统错误', 'error');
+                }
+            });
+        }
+    })
+}

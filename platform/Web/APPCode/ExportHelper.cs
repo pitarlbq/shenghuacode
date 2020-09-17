@@ -960,7 +960,7 @@ namespace Web.APPCode
             downloadurl = DoExport(FileName, dt, rangeList: rangeList);
             return true;
         }
-        public static bool DownLoadCustomerServiceData(Foresight.DataAccess.Ui.DataGrid dg, out string downloadurl, out string error)
+        public static bool DownLoadCustomerServiceData(Foresight.DataAccess.Ui.DataGrid dg, int ServiceStatus, out string downloadurl, out string error)
         {
             downloadurl = string.Empty;
             error = string.Empty;
@@ -979,21 +979,86 @@ namespace Web.APPCode
                 error = "没有可导出的数据";
                 return false;
             }
-            var titleList = GetTableColumns("customerservice");
             List<NpoiHeadCfg> head_list = new List<NpoiHeadCfg>();
             DataTable dt = new DataTable();
-            foreach (var item in titleList)
+            if (ServiceStatus == 250)
             {
-                if (!dt.Columns.Contains(item["ColumnName"].ToString()))
-                {
-                    SaveNpoiHead(item["ColumnName"].ToString(), item["FieldName"].ToString(), head_list: head_list, HAlign: "center");
-                    dt.Columns.Add(item["FieldName"].ToString());
-                }
+                SaveNpoiHead("公司", "CompanyName", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("CompanyName");
+
+                SaveNpoiHead("项目", "FinalProjectName", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("FinalProjectName");
+
+                SaveNpoiHead("期数", "BuildingNumber", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("BuildingNumber");
+
+                SaveNpoiHead("姓名", "AddCustomerName", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("AddCustomerName");
+
+                SaveNpoiHead("电话", "AddCallPhone", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("AddCallPhone");
+
+                SaveNpoiHead("工单类型", "CategoryPartA", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("CategoryPartA");
+
+                SaveNpoiHead("二级分类", "CategoryPartB", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("CategoryPartB");
+
+                SaveNpoiHead("三级分类", "CategoryPartC", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("CategoryPartC");
+
+                SaveNpoiHead("工单内容", "ServiceContent", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("ServiceContent");
+
+                SaveNpoiHead("状态", "ServiceStatusDesc", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("ServiceStatusDesc");
+
+                SaveNpoiHead("满意度", "HuiFangRate", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("HuiFangRate");
+
+                SaveNpoiHead("登记日期", "AddTime", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("AddTime");
+
+                SaveNpoiHead("办结日期", "BanJieTime", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("BanJieTime");
+
+                SaveNpoiHead("处理结果", "ChuliNote", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("ChuliNote");
+
+                SaveNpoiHead("回访结果", "HuiFangNote", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("HuiFangNote");
+
+                SaveNpoiHead("是否超时", "TimeOutDesc", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("TimeOutDesc");
+
+                SaveNpoiHead("办结超时时间", "FinalBanJieChaoShiTakeHour", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("FinalBanJieChaoShiTakeHour");
+
+                SaveNpoiHead("总体超时时间", "TotalChaoShiTakeHour", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("TotalChaoShiTakeHour");
+
+                SaveNpoiHead("超时节点", "ChaoShiStatusNames", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("ChaoShiStatusNames");
+
+                SaveNpoiHead("投诉来源", "ServiceFromDesc", head_list: head_list, HAlign: "center");
+                dt.Columns.Add("ServiceFromDesc");
             }
-            if (!dt.Columns.Contains("重大投诉"))
+            else
             {
-                SaveNpoiHead("重大投诉", "ImportantDesc", head_list: head_list, HAlign: "center");
-                dt.Columns.Add("ImportantDesc");
+                var titleList = GetTableColumns("customerservice");
+                foreach (var item in titleList)
+                {
+                    if (!dt.Columns.Contains(item["ColumnName"].ToString()))
+                    {
+                        SaveNpoiHead(item["ColumnName"].ToString(), item["FieldName"].ToString(), head_list: head_list, HAlign: "center");
+                        dt.Columns.Add(item["FieldName"].ToString());
+                    }
+                }
+                if (!dt.Columns.Contains("重大投诉"))
+                {
+                    SaveNpoiHead("重大投诉", "ImportantDesc", head_list: head_list, HAlign: "center");
+                    dt.Columns.Add("ImportantDesc");
+                }
             }
             for (int i = 0; i < list.Length; i++)
             {
@@ -1011,6 +1076,10 @@ namespace Web.APPCode
                     else if (dt.Columns[j].ColumnName.Equals("CloseDesc"))
                     {
                         dr[dt.Columns[j].ColumnName] = list[i].IsClosed ? "已关单" : "未关单";
+                    }
+                    else if (dt.Columns[j].ColumnName.Equals("HuiFangRate"))
+                    {
+                        dr[dt.Columns[j].ColumnName] = list[i].HuiFangRate > 0 ? list[i].HuiFangRate.ToString() : "";
                     }
                     else
                     {

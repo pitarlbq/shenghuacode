@@ -119,7 +119,7 @@ namespace DataAccess.Analysis
                     var data = new TouSuShiXiaoAnalysisModel();
                     data.CompanyID = companyItem.CompanyID;
                     data.CompanyName = companyItem != null ? companyItem.CompanyName : "";
-                    data.ProjectID = projectItem!=null?projectItem.ID:0;
+                    data.ProjectID = projectItem != null ? projectItem.ID : 0;
                     data.ProjectName = projectItem != null ? projectItem.Name : "";
                     data.TotalCount = myServiceList2.Length;
                     data.ChaoShiCount = myServiceList2.Where(p => p.BanJieTimeOutStatus == 2).ToArray().Length;
@@ -256,6 +256,7 @@ namespace DataAccess.Analysis
                     data.ChuLiTotalTakeHour = myServiceList3.Sum(p => p.ProcessTakeHour);
                     data.BanJieTotalTakeHour = myServiceList3.Sum(p => p.BanJieTakeHour);
                     data.HuiFangTotalTakeHour = myServiceList3.Sum(p => p.CallBackTakeHour);
+                    dataList.Add(data);
                 }
             }
             return dataList;

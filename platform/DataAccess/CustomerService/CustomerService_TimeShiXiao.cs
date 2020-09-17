@@ -28,6 +28,7 @@ namespace Foresight.DataAccess
             {
                 return;
             }
+            
             item.XiaDanDate = myTimeItem.XiaDanDate;
             item.XiaDanTakeHour = myTimeItem.XiaDanTakeHour;
             item.XiaDanTimeOutStatus = myTimeItem.XiaDanTimeOutStatus;
@@ -67,6 +68,33 @@ namespace Foresight.DataAccess
             item.CloseTakeHour = myTimeItem.CloseTakeHour;
             item.CloseTimeOutStatus = myTimeItem.CloseTimeOutStatus;
             item.CloseChaoShiTakeHour = myTimeItem.CloseChaoShiTakeHour;
+
+            if (item.IsTimeOutInvalid)
+            {
+                item.XiaDanTimeOutStatus = 1;
+                item.XiaDanChaoShiTakeHour = 0;
+
+                item.PaiDanTimeOutStatus = 1;
+                item.PaiDanChaoShiTakeHour = 0;
+
+                item.ResponseTimeOutStatus = 1;
+                item.ResponseChaoShiTakeHour = 0;
+
+                item.ResponseTimeOutStatus = 1;
+                item.ResponseChaoShiTakeHour = 0;
+
+                item.CheckTimeOutStatus = 1;
+                item.CheckChaoShiTakeHour = 0;
+
+                item.ProcessTimeOutStatus = 1;
+                item.ProcessChaoShiTakeHour = 0;
+
+                item.BanJieTimeOutStatus = 1;
+                item.BanJieChaoShiTakeHour = 0;
+
+                item.CloseTimeOutStatus = 1;
+                item.CloseChaoShiTakeHour = 0;
+            }
         }
         public static void SetTimeShiXiaoData(ViewCustomerService item, CustomerService_TimeShiXiao myTimeItem, List<string> sqlList)
         {

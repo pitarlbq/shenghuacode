@@ -2,10 +2,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
-        var ID, tdHandelType, ffObj, filecount = 0, tdServiceType1, tdServiceType2, tdServiceType3, isComplete = 0, tdResponseRemark, tdChuLiNote;
+        var ID, tdHandelType, ffObj, filecount = 0, tdServiceType1, tdServiceType2, tdServiceType3, isComplete = 0, tdResponseRemark, tdChuLiNote, WuYeBaoShiServiceID;
         $(function () {
             ID = "<%=this.ID%>";
             isComplete = Number("<%=this.isComplete%>");
+            WuYeBaoShiServiceID = Number("<%=this.WuYeBaoShiServiceID%>");
             ffObj = $("#<%=this.ff.ClientID%>");
             tdServiceType1 = $("#<%=this.tdServiceType1.ClientID%>");
             tdServiceType2 = $("#<%=this.tdServiceType2.ClientID%>");
@@ -81,7 +82,9 @@
                             loadServiceTypes(serviceType2, 3);
                         }
                     } else if (level == 3) {
+                        var required = ParentIDList.indexOf(WuYeBaoShiServiceID + '') == -1;
                         tdServiceType3.combobox({
+                            required: required,
                             multiple: true,
                             editable: false,
                             data: data.list,

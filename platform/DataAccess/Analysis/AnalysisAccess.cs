@@ -100,10 +100,14 @@ namespace Foresight.DataAccess
                 }
                 return false;
             }).ToArray();
-            var addTimeHuiFangList = huiFangTimeList;
-            var banJieTimeHuiFangList = huiFangTimeList;
-            var addTimeAllList = list;
-            var banJieAllList = list;
+            var addTimeHuiFangList = new ViewCustomerService[huiFangTimeList.Length];
+            huiFangTimeList.CopyTo(addTimeHuiFangList, 0);
+            var banJieTimeHuiFangList = new ViewCustomerService[huiFangTimeList.Length];
+            huiFangTimeList.CopyTo(banJieTimeHuiFangList, 0);
+            var addTimeAllList = new ViewCustomerService[list.Length];
+            list.CopyTo(addTimeAllList, 0);
+            var banJieAllList = new ViewCustomerService[list.Length];
+            list.CopyTo(banJieAllList, 0);
             if (StartTime > DateTime.MinValue)
             {
                 addTimeHuiFangList = addTimeHuiFangList.Where(p => p.AddTime >= StartTime).ToArray();
@@ -138,15 +142,22 @@ namespace Foresight.DataAccess
             var tousuHuiFangTimeList = huiFangTimeList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).ToArray();
             int BaoXiuServiceID = new Utility.SiteConfig().BaoXiuServiceID;
             var baoXiuHuiFangTimeList = huiFangTimeList.Where(p => p.ServiceType1ID == BaoXiuServiceID && !p.ServiceType2IDList.Contains(WuYeBaoShiServiceID)).ToArray();
+
             var dataList = new List<CallSummaryAnalysisModel>();
             int TouSuTotalCount_CallBack = tousuHuiFangTimeList.Where(p => p.HuiFangAddUserIDList.Length > 0).ToArray().Length;
             var TouSuTotalList_NotCallBack = addTimeHuiFangList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID).Where(p => p.HuiFangAddUserIDList.Length == 0 && !p.CanNotCallback).ToArray();
             int TouSuTotalCount_NotCallBack = TouSuTotalList_NotCallBack.Length;
-            int TouSuTotalCount = TouSuTotalCount_CallBack + TouSuTotalCount_NotCallBack;
+            int TouSuTotalCount2 = TouSuTotalCount_CallBack + TouSuTotalCount_NotCallBack;
+            var TouSuTotalCount = addTimeHuiFangList.Where(p => p.ServiceType1ID == LianJieTouSuServiceID || p.ServiceType1ID == WuYeTouSuServiceID || p.ServiceType1ID == YingXiaoTouSuServiceID && !p.CanNotCallback).ToArray().Length;
+            TouSuTotalCount = TouSuTotalCount_CallBack > TouSuTotalCount ? TouSuTotalCount_CallBack : TouSuTotalCount;
             int TouSuTotalHuiFangCount = tousuHuiFangTimeList.Length;
             int BaoXiuTotalCount_CallBack = baoXiuHuiFangTimeList.Where(p => p.HuiFangAddUserIDList.Length > 0 && !p.ServiceFrom.Equals("app")).ToArray().Length;
-            int BaoXiuTotalCount_NotCallBack = addTimeHuiFangList.Where(p => p.ServiceType1ID == BaoXiuServiceID).Where(p => p.HuiFangAddUserIDList.Length == 0 && !p.CanNotCallback && !p.ServiceFrom.Equals("app") && !p.ServiceType2IDList.Contains(WuYeBaoShiServiceID)).ToArray().Length;
-            int BaoXiuTotalCount = BaoXiuTotalCount_CallBack + BaoXiuTotalCount_NotCallBack;
+            var BaoXiuTotalCount_NotCallBack_List = addTimeHuiFangList.Where(p => p.ServiceType1ID == BaoXiuServiceID).Where(p => p.HuiFangAddUserIDList.Length == 0 && !p.CanNotCallback && !p.ServiceFrom.Equals("app") && !p.ServiceType2IDList.Contains(WuYeBaoShiServiceID)).ToArray();
+            Utility.LogHelper.WriteDebug("BaoXiuTotalCount_NotCallBack_ID_List", Utility.JsonConvert.SerializeObject(BaoXiuTotalCount_NotCallBack_List.Select(p => p.ID)));
+            int BaoXiuTotalCount_NotCallBack = BaoXiuTotalCount_NotCallBack_List.Length;
+            int BaoXiuTotalCount2 = BaoXiuTotalCount_CallBack + BaoXiuTotalCount_NotCallBack;
+            int BaoXiuTotalCount = addTimeHuiFangList.Where(p => p.ServiceType1ID == BaoXiuServiceID && !p.CanNotCallback && !p.ServiceFrom.Equals("app") && !p.ServiceType2IDList.Contains(WuYeBaoShiServiceID)).ToArray().Length;
+            BaoXiuTotalCount = BaoXiuTotalCount_CallBack > BaoXiuTotalCount ? BaoXiuTotalCount_CallBack : BaoXiuTotalCount;
             var footerData = new CallSummaryAnalysisModel();
             footerData.TouSuTotalCount = TouSuTotalCount;
             footerData.TouSuTotalCallbackCount = TouSuTotalCount;

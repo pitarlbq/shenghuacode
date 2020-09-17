@@ -15,6 +15,7 @@ namespace Web.CustomerService
         public int ID = 0;
         public string op = string.Empty;
         public int isComplete = 0;
+        public int WuYeBaoShiServiceID = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(Request.QueryString["op"]))
@@ -58,6 +59,7 @@ namespace Web.CustomerService
             this.tdCheckTime.Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             this.tdChuLiTime.Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             this.tdBanJieTime.Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            this.WuYeBaoShiServiceID = new Utility.SiteConfig().WuYeBaoShiServiceID;
         }
     }
 }

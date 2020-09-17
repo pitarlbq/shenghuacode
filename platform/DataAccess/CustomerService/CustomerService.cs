@@ -298,7 +298,11 @@ namespace Foresight.DataAccess
                 return 0;
             }
             var conditions = new List<string>();
-            conditions.Add("ServiceTypeID in (" + string.Join(",", ServiceTypeIDList.ToArray()) + ")");
+            var cmdlist = new List<string>();
+            cmdlist.Add("ServiceType1ID in (" + string.Join(",", ServiceTypeIDList.ToArray()) + ")");
+            cmdlist.Add("exists (select 1 from [dbo].[f_split_idlist] (ServiceType2ID,',') where id in (" + string.Join(",", ServiceTypeIDList.ToArray()) + "))");
+            cmdlist.Add("exists (select 1 from [dbo].[f_split_idlist] (ServiceType3ID,',') where id in (" + string.Join(",", ServiceTypeIDList.ToArray()) + "))");
+            conditions.Add("(" + string.Join(" or ", cmdlist) + ")");
             int count = 0;
             using (SqlHelper helper = new SqlHelper())
             {

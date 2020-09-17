@@ -108,6 +108,8 @@
     <Content Include="callring.mp3" />
     <Content Include="CangKu\DepartmentMgr.aspx" />
     <Content Include="CangKu\EditDepartment.aspx" />
+    <Content Include="CustomerService\ProjectServiceTypeEdit.aspx" />
+    <Content Include="CustomerService\ProjectServiceTypeMgr.aspx" />
     <Content Include="CustomerService\ServiceTypeImportShiXiaoEdit.aspx" />
     <Content Include="CustomerService\ServiceCancel.aspx" />
     <Content Include="CustomerService\ServiceImportantApprove.aspx" />
@@ -168,6 +170,7 @@
     <Content Include="js\Page\Analysis\SmsSendAnalysis.js" />
     <Content Include="js\Page\CangKu\CKDepartmentMgr.js" />
     <Content Include="js\Page\Comm\dateRangeUtil.js" />
+    <Content Include="js\Page\CustomerService\ProjectServiceTypeMgr.js" />
     <Content Include="js\Page\CustomerService\ServiceRecordMgr.js" />
     <Content Include="js\Page\CustomerService\ServiceCallMgr.js" />
     <Content Include="js\Page\CustomerService\ServiceProcessMgr.js" />
@@ -1141,6 +1144,20 @@
     </Compile>
     <Compile Include="CangKu\EditDepartment.aspx.designer.cs">
       <DependentUpon>EditDepartment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ProjectServiceTypeEdit.aspx.cs">
+      <DependentUpon>ProjectServiceTypeEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ProjectServiceTypeEdit.aspx.designer.cs">
+      <DependentUpon>ProjectServiceTypeEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerService\ProjectServiceTypeMgr.aspx.cs">
+      <DependentUpon>ProjectServiceTypeMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerService\ProjectServiceTypeMgr.aspx.designer.cs">
+      <DependentUpon>ProjectServiceTypeMgr.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomerService\ServiceTypeImportShiXiaoEdit.aspx.cs">
       <DependentUpon>ServiceTypeImportShiXiaoEdit.aspx</DependentUpon>

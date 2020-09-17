@@ -1025,6 +1025,38 @@ namespace Foresight.DataAccess
             protected set { this._canNotCallback = value;}
 		}
 		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private int _projectDelayHour = int.MinValue;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public int ProjectDelayHour
+		{
+			[DebuggerStepThrough()]
+			get { return this._projectDelayHour; }
+            protected set { this._projectDelayHour = value;}
+		}
+		
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+		private bool _isTimeOutInvalid = false;
+		/// <summary>
+		/// 
+		/// </summary>
+        [Description("")]
+		[DatabaseColumn()]
+		[TypeConverter(typeof(MinToEmptyTypeConverter))]
+		[DataObjectField(false, false, true)]
+		public bool IsTimeOutInvalid
+		{
+			[DebuggerStepThrough()]
+			get { return this._isTimeOutInvalid; }
+            protected set { this._isTimeOutInvalid = value;}
+		}
+		
 		
 		#endregion
 		
@@ -1109,7 +1141,9 @@ namespace Foresight.DataAccess
 	[ViewCustomerService].[HuiFangRate],
 	[ViewCustomerService].[CompanyID],
 	[ViewCustomerService].[IsImportantTouSu],
-	[ViewCustomerService].[CanNotCallback]
+	[ViewCustomerService].[CanNotCallback],
+	[ViewCustomerService].[ProjectDelayHour],
+	[ViewCustomerService].[IsTimeOutInvalid]
 ";
 			}
 		}
@@ -1383,6 +1417,8 @@ SELECT " + ViewCustomerService.SelectFieldList + "FROM [dbo].[ViewCustomerServic
 			public const string CompanyID = "CompanyID";
 			public const string IsImportantTouSu = "IsImportantTouSu";
 			public const string CanNotCallback = "CanNotCallback";
+			public const string ProjectDelayHour = "ProjectDelayHour";
+			public const string IsTimeOutInvalid = "IsTimeOutInvalid";
             
             public static Dictionary<string,string> AllPropertiesDescription=new Dictionary<string,string>(){
     			 {"ID" , "int:"},
@@ -1448,6 +1484,8 @@ SELECT " + ViewCustomerService.SelectFieldList + "FROM [dbo].[ViewCustomerServic
     			 {"CompanyID" , "int:"},
     			 {"IsImportantTouSu" , "bool:"},
     			 {"CanNotCallback" , "bool:"},
+    			 {"ProjectDelayHour" , "int:"},
+    			 {"IsTimeOutInvalid" , "bool:"},
             };
 		}
 		#endregion

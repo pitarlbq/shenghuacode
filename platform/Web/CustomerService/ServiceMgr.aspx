@@ -328,7 +328,10 @@
                         { %>
                     <a href="javascript:void(0)" onclick="do_mark_important()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-remove'">重大报修</a>
                     <%} %>
-
+                     <%if (base.CheckAuthByModuleCode("110119604"))
+                        { %>
+                    <a href="javascript:void(0)" onclick="do_cancel_timeout()" class="easyui-linkbutton btnlinkbar" data-options="plain:true,iconCls:'icon-remove'">取消超时</a>
+                    <%} %>
                     <asp:HiddenField ID="hdOrderBy" runat="server" />
                     <asp:HiddenField ID="hdIDs" runat="server" />
                 </div>

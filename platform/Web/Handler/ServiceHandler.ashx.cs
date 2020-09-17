@@ -195,6 +195,15 @@ namespace Web.Handler
                     case "saveservicetypeimportshixiao":
                         saveservicetypeimportshixiao(context);
                         break;
+                    case "loadprojectservicetypegrid":
+                        loadprojectservicetypegrid(context);
+                        break;
+                    case "saveprojectservicetype":
+                        saveprojectservicetype(context);
+                        break;
+                    case "cancelcustomerservicetimeout":
+                        cancelcustomerservicetimeout(context);
+                        break;
                     default:
                         break;
                 }
@@ -204,6 +213,73 @@ namespace Web.Handler
                 Utility.LogHelper.WriteError("ServiceHandler", "命令:" + visit, ex);
                 WebUtil.WriteJson(context, new { status = false });
             }
+        }
+        private void cancelcustomerservicetimeout(HttpContext context)
+        {
+            string IDs = context.Request["IDs"];
+            var IDList = new List<int>();
+            if (!string.IsNullOrEmpty(IDs))
+            {
+                IDList = Utility.JsonConvert.DeserializeObject<List<int>>(IDs);
+            }
+            if (IDList.Count == 0)
+            {
+                WebUtil.WriteJson(context, new { status = false, error = "请选择一条任务工单" });
+                return;
+            }
+            var user = WebUtil.GetUser(context);
+            using (SqlHelper helper = new SqlHelper())
+            {
+                try
+                {
+                    helper.BeginTransaction();
+                    foreach (var ServiceID in IDList)
+                    {
+                        var data = CustomerService_ManualTimeout.GetCustomerService_ManualTimeout(ServiceID, helper);
+                        if (data == null)
+                        {
+                            data = new CustomerService_ManualTimeout();
+                            data.ServiceID = ServiceID;
+                        }
+                        data.IsTimeOutInvalid = true;
+                        data.AddTime = DateTime.Now;
+                        data.AddMan = user.FinalRealName;
+                        data.Save(helper);
+                    }
+                    helper.Commit();
+                }
+                catch (Exception ex)
+                {
+                    Utility.LogHelper.WriteError("ServiceHandler", "命令: cancelcustomerservicetimeout", ex);
+                    helper.Rollback();
+                    WebUtil.WriteJson(context, new { status = false });
+                    return;
+                }
+            }
+            WebUtil.WriteJson(context, new { status = true });
+        }
+        private void saveprojectservicetype(HttpContext context)
+        {
+            int ID = WebUtil.GetIntValue(context, "ID");
+            var data = Project_ServiceTypeDelay.GetProject_ServiceTypeDelay(ID);
+            if (data == null)
+            {
+                data = new Project_ServiceTypeDelay();
+                data.ProjectID = ID;
+                data.AddTime = DateTime.Now;
+                data.AddName = WebUtil.GetUser(context).FinalRealName;
+            }
+            data.DelayHour = WebUtil.getServerIntValue(context, "tdDelayHour");
+            data.UpdateTime = DateTime.Now;
+            data.UpdateName = WebUtil.GetUser(context).FinalRealName;
+            data.Save();
+            WebUtil.WriteJson(context, new { status = true });
+        }
+        private void loadprojectservicetypegrid(HttpContext context)
+        {
+            string Keywords = context.Request["Keywords"];
+            DataGrid dg = Foresight.DataAccess.Project_ServiceTypeDelay.GetProject_ServiceTypeDelayGrid(Keywords);
+            WebUtil.WriteJson(context, dg);
         }
         private void saveservicetypeimportshixiao(HttpContext context)
         {
@@ -2084,6 +2160,7 @@ namespace Web.Handler
             //huifang.ChuLiRate = WebUtil.getServerDecimalValue(context, "tdChuLiRate");
             huifang.AddTime = DateTime.Now;
             huifang.AddUserID = user.UserID;
+            huifang.ChuLiRate = WebUtil.getServerDecimalValue(context, "tdChuLiRate");
             int CanManualyAddPhoneState = WebUtil.GetIntValue(context, "CanManualyAddPhoneState");
             PhoneRecord record = null;
             if (CanManualyAddPhoneState == 1)
@@ -2142,10 +2219,9 @@ namespace Web.Handler
                 try
                 {
                     helper.BeginTransaction();
-                    string ChuliRateStr = WebUtil.getServerValue(context, "tdChuLiRate");
-                    if (!string.IsNullOrEmpty(ChuliRateStr))
+                    if (huifang.ChuLiRate > 0 && huifang.ChuLiRate > service.HuiFangRate)
                     {
-                        service.HuiFangRate = WebUtil.getServerDecimalValue(context, "tdChuLiRate");
+                        service.HuiFangRate = huifang.ChuLiRate;
                         service.Save(helper);
                     }
                     huifang.Save(helper);
@@ -2372,7 +2448,7 @@ namespace Web.Handler
                 {
                     string downloadurl = string.Empty;
                     string error = string.Empty;
-                    bool status = APPCode.ExportHelper.DownLoadCustomerServiceData(dg, out downloadurl, out error);
+                    bool status = APPCode.ExportHelper.DownLoadCustomerServiceData(dg, ServiceStatus, out downloadurl, out error);
                     WebUtil.WriteJson(context, new { status = status, downloadurl = downloadurl, error = error });
                     return;
                 }

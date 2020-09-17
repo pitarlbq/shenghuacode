@@ -21,11 +21,15 @@ function loadTT() {
         columns: [[
             { field: 'CompanyName', title: '公司', width: 100 },
             { field: 'FinalProjectName', title: '项目', width: 100 },
+            { field: 'BuildingNumber', title: '期数', width: 100 },
             { field: 'AddCustomerName', title: '姓名', width: 100 },
             { field: 'AddCallPhone', title: '电话', width: 100 },
             { field: 'CategoryPartA', title: '工单类型', width: 100 },
+            { field: 'CategoryPartB', title: '二级分类', width: 100 },
+            { field: 'CategoryPartC', title: '三级分类', width: 100 },
             { field: 'ServiceContent', title: '工单内容', width: 300 },
             { field: 'ServiceStatusDesc', title: '状态', width: 100 },
+            { field: 'HuiFangRate', formatter: formatDecimal, title: '满意度', width: 100 },
             { field: 'AddTime', formatter: formatDateTime, title: '登记日期', width: 120 },
             { field: 'BanJieTime', formatter: formatDateTime, title: '办结日期', width: 120 },
             { field: 'ChuliNote', title: '处理结果', width: 100, width: 300 },
@@ -60,6 +64,9 @@ function loadTT() {
     setTimeout(function () {
         SearchTT()
     }, 100);
+}
+function formatDecimal(value, row) {
+    return value > 0 ? value : '';
 }
 function SearchTT() {
     var options = get_options();

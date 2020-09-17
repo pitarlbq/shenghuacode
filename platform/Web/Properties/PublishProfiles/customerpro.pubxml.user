@@ -391,13 +391,13 @@
       <publishTime>09/12/2018 09:27:06</publishTime>
     </File>
     <File Include="bin/DataAccess.dll">
-      <publishTime>05/13/2020 20:43:26</publishTime>
+      <publishTime>09/17/2020 16:06:35</publishTime>
     </File>
     <File Include="bin/DataAccess.dll.config">
       <publishTime>05/13/2020 09:02:43</publishTime>
     </File>
     <File Include="bin/Encript.dll">
-      <publishTime>05/13/2020 20:43:27</publishTime>
+      <publishTime>09/17/2020 16:06:35</publishTime>
     </File>
     <File Include="bin/Encript.dll.config">
       <publishTime>05/13/2020 09:02:42</publishTime>
@@ -406,7 +406,7 @@
       <publishTime>09/27/2018 09:47:19</publishTime>
     </File>
     <File Include="bin/ExcelProcess.dll">
-      <publishTime>05/13/2020 20:43:28</publishTime>
+      <publishTime>09/17/2020 16:06:36</publishTime>
     </File>
     <File Include="bin/ExcelProcess.dll.config">
       <publishTime>05/13/2020 09:02:42</publishTime>
@@ -421,7 +421,7 @@
       <publishTime>05/11/2018 22:48:09</publishTime>
     </File>
     <File Include="bin/JPush.dll">
-      <publishTime>05/13/2020 20:43:28</publishTime>
+      <publishTime>09/17/2020 16:06:36</publishTime>
     </File>
     <File Include="bin/JPush.dll.config">
       <publishTime>05/13/2020 09:02:44</publishTime>
@@ -454,7 +454,7 @@
       <publishTime>02/15/2019 14:43:17</publishTime>
     </File>
     <File Include="bin/SocketIOClient.dll">
-      <publishTime>05/13/2020 20:43:27</publishTime>
+      <publishTime>09/17/2020 16:06:36</publishTime>
     </File>
     <File Include="bin/SocketIOClient.dll.config">
       <publishTime>05/13/2020 09:02:42</publishTime>
@@ -478,13 +478,13 @@
       <publishTime>05/11/2018 22:48:09</publishTime>
     </File>
     <File Include="bin/Utility.dll">
-      <publishTime>05/13/2020 20:43:22</publishTime>
+      <publishTime>09/17/2020 16:06:32</publishTime>
     </File>
     <File Include="bin/Utility.dll.config">
       <publishTime>05/13/2020 09:02:42</publishTime>
     </File>
     <File Include="bin/Web.dll">
-      <publishTime>05/13/2020 20:43:29</publishTime>
+      <publishTime>09/17/2020 16:06:37</publishTime>
     </File>
     <File Include="bin/WebSocket4Net.dll">
       <publishTime>09/27/2018 09:47:19</publishTime>
@@ -996,6 +996,12 @@
     <File Include="CustomerService/ProcessService.aspx">
       <publishTime>10/29/2018 11:36:44</publishTime>
     </File>
+    <File Include="CustomerService/ProjectServiceTypeEdit.aspx">
+      <publishTime>09/17/2020 15:17:19</publishTime>
+    </File>
+    <File Include="CustomerService/ProjectServiceTypeMgr.aspx">
+      <publishTime>09/17/2020 15:58:43</publishTime>
+    </File>
     <File Include="CustomerService/ServiceCall.aspx">
       <publishTime>07/26/2019 15:37:00</publishTime>
     </File>
@@ -1039,13 +1045,13 @@
       <publishTime>05/11/2018 22:47:01</publishTime>
     </File>
     <File Include="CustomerService/ServiceMgr.aspx">
-      <publishTime>08/12/2019 11:43:06</publishTime>
+      <publishTime>09/17/2020 16:05:24</publishTime>
     </File>
     <File Include="CustomerService/ServicePhoneListen.aspx">
       <publishTime>03/01/2019 11:40:45</publishTime>
     </File>
     <File Include="CustomerService/ServiceProcess.aspx">
-      <publishTime>07/29/2019 14:46:38</publishTime>
+      <publishTime>05/14/2020 17:53:45</publishTime>
     </File>
     <File Include="CustomerService/ServiceProcessFileView.aspx">
       <publishTime>04/11/2019 17:36:30</publishTime>
@@ -1069,7 +1075,7 @@
       <publishTime>08/05/2019 09:32:02</publishTime>
     </File>
     <File Include="CustomerService/ServiceSuggestionMgr.aspx">
-      <publishTime>08/05/2019 10:02:08</publishTime>
+      <publishTime>09/17/2020 16:05:34</publishTime>
     </File>
     <File Include="CustomerService/ServiceTypeImportShiXiaoEdit.aspx">
       <publishTime>07/29/2019 10:16:37</publishTime>
@@ -3988,7 +3994,7 @@
       <publishTime>03/16/2019 23:18:30</publishTime>
     </File>
     <File Include="js/Page/Analysis/ServiceListAnalysis.js">
-      <publishTime>06/24/2019 17:44:03</publishTime>
+      <publishTime>09/08/2020 09:26:02</publishTime>
     </File>
     <File Include="js/Page/Analysis/ServiceRateAnalysis.js">
       <publishTime>02/27/2019 16:33:41</publishTime>
@@ -4482,6 +4488,9 @@
     <File Include="js/Page/CustomerService/CustomerServiceTypeMgr.js">
       <publishTime>07/29/2019 11:25:08</publishTime>
     </File>
+    <File Include="js/Page/CustomerService/ProjectServiceTypeMgr.js">
+      <publishTime>09/17/2020 15:59:27</publishTime>
+    </File>
     <File Include="js/Page/CustomerService/ServiceAdd.js">
       <publishTime>11/14/2018 09:13:45</publishTime>
     </File>
@@ -4495,7 +4504,7 @@
       <publishTime>11/14/2018 09:13:45</publishTime>
     </File>
     <File Include="js/Page/CustomerService/ServiceMgr.js">
-      <publishTime>10/24/2019 10:05:09</publishTime>
+      <publishTime>09/17/2020 15:55:38</publishTime>
     </File>
     <File Include="js/Page/CustomerService/ServiceProcess.js">
       <publishTime>11/01/2018 20:25:15</publishTime>
@@ -7618,7 +7627,7 @@
       <publishTime>02/28/2019 22:24:19</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/13/2020 20:08:13</publishTime>
+      <publishTime>06/17/2020 09:05:54</publishTime>
     </File>
     <File Include="Wechat/ActiveMgr.aspx">
       <publishTime>11/06/2018 17:11:46</publishTime>
