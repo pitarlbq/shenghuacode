@@ -380,11 +380,11 @@ function imageUploadInit() {
 
     }, false);
 }
-//XmlHttpRequest对象    
+//XmlHttpRequest对象
 function createXmlHttpRequest() {
-    if (window.ActiveXObject) { //如果是IE浏览器    
+    if (window.ActiveXObject) { //如果是IE浏览器
         return new ActiveXObject("Microsoft.XMLHTTP");
-    } else if (window.XMLHttpRequest) { //非IE浏览器    
+    } else if (window.XMLHttpRequest) { //非IE浏览器
         return new XMLHttpRequest();
     }
 }
@@ -396,20 +396,20 @@ function doUpload() {
     for (var i = 0; i < app.form.uploadfiles.length; i++) {
         fd.append('file[]', app.form.uploadfiles[i]);
     }
-    //1.创建XMLHttpRequest组建    
+    //1.创建XMLHttpRequest组建
     xmlHttpRequest = createXmlHttpRequest();
 
-    //2.设置回调函数    
+    //2.设置回调函数
     xmlHttpRequest.onreadystatechange = requestCallBackFun;
 
-    //3.初始化XMLHttpRequest组建    
+    //3.初始化XMLHttpRequest组建
     xmlHttpRequest.open("POST", url, true);
-    //4.发送请求    
+    //4.发送请求
     xmlHttpRequest.send(fd);
 }
 
 
-//回调函数    
+//回调函数
 function requestCallBackFun() {
     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
         var b = xmlHttpRequest.responseText;

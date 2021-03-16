@@ -2443,6 +2443,7 @@ namespace Web.Handler
                 DateTime CompleteEndTime = WebUtil.GetDateValue(context, "CompleteEndTime");
                 string ProcessKewords = context.Request["ProcessKewords"];
                 string CallBackKeywords = context.Request["CallBackKeywords"];
+                int ServiceAccpetManID = WebUtil.GetIntValue(context, "ServiceAccpetManID");
                 DataGrid dg = Foresight.DataAccess.ViewCustomerService.GetCustomerServiceGridByKeywords(Keywords, RoomIDList, StartTime, EndTime, ServiceStatus, SortOrder, startRowIndex, pageSize, user.UserID, canViewAll, EqualProjectIDList: EqualProjectIDList, InProjectIDList: InProjectIDList, CompanyIDList: CompanyIDList, ServiceType: ServiceType, canexport: canexport, canViewWechatAPPService: canViewWechatAPPService, canViewWechatAPPSuggestoin: canViewWechatAPPSuggestoin, isServiceAnalysis: isServiceAnalysis, CloseType: CloseType, TimeOutType: TimeOutType, IsTouSuChaoShi: IsTouSuChaoShi, IsRepairChaoShi: IsRepairChaoShi, CallBackStatus: CallBackStatus, CallServiceType: CallServiceType, ServiceType1ID: ServiceType1ID, ServiceType2ID: ServiceType2ID, ServiceType3ID: ServiceType3ID, PayStatus: PayStatus, BeforeBanJieTimeOutHour: BeforeBanJieTimeOutHour, IsImportantTouSu: IsImportantTouSu, CompleteStartTime: CompleteStartTime, CompleteEndTime: CompleteEndTime, ProcessKewords: ProcessKewords, CallBackKeywords: CallBackKeywords);
                 if (canexport)
                 {

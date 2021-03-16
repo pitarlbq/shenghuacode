@@ -64,7 +64,7 @@ namespace Foresight.DataAccess
         {
             return GetCustomerServiceGridByKeywords(Keywords, RoomIDList, DateTime.MinValue, DateTime.MinValue, 13, orderBy, startRowIndex, pageSize, UserID, canViewAll, EqualProjectIDList: EqualProjectIDList, InProjectIDList: InProjectIDList, canexport: canexport, canViewWechatAPPService: canViewWechatAPPService, canViewWechatAPPSuggestoin: canViewWechatAPPSuggestoin, BeforeBanJieTimeOutHour: BeforeBanJieTimeOutHour);
         }
-        public static Ui.DataGrid GetCustomerServiceGridByKeywords(string Keywords, List<int> RoomIDList, DateTime StartTime, DateTime EndTime, int ServiceStatus, string orderBy, long startRowIndex, int pageSize, int UserID, bool canViewAll, List<int> EqualProjectIDList = null, List<int> InProjectIDList = null, int[] CompanyIDList = null, int ServiceType = 0, bool canexport = false, bool canViewWechatAPPService = false, bool canViewWechatAPPSuggestoin = false, bool isServiceAnalysis = false, int CloseType = 0, int TimeOutType = 0, bool IsTouSuChaoShi = false, bool IsRepairChaoShi = false, int CallBackStatus = 0, int CallServiceType = 0, int ServiceType1ID = 0, int ServiceType2ID = 0, int ServiceType3ID = 0, int PayStatus = 0, decimal BeforeBanJieTimeOutHour = 0, int IsImportantTouSu = -1, DateTime? CompleteStartTime = null, DateTime? CompleteEndTime = null, string ProcessKewords = "", string CallBackKeywords = "")
+        public static Ui.DataGrid GetCustomerServiceGridByKeywords(string Keywords, List<int> RoomIDList, DateTime StartTime, DateTime EndTime, int ServiceStatus, string orderBy, long startRowIndex, int pageSize, int UserID, bool canViewAll, List<int> EqualProjectIDList = null, List<int> InProjectIDList = null, int[] CompanyIDList = null, int ServiceType = 0, bool canexport = false, bool canViewWechatAPPService = false, bool canViewWechatAPPSuggestoin = false, bool isServiceAnalysis = false, int CloseType = 0, int TimeOutType = 0, bool IsTouSuChaoShi = false, bool IsRepairChaoShi = false, int CallBackStatus = 0, int CallServiceType = 0, int ServiceType1ID = 0, int ServiceType2ID = 0, int ServiceType3ID = 0, int PayStatus = 0, decimal BeforeBanJieTimeOutHour = 0, int IsImportantTouSu = -1, DateTime? CompleteStartTime = null, DateTime? CompleteEndTime = null, string ProcessKewords = "", string CallBackKeywords = "", int ServiceAccpetManID = 0)
         {
             ResetCache();
             long totalRows = 0;
@@ -74,6 +74,10 @@ namespace Foresight.DataAccess
             conditions.Add("1=1");
             conditions.Add("(exists(select 1 from [UserServiceType] where [ServiceTypeID]=A.ServiceType1ID and ([UserID]=@UserID or exists(select 1 from [UserRoles] where [RoleID]=[UserServiceType].RoleID and [UserID]=@UserID))) or A.ServiceType1ID=0)");
             parameters.Add(new SqlParameter("@UserID", UserID));
+            if (ServiceAccpetManID > 0)
+            {
+                conditions.Add("");
+            }
             if (CompleteStartTime != null && CompleteStartTime.Value > DateTime.MinValue)
             {
                 conditions.Add("[BanJieTime]>=@CompleteStartTime");
